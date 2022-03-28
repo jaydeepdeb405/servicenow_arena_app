@@ -1,0 +1,922 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($rootScope, $scope, $timeout, $interval, $window, $location, $sce) {
+	/* widget controller */
+	var c = this;
+
+	if (!c.data.testId || !c.data.testTakerProfile || typeof c.data.testId !== 'string' || c.data.testId.length !== 32) {
+		$location.url('/arena_test');
+		return;
+	}
+
+	$scope.startTimer = function() {
+		$interval.cancel($scope.interval);
+		$scope.interval = $interval(function() {
+			$scope.seconds--;
+			var hours = Math.floor(($scope.seconds % (60 * 60 * 24)) / (60 * 60));
+			var minutes = Math.floor(($scope.seconds % (60 * 60)) / 60);
+			var seconds = Math.floor($scope.seconds % 60);
+
+			$scope.timerBarWidth = ($scope.seconds / parseInt(c.data.timer)) * 100;
+			setTimerBarColor();
+			$scope.timer = hours + 'h ' + minutes + 'm ' + seconds + 's';
+			if ($scope.seconds === 0) $scope.submitTest();
+
+			localStorage.setItem("arenaTestTimer", $scope.seconds);
+			localStorage.setItem("arenaTestLastAccessed", new Date().getTime());
+		}, 1000);
+	}
+
+	$scope.saveAnswer = function(question, choiceIndex) {
+		var answered = false;
+		var answerCount = 0;
+		if (question.type == 'radioButton') {
+			question.choices.forEach(function(choice, index) {
+				if (index === choiceIndex) choice.selected = !choice.selected;
+				else choice.selected = false;
+				if (choice.selected === true) answerCount++;
+			});
+		} else if (question.type == 'checkBox') {
+			question.choices.forEach(function(choice, index) {
+				if (index === choiceIndex) choice.selected = !choice.selected;
+				if (choice.selected === true) answerCount++;
+			});
+		}
+		if (answerCount > 0) question.answered = true;
+		else question.answered = false;
+		setChipColor($scope.currentQuestionIndex);
+	}
+
+	$scope.prevQuestion = function() {
+		markCurrentQuestion();
+		if ($scope.questionLen > 0 && $scope.currentQuestionIndex > 0) $scope.currentQuestionIndex--;
+		cacheUserReponse();
+	}
+
+	$scope.nextQuestion = function() {
+		markCurrentQuestion();
+		// move to next question && enable review if moved to last question
+		if ($scope.questionLen > 0 && $scope.currentQuestionIndex < $scope.questionLen - 1) $scope.currentQuestionIndex++;
+		if ($scope.currentQuestionIndex === ($scope.questionLen - 1) && $scope.enableReview === false) {
+			M.toast({
+				html: '<h6>Review enabled, please use the question numbers on the right</h6>',
+				displayLength: 5000
+			});
+			$scope.enableReview = true;
+			localStorage.setItem("arenaTestReviewEnabled", $scope.enableReview);
+		}
+		cacheUserReponse();
+	}
+
+	$scope.goToQuestion = function(index) {
+		if ($scope.enableReview === true) {
+			markCurrentQuestion();
+			$scope.currentQuestionIndex = index;
+			cacheUserReponse();
+		} else {
+			M.Toast.dismissAll();
+			M.toast({
+				html: '<h6>Complete all questions to enable review</h6>',
+				displayLength: 5000
+			});
+		}
+	}
+
+	$scope.flagQuestion = function() {
+		$scope.questions[$scope.currentQuestionIndex].flagged = !$scope.questions[$scope.currentQuestionIndex].flagged;
+		setChipColor($scope.currentQuestionIndex);
+	}
+
+	$scope.proceedToSubmit = function() {
+		var proceed = confirm('Proceed to submit the test?');
+		if (proceed === true) $scope.submitTest();
+		else goFullScreen();
+	}
+
+	$scope.submitTest = function() {
+		$scope.transition = true;
+		c.data.responsePayload = $scope.questions.map(function(question) {
+			return {
+				id: question.id,
+				title: question.title,
+				type: question.type,
+				module: question.module,
+				choices: question.choices
+			}
+		});
+		// log user response
+		// console.log(c.data.responsePayload);
+		c.data.testScheduleId = c.data.testId;
+		c.data.testTakerId = c.data.currentTestTakerID;
+		c.data.sessionID = c.data.sessionID;
+		c.data.show_responses = c.data.show_responses; 
+		c.data.action = "submitTest";
+		c.server.update().then(function() {
+			c.data.action = undefined;
+			c.data.responsePayload = undefined;
+			$scope.testSubmitted = true;
+			$scope.transition = false;
+			$scope.resetSession();
+			disableAntiCheat();
+			if (c.data.show_responses === true && $scope.data.result_id) redirectToResult();
+			else redirect();
+		});
+	}
+
+	var reportQuestionModal;
+	$scope.openModalForReportQuestion = function() {
+		if(!reportQuestionModal) 
+			reportQuestionModal = M.Modal.init(angular.element('#report-question-modal'), {
+				onCloseEnd: function() {
+					$scope.questions[$scope.currentQuestionIndex].comments = "";
+				}
+			});
+		M.Modal.getInstance(angular.element('#report-question-modal')).open();
+	}
+
+	$scope.reportQuestion = function() {
+		$scope.server.get({
+			action: 'reportQuestion',
+			question: $scope.questions[$scope.currentQuestionIndex].id,
+			user: $scope.data.currentTestTakerID,
+			comments: $scope.questions[$scope.currentQuestionIndex].comments
+		}).then(function() {
+			M.toast({
+				html: '<h6>Report submitted for this question</h6>',
+				displayLength: 3000
+			});
+			M.Modal.getInstance(angular.element('#report-question-modal')).close();
+		});
+		$scope.questions[$scope.currentQuestionIndex].comments = "";
+	}
+
+	$scope.trustHtml = function(htmlStr){
+		return $sce.trustAsHtml(htmlStr);
+	}
+
+	// mark as unanswered if left empty
+	var markCurrentQuestion = function() {
+		if ($scope.questions[$scope.currentQuestionIndex].answered === undefined) {
+			$scope.questions[$scope.currentQuestionIndex].answered = false;
+			setChipColor($scope.currentQuestionIndex);
+		}
+	}
+
+	var redirectToResult = function() {
+		M.toast({
+			html: '<h6>Loading responses....</h6>',
+			displayLength: 2000
+		});
+		$timeout(function() {
+			$location.url('/arena_test?id=arena_test_response&result_id=' + $scope.data.result_id);
+		}, 2000);
+	};
+
+	// redirect to home after 5 secs
+	var redirect = function() {
+		M.toast({
+			html: '<h6>Redirecting in 5 seconds....</h6>',
+			displayLength: 5000
+		});
+		$timeout(function() {
+			$location.url('/arena_test');
+		}, 5000);
+	}
+
+	var goFullScreen = function() {
+		$timeout(function() {
+			var elem = document.documentElement;
+			/* View in fullscreen */
+			if (elem.requestFullscreen) {
+				elem.requestFullscreen();
+			} else if (elem.mozRequestFullScreen) {
+				/* Firefox */
+				elem.mozRequestFullScreen();
+			} else if (elem.webkitRequestFullscreen) {
+				/* Chrome, Safari and Opera */
+				elem.webkitRequestFullscreen();
+			} else if (elem.msRequestFullscreen) {
+				/* IE/Edge */
+				elem.msRequestFullscreen();
+			}
+		}, 500);
+	}
+
+	// enforce test security
+	var enableAntiCheat = function() {
+		angular.element($window).blur(function() {
+			if ($scope.testStarted === false || $scope.testSubmitted === true) {
+				angular.element($window).off("blur");
+				return;
+			}
+			if ($scope.cheatAttempts === 0) {
+				M.toast({
+					html: '<h6>TEST TERMINATED. CONTACT ADMIN</h6>',
+					displayLength: 5000
+				});
+				$scope.submitTest();
+				return;
+			}
+			M.toast({
+				html: '<h6>DO NOT NAVIGATE AWAY FROM THIS WINDOW OR SESSION WILL BE TERMINATED</h6><h6>Remaining warnings: ' + $scope.cheatAttempts + '</h6>',
+				displayLength: 5000
+			});
+			localStorage.setItem("arenaTestCheatAttempts", --$scope.cheatAttempts);
+		});
+	}
+
+	var disableAntiCheat = function() {
+		angular.element($window).off("blur");
+	}
+
+	var setChipColor = function(index) {
+		var question = $scope.questions[index];
+		if (question.flagged === true) $scope.markers[index] = 'yellow';
+		else if (question.answered === undefined) $scope.markers[index] = 'grey';
+		else if (question.answered === true) $scope.markers[index] = 'green';
+		else if (question.answered === false) $scope.markers[index] = 'red';
+	}
+
+	var setTimerBarColor = function() {
+		var width = Math.round($scope.timerBarWidth);
+		if (width > 75 && width <= 100) $scope.timerBarColor = 'lightskyblue';
+		else if (width > 50 && width <= 75) $scope.timerBarColor = 'green';
+		else if (width > 35 && width <= 50) $scope.timerBarColor = 'yellow';
+		else if (width > 10 && width <= 35) $scope.timerBarColor = 'orange';
+		else if (width >= 0 && width < 10) $scope.timerBarColor = 'red';
+	}
+
+	$scope.resetSession = function() {
+		localStorage.removeItem('arenaTestId');
+		localStorage.removeItem('arenaTestTimer');
+		localStorage.removeItem('arenaTestCache');
+		localStorage.removeItem('arenaTestCheatAttempts');
+		localStorage.removeItem('arenaTestStarted');
+		localStorage.removeItem('arenaTestCurrentQuestion');
+		localStorage.removeItem('arenaTestReviewEnabled');
+		localStorage.removeItem('arenaTestLastAccessed');
+
+		$scope.timer = '0h 0m 0s';
+		$interval.cancel($scope.interval);
+	}
+
+	var cacheUserReponse = function() {
+		localStorage.setItem("arenaTestCache", JSON.stringify($scope.questions));
+		localStorage.setItem("arenaTestCurrentQuestion", $scope.currentQuestionIndex);
+	}
+
+	$scope.proceedToTest = function() {
+		$scope.transition = true;
+		$timeout(function() {
+			$scope.transition = false;
+			$scope.startTest();
+		}, 2000);
+	}
+
+	$scope.startTest = function() {
+		if (c.data.enable_retakes == false && c.data.hasSubmittedTest === true) {
+			M.toast({
+				html: '<h6>You have aleady appeared for this test</h6>',
+				displayLength: 10000
+			});
+			$scope.testStarted = true;
+		} else if (c.data.appear_anytime == false && c.data.startTime >= new Date().getTime()) {
+			M.toast({
+				html: '<h6>You can start the test on/after ' + c.data.startTimeDisplayValue + '</h6>',
+				displayLength: 10000
+			});
+		} else if ($scope.questions.length > 0) {
+			$scope.startTimer();
+			$scope.markers.forEach(function(marker, index) {
+				setChipColor(index);
+			});
+			goFullScreen();
+			$scope.testStarted = true;
+			localStorage.setItem("arenaTestStarted", $scope.testStarted);
+			localStorage.setItem("arenaTestId", c.data.testId);
+		} else {
+			M.toast({
+				html: '<h6>Test not setup. CONTACT ADMIN</h6>',
+				displayLength: 10000
+			});
+		}
+	}
+
+	// reset session if stored test id is different
+	if (c.data.testId !== localStorage.getItem("arenaTestId")) $scope.resetSession();
+
+	$scope.testStarted = localStorage.getItem("arenaTestStarted") === "true" || false;
+	$scope.enableReview = localStorage.getItem("arenaTestReviewEnabled") === "true" || false;
+	$scope.interval = null;
+	$scope.seconds = localStorage.getItem("arenaTestTimer") ? parseInt(localStorage.getItem("arenaTestTimer")) : parseInt(c.data.timer);
+	$scope.secondsLeftWhenTestStarted = $scope.seconds;
+	$scope.timerBarWidth = ($scope.secondsLeftWhenTestStarted / c.data.timer) * 100;
+	$scope.timerBarColor = 'white';
+	$scope.timer = '0h 0m 0s';
+	$scope.transition = false;
+	$scope.questions = localStorage.getItem("arenaTestCache") ? JSON.parse(localStorage.getItem("arenaTestCache")) : c.data.questions;
+	$scope.questionLen = $scope.questions.length;
+	$scope.markers = new Array($scope.questionLen).fill('grey');
+	$scope.testSubmitted = c.data.hasSubmittedTest === true || localStorage.getItem("TestSubmitted") === "true" || false;
+	$scope.currentQuestionIndex = localStorage.getItem("arenaTestCurrentQuestion") ? parseInt(localStorage.getItem("arenaTestCurrentQuestion")) : 0;
+	$scope.cheatAttempts = parseInt(localStorage.getItem("arenaTestCheatAttempts")) || 3;
+
+
+	// auto submit test if user reopens test after 10 mins of inactivity
+	var timeSinceLastAccessed = parseInt(localStorage.getItem('arenaTestLastAccessed') || 0);
+	if (timeSinceLastAccessed > 0 &&
+			(Math.floor((new Date().getTime() - timeSinceLastAccessed) / (1000 * 60)) > 10)) $scope.submitTest();
+	// resume if refreshed
+	if ($scope.testStarted === true && $scope.testSubmitted === false) $scope.startTest();
+	// dis-engage anti cheat when disabled by admin
+	if (c.data.enableAntiCheat === false) {
+		disableAntiCheat();
+		// reset no of attempts
+		localStorage.setItem("arenaTestCheatAttempts", 3);
+	}
+	// re-engage anti cheat when enabled by admin
+	else if (c.data.enableAntiCheat === true) {
+		disableAntiCheat();
+		enableAntiCheat();
+	}
+	// logout if test is submitted
+	if ($scope.testSubmitted === true) {
+		inactivateSession();
+		$scope.testStarted = true;
+		redirect();
+	}
+
+	function reloadPage() {
+		$window.location.reload();
+	}
+
+	function inactivateSession() {
+		c.data.action = "inactivateSession";
+		c.data.sessionID = c.data.sessionID;
+		c.server.update();
+	}
+
+	// deactivate session if user closes window
+	/*var myEvent = $window.attachEvent || $window.addEventListener;
+    var chkevent = $window.attachEvent ? 'onbeforeunload' : 'beforeunload'; /// make IE7, IE8 compitable
+    myEvent(chkevent, function(e) { 
+    	$timeout(reloadPage, 2000);
+    	c.data.action = "inactivateSession";
+    	c.data.sessionID = c.data.sessionID;
+    	c.server.update();
+    	var confirmationMessage = 'Are you sure to leave the page?';
+    	(e || $window.event).returnValue = confirmationMessage;
+    	return confirmationMessage;
+    });*/
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.loader-wrapper {&#13;
+  display: flex;&#13;
+  left: 0;&#13;
+  right: 0;&#13;
+  width: 100%;&#13;
+  position: fixed;&#13;
+  z-index: 999;&#13;
+  height: 80vh;&#13;
+  top: 0;&#13;
+  bottom: 0;&#13;
+}&#13;
+&#13;
+.seconds-bar {&#13;
+  position: fixed;&#13;
+  box-shadow: 1px 2px 20px grey;&#13;
+  top: 0;&#13;
+  left: 0;&#13;
+  right: 0;&#13;
+  height: 10px;&#13;
+  transition: background-color 2s linear 0s, width 2s linear 0s;&#13;
+}&#13;
+&#13;
+.test-wrapper {&#13;
+  margin: 5% auto; &#13;
+}&#13;
+&#13;
+.card-title {&#13;
+  font-size: 1.5rem;&#13;
+  display: flex;&#13;
+  justify-content: space-around;&#13;
+  align-items: center;&#13;
+  height: 10vh;&#13;
+  label {&#13;
+    font-size: 1.1rem;&#13;
+  	margin: 0;&#13;
+  }&#13;
+}&#13;
+&#13;
+.main-header {&#13;
+  justify-content: space-between;&#13;
+  padding: 0 20px;&#13;
+}&#13;
+&#13;
+.timer-heading {&#13;
+  font-size: 0.6em;&#13;
+}&#13;
+&#13;
+.card-content {&#13;
+  height: 60vh;&#13;
+  overflow: auto;&#13;
+}&#13;
+&#13;
+/* width */&#13;
+.card-content::-webkit-scrollbar {&#13;
+  width  : 5px;&#13;
+}&#13;
+&#13;
+.card-content::-webkit-scrollbar-thumb {&#13;
+  border-radius   : 5px;&#13;
+  background-color: rgba(0, 0, 0, 0.3);&#13;
+}&#13;
+&#13;
+/* Handle on hover */&#13;
+.card-content::-webkit-scrollbar-thumb:hover {&#13;
+  background: #555;&#13;
+}&#13;
+&#13;
+.quiz-question {&#13;
+  position: relative;&#13;
+  -webkit-touch-callout: none;&#13;
+  -webkit-user-select: none;&#13;
+  -khtml-user-select: none;&#13;
+  -moz-user-select: none;&#13;
+  -ms-user-select: none;&#13;
+  user-select: none;&#13;
+}&#13;
+&#13;
+.quiz-question-title {&#13;
+  font-size: 1.4em;&#13;
+}&#13;
+&#13;
+.quiz-question-choices {&#13;
+  margin: 15px;&#13;
+}&#13;
+&#13;
+.quiz-question-flag-btn {&#13;
+  position: absolute;&#13;
+  right: 24px;&#13;
+  bottom: 20px;&#13;
+  i {&#13;
+    color: red;&#13;
+    font-size: 1.5rem;&#13;
+  }&#13;
+}&#13;
+&#13;
+.quiz-question-title span &gt; *{&#13;
+  display: inline !important;&#13;
+}&#13;
+&#13;
+.ng-hide.ng-hide-animate {&#13;
+  display: none !important;&#13;
+}&#13;
+&#13;
+.ng-animate.no-animate {&#13;
+  transition: 0s none;&#13;
+  -webkit-transition: 0s none;&#13;
+  animation: 0s none;&#13;
+  -webkit-animation: 0s none;&#13;
+}&#13;
+&#13;
+.question-markers-wrapper {&#13;
+  padding: 10px;  &#13;
+}&#13;
+&#13;
+.question-markers {&#13;
+  display: flex;&#13;
+  flex-flow: column;&#13;
+  align-items: center;&#13;
+  height: 100%;&#13;
+  flex-wrap: wrap;&#13;
+  overflow-x: auto;&#13;
+  overflow-y: hidden;&#13;
+  .chip {&#13;
+    padding: 0;&#13;
+    font-size: 15px;&#13;
+    width: 32px;&#13;
+    text-align: center;&#13;
+    box-shadow: 1px 2px 2px;&#13;
+    margin-bottom: 6px;&#13;
+    margin-right: 7px;&#13;
+  }&#13;
+}&#13;
+&#13;
+/* width */&#13;
+.question-markers::-webkit-scrollbar {&#13;
+  height  : 5px;&#13;
+}&#13;
+&#13;
+.question-markers::-webkit-scrollbar-thumb {&#13;
+  border-radius   : 5px;&#13;
+  background-color: rgba(0, 0, 0, 0.3);&#13;
+}&#13;
+&#13;
+/* Handle on hover */&#13;
+.question-markers::-webkit-scrollbar-thumb:hover {&#13;
+  background: #555;&#13;
+}&#13;
+&#13;
+.quiz-buttons {&#13;
+  display: flex;&#13;
+  flex-flow: row;&#13;
+  justify-content: space-between;&#13;
+}&#13;
+&#13;
+.quiz-buttons .badge {&#13;
+  background-color: $primary;&#13;
+}&#13;
+&#13;
+.rules {&#13;
+  overflow: auto;&#13;
+}&#13;
+&#13;
+.rules .rule {&#13;
+  margin-bottom: 30px;&#13;
+  font-size: 1rem;&#13;
+}&#13;
+&#13;
+.rules .note {&#13;
+  font-weight: 600;&#13;
+  margin: 10px auto;&#13;
+}&#13;
+&#13;
+.modal-content {&#13;
+  border: 0;&#13;
+}&#13;
+&#13;
+@keyframes color {&#13;
+  0%{&#13;
+    background-color: lightskyblue;&#13;
+  }&#13;
+  25% {&#13;
+    background-color: green;&#13;
+  }&#13;
+&#13;
+  50% {&#13;
+    background-color: yellow;&#13;
+  }&#13;
+&#13;
+  75% {&#13;
+    background-color: orange;&#13;
+  }&#13;
+&#13;
+  100% {&#13;
+    background-color: red;&#13;
+  }&#13;
+}&#13;
+&#13;
+/* width */&#13;
+::-webkit-scrollbar {&#13;
+  width  : 5px;&#13;
+}&#13;
+&#13;
+::-webkit-scrollbar-thumb {&#13;
+  border-radius   : 5px;&#13;
+  background-color: rgba(0, 0, 0, 0.3);&#13;
+}&#13;
+&#13;
+/* Handle on hover */&#13;
+::-webkit-scrollbar-thumb:hover {&#13;
+  background: #555;&#13;
+}&#13;
+&#13;
+#report-question-modal {&#13;
+  .modal-content {&#13;
+    padding: 10px 15px;&#13;
+    h5 {&#13;
+      margin-top: 0.5rem;&#13;
+      margin-bottom: 1.2rem;&#13;
+    }&#13;
+  }&#13;
+  .modal-footer {&#13;
+    padding: 4px 15px;&#13;
+  }&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Arena Test</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	if(input && input.action === "reportQuestion") {
+		var feedback = new GlideRecord('x_93700_arena_question_feedback');
+		feedback.initialize();
+		feedback.question = input.question;
+		feedback.user = input.user;
+		feedback.comments = input.comments;
+		feedback.insert();
+		return;
+	}
+	
+	if(input && input.action === "submitTest") {
+		var evaluator = new x_93700_arena.Evaluator();
+		var result_id = evaluator.getTestModeResult(input.testScheduleId, input.testTakerId, input.responsePayload);
+		data.hasSubmittedTest = true;
+		deactivateSession(input.sessionID);
+		if (input.show_responses === true) data.result_id = result_id;
+		return;
+	}
+
+	if(input && input.action === "inactivateSession") {
+		deactivateSession(input.sessionID);
+		return;
+	}
+
+	data.hasSubmittedTest = false;
+	data.enable_retakes = false;
+	data.appear_anytime = false;
+	data.show_responses = false;
+	data.testId = $sp.getParameter('test_id');
+	data.testTakerProfile = gs.getSession().getClientData('testTakerProfile');
+
+
+	if (data.testTakerProfile) {
+		data.testTakerProfile = JSON.parse(data.testTakerProfile);
+
+		data.currentTestTakerID = data.testTakerProfile.id;
+		data.currentTestTakerName = data.testTakerProfile.name;
+
+		data.questions = [];
+		data.timer = -1;
+		data.enableAntiCheat = false;
+
+		data.sessionID = getSession(data.testId, data.currentTestTakerID);
+
+		// check for any active result record, if found then user has already taken the test
+		var resultGr = new GlideRecord('x_93700_arena_results');
+		resultGr.setLimit(1);
+		resultGr.addActiveQuery();
+		resultGr.addQuery('test_schedule', data.testId);
+		resultGr.addQuery('test_taker', data.currentTestTakerID);
+		resultGr.query();
+		if (resultGr.next()) {
+			data.hasSubmittedTest = true;
+			data.enable_retakes = resultGr.test_schedule.enable_retakes.toString() === 'true';
+			deactivateSession(data.sessionID);
+		}
+
+		// fetch questions if testId is valid & user has not appeared in the test before/retakes are enabled in this test
+		if(data.testId && data.testId.length === 32 && (data.enable_retakes === true || data.hasSubmittedTest === false)) {
+			var questionIDs = "";
+			var testScheduleGr = new GlideRecord('x_93700_arena_test_schedule');
+			testScheduleGr.addQuery('sys_id', data.testId);
+			testScheduleGr.query();
+			if(testScheduleGr.next()) {
+				data.shuffle = testScheduleGr.getValue('shuffle') === '1';
+				data.enable_retakes = testScheduleGr.getValue('enable_retakes') === '1';
+				data.appear_anytime = testScheduleGr.getValue('appear_anytime') === '1';
+				data.show_responses = testScheduleGr.getValue('show_responses') === '1';
+				var questionSet = testScheduleGr.question_set ? testScheduleGr.question_set.questions.toString() : "";
+				if(questionSet && typeof questionSet === 'string' && questionSet.length > 32) {
+					questionIDs = questionSet;
+					data.timer = testScheduleGr.getValue('test_duration_in_minutes')*60;
+					data.duration = testScheduleGr.getValue('test_duration_in_minutes');
+					data.testName = testScheduleGr.getValue('name') || '';
+					data.enableAntiCheat = testScheduleGr.getValue('enable_anti_cheat') === "1";
+					data.startTime = new GlideDateTime(testScheduleGr.getValue('start_time')).getNumericValue();
+					data.startTimeDisplayValue = testScheduleGr.getDisplayValue('start_time');
+				} else {
+					return;
+				}
+			}
+
+			var questionCount = 0;
+			var questionGr = new GlideRecord('x_93700_arena_arena_question');
+			questionGr.addQuery('sys_id', 'IN', questionIDs);
+			questionGr.query();
+			while(questionGr.next()) {
+				var question = {};
+				question.id = questionGr.getValue('sys_id');
+				question.module = questionGr.getValue('module');
+				question.type = questionGr.getValue('type');
+				question.title = questionGr.getValue('question').trim() || '';
+				question.flagged = false;
+				question.answered = undefined;
+				question.comments = '';
+				question.choices = [];
+				var questionChoiceGr = new GlideRecord('x_93700_arena_quiz_choices');
+				questionChoiceGr.orderByDesc('correct');
+				questionChoiceGr.addQuery('question', questionGr.sys_id);
+				questionChoiceGr.query();
+				while(questionChoiceGr.next()) {
+					question.choices.push({
+						id: questionChoiceGr.getValue('sys_id'),
+						value: questionChoiceGr.getValue('choice'),
+						selected: false
+					});
+				}
+				question.choices = shuffle(question.choices);
+				data.questions.push(question);
+			}
+
+			if (data.shuffle === true) data.questions = shuffle(data.questions);
+		}
+	}
+
+	// helper method to shuffle choices array
+	function shuffle(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex;
+		while (0 !== currentIndex) {
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+		}
+		return array;
+	}
+
+	function getSession(testId, currentTestTakerID) {
+		var testSessionGr = new GlideRecord('x_93700_arena_logged_in_test_takers');
+		testSessionGr.setLimit(1);
+		testSessionGr.addQuery('test_schedule', testId);
+		testSessionGr.addQuery('test_taker', currentTestTakerID);
+		testSessionGr.query();
+		if (testSessionGr.next()) {
+			testSessionGr.setValue('active', true);
+			testSessionGr.setValue('login_time', new GlideDateTime());
+			testSessionGr.setValue('logout_time', '');
+			return testSessionGr.update();
+		} else {
+			testSessionGr.initialize();
+			testSessionGr.setValue('active', true);
+			testSessionGr.setValue('login_time', new GlideDateTime());
+			testSessionGr.setValue('logout_time', '');
+			testSessionGr.setValue('test_schedule', testId);
+			testSessionGr.setValue('test_taker', currentTestTakerID);
+			return testSessionGr.insert();
+		}
+	}
+
+	function deactivateSession(sessionID) {
+		var testSessionGr = new GlideRecord('x_93700_arena_logged_in_test_takers');
+		testSessionGr.addQuery('sys_id', sessionID);
+		testSessionGr.setValue('active', false);
+		testSessionGr.setValue('logout_time', new GlideDateTime());
+		testSessionGr.updateMultiple();
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-26 15:15:54</sys_created_on>
+        <sys_id>be84f0bc0712541037c7f2ae7c1ed0fc</sys_id>
+        <sys_mod_count>426</sys_mod_count>
+        <sys_name>Arena Test</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_be84f0bc0712541037c7f2ae7c1ed0fc</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-10-22 07:37:47</sys_updated_on>
+        <template><![CDATA[<div class="loader-wrapper" ng-if="transition === true">
+  <div class="preloader-wrapper big active" style="margin: auto;">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+      <div class="circle"></div>
+      </div><div class="circle-clipper right">
+      <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-style="transition === true && {'filter': 'blur(5px)'}" ng-if="testStarted === false">
+  <div class="col s12">
+    <div class="card z-depth-3">
+      <div class="card-title blue darken-4 white-text" style="padding: 12px;">Rules for this test</div>
+      <div class="card-content rules"> 
+        <div class="rule">1. This test consists of {{questionLen}} questions of 1 mark each</div>
+        <div class="rule">2. Total test duration is {{c.data.duration}} minutes, test can be submitted any time before.
+          <div class="note">Test will be auto submitted after this duration</div>
+        </div>
+        <img src="arena-test-question-toolbar.png" style="float: right;">
+        <div class="rule">3. The question toolbar on the right hand side denotes the status of each question using color codes.</div>
+        <div class="rule">4. You can review the questions by clicking on any question number from the question toolbar.
+          <div class="note">This will only be enabled after attempting all the questions</div>
+        </div>
+        <div class="rule" ng-if="c.data.enableAntiCheat === true">5. Do not try to navigate away from the test window after starting the test.
+          <div class="note">Doing so will terminate the test</div>
+        </div>
+      </div>
+      <div class="card-action center-align blue darken-4">
+        <a class="waves-effect black-text blue lighten-5 btn" ng-click="proceedToTest()">Proceed to test</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="test-wrapper" ng-style="transition === true && {'filter': 'blur(5px)'}" ng-if="testStarted == true">
+  <div class="row" ng-if="testSubmitted === false">
+    <div class="seconds-bar" ng-style="{ 'background-color': timerBarColor, 'width': timerBarWidth+'%' }" ></div>
+    <div class="col s12 m8 l9 xl9">
+      <div class="card z-depth-3">
+        <div class="card-title main-header blue darken-4 white-text">
+          <div ng-bind="c.data.testName"></div>
+          <div ng-bind="c.data.currentTestTakerName"></div>
+        </div>
+        <div class="quiz-question card-content" oncopy="return false" oncut="return false" onpaste="return false">
+          <div class="quiz-question-title">
+            <span>{{(currentQuestionIndex+1)+'. '}}</span>
+            <span class="title-content" ng-bind-html="trustHtml(questions[currentQuestionIndex].title)"></span>
+          </div>
+          <div class="quiz-question-choices">
+            <div ng-repeat="choice in questions[currentQuestionIndex].choices track by $index" ng-init="choiceIndex=$index" class="choices-wrapper">
+              <label>
+                <input ng-if="questions[currentQuestionIndex].type === 'radioButton'" type="radio" id="ques-{{currentQuestionIndex}}-choice-{{choiceIndex}}" ng-checked="choice.selected" ng-click="saveAnswer(questions[currentQuestionIndex], choiceIndex)" />
+                <input ng-if="questions[currentQuestionIndex].type === 'checkBox'" type="checkbox" id="ques-{{currentQuestionIndex}}-choice-{{choiceIndex}}" ng-checked="choice.selected" ng-click="saveAnswer(questions[currentQuestionIndex], choiceIndex)" />
+                <span>{{choice.value}}</span>
+              </label>
+            </div>
+          </div>
+          <div class="quiz-question-flag-btn"
+               uib-tooltip="Report this question" 
+               tooltip-placement="left">
+            <a class="waves-effect btn-floating btn-sm black-text light-blue lighten-5" 
+               ng-click="openModalForReportQuestion()"
+               href="javascript: void(0);">
+              <i class="material-icons">report_problem</i>
+            </a>
+          </div>
+        </div>
+        <div class="quiz-buttons card-action blue darken-4">
+          <a class="waves-effect black-text blue lighten-5 btn" ng-click="prevQuestion()">Previous</a>
+          <a class="waves-effect black-text blue lighten-5 btn" ng-click="flagQuestion()">{{questions[currentQuestionIndex].flagged === true ? 'Unflag' : 'Flag'}}</a>
+          <a class="waves-effect black-text blue lighten-5 btn" ng-click="nextQuestion()">Next</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m4 l3 xl3">
+      <div class="card z-depth-3">
+        <div class="card-title blue darken-4 white-text">
+          <label class="timer-heading white-text" for="timer">TIMER :</label>
+          <div id="timer">{{timer}}</div>
+        </div>
+
+        <div class="card-content question-markers-wrapper">
+          <div class="question-markers">
+            <div class="chip" ng-class="marker" ng-repeat="marker in markers track by $index" ng-init="markerIndex=$index" ng-click="goToQuestion(markerIndex)">{{markerIndex+1}}</div>
+          </div>
+        </div>
+
+        <div class="card-action blue darken-4 center-align">
+          <a class="waves-effect black-text blue lighten-5 btn" ng-click="proceedToSubmit()">Submit Test</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="report-question-modal" class="modal">
+      <div class="modal-content">
+        <h5>Add a comment to submit report</h5>
+        <sp-tinymce-editor ng-model="questions[currentQuestionIndex].comments" 
+                           ng-model-options="{getterSetter: true}">
+        </sp-tinymce-editor>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0);" 
+           class="modal-close waves-effect btn-flat"
+           style="margin-right: 5px">
+          Close
+        </a>
+        <a href="javascript:void(0);" 
+           class="waves-effect black-text blue lighten-5 btn-flat" 
+           ng-click="reportQuestion()"
+           ng-disabled="!questions[currentQuestionIndex].comments">
+          Submit
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row" ng-if="testSubmitted === true">
+    <div class="col s12">
+      <div class="card z-depth-3 blue darken-4">
+        <div class="card-content center-align" style="padding: 25% 0;"> 
+          <h5 class="white-text">Thank you for taking the test</h5> 
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

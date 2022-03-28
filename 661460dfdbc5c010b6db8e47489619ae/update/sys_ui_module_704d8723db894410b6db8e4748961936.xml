@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_module">
+    <sys_ui_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="Arena">784d432fdb494410b6db8e4748961910</application>
+        <filter/>
+        <name>Arena Questions</name>
+        <order/>
+        <path/>
+        <path_relative_to_root>false</path_relative_to_root>
+        <roles>x_93700_arena.player</roles>
+        <sys_class_name>sys_ui_module</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-11-17 15:56:47</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>704d8723db894410b6db8e4748961936</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Arena Questions</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ui_module_704d8723db894410b6db8e4748961936</sys_update_name>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2019-11-17 15:56:47</sys_updated_on>
+        <table>x_93700_arena_arena_question</table>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+    </sys_ui_module>
+</record_update>

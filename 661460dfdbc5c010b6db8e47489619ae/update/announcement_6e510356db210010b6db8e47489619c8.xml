@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="announcement">
+    <announcement action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <click_target>urlNew</click_target>
+        <details/>
+        <details_link_text>Create Arena Questions</details_link_text>
+        <details_page/>
+        <details_url>https://dev51484.service-now.com/x_93700_arena_arena_question_list.do?sysparm_userpref_module=3c4d432fdb494410b6db8e474896190c&amp;sysparm_clear_stack=true</details_url>
+        <dismiss_options>session_dismissible</dismiss_options>
+        <display_first>false</display_first>
+        <display_style display_value="Urgent">339ea11ae7d4030075c2a117c2f6a9cf</display_style>
+        <from>2019-12-04 14:24:26</from>
+        <glyph>clock-o</glyph>
+        <glyph_alt_text/>
+        <name>To Do</name>
+        <public>true</public>
+        <roles/>
+        <show_for_unauthenticated_users_only>false</show_for_unauthenticated_users_only>
+        <summary>1. Validate and fix scoring algorithm - not working &#13;
+2. fix  menu page css &#13;
+3. Fix issues in radio  button (should not allow multiselect)&#13;
+4. link t2(dev51484) widget with arena- to capture user photo in profile&#13;
+4.  build score card like (https://dribbble.com/shots/3311782-Dark-Gamer-Profile-Design)&#13;
+5.Redesign scoring algorithm to consider attempts based scores (backlog)&#13;
+6.Design Avatar page&#13;
+7.Design timeline/Map&#13;
+8.Design test completion  modal&#13;
+9. Create questions for all qn types &#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+</summary>
+        <sys_class_name>announcement</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-12-08 14:31:05</sys_created_on>
+        <sys_id>6e510356db210010b6db8e47489619c8</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>To Do</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>announcement_6e510356db210010b6db8e47489619c8</sys_update_name>
+        <sys_updated_by>anirudh</sys_updated_by>
+        <sys_updated_on>2020-04-03 07:03:10</sys_updated_on>
+        <title>Pending Work - Arena </title>
+        <to>2020-04-09 13:24:34</to>
+        <type>67eaf134e7a3320075c2a117c2f6a9d2,52fa79f8e763320075c2a117c2f6a991</type>
+    </announcement>
+    <sys_translated_text action="delete_multiple" query="documentkey=6e510356db210010b6db8e47489619c8"/>
+</record_update>

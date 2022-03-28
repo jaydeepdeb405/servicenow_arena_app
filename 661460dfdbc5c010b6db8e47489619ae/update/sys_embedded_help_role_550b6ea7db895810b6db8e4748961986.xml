@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>1000</order>
+        <role display_value="x_93700_arena.question_team" name="x_93700_arena.question_team">aabae2a7db895810b6db8e474896197d</role>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>praveen</sys_created_by>
+        <sys_created_on>2020-06-03 09:38:20</sys_created_on>
+        <sys_id>550b6ea7db895810b6db8e4748961986</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>aabae2a7db895810b6db8e474896197d</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_embedded_help_role_550b6ea7db895810b6db8e4748961986</sys_update_name>
+        <sys_updated_by>praveen</sys_updated_by>
+        <sys_updated_on>2020-06-03 09:38:20</sys_updated_on>
+    </sys_embedded_help_role>
+</record_update>

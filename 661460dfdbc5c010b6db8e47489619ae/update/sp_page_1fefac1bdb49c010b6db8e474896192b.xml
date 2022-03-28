@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <css>@font-face {&#13;
+    font-family: pfs-bold;&#13;
+  	//src: url('/sys_attachment.do?sys_id=e67dc073dbf09010b6db8e4748961958');&#13;
+   src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/PFSquareSansPro-Bold.otf');&#13;
+}&#13;
+&#13;
+ body {&#13;
+  background-color: white;&#13;
+  background-position: center center;&#13;
+  background-size: cover;&#13;
+  background-repeat: no-repeat;&#13;
+  height:100vh; &#13;
+  font-family: pfs-bold;&#13;
+}&#13;
+&#13;
+  // commenting as it is causing issues in test page -sk&#13;
+section{&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  justify-content:center;&#13;
+  align-items:center;&#13;
+  text-align:center;&#13;
+} &#13;
+&#13;
+.textStyling{&#13;
+color:darkorange;&#13;
+font-weight:bolder;&#13;
+}&#13;
+ &#13;
+&#13;
+.col-md-12,.col-xs-12{&#13;
+  padding-left:0px !important;&#13;
+  padding-right:0px !important;&#13;
+  &#13;
+}&#13;
+&#13;
+/*body,button,div,a  {*/&#13;
+*{&#13;
+  cursor: -webkit-image-set(url(https://cdn.custom-cursor.com/db/4308/arrow2489.png) 5x) , default !important;&#13;
+}&#13;
+&#13;
+// hide all gs messages&#13;
+#uiNotificationContainer {&#13;
+ 	display: none; &#13;
+}</css>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <id>arena_home</id>
+        <internal>false</internal>
+        <omit_watcher>false</omit_watcher>
+        <public>false</public>
+        <roles/>
+        <seo_script/>
+        <short_description/>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-16 09:51:26</sys_created_on>
+        <sys_id>1fefac1bdb49c010b6db8e474896192b</sys_id>
+        <sys_mod_count>114</sys_mod_count>
+        <sys_name>arena_home</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_page_1fefac1bdb49c010b6db8e474896192b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-08 11:47:43</sys_updated_on>
+        <title>Home</title>
+        <use_seo_script>false</use_seo_script>
+    </sp_page>
+    <sys_translated_text action="delete_multiple" query="documentkey=1fefac1bdb49c010b6db8e474896192b"/>
+</record_update>

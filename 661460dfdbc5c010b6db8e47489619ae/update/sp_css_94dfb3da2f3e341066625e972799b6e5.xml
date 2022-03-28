@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css">
+    <sp_css action="INSERT_OR_UPDATE">
+        <css>/*&#13;
+ * overriding bootstrap styles&#13;
+ */&#13;
+&#13;
+.row {&#13;
+  margin-left: -15px !important;&#13;
+  margin-right: -15px !important;&#13;
+}&#13;
+&#13;
+.modal {&#13;
+  height: max-content !important;&#13;
+  background: transparent !important;&#13;
+  max-height: fit-content !important;&#13;
+}&#13;
+&#13;
+.modal-content {&#13;
+  box-shadow: none !important;&#13;
+  border-radius: 0 !important;&#13;
+}&#13;
+&#13;
+.material-tooltip {&#13;
+  display: none !important;&#13;
+}&#13;
+&#13;
+#toast-container {&#13;
+  position: fixed !important;&#13;
+  width: 100% !important;&#13;
+  top: -10px !important;&#13;
+}&#13;
+&#13;
+button {&#13;
+  outline: 0 !important;&#13;
+}</css>
+        <name>arena_test_common_styles</name>
+        <sys_class_name>sp_css</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-09-27 10:48:48</sys_created_on>
+        <sys_id>94dfb3da2f3e341066625e972799b6e5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>arena_test_common_styles</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_css_94dfb3da2f3e341066625e972799b6e5</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-09-27 10:48:48</sys_updated_on>
+    </sp_css>
+</record_update>

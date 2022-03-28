@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Now Bytes Suggestions" max_length="40" name="x_93700_arena_dyk_suggestions" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Suggestion" max_length="8000" name="suggestion" type="html"/>
+        <element label="Time" max_length="40" name="time" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <index name="index">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

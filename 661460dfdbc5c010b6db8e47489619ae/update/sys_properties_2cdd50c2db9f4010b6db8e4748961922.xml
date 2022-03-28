@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>Questions per Module</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_93700_arena.ModuleWeightage</name>
+        <read_roles/>
+        <suffix>ModuleWeightage</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>praveen</sys_created_by>
+        <sys_created_on>2020-03-03 07:50:30</sys_created_on>
+        <sys_id>2cdd50c2db9f4010b6db8e4748961922</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>x_93700_arena.ModuleWeightage</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_properties_2cdd50c2db9f4010b6db8e4748961922</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-08 15:40:52</sys_updated_on>
+        <type>string</type>
+        <value>{"platform_admin" : "3","scripting ": "3","ui" : "2","applications" : "2"}</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=2cdd50c2db9f4010b6db8e4748961922"/>
+</record_update>

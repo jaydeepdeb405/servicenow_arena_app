@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>true</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_93700_arena_results</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_93700_arena_results">arena_user.interviewee=false^EQ<item endquery="false" field="arena_user.interviewee" goto="false" newquery="false" operator="=" or="false" value="false"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Arena Excellence Processor</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+
+    //Fetching Arena Player ID based on logged in User
+    var player = '';
+    var arenaUser = new GlideRecord("x_93700_arena_user");
+    arenaUser.addQuery("user", gs.getUserID());
+    arenaUser.query();
+    if (arenaUser.next()) {
+        player = arenaUser.sys_id.toString();
+
+        //Fetching Arena Player results
+        var platform_excellence = 0;
+        var scripting_excellence = 0;
+        var ui_excellence = 0;
+        var application_excellence = 0;
+        var gamesPlayed = 0;
+        var level = [];
+
+        var results = new GlideRecord("x_93700_arena_results");
+        results.addQuery("arena_user", player.toString());
+        results.query();
+
+        while (results.next()) {
+            platform_excellence = parseInt(platform_excellence) + parseInt(results.platform_admin);
+            scripting_excellence = parseInt(scripting_excellence) + parseInt(results.scripting);
+            ui_excellence = parseInt(ui_excellence) + parseInt(results.ui);
+            application_excellence = parseInt(application_excellence) + parseInt(results.applications);
+            level.push(results.level.getDisplayValue().toString());
+         
+            gamesPlayed++;
+        }
+
+        platform_excellence = Math.round((platform_excellence / (gamesPlayed * 30)) * 100); //3 Platform questions ... Total is 30
+        scripting_excellence = Math.round((scripting_excellence / (gamesPlayed * 30)) * 100); //3 Scripting questions ... Total is 30
+        ui_excellence = Math.round((ui_excellence / (gamesPlayed * 20)) * 100); //2 UI questions ... Total is 20
+        application_excellence = Math.round((application_excellence / (gamesPlayed * 20)) * 100); //3 Application questions ... Total is 20
+
+        arenaUser.platform_excellence = platform_excellence;
+        arenaUser.scripting_excellence = scripting_excellence;
+        arenaUser.ui_excellence = ui_excellence;
+        arenaUser.application_excellence = application_excellence;
+
+        //** Get user's max level and difficulty he have attempted till now** //
+
+        var arrayUtil = new global.ArrayUtil();
+		
+		var uniqueLevel = arrayUtil.unique(level); 
+		//var uniqueDifficulty = arrayUtil.unique(difficulty); 
+		
+		uniqueLevel.sort();
+		uniqueLevel.reverse();
+		
+	
+		
+		arenaUser.present_level = uniqueLevel[0] ;
+
+
+        arenaUser.update();
+    }
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>anirudh</sys_created_by>
+        <sys_created_on>2020-04-12 13:49:43</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d56eebb2db889010b6db8e4748961932</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_name>Arena Excellence Processor</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_script_d56eebb2db889010b6db8e4748961932</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-08 12:02:15</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=d56eebb2db889010b6db8e4748961932"/>
+</record_update>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>GET</http_method>
+        <name>getPlayerDetails</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	var currentUserID = gs.getUserID();
+	var playerDetails = {};
+	
+	var challenges = [];
+	var resultGr = new GlideRecord('x_93700_arena_results');
+	resultGr.addQuery('arena_user.user', currentUserID);
+	resultGr.addActiveQuery();
+	resultGr.addNotNullQuery('challenged_by');
+	resultGr.query();
+	while(resultGr.next()) {
+		var challenge = {};
+		var challengedByName = resultGr.challenged_by.avatar.toString() || resultGr.challenged_by.user.getDisplayValue();
+		var challengedByAvatar = resultGr.challenged_by.profile_image.getDisplayValue() || resultGr.challenged_by.user.photo.getDisplayValue() || '';
+		var challengedByInitials = getInitials(challengedByName);
+		challenge.level = {label: resultGr.getDisplayValue('level'), value: resultGr.getValue('level')};
+		challenge.difficulty = {label: resultGr.getDisplayValue('difficulty'), value: resultGr.getValue('difficulty')};
+		challenge.challenged_by = {label: challengedByName, value: resultGr.getValue('challenged_by'), avatar_src: challengedByAvatar, initials: challengedByInitials };
+		challenges.push(challenge);
+	}
+	
+	var arenaPlayerGr = new GlideRecord('x_93700_arena_user');
+	arenaPlayerGr.addQuery('user', currentUserID);
+	arenaPlayerGr.query();
+	if(arenaPlayerGr.next()) {
+		playerDetails.nickname = arenaPlayerGr.getValue('avatar') || arenaPlayerGr.user.getDisplayValue() || '';
+		playerDetails.image = arenaPlayerGr.profile_image.getDisplayValue() || arenaPlayerGr.user.photo.getDisplayValue();
+		playerDetails.id = arenaPlayerGr.getValue('sys_id');
+		playerDetails.levelIndex = arenaPlayerGr.getElement('level').getChoices().indexOf(arenaPlayerGr.getValue('level'));
+		playerDetails.difficultyIndex = arenaPlayerGr.getElement('difficulty').getChoices().indexOf(arenaPlayerGr.getValue('difficulty'));
+		playerDetails.sfx = arenaPlayerGr.getValue('sfx') === '1';
+		playerDetails.music = arenaPlayerGr.getValue('music') === '1';
+		playerDetails.challenges = challenges;
+		playerDetails.sfxSound = arenaPlayerGr.getValue('sfx_sounds');
+		playerDetails.sfxChoices = arenaPlayerGr.getElement('sfx_sounds').getChoices();
+		playerDetails.stats = [
+			{label: 'Platform Administration', value: arenaPlayerGr.platform_excellence},
+			{label: 'Scripting', value: arenaPlayerGr.scripting_excellence},
+			{label: 'User Interface', value: arenaPlayerGr.ui_excellence},
+			{label: 'Application', value: arenaPlayerGr.application_excellence}
+		];
+	}
+	
+	response.setBody(playerDetails);
+	response.setStatus(200);
+	
+	function getInitials(name) {
+		var first = (name.split(' ')[0] || '').charAt(0).toUpperCase();
+		var last = (name.split(' ')[1] || '').charAt(0).toUpperCase();
+		return first+last;
+	}
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_93700_arena/arena/getPlayerDetails</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/getPlayerDetails</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-12 18:02:24</sys_created_on>
+        <sys_id>bcb4f22e0755101037c7f2ae7c1ed018</sys_id>
+        <sys_mod_count>20</sys_mod_count>
+        <sys_name>getPlayerDetails</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ws_operation_bcb4f22e0755101037c7f2ae7c1ed018</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-28 11:19:05</sys_updated_on>
+        <web_service_definition display_value="Arena">5b64b26e0755101037c7f2ae7c1ed048</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

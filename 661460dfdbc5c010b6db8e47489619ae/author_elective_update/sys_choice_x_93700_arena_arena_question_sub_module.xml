@@ -1,0 +1,880 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="sub_module" table="x_93700_arena_arena_question" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>sub_module</element>
+            <name>x_93700_arena_arena_question</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:17:06</sys_created_on>
+            <sys_id>bce9f11e079d501037c7f2ae7c1ed080</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>sub_module</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_choice_x_93700_arena_arena_question_sub_module</sys_update_name>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:17:06</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>certification</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CSA</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>100</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-09-27 08:36:40</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8a91a3562f7a341066625e972799b631</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-10-01 14:34:33</sys_updated_on>
+            <value>csa</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Table Administration</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>100</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:17:06</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>89618dbbdb7b4050b6db8e4748961954</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:34:06</sys_updated_on>
+            <value>table_administration</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>certification</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CIS - ITSM</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>200</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-09-23 12:56:14</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>de96b3890736301037c7f2ae7c1ed05f</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-10-01 14:34:26</sys_updated_on>
+            <value>cis_itsm</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>List Administration</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>200</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:17:36</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c571c1fbdb7b4050b6db8e47489619ee</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:34:15</sys_updated_on>
+            <value>list_administration</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>certification</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CIS - HRSD</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>300</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-10-01 14:34:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2da9ddb72f7eb01066625e972799b6ce</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-10-01 14:56:21</sys_updated_on>
+            <value>cis_hrsd</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Form Administration</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>300</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:18:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6c9149bbdb7b4050b6db8e474896191f</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:34:15</sys_updated_on>
+            <value>form_administration</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>certification</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CIS - Risk and Compliance</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>400</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb@kpmg.com</sys_created_by>
+            <sys_created_on>2022-03-21 05:46:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>aa58c4be1b5a49106d5b117c0a4bcb18</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>jaydeepdeb@kpmg.com</sys_updated_by>
+            <sys_updated_on>2022-03-21 05:46:47</sys_updated_on>
+            <value>cis_grc</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Field Administration</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>400</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:18:36</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>cba105fbdb7b4050b6db8e47489619c5</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:34:15</sys_updated_on>
+            <value>field_administration</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Localization</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>500</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:19:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d7c109b7db7b4050b6db8e474896199f</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:34:15</sys_updated_on>
+            <value>localization</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Search Administration</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>600</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:19:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d5e189f7db7b4050b6db8e47489619ca</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:34:15</sys_updated_on>
+            <value>search_administration</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>User Administration</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>700</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:19:41</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>82f145fbdb7b4050b6db8e47489619a7</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:34:15</sys_updated_on>
+            <value>user_administration</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Events</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>800</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:20:02</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8b0281fbdb7b4050b6db8e474896198c</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:34:16</sys_updated_on>
+            <value>events</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Data Management</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>900</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:20:19</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>9c2205fbdb7b4050b6db8e47489619c9</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:34:16</sys_updated_on>
+            <value>data_management</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>System Security</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>1000</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:20:40</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>943209fbdb7b4050b6db8e4748961914</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:34:16</sys_updated_on>
+            <value>system_security</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Notifications</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>1100</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-07 15:29:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f3a81edddbc05010b6db8e47489619fb</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-07 15:42:50</sys_updated_on>
+            <value>notification</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Integration Basic</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>1110</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:21:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e54289fbdb7b4050b6db8e47489619a1</sys_id>
+            <sys_mod_count>6</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-07 15:42:46</sys_updated_on>
+            <value>integration_basic</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>platform_admin</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Miscellaneous - Platform</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>1120</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-07 15:43:32</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d0cb9291db045010b6db8e4748961919</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-07 15:43:58</sys_updated_on>
+            <value>misc_platform</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>g_form Functions</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>1200</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:22:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>266209fbdb7b4050b6db8e4748961915</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:22</sys_updated_on>
+            <value>g_form_functions</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>g_user Functions</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>1300</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:22:44</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>dea2c5fbdb7b4050b6db8e47489619cd</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:23</sys_updated_on>
+            <value>g_user_functions</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>g_list Functions</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>1400</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:23:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>33b20dfbdb7b4050b6db8e47489619d5</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:23</sys_updated_on>
+            <value>g_list_functions</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>g_scratchpad</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>1500</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:23:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>50d28dfbdb7b4050b6db8e47489619ea</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:23</sys_updated_on>
+            <value>g_scratchpad</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Logging Functions</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>1600</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:23:49</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e0e2c9fbdb7b4050b6db8e474896196b</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:23</sys_updated_on>
+            <value>logging_functions</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Gliderecord</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>1700</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:24:09</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>7ff2053fdb7b4050b6db8e474896191c</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:23</sys_updated_on>
+            <value>gliderecord</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Date Scripting</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>1800</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:24:27</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>94138dfbdb7b4050b6db8e4748961945</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:23</sys_updated_on>
+            <value>date_scripting</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Email Scripting</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>1900</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:24:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3823853fdb7b4050b6db8e4748961947</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:23</sys_updated_on>
+            <value>email_scripting</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Workflow Scripting</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>2000</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:25:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3d338dfbdb7b4050b6db8e47489619f4</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:24</sys_updated_on>
+            <value>workflow_scripting</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Widget Scripting</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>2100</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:25:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e543c9fbdb7b4050b6db8e4748961970</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:39</sys_updated_on>
+            <value>widget_scripting</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Jelly Scripting</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>2200</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:26:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>0063c9fbdb7b4050b6db8e4748961940</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:39</sys_updated_on>
+            <value>jelly_scripting</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Integration Scripting</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>2300</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:26:42</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d483853fdb7b4050b6db8e4748961949</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:39</sys_updated_on>
+            <value>integration_scripting</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Regular Expressions</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>2400</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:27:09</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>39a3c93fdb7b4050b6db8e474896192b</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:35:39</sys_updated_on>
+            <value>regular_expressions</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>scripting</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Miscellaneous - scripting</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>2410</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-07 07:16:14</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5bb7e459db4c1010b6db8e4748961970</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-07 15:44:45</sys_updated_on>
+            <value>misc_scripting</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>ui</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Reports and Dashboards</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>2500</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:27:42</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>dcc3cdfbdb7b4050b6db8e4748961919</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:36:15</sys_updated_on>
+            <value>report</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>ui</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>HTML</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>2600</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:27:59</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>dce34d3fdb7b4050b6db8e47489619e1</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:36:15</sys_updated_on>
+            <value>html</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>ui</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Portal Configuration</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>2700</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:28:23</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b8f3817fdb7b4050b6db8e47489619c9</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:36:15</sys_updated_on>
+            <value>portal_configuration</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>ui</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>GlideDialogWindow</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>2800</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:28:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1604057fdb7b4050b6db8e47489619eb</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:36:15</sys_updated_on>
+            <value>glide_dialog_window</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>applications</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>ITSM</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>2900</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-03 12:50:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>516a014cdbc49050b6db8e47489619bd</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-03 12:50:24</sys_updated_on>
+            <value>itsm</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>applications</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CMDB</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>3000</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-03 12:51:02</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>08fd898cdbc49050b6db8e4748961978</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-03 12:51:19</sys_updated_on>
+            <value>cmdb</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>applications</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>HR</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>3100</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-18 06:11:13</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>006209b0db14d010b6db8e4748961943</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-18 06:11:31</sys_updated_on>
+            <value>hr</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>applications</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Surveys and Assessments</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>3200</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-18 06:50:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>225b8938db14d010b6db8e4748961907</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-18 06:50:47</sys_updated_on>
+            <value>survey</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>applications</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>PPM</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>3300</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-24 08:35:15</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e93c58fedbdc5810b6db8e4748961943</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-24 08:35:30</sys_updated_on>
+            <value>ppm</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>applications</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Virtual Agent</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>3400</sequence>
+            <synonyms/>
+            <sys_created_by>akshatha</sys_created_by>
+            <sys_created_on>2020-05-02 08:30:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>9488ed11db2c9050b6db8e4748961904</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>akshatha</sys_updated_by>
+            <sys_updated_on>2020-05-02 08:30:18</sys_updated_on>
+            <value>va</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>applications</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>ATF</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>3500</sequence>
+            <synonyms/>
+            <sys_created_by>akshatha</sys_created_by>
+            <sys_created_on>2020-05-02 08:30:42</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f0986951db2c9050b6db8e474896197f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>akshatha</sys_updated_by>
+            <sys_updated_on>2020-05-02 08:30:42</sys_updated_on>
+            <value>atf</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value>applications</dependent_value>
+            <element>sub_module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>GRC</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>3600</sequence>
+            <synonyms/>
+            <sys_created_by>akshatha</sys_created_by>
+            <sys_created_on>2020-05-02 17:05:47</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>588e5b5ddba0d050b6db8e47489619c8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>akshatha</sys_updated_by>
+            <sys_updated_on>2020-05-02 17:05:47</sys_updated_on>
+            <value>grc</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

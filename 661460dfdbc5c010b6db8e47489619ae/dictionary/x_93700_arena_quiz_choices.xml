@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Quiz Choices" max_length="40" name="x_93700_arena_quiz_choices" sizeclass="3353" type="collection">
+        <element label="Answer" max_length="100" name="answer" type="string"/>
+        <element label="Choice" max_length="1000" name="choice" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Is Correct" max_length="40" name="correct" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Question" max_length="32" name="question" reference="x_93700_arena_arena_question" reference_cascade_rule="delete" type="reference"/>
+        <index name="index">
+            <element name="question"/>
+        </index>
+    </element>
+</database>

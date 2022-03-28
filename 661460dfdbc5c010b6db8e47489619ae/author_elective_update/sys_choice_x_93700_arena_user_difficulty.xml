@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="difficulty" table="x_93700_arena_user" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>difficulty</element>
+            <name>x_93700_arena_user</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>nikesh</sys_created_by>
+            <sys_created_on>2019-11-17 15:29:20</sys_created_on>
+            <sys_id>f0e9f11e079d501037c7f2ae7c1ed0bc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>difficulty</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_choice_x_93700_arena_user_difficulty</sys_update_name>
+            <sys_updated_by>nikesh</sys_updated_by>
+            <sys_updated_on>2019-11-17 15:29:20</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>difficulty</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Easy</label>
+            <language>en</language>
+            <name>x_93700_arena_user</name>
+            <sequence>100</sequence>
+            <synonyms/>
+            <sys_created_by>nikesh</sys_created_by>
+            <sys_created_on>2019-11-17 15:29:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>fad603a7db494410b6db8e47489619e6</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>manoj</sys_updated_by>
+            <sys_updated_on>2020-05-05 15:26:14</sys_updated_on>
+            <value>easy</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>difficulty</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Medium</label>
+            <language>en</language>
+            <name>x_93700_arena_user</name>
+            <sequence>200</sequence>
+            <synonyms/>
+            <sys_created_by>nikesh</sys_created_by>
+            <sys_created_on>2019-11-17 15:30:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>f6f687e7db494410b6db8e4748961928</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>manoj</sys_updated_by>
+            <sys_updated_on>2020-05-05 15:26:22</sys_updated_on>
+            <value>medium</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>difficulty</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Hard</label>
+            <language>en</language>
+            <name>x_93700_arena_user</name>
+            <sequence>300</sequence>
+            <synonyms/>
+            <sys_created_by>nikesh</sys_created_by>
+            <sys_created_on>2019-11-17 15:30:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c92783e7db494410b6db8e474896196b</sys_id>
+            <sys_mod_count>6</sys_mod_count>
+            <sys_updated_by>manoj</sys_updated_by>
+            <sys_updated_on>2020-05-05 15:26:27</sys_updated_on>
+            <value>hard</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

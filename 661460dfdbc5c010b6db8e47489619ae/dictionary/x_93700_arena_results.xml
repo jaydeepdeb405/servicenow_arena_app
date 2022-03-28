@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Results" max_length="40" name="x_93700_arena_results" sizeclass="70" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Applications" max_length="40" name="applications" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" display="true" label="Arena User" max_length="32" name="arena_user" reference="x_93700_arena_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Challenged By" max_length="32" name="challenged_by" reference="x_93700_arena_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Challenge Status" max_length="40" name="challenge_status" read_only="true" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Won" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="Lost" sequence="2" value="2"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Details" max_length="65536" name="detail" type="html"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Difficulty" max_length="40" name="difficulty" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Easy" sequence="100" value="easy"/>
+                <element inactive_on_update="false" label="Medium" sequence="200" value="medium"/>
+                <element inactive_on_update="false" label="Hard" sequence="300" value="hard"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" default="0ef69af40732301037c7f2ae7c1ed028" label="Goto Responses" max_length="4000" name="goto_responses" type="glide_action_list"/>
+        <element default="javascript:new GlideDateTime().getDisplayValue()" label="Interview Date" max_length="40" name="interview_date" read_only="true" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Level" max_length="40" name="level" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Level 1" sequence="100" value="level1"/>
+                <element inactive_on_update="false" label="Level 2" sequence="200" value="level2"/>
+                <element inactive_on_update="false" label="Level 3" sequence="300" value="level3"/>
+                <element inactive_on_update="false" label="Level 4" sequence="400" value="level4"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Platform Administration" max_length="40" name="platform_admin" type="integer"/>
+        <element label="Response JSON" max_length="999999999" name="response_json" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Scripting" max_length="40" name="scripting" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Test Schedule" max_length="32" name="test_schedule" reference="x_93700_arena_test_schedule" reference_cascade_rule="delete" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Test score" max_length="40" name="test_score" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Test Taker" max_length="32" name="test_taker" reference="x_93700_arena_test_takers" reference_cascade_rule="delete" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="TIme Taken" max_length="40" name="time_taken" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" calculation="(function calculatedFieldValue(current) {&#10;&#10;&#9;var total = current.platform_admin + current.scripting + current.ui + current.applications;&#10;&#9;return total;  // return the calculated value&#10;&#10;})(current);" label="Total Score" max_length="40" name="total_score" type="integer" virtual="true"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="type" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Interview" sequence="0" value="interview"/>
+                <element inactive_on_update="false" label="Quiz" sequence="1" value="quiz"/>
+                <element inactive_on_update="false" label="Test" sequence="2" value="test"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="User Interface" max_length="40" name="ui" type="integer"/>
+        <index name="index">
+            <element name="test_schedule"/>
+        </index>
+        <index name="index2">
+            <element name="test_taker"/>
+        </index>
+        <index name="index3">
+            <element name="arena_user"/>
+        </index>
+        <index name="index4">
+            <element name="challenged_by"/>
+        </index>
+    </element>
+</database>

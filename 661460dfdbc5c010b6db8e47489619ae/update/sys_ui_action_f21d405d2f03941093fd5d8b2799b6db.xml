@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name/>
+        <active>false</active>
+        <client>false</client>
+        <client_script_v2><![CDATA[function onClick(g_form) {
+
+}]]></client_script_v2>
+        <comments/>
+        <condition/>
+        <form_action>true</form_action>
+        <form_button>true</form_button>
+        <form_button_v2>false</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>false</form_link>
+        <form_menu_button_v2>false</form_menu_button_v2>
+        <form_style>primary</form_style>
+        <hint/>
+        <isolate_script>false</isolate_script>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <messages/>
+        <name>Pick questions</name>
+        <onclick/>
+        <order>100</order>
+        <script><![CDATA[var questions = [],
+    questionGr;
+if (current.select_randomly == true) {
+    questionGr = new GlideRecord('x_93700_arena_arena_question');
+    questionGr.setLimit(parseInt(current.getValue('total_count') || 0));
+    questionGr.addActiveQuery();
+    questionGr.addEncodedQuery(current.filter);
+    questionGr.query();
+    while (questionGr.next()) {
+        questions.push(questionGr.getValue('sys_id'));
+    }
+    current.setValue('total_count', questions.length);
+} else {
+    var selectedQuestionsCount = {
+        level_1_count: parseInt(current.getValue('level_1_count') || 0),
+        level_2_count: parseInt(current.getValue('level_2_count') || 0),
+        level_3_count: parseInt(current.getValue('level_3_count') || 0),
+        level_4_count: parseInt(current.getValue('level_4_count') || 0)
+    };
+
+    for (var index = 1; index <= 4; index++) {
+        var countFieldName = 'level_' + index + '_count';
+        var currentLevelQuestions = [];
+
+        questionGr = new GlideRecord('x_93700_arena_arena_question');
+        questionGr.setLimit(selectedQuestionsCount[countFieldName]);
+        questionGr.addActiveQuery();
+        questionGr.addEncodedQuery(current.filter);
+        questionGr.addQuery('level', 'level' + index);
+        questionGr.query();
+        while (questionGr.next()) {
+            currentLevelQuestions.push(questionGr.getValue('sys_id'));
+        }
+
+        current.setValue(countFieldName, currentLevelQuestions.length);
+        questions = questions.concat(currentLevelQuestions);
+    }
+}
+current.setValue('questions', questions);
+current.update();
+action.setRedirectURL(current);]]></script>
+        <show_insert>false</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-03 08:29:25</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>f21d405d2f03941093fd5d8b2799b6db</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Pick questions</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ui_action_f21d405d2f03941093fd5d8b2799b6db</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-09-24 09:58:20</sys_updated_on>
+        <table>x_93700_arena_question_set</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+</record_update>

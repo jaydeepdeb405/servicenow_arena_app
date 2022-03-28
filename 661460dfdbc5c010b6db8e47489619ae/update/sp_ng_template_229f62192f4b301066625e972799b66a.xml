@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>mytests-card</id>
+        <sp_widget display_value="Arena Test Home">cbf24fe10783181037c7f2ae7c1ed078</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-10-06 12:42:10</sys_created_on>
+        <sys_id>229f62192f4b301066625e972799b66a</sys_id>
+        <sys_mod_count>26</sys_mod_count>
+        <sys_name>mytests-card</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_ng_template_229f62192f4b301066625e972799b66a</sys_update_name>
+        <sys_updated_by>jaydeepdeb@kpmg.com</sys_updated_by>
+        <sys_updated_on>2021-10-11 13:29:03</sys_updated_on>
+        <template><![CDATA[<div class="col s12 card-panel white">
+  <div class="black-text col s8 l10">
+    <h5>{{test.name}}</h5>
+    <div class="badge orange lighten-4" >Duration: {{test.duration}} minutes</div>
+    <div class="badge blue lighten-4" uib-tooltip="{{'Test opens at ' + test.start_time}}" tooltip-placement="right">
+      {{test.appear_anytime === true ? test.total_questions + " questions" : test.time_to_go}}
+    </div>
+  </div>
+  <div class="col s4 l2">
+    <a class="col s12 waves-effect black-text btn start-btn blue lighten-5" 
+       ng-click="c.validateTest(test)">
+      <span ng-show="test.transition">
+        <div class="preloader-wrapper active" style="margin: 4px auto;height: 26px;width: 26px;">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+            </div><div class="circle-clipper right">
+            <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </span>
+      <span ng-hide="test.transition">
+        {{test.enable_retakes === true && test.appeared === true ? 'RETAKE' : 'START'}}
+        <i class="material-icons right">navigate_next</i>
+      </span>
+    </a>
+  </div>
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="INSERT_OR_UPDATE">
+        <before>false</before>
+        <description/>
+        <name>Excellence Graph</name>
+        <record_for_rollback>false</record_for_rollback>
+        <script><![CDATA[var results = new GlideRecord("x_93700_arena_results");
+results.addQuery("arena_user", gs.getUserID());
+results.query();
+if (results.next()) {
+   //
+}
+
+gs.info('in');
+]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>anirudh</sys_created_by>
+        <sys_created_on>2020-04-11 18:21:29</sys_created_on>
+        <sys_id>f426efa2db0c5010b6db8e474896192d</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Excellence Graph</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_script_fix_f426efa2db0c5010b6db8e474896192d</sys_update_name>
+        <sys_updated_by>anirudh</sys_updated_by>
+        <sys_updated_on>2020-04-12 08:13:27</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+</record_update>

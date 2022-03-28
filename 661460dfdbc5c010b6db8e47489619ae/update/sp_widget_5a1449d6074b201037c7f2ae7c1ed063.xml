@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function($scope, spUtil) {
+	/* widget controller */
+	var c = this;
+
+	$scope.changeQuestion = function(currentQuestionId, action) {
+		$scope.data.action = action;
+		$scope.data.currentQuestionId = currentQuestionId;
+		$scope.server.update();
+	}
+	
+	$scope.goToFirst = function() {
+		$scope.data.action = "first";
+		$scope.server.update();
+	}
+	
+	$scope.submitAnswer = function(answer, currentQuestionId) {
+		$scope.data.isNotAnswered = false;
+		$scope.data.action = "answer";
+		$scope.data.answer = answer;
+		$scope.server.update().then(function() {
+			$scope.answer = "";
+		});
+	}
+	
+	$scope.refresh = function() {
+		$scope.server.refresh();
+	}
+	
+	spUtil.recordWatch($scope, 'x_93700_arena_question_set', $scope.data.setId, function(response) {
+		if (response.data.operation == 'insert') $scope.refresh();
+	});
+	
+	spUtil.recordWatch($scope, 'x_93700_arena_quiz_result', $scope.data.resultWatcherFilter, function(response) {
+		console.log(response.data)
+		if (response.data.operation == 'insert') $scope.refresh();
+	});
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.ques {
+	padding: 5px 10px;
+}
+
+.ques &gt; p {
+	display: inline;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Technical Quiz</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	data.isQuizMaster = gs.hasRole('admin');
+	data.userId = gs.getUserID();
+	var user = new GlideRecord('sys_user');
+	user.get(data.userId);
+	data.userName = user.getDisplayValue();
+
+	data.setId = '5ae6599e07cb201037c7f2ae7c1ed08a';
+
+	var currentQuestion, questionIds;
+	var set = new GlideRecord('x_93700_arena_question_set');
+	set.get(data.setId);
+	if (set) {
+		currentQuestion = set.getValue('current_question') || "";
+		questionIds = set.getValue('questions') || "";
+	}
+
+	data.questionIds = questionIds.length > 32 ? questionIds.split(',') : [];
+
+	if (input) {
+		var currIndex = data.questionIds.indexOf(input.currentQuestionId);
+		if (input.action == "prev") {
+			currentQuestion = data.questionIds[currIndex-1] ? data.questionIds[currIndex-1] : data.questionIds[0];
+			setCurrentQuestion(set, currentQuestion);
+		}
+		if (input.action == "next") {
+			currentQuestion = data.questionIds[currIndex+1] ? data.questionIds[currIndex+1] : data.questionIds[data.questionIds.length - 1];
+			setCurrentQuestion(set, currentQuestion);
+		}
+		if (input.action == "first") {
+			currentQuestion = data.questionIds.length > 0 ? data.questionIds[0] : '';
+			setCurrentQuestion(set, currentQuestion);
+		}
+		if (input.action == "answer") {
+			var results = new GlideRecord('x_93700_arena_quiz_result');
+			results.initialize();
+			results.set = set.sys_id;
+			results.question = currentQuestion;
+			results.user = data.userId;
+			results.answer = input.answer;
+			results.insert();
+		}
+	}
+
+	if (!currentQuestion && data.questionIds.length > 0) {
+		if (setCurrentQuestion(set, data.questionIds[0])) currentQuestion = data.questionIds[0];
+	}
+
+	if (currentQuestion) {
+		data.currIndex = data.questionIds.indexOf(currentQuestion) + 1;
+		var question = new GlideRecord('x_93700_arena_arena_question');
+		question.get(currentQuestion);
+		var questionResults = [];
+		var results = new GlideRecord('x_93700_arena_quiz_result');
+		results.addActiveQuery();
+		results.addQuery('set', set.sys_id);
+		results.addQuery('question', currentQuestion);
+		if (!data.isQuizMaster) results.addQuery('user', gs.getUserID());
+		results.query();
+		if (!data.isQuizMaster) data.isNotAnswered = results.getRowCount() == 0;
+		data.resultWatcherFilter = results.getEncodedQuery();
+		while(results.next()) {
+			questionResults.push({
+				id: results.sys_id.toString(),
+				user: results.user.getDisplayValue(),
+				answer: results.answer.toString()
+			});
+		}
+		data.question = {
+			id: question.sys_id.toString(),
+			html: question.getValue('question') || '',
+			results: questionResults
+		};
+	}
+
+})();
+
+function setCurrentQuestion(set, id) {
+	set.current_question = id;
+	return set.update();
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-03-24 11:29:28</sys_created_on>
+        <sys_id>5a1449d6074b201037c7f2ae7c1ed063</sys_id>
+        <sys_mod_count>51</sys_mod_count>
+        <sys_name>Technical Quiz</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_5a1449d6074b201037c7f2ae7c1ed063</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-03-24 13:54:25</sys_updated_on>
+        <template><![CDATA[<div ng-if="data.question">
+  <span ng-if="data.isQuizMaster" class="glyphicon glyphicon-arrow-left" ng-click="changeQuestion(data.question.id, 'prev')"></span>
+  <span>{{data.currIndex+". "}}</span>
+  <span class="ques" ng-bind-html="data.question.html"></span>
+  <span ng-if="data.isQuizMaster" class="glyphicon glyphicon-arrow-right" ng-click="changeQuestion(data.question.id, 'next')"></span>
+</div>
+<button ng-if="data.isQuizMaster" class="btn btn-primary btn-block" ng-click="goToFirst()">
+  Go to first
+</button>
+
+<button ng-click="refresh()" class="btn btn-primary btn-block">Refresh</button>
+
+<div ng-repeat="r in data.question.results">
+  <span style="padding-right: 20px;">{{r.user}}</span>
+  <span>{{r.answer}}</span>
+</div>
+
+<div ng-if="data.isNotAnswered || data.isQuizMaster">
+  <span style="padding-right: 20px;">{{data.userName}}</span>
+  <textarea ng-model="answer"></textarea>
+  <button ng-click="submitAnswer(answer, data.question.id)" class="btn btn-primary">Submit</button>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

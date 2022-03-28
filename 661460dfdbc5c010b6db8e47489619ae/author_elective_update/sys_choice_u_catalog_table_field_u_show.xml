@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="DELETE" field="u_show" table="u_catalog_table_field" version="3">
+        <sys_choice_set action="DELETE">
+            <element>u_show</element>
+            <name>u_catalog_table_field</name>
+            <sys_class_name/>
+            <sys_created_by>kesav</sys_created_by>
+            <sys_created_on/>
+            <sys_id>a8080175db174010b6db8e474896198a</sys_id>
+            <sys_mod_count/>
+            <sys_name>u_show</sys_name>
+            <sys_package display_value="">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_choice_u_catalog_table_field_u_show</sys_update_name>
+            <sys_updated_by>kesav</sys_updated_by>
+            <sys_updated_on>2020-06-11 18:21:50</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_choice_u_catalog_table_field_u_show</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_choice action="DELETE" field="u_show" table="u_catalog_table_field" version="3"><sys_choice_set action="DELETE"><element>u_show</element><name>u_catalog_table_field</name><sys_class_name/><sys_created_by>kesav</sys_created_by><sys_created_on/><sys_id>a8080175db174010b6db8e474896198a</sys_id><sys_mod_count/><sys_name>u_show</sys_name><sys_package display_value="">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_choice_u_catalog_table_field_u_show</sys_update_name><sys_updated_by>kesav</sys_updated_by><sys_updated_on>2020-06-11 18:21:50</sys_updated_on></sys_choice_set></sys_choice></record_update>]]></payload>
+        <payload_hash>-1753314930</payload_hash>
+        <record_name>u_catalog_table_field.u_show</record_name>
+        <reverted_from/>
+        <source>f7cad55c07f0101037c7f2ae7c1ed0ce</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-11 18:21:50</sys_created_on>
+        <sys_id>4c9fa192079d501037c7f2ae7c1ed022</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>172a49de5b90000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-11 18:21:50</sys_updated_on>
+        <type>Choice list</type>
+        <update_guid>c49fa192f19d50109077f61dfe71f522</update_guid>
+        <update_guid_history>c49fa192f19d50109077f61dfe71f522:-1753314930,049fa192d79d501072a8418b29cec11f:1615935007,489fa192769d501090ad45c81224d11c:-764504182,3b558d7135174010d13cf67180fe5de2:1085126027,3b558d7135174010d13cf67180fe5de2:1085126027,f3558d717917401039a7a17212142cd1:623835468,7f558d71611740100257b9682c9e22cd:-1176714559,dd0622402a5700102a8fcb5faac233d5:0,dcb562006a570010e779447287a14aeb:-53785086,10b562009c570010a4a610da66044ee8:623835468,98b5620012570010dd98b015cce2f2e4:-1176714559,654b8ab76dc7001049ec23ffaf1f568a:0,930bce7775c7001008ae4f2bf0a15d2b:-53785086,d30bce77d4c70010ad62d7cdee525827:623835468,df0bce77c7c70010a84bdbb13531b90a:-1176714559,22fa66d9112d0410caca141c80e5bc42:-1522839669</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-11 18:21:50</sys_created_on>
+        <sys_db_object display_value="" name="sys_choice_set">sys_choice_set</sys_db_object>
+        <sys_id>177912b89b604c6e8ecc8e6dcd6d5589</sys_id>
+        <sys_metadata>a8080175db174010b6db8e474896198a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>u_show</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete/>
+        <sys_update_name>sys_choice_u_catalog_table_field_u_show</sys_update_name>
+        <sys_update_version display_value="sys_choice_u_catalog_table_field_u_show">4c9fa192079d501037c7f2ae7c1ed022</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-11 18:21:50</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function homePage($rootScope, $scope) {
+
+    var c = this;
+
+
+
+    c.play = function() {
+        sfx.playTik();
+        var gameScreen = {
+            introSequence: false,
+            gameHeading: true,
+            mainMenu: false,
+            gameLevels: true,
+            quizPage: false,
+            profilePage: false,
+            leaderboard: false
+        };
+        $rootScope.$broadcast('gameScreen', gameScreen);
+    };
+
+    c.profile = function() {
+        sfx.playTik();
+        var gameScreen = {
+            introSequence: false,
+            gameHeading: false,
+            mainMenu: false,
+            gameLevels: false,
+            quizPage: false,
+            profilePage: true,
+            leaderboard: false
+        };
+        $rootScope.$broadcast('gameScreen', gameScreen);
+    };
+
+
+    c.closeWindow = function() {
+        sfx.playTik();
+        var currentTab = window.open(window.location, '_self');
+        currentTab.close();
+        var gameScreen = {
+            gameHeading: true,
+            mainMenu: true,
+            gameLevels: false,
+            quizPage: false,
+            profilePage: false,
+            leaderboard: false,
+            report: false
+        };
+        $rootScope.$broadcast('gameScreen', gameScreen);
+    };
+
+    c.leaderboard = function() {
+        sfx.playTik();
+        var gameScreen = {
+            introSequence: false,
+            gameHeading: false,
+            mainMenu: false,
+            gameLevels: false,
+            quizPage: false,
+            leaderboard: true,
+            profilePage: false
+        };
+        $rootScope.$broadcast('gameScreen', gameScreen);
+    };
+
+    c.showCredits = function() {
+        sfx.playTik();
+        var gameScreen = {
+            introSequence: false,
+            gameHeading: false,
+            mainMenu: false,
+            gameLevels: false,
+            quizPage: false,
+            leaderboard: false,
+            profilePage: false,
+            showCredits: true
+        };
+        $rootScope.$broadcast('gameScreen', gameScreen);
+    };
+
+
+
+
+
+
+
+
+    /////////////////////////Listener/////////////////////////
+    $rootScope.$on('gameScreen', function(event, obj) {
+        c.showMainMenu = obj.mainMenu;
+
+        _.defer(function() {
+            $scope.$apply();
+        }); //workarround for lag -SK
+
+
+    });
+
+
+
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.vertical-middle{
+  margin-top:18px
+  
+}
+
+.menuStyle{  
+  width: 8em;
+  font-weight:bold;
+  font-size:25px;
+  font-family:pfs-bold;
+}
+
+.listPadding{
+padding : 3px;
+}
+
+.noPad{
+padding-inline-start: 0px !important;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>HomePage</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+	var userTable = "x_93700_arena_user";
+	var userId    = gs.getUserID();
+	var arenauserID ;
+	var user;
+
+		var arenaUser = new GlideRecord(userTable);
+		arenaUser.addQuery("user", userId);
+		arenaUser.query();
+		if (arenaUser.next()) {
+			arenauserID = arenaUser.sys_id;
+		} else {
+			
+			arenaUser.initialize();
+			arenaUser.user = userId;
+			arenaUser.sound = true;
+			arenaUser.music = true;
+			arenauserID = arenaUser.insert();
+		}
+	
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-12-02 11:47:00</sys_created_on>
+        <sys_id>31d36310db250010b6db8e47489619e0</sys_id>
+        <sys_mod_count>113</sys_mod_count>
+        <sys_name>HomePage</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_31d36310db250010b6db8e47489619e0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-08 09:45:05</sys_updated_on>
+        <template><![CDATA[<div ng-show="c.showMainMenu"  class="row vertical-middle" >
+   
+   <div class="text-center "> <!-- removed col-md-4 from class-->
+      <div class="textStyling">
+         <ul style="list-style-type: none;" class="noPad">
+            <li class="listPadding">
+               <button type="button" class="btn btn-lg btn-success menuStyle" ng-click="c.play()">Play</button>
+            </li>
+            <li class="listPadding">
+               <button type="button" class="btn btn-lg btn-success menuStyle" ng-click="c.profile()">Profile</button>
+            </li>
+            <li class="listPadding">
+               <button type="button" class="btn btn-lg btn-success menuStyle" ng-click="c.leaderboard()">Leaderboard</button>
+            </li>
+            <li class="listPadding">
+               <button type="button" class="btn btn-lg btn-success menuStyle" ng-click="c.showCredits()">Credits</button>
+            </li>
+            <li class="listPadding">
+               <button type="button" class="btn btn-lg btn-success menuStyle" ng-click="c.closeWindow()">Quit</button>
+            </li>
+          
+         </ul>
+      </div>
+   </div>
+   
+</div>]]></template>
+    </sp_widget>
+</record_update>

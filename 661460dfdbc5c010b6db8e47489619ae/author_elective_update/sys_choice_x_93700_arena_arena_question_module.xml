@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="module" table="x_93700_arena_arena_question" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>module</element>
+            <name>x_93700_arena_arena_question</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-12-11 11:12:07</sys_created_on>
+            <sys_id>28e9f11e079d501037c7f2ae7c1ed078</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>module</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_choice_x_93700_arena_arena_question_module</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-12-11 11:12:07</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Platform Administration</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>10</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-12-11 11:12:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c542bd13db690410b6db8e474896197c</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 09:50:34</sys_updated_on>
+            <value>platform_admin</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Scripting</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>20</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-12-11 11:12:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>cd42bd13db690410b6db8e4748961978</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 09:50:22</sys_updated_on>
+            <value>scripting</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>User Interface</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>30</sequence>
+            <synonyms/>
+            <sys_created_by>praveen</sys_created_by>
+            <sys_created_on>2020-03-03 07:12:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8c779806db5f4010b6db8e47489619ee</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 09:51:11</sys_updated_on>
+            <value>ui</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Applications</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>40</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-12-11 11:12:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>c942bd13db690410b6db8e474896197a</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 09:50:29</sys_updated_on>
+            <value>applications</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>module</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Certification</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <sequence>50</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-09-23 12:55:21</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8f66738107f2301037c7f2ae7c1ed093</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-09-23 12:55:31</sys_updated_on>
+            <value>certification</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

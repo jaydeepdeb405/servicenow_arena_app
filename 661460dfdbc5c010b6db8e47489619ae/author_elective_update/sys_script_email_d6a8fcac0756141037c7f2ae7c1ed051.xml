@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_email">
+    <sys_script_email action="DELETE">
+        <name>test_invite_link</name>
+        <new_lines_to_html>false</new_lines_to_html>
+        <script><![CDATA[(function runMailScript(/* GlideRecord */ current, /* TemplatePrinter */ template,
+          /* Optional EmailOutbound */ email, /* Optional GlideRecord */ email_action,
+          /* Optional GlideRecord */ event) {
+	var testId = current.getValue('sys_id');
+	template.print("<a href='"+gs.getProperty('glide.servlet.uri')+'arena?id=test&test_id='+testId+"'>Link to test</a>");
+})(current, template, email, email_action, event);]]></script>
+        <sys_class_name>sys_script_email</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-25 20:58:56</sys_created_on>
+        <sys_id>d6a8fcac0756141037c7f2ae7c1ed051</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>test_invite_link</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_script_email_d6a8fcac0756141037c7f2ae7c1ed051</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-25 21:03:45</sys_updated_on>
+    </sys_script_email>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_script_email_d6a8fcac0756141037c7f2ae7c1ed051</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_email"&gt;&lt;sys_script_email action="INSERT_OR_UPDATE"&gt;&lt;name&gt;test_invite_link&lt;/name&gt;&lt;new_lines_to_html&gt;false&lt;/new_lines_to_html&gt;&lt;script&gt;&lt;![CDATA[(function runMailScript(/* GlideRecord */ current, /* TemplatePrinter */ template,
+          /* Optional EmailOutbound */ email, /* Optional GlideRecord */ email_action,
+          /* Optional GlideRecord */ event) {
+	var testId = current.getValue('sys_id');
+	template.print("&lt;a href='"+gs.getProperty('glide.servlet.uri')+'arena?id=test&amp;test_id='+testId+"'&gt;Link to test&lt;/a&gt;");
+})(current, template, email, email_action, event);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_email&lt;/sys_class_name&gt;&lt;sys_created_by&gt;jaydeepdeb&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-07-25 20:58:56&lt;/sys_created_on&gt;&lt;sys_id&gt;d6a8fcac0756141037c7f2ae7c1ed051&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;test_invite_link&lt;/sys_name&gt;&lt;sys_package display_value="Arena" source="x_93700_arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_email_d6a8fcac0756141037c7f2ae7c1ed051&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;jaydeepdeb&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-07-25 21:03:45&lt;/sys_updated_on&gt;&lt;/sys_script_email&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1057616774</payload_hash>
+        <record_name>test_invite_link</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-25 21:03:45</sys_created_on>
+        <sys_id>b89abc200796141037c7f2ae7c1ed0eb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17387c9f22d0000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-25 21:03:45</sys_updated_on>
+        <type>Email Script</type>
+        <update_guid>709abc2018961410305ce997348477eb</update_guid>
+        <update_guid_history>709abc2018961410305ce997348477eb:1057616774,0e79b4ec09561410d56842f2960837ac:1424817632</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-03 15:50:01</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_email">sys_script_email</sys_db_object>
+        <sys_id>a4863ee795cc4171887aa5b2b0cc27d1</sys_id>
+        <sys_metadata>d6a8fcac0756141037c7f2ae7c1ed051</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>test_invite_link</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_script_email_d6a8fcac0756141037c7f2ae7c1ed051</sys_update_name>
+        <sys_update_version display_value="sys_script_email_d6a8fcac0756141037c7f2ae7c1ed051">b89abc200796141037c7f2ae7c1ed0eb</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-03 15:50:01</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

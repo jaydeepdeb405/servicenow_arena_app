@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container">
+    <sp_container action="DELETE">
+        <background_color/>
+        <background_image/>
+        <background_style>default</background_style>
+        <bootstrap_alt>false</bootstrap_alt>
+        <class_name/>
+        <container_class_name/>
+        <name>Test - Container 1</name>
+        <order>1</order>
+        <sp_page display_value="test">1ccc52dc07ded01037c7f2ae7c1ed0a7</sp_page>
+        <subheader>false</subheader>
+        <sys_class_name>sp_container</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-25 09:36:22</sys_created_on>
+        <sys_id>6f3dd6dc07ded01037c7f2ae7c1ed07f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Test - Container 1</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_container_6f3dd6dc07ded01037c7f2ae7c1ed07f</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-25 09:36:22</sys_updated_on>
+        <title/>
+        <width>container</width>
+    </sp_container>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sp_container_6f3dd6dc07ded01037c7f2ae7c1ed07f</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container"><sp_container action="INSERT_OR_UPDATE"><background_color/><background_image/><background_style>default</background_style><bootstrap_alt>false</bootstrap_alt><class_name/><container_class_name/><name>Test - Container 1</name><order>1</order><sp_page display_value="test">1ccc52dc07ded01037c7f2ae7c1ed0a7</sp_page><subheader>false</subheader><sys_class_name>sp_container</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-07-25 09:36:22</sys_created_on><sys_id>6f3dd6dc07ded01037c7f2ae7c1ed07f</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Test - Container 1</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sp_container_6f3dd6dc07ded01037c7f2ae7c1ed07f</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-07-25 09:36:22</sys_updated_on><title/><width>container</width></sp_container></record_update>]]></payload>
+        <payload_hash>1367285741</payload_hash>
+        <record_name>Test - Container 1</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-25 09:36:22</sys_created_on>
+        <sys_id>a73dd6dc07ded01037c7f2ae7c1ed082</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17385549eb50000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-25 09:36:22</sys_updated_on>
+        <type>Container</type>
+        <update_guid>af3dd6dc8bded0107cee53f20f8f2381</update_guid>
+        <update_guid_history>af3dd6dc8bded0107cee53f20f8f2381:1367285741</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Test - Container 1">7bac23be075e141037c7f2ae7c1ed01e</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-02 09:48:17</sys_created_on>
+        <sys_db_object display_value="" name="sp_container">sp_container</sys_db_object>
+        <sys_id>46a6c816b8454b40a80a85c9bda41000</sys_id>
+        <sys_metadata>6f3dd6dc07ded01037c7f2ae7c1ed07f</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Test - Container 1</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sp_container_6f3dd6dc07ded01037c7f2ae7c1ed07f</sys_update_name>
+        <sys_update_version display_value="sp_container_6f3dd6dc07ded01037c7f2ae7c1ed07f">a73dd6dc07ded01037c7f2ae7c1ed082</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-02 09:48:17</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

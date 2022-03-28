@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+	
+	var tree = [
+  {
+    text: "Parent 1",
+    nodes: [
+      {
+        text: "Child 1",
+        nodes: [
+          {
+            text: "Grandchild 1"
+          },
+          {
+            text: "Grandchild 2"
+          }
+        ]
+      },
+      {
+        text: "Child 2"
+      }
+    ]
+  },
+  {
+    text: "Parent 2"
+  },
+  {
+    text: "Parent 3"
+  },
+  {
+    text: "Parent 4"
+  },
+  {
+    text: "Parent 5"
+  }
+];
+	
+	function getTree() {
+  // Some logic to retrieve, or generate tree structure
+  return tree;
+}
+
+$('#tree').treeview({data: getTree()});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>&#13;
+.popover.bottom {&#13;
+  margin-top: 50px;&#13;
+  margin-left: -85px;&#13;
+  min-width: 220px&#13;
+}&#13;
+&#13;
+.timeline &gt; li &gt; .timeline-badge.success {&#13;
+  background-color: $brand-success;&#13;
+  font-size: 15px;&#13;
+}&#13;
+&#13;
+.corner-buttons {&#13;
+  position: absolute;&#13;
+  right: 50px;&#13;
+  top: 50px;&#13;
+  text-align: right;&#13;
+  left: 50%;&#13;
+  &#13;
+  .btn {&#13;
+  	margin-bottom: 10px;&#13;
+    margin-left: 10px;&#13;
+  }&#13;
+}&#13;
+&#13;
+.corner-buttons .message {&#13;
+  padding-top: 13px; &#13;
+}&#13;
+&#13;
+.corner-buttons .message .submitted{&#13;
+  color: #555555; &#13;
+}&#13;
+&#13;
+.corner-buttons .message .closed {&#13;
+  color: #5cb85c; &#13;
+}&#13;
+&#13;
+.panel- .task-number {&#13;
+  color: #999;&#13;
+}&#13;
+&#13;
+.titles {&#13;
+  	width: 50%;&#13;
+}&#13;
+&#13;
+.timeline-body &gt; p {&#13;
+  white-space: pre-wrap;&#13;
+}&#13;
+&#13;
+.no-resize {&#13;
+  resize: none;&#13;
+}&#13;
+&#13;
+.journal-field-indicator {&#13;
+  width: 5px;&#13;
+  height: 23px;&#13;
+  position: absolute;&#13;
+  left: 5px;&#13;
+  top: 5px;&#13;
+  z-index: 3;&#13;
+}&#13;
+&#13;
+.panel-heading {&#13;
+  word-wrap: break-word;&#13;
+}&#13;
+&#13;
+.subtitle {&#13;
+  font-size: 80%;&#13;
+  color: #999;&#13;
+  margin-left: 38px;&#13;
+}&#13;
+&#13;
+.glyphicon {&#13;
+  top:3px;&#13;
+}&#13;
+&#13;
+.selected {&#13;
+  background-color: $brand-primary;&#13;
+  color: white!important;&#13;
+}&#13;
+&#13;
+.selected .subtitle {&#13;
+  color: white;&#13;
+}&#13;
+&#13;
+.selected:hover,&#13;
+.selected:focus {&#13;
+  background-color: $brand-info;&#13;
+  color: white!important;&#13;
+}&#13;
+&#13;
+.dropdown-menu &gt; li &gt; a {   &#13;
+  border-bottom: 1px solid #dddddd;&#13;
+  padding: 7px 15px;&#13;
+}&#13;
+&#13;
+tr.centered td{&#13;
+  vertical-align: middle;&#13;
+}&#13;
+&#13;
+.btn-name {&#13;
+  display: inline-block;&#13;
+  padding: 5px;&#13;
+  color: #999;&#13;
+}&#13;
+&#13;
+.span-name {&#13;
+  padding-top: 7px;&#13;
+  display: inline-block;  &#13;
+}&#13;
+&#13;
+.due-by {&#13;
+  position: relative;&#13;
+  float: right;&#13;
+  top: -40px;&#13;
+}&#13;
+&#13;
+.title div {&#13;
+  white-space: normal;&#13;
+  margin-left: 38px;  &#13;
+}&#13;
+&#13;
+.sup-title {&#13;
+  text-align: center;&#13;
+  margin-bottom: 3px;&#13;
+  color: gray;&#13;
+  font-size: 12px;&#13;
+}&#13;
+&#13;
+.task-status {&#13;
+  display: inline-block;&#13;
+  white-space: nowrap;&#13;
+  border: none;&#13;
+  color: white;&#13;
+  text-align: center;&#13;
+  padding: 2px 15px;&#13;
+  border-radius: 15px;&#13;
+  font-size: 11px;&#13;
+  vertical-align: middle;&#13;
+  min-width: 90px;&#13;
+}&#13;
+&#13;
+.badge {&#13;
+  background-color: #e6e9eb;&#13;
+  display: inline-block;&#13;
+  margin-bottom: 3px;&#13;
+  font-weight: 100;&#13;
+  color: #4a4a4a;&#13;
+}&#13;
+&#13;
+.nav-tabs  &gt; li.disabled .badge {&#13;
+  background-color: #cfcfcf;&#13;
+}&#13;
+&#13;
+.open &gt; .dropdown-menu {&#13;
+  padding: 0;&#13;
+}&#13;
+&#13;
+.request-link {&#13;
+  color: inherit !important;&#13;
+  text-decoration: underline;&#13;
+  font-size: inherit;&#13;
+  font-weight: 600;&#13;
+  display: block;&#13;
+}&#13;
+&#13;
+.request-desc {&#13;
+  color: #aaaaaa;&#13;
+}&#13;
+&#13;
+.popover.bottom.displayed {&#13;
+  display: block;&#13;
+  margin-left: -85px;&#13;
+  margin-top: 50px;&#13;
+}&#13;
+&#13;
+.popover .popover-content {&#13;
+  padding: 0px;&#13;
+}&#13;
+&#13;
+input[type=checkbox]:focus ~ label.name-card-label {&#13;
+  box-shadow: 0px 0px 6px 1px #278efc;&#13;
+}&#13;
+&#13;
+textarea.form-control {&#13;
+  height: inherit !important;&#13;
+}&#13;
+&#13;
+.task-description {&#13;
+  border-bottom: 1px solid #dadada;&#13;
+  margin-bottom: 30px;&#13;
+  white-space: pre-line;&#13;
+  margin-top: -30px;&#13;
+  padding-bottom: 10px;&#13;
+  min-height: 100px;&#13;
+}&#13;
+&#13;
+.avatar-container .avatar .sub-avatar {&#13;
+  background: #81b4a0 center;&#13;
+  background-size: 3.2rem;&#13;
+}&#13;
+&#13;
+.btn-name.disabled {&#13;
+  .caret { &#13;
+    display:none;&#13;
+  }&#13;
+&#13;
+  .avatar-container {&#13;
+    cursor: default; &#13;
+    .avatar .sub-avatar {&#13;
+      background-color: #a2a2a2;&#13;
+    }&#13;
+  }</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>sp-home</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Sankaran Pillai Home</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>satheesh</sys_created_by>
+        <sys_created_on>2020-09-10 14:50:35</sys_created_on>
+        <sys_id>e9b72daf2f43d41093fd5d8b2799b62f</sys_id>
+        <sys_mod_count>27</sys_mod_count>
+        <sys_name>Sankaran Pillai Home</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_e9b72daf2f43d41093fd5d8b2799b62f</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-17 14:09:25</sys_updated_on>
+        <template><![CDATA[
+
+<script src="http://github.com/jonmiles/bootstrap-treeview/blob/master/src/js/bootstrap-treeview.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link href="http://jonmiles.github.io/bootstrap-treeview/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    
+<div id="tree"></div>
+
+]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Now Bytes Feedback" max_length="40" name="x_93700_arena_dyk_feedback" sizeclass="2" type="collection">
+        <element label="Comment" max_length="4000" name="comment" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="DYK Content" max_length="32" name="dyk_content" reference="x_93700_arena_did_you_know" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Bookmark" value="bookmark"/>
+                <element inactive_on_update="false" label="Comment" value="comment"/>
+                <element inactive_on_update="false" label="Like" value="like"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" default="javascript: gs.getUserID()" label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Active" max_length="40" name="u_active" type="boolean"/>
+        <index name="index">
+            <element name="dyk_content"/>
+        </index>
+        <index name="index2">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

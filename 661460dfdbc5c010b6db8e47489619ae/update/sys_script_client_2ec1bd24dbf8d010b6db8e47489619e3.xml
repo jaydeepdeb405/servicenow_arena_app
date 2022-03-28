@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>actions_taken</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>test button color</name>
+        <order/>
+        <script><![CDATA[function onLoad() {
+//Change the color of the 'Approve' button to green
+transformButton('help', '#77FF77', 'white', 'icon-success-circle');
+//Change the color of the 'Reject' button to red
+//transformButton('reject', '#FF0022', 'white', 'icon-error-circle');
+//Change the color of the 'Info' button to blue
+//transformButton('info_button', '#31708f', 'white', 'icon-info');
+//Change the color of the 'Warning' button to yellow
+//transformButton('warning_button', '#f0ad4e', 'white', 'icon-warning-circle');
+}
+
+function transformButton(buttonID, buttonBackgroundColor, buttonTextColor, buttonIconName) {
+try{
+//Find the button(s) by ID and change the background color
+$$('button[id=' + buttonID + ']').each(function(elmt) {
+elmt.style.backgroundColor = buttonBackgroundColor;
+if(buttonTextColor){
+elmt.style.color = buttonTextColor;
+}
+if(buttonIconName){
+elmt.addClassName(buttonIconName);
+//Add some spacing between the icon and button label
+elmt.innerHTML = ' ' + elmt.innerHTML;
+}
+});
+}catch(e){
+	
+	console.log(e.message);
+}
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-05-12 11:31:43</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2ec1bd24dbf8d010b6db8e47489619e3</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>test button color</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_script_client_2ec1bd24dbf8d010b6db8e47489619e3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-05-12 11:35:05</sys_updated_on>
+        <table>incident</table>
+        <type>onLoad</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

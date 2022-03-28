@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $rootScope, $http) {
+	/* widget controller */
+	var c = this;
+	//	c.showLevelResults = true;
+
+	c.replay = function(level, difficulty) {
+		sfx.playTik();
+		var gameScreen = {
+			resultPage: false,
+			introSequence: false,
+			gameHeading: false,
+			mainMenu: false,
+			gameLevels: false,
+			quizPage: true,
+			profilePage: false,
+			level: level,
+			difficulty: difficulty
+		};
+		$rootScope.$broadcast('gameScreen', gameScreen);
+	};
+
+	c.leaderboard = function() {
+		sfx.playTik();
+		var gameScreen = {
+			resultPage: false,
+			introSequence:false,
+			gameHeading:false,
+			mainMenu: false,
+			gameLevels: false,
+			quizPage: false,
+			leaderboard: true,
+			profilePage: false
+		};
+		$rootScope.$broadcast('gameScreen', gameScreen);
+	};
+
+	c.updateResults = function(level, difficulty) {
+		c.data.level = level;
+		c.data.difficulty = difficulty;
+		c.server.update();
+	};
+
+	c.challenger = function(uID,level,difficulty) {
+		sfx.playTik();
+		c.data.recID = uID;
+		c.server.update().then(function (response) {
+			c.updateResults(level,difficulty);
+			Notiflix.Notify.Init({width:'500px',position:'right-top',fontSize:'1.2em'});
+		//	Notiflix.Notify.Init({width:'500px',position:'right-bottom',fontSize:'20px'});
+			if(c.data.alreadyChallenged)
+				Notiflix.Notify.Failure('Player has been challenged by '+ c.data.alreadyChallengedBy);
+			if(c.data.challengedByYou)
+				Notiflix.Notify.Success('You just challenged '+ c.data.challengedByUser);
+		});
+	};
+
+	var liveProfiles = {};
+	$scope.getLiveProfileByUserId = function(userSysId) {
+		return liveProfiles[userSysId];
+	};
+	var pending = {};
+	//Little caching implementation to make sure we only get a given user's profile once.
+	$scope.hasLiveProfile = function hasLiveProfile(userSysId) {
+		if (liveProfiles[userSysId])
+			return true;
+		else if (pending[userSysId])
+			return false;
+		else {
+			pending[userSysId] = $http.get('/api/now/live/profiles/sys_user.' + userSysId).then(function(response) { //alert(JSON.stringify(response.data.result));
+				liveProfiles[userSysId] = {
+					userID: userSysId,
+					name: response.data.result.name,
+					initials: buildInitials(response.data.result.name),
+					avatar: response.data.result.avatar
+				};
+			});
+			return false;
+		}
+	};
+
+	function buildInitials(name) {
+		if (!name)
+			return "--";
+		var initials = name.split(" ").map(function(word) {
+			return word.toUpperCase();
+		}).filter(function(word) {
+			return word.match(/^[A-Z]/);
+		}).map(function(word) {
+			return word.substring(0, 1);
+		}).join("");
+		return (initials.length > 3) ? initials.substr(0, 3) : initials;
+	}
+
+
+
+
+
+	/////////////////////////Listener/////////////////////////
+	$rootScope.$on('gameScreen', function(event, obj) {
+		c.showLevelResults1 = false;
+		c.showLevelResults = obj.resultPage;
+		if (c.showLevelResults) {
+			c.data.resultID = obj.resultID;
+			c.data.level = obj.level.toLowerCase().replace(' ', '');
+			c.data.difficulty = obj.difficulty.toLowerCase();
+			c.server.update().then(function (response) {
+				c.showLevelResults1 = true;
+				Notiflix.Notify.Init({width:'500px',position:'right-top',fontSize:'1.2em'});
+				if(c.data.showCompletedMsg == true){
+					Notiflix.Notify.Success('Congratulations!!! You have succcessfully completed all the levels');
+				}
+				else if(c.data.showUnlockedMsg == true){
+					Notiflix.Notify.Success('You have unlocked all the levels');
+				}
+			});
+		}
+	});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.capitalize 
+{
+  text-transform: capitalize;
+}
+
+.result-wrapper {
+  width: 100vw; 
+}
+
+.table-wrapper {
+  width: 70%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .table-wrapper {
+    width: 90%;
+  }
+}
+
+.username {
+  text-align: start;
+  padding-left: 6rem;
+  padding: 1rem 0 1em 6rem; 
+}
+
+.stats
+{
+  font-size: 15px;
+  border-radius:15px;
+  color: #ffff66;
+}
+.darkTable button
+{
+  background-color:#44c767;
+  // border-radius:12px;
+  //  border:1px solid #18ab29;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  padding:2px 10px;
+  text-decoration:none;
+  text-shadow:-2px -1px 3px #2f6627;
+}
+
+.darkTable button:hover
+{
+  background-color:#5cbf2a;
+}
+
+.darkTable button:active
+{
+  position:relative;
+  top:1px;
+}
+
+table.darkTable {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  width: 100%;
+  text-align: center;
+  //  border-radius:15px;
+  border-collapse: inherit;
+}
+table.darkTable td, table.darkTable th {
+  //  border: 2px solid #aaff00;
+  padding: 3px 2px;
+  //  border-radius:15px;
+  margin: 2px 2px 2px 2px;
+}
+table.darkTable tbody td {
+  font-size: 13px;
+  //  border-radius:15px;
+  color: #ffff66;
+  background-color: rgba(0,0,0, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+table.darkTable thead {
+  background: #58196D;
+  background: -moz-linear-gradient(top, #825291 0%, #68307b 66%, #58196D 100%);
+  background: -webkit-linear-gradient(top, #825291 0%, #68307b 66%, #58196D 100%);
+  background: linear-gradient(to bottom, #825291 0%, #68307b 66%, #58196D 100%);
+  border-bottom: 3px solid #8949FF;
+  border-radius:15px;
+}
+table.darkTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #E6E6E6;
+  text-align: center;
+  //border-left: 2px solid #ff80df;
+  //  border-radius:15px;
+}
+
+table.darkTable tfoot td {
+  font-size: 12px;
+}
+.pyro &gt; .before, .pyro &gt; .after {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  box-shadow: -120px -218.66667px blue, 248px -16.66667px #00ff84, 190px 16.33333px #002bff, -113px -308.66667px #ff009d, -109px -287.66667px #ffb300, -50px -313.66667px #ff006e, 226px -31.66667px #ff4000, 180px -351.66667px #ff00d0, -12px -338.66667px #00f6ff, 220px -388.66667px #99ff00, -69px -27.66667px #ff0400, -111px -339.66667px #6200ff, 155px -237.66667px #00ddff, -152px -380.66667px #00ffd0, -50px -37.66667px #00ffdd, -95px -175.66667px #a6ff00, -88px 10.33333px #0d00ff, 112px -309.66667px #005eff, 69px -415.66667px #ff00a6, 168px -100.66667px #ff004c, -244px 24.33333px #ff6600, 97px -325.66667px #ff0066, -211px -182.66667px #00ffa2, 236px -126.66667px #b700ff, 140px -196.66667px #9000ff, 125px -175.66667px #00bbff, 118px -381.66667px #ff002f, 144px -111.66667px #ffae00, 36px -78.66667px #f600ff, -63px -196.66667px #c800ff, -218px -227.66667px #d4ff00, -134px -377.66667px #ea00ff, -36px -412.66667px #ff00d4, 209px -106.66667px #00fff2, 91px -278.66667px #000dff, -22px -191.66667px #9dff00, 139px -392.66667px #a6ff00, 56px -2.66667px #0099ff, -156px -276.66667px #ea00ff, -163px -233.66667px #00fffb, -238px -346.66667px #00ff73, 62px -363.66667px #0088ff, 244px -170.66667px #0062ff, 224px -142.66667px #b300ff, 141px -208.66667px #9000ff, 211px -285.66667px #ff6600, 181px -128.66667px #1e00ff, 90px -123.66667px #c800ff, 189px 70.33333px #00ffc8, -18px -383.66667px #00ff33, 100px -6.66667px #ff008c;
+  -moz-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+  -webkit-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+  -o-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+  -ms-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+  animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards; }
+
+.pyro &gt; .after {
+  -moz-animation-delay: 1.25s, 1.25s, 1.25s;
+  -webkit-animation-delay: 1.25s, 1.25s, 1.25s;
+  -o-animation-delay: 1.25s, 1.25s, 1.25s;
+  -ms-animation-delay: 1.25s, 1.25s, 1.25s;
+  animation-delay: 1.25s, 1.25s, 1.25s;
+  -moz-animation-duration: 1.25s, 1.25s, 6.25s;
+  -webkit-animation-duration: 1.25s, 1.25s, 6.25s;
+  -o-animation-duration: 1.25s, 1.25s, 6.25s;
+  -ms-animation-duration: 1.25s, 1.25s, 6.25s;
+  animation-duration: 1.25s, 1.25s, 6.25s; }
+
+@-webkit-keyframes bang {
+  from {
+    box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white; } }
+@-moz-keyframes bang {
+  from {
+    box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white; } }
+@-o-keyframes bang {
+  from {
+    box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white; } }
+@-ms-keyframes bang {
+  from {
+    box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white; } }
+@keyframes bang {
+  from {
+    box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white; } }
+@-webkit-keyframes gravity {
+  to {
+    transform: translateY(200px);
+    -moz-transform: translateY(200px);
+    -webkit-transform: translateY(200px);
+    -o-transform: translateY(200px);
+    -ms-transform: translateY(200px);
+    opacity: 0; } }
+@-moz-keyframes gravity {
+  to {
+    transform: translateY(200px);
+    -moz-transform: translateY(200px);
+    -webkit-transform: translateY(200px);
+    -o-transform: translateY(200px);
+    -ms-transform: translateY(200px);
+    opacity: 0; } }
+@-o-keyframes gravity {
+  to {
+    transform: translateY(200px);
+    -moz-transform: translateY(200px);
+    -webkit-transform: translateY(200px);
+    -o-transform: translateY(200px);
+    -ms-transform: translateY(200px);
+    opacity: 0; } }
+@-ms-keyframes gravity {
+  to {
+    transform: translateY(200px);
+    -moz-transform: translateY(200px);
+    -webkit-transform: translateY(200px);
+    -o-transform: translateY(200px);
+    -ms-transform: translateY(200px);
+    opacity: 0; } }
+@keyframes gravity {
+  to {
+    transform: translateY(200px);
+    -moz-transform: translateY(200px);
+    -webkit-transform: translateY(200px);
+    -o-transform: translateY(200px);
+    -ms-transform: translateY(200px);
+    opacity: 0; } }
+@-webkit-keyframes position {
+  0%, 19.9% {
+    margin-top: 10%;
+    margin-left: 40%; }
+
+  20%, 39.9% {
+    margin-top: 40%;
+    margin-left: 30%; }
+
+  40%, 59.9% {
+    margin-top: 20%;
+    margin-left: 70%; }
+
+  60%, 79.9% {
+    margin-top: 30%;
+    margin-left: 20%; }
+
+  80%, 99.9% {
+    margin-top: 30%;
+    margin-left: 80%; } }
+@-moz-keyframes position {
+  0%, 19.9% {
+    margin-top: 10%;
+    margin-left: 40%; }
+
+  20%, 39.9% {
+    margin-top: 40%;
+    margin-left: 30%; }
+
+  40%, 59.9% {
+    margin-top: 20%;
+    margin-left: 70%; }
+
+  60%, 79.9% {
+    margin-top: 30%;
+    margin-left: 20%; }
+
+  80%, 99.9% {
+    margin-top: 30%;
+    margin-left: 80%; } }
+@-o-keyframes position {
+  0%, 19.9% {
+    margin-top: 10%;
+    margin-left: 40%; }
+
+  20%, 39.9% {
+    margin-top: 40%;
+    margin-left: 30%; }
+
+  40%, 59.9% {
+    margin-top: 20%;
+    margin-left: 70%; }
+
+  60%, 79.9% {
+    margin-top: 30%;
+    margin-left: 20%; }
+
+  80%, 99.9% {
+    margin-top: 30%;
+    margin-left: 80%; } }
+@-ms-keyframes position {
+  0%, 19.9% {
+    margin-top: 10%;
+    margin-left: 40%; }
+
+  20%, 39.9% {
+    margin-top: 40%;
+    margin-left: 30%; }
+
+  40%, 59.9% {
+    margin-top: 20%;
+    margin-left: 70%; }
+
+  60%, 79.9% {
+    margin-top: 30%;
+    margin-left: 20%; }
+
+  80%, 99.9% {
+    margin-top: 30%;
+    margin-left: 80%; } }
+@keyframes position {
+  0%, 19.9% {
+    margin-top: 10%;
+    margin-left: 40%; }
+
+  20%, 39.9% {
+    margin-top: 40%;
+    margin-left: 30%; }
+
+  40%, 59.9% {
+    margin-top: 20%;
+    margin-left: 70%; }
+
+  60%, 79.9% {
+    margin-top: 30%;
+    margin-left: 20%; }
+
+  80%, 99.9% {
+    margin-top: 30%;
+    margin-left: 80%; } }
+
+
+.pulseit{
+  -webkit-animation: pulse linear 1s infinite;
+  animation: pulse linear 3s infinite;
+}
+.glow {
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+.avatar-medium{
+  float:left;
+  margin-left:10px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>results_page_arena</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>Result Page</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    var player = new GlideRecord("x_93700_arena_user");
+    player.addQuery("user", gs.getUserID());
+    player.addQuery('interviewee', 'true');
+    player.query();
+    if (player.next()) {
+        data.interviewprofile = 'true';
+    }
+
+    if (input) {
+        if (input.level && input.difficulty && input.resultID) {
+            data.showResultPage = false;
+            var myActiveRec = '';
+            var level = input.level;
+            var difficulty = input.difficulty;
+            data.rankArray = [];
+            var userHighScore = 0;
+            var userHighTime = 0;
+            var lastUser = "";
+            var lastUserName = "";
+            var currentUserRank = 0;
+            data.score = 0;
+			data.showUnlockedMsg = false;
+            data.showCompletedMsg = false;
+            data.user = '';
+            data.nextLevel = level;
+            data.nextDifficulty = '';
+            data.nextQuiz = false;
+
+
+
+            var resultRec = new GlideRecord('x_93700_arena_results');
+            if (resultRec.get(input.resultID)) {
+                data.user = resultRec.getValue('arena_user');
+                data.score = resultRec.getValue('total_score');
+
+                var timeTaken = Math.round(parseInt(resultRec.getValue('time_taken')) / 60);
+                if (timeTaken <= 1)
+                    data.timeTaken = 'About 1 minute';
+                else
+                    data.timeTaken = 'about ' + timeTaken + ' minutes';
+
+                var passingScore = gs.getProperty('x_93700_arena.passing_score');
+                if (data.score >= passingScore) {
+					if (level == 'level4' && difficulty == 'medium') 
+						data.showUnlockedMsg = true;
+                    if (level == 'level4' && difficulty == 'hard')
+                        data.showCompletedMsg = true;
+                    else {
+                        data.nextQuiz = true;
+                        if (difficulty == 'easy')
+                            data.nextDifficulty = 'medium';
+                        else if (difficulty == 'medium')
+                            data.nextDifficulty = 'hard';
+                        else if (difficulty == 'hard') {
+                            var nextLevel = parseInt(level.replace('level', '')) + 1;
+                            data.nextDifficulty = 'easy';
+                            data.nextLevel = 'level' + nextLevel;
+                        }
+                    }
+                }
+            }
+
+            data.attempts = new Evaluator().getAttempts(data.user, level, difficulty);
+
+            /*	var activeRec = new GlideRecord('x_93700_arena_results');
+            	activeRec.addEncodedQuery('arena_user='+data.user+'^active=true^difficulty=' + difficulty + '^level=' + level);
+            	activeRec.query();
+            	if(activeRec.next()) {
+            		myActiveRec = activeRec.sys_id;
+            	}   */
+
+            var levelStats = new GlideRecord('x_93700_arena_results');
+            levelStats.addEncodedQuery('active=true^difficulty=' + difficulty + '^level=' + level);
+            levelStats.orderByDesc('total_score');
+            levelStats.query();
+            while (levelStats.next()) {
+                //		var showDisabled = false;
+                var showChallenger = false;
+                var showEnabled = false;
+                var showMsg = false;
+                var challenger = '';
+                var sysID = levelStats.getValue('sys_id');
+                userHighScore = levelStats.getValue('total_score');
+                userHighTime = levelStats.getValue('time_taken');
+                lastUser = levelStats.arena_user.user.toString();
+                if (levelStats.arena_user.avatar)
+                    lastUserName = levelStats.arena_user.avatar.toString();
+                else
+                    lastUserName = levelStats.arena_user.user.name.toString();
+                if (levelStats.challenged_by) {
+                    showChallenger = true;
+                    if (levelStats.challenged_by.avatar)
+                        challenger = levelStats.challenged_by.avatar.toString();
+                    else
+                        challenger = levelStats.challenged_by.user.name.toString();
+                } else if (levelStats.arena_user.user.sys_id == gs.getUserID())
+                    showMsg = true;
+                else {
+                    //					showDisabled = true;
+                    showEnabled = true;
+                }
+                data.rankArray.push({
+                    "sys_id": sysID,
+                    "userHighScore": userHighScore,
+                    "userHighTime": userHighTime,
+                    "lastUser": lastUser,
+                    "lastUserName": lastUserName,
+                    "level": level,
+                    "difficulty": difficulty,
+                    //		"showDisabled": showDisabled,
+                    "showEnabled": showEnabled,
+                    "showChallenger": showChallenger,
+                    "showMsg": showMsg,
+                    "challenger": challenger
+                });
+            }
+
+            data.rankArray = data.rankArray.sort(function(a, b) { //sorting as per mood high score and least time
+                if (b.userHighScore != a.userHighScore)
+                    return b.userHighScore - a.userHighScore;
+                if (b.userHighScore == a.userHighScore)
+                    return a.userHighTime - b.userHighTime;
+            });
+
+            var rankCounter = 1;
+            for (var i = 0; i < data.rankArray.length; i++) //pushing rank name in each object
+            {
+                data.rankArray[i].rank = rankCounter;
+                /*		if (data.rankArray[i].sys_id == myActiveRec) {
+                			if (rankCounter <= 5){
+                				for (var j = 0; j < rankCounter - 1; j++) {
+                					if (data.rankArray[j].challenger == '') {
+                						data.rankArray[j].showEnabled = true;
+                						data.rankArray[j].showDisabled = false;
+                					}
+                				}
+                			}
+                		} */
+                rankCounter++;
+            }
+            data.showResultPage = true;
+        }
+
+        //What to do when Challenge button is clicked
+        if (input.recID) {
+            data.alreadyChallenged = false;
+            data.challengedByYou = false;
+            var challenger1 = new GlideRecord('x_93700_arena_results');
+            var challenged = 0;
+            if (input.User != gs.getUserID())
+                if (challenger1.get(input.recID)) {
+                    if (!challenger1.challenged_by && input.User != gs.getUserID()) {
+                        challenger1.setValue('challenged_by', data.user);
+                        challenger1.update();
+                        challenged = 1;
+                    } else if (challenger1.challenged_by) {
+                        data.alreadyChallenged = true;
+                        if (challenger1.challenged_by.avatar)
+                            data.alreadyChallengedBy = challenger1.challenged_by.avatar.toString();
+                        else
+                            data.alreadyChallengedBy = challenger1.challenged_by.user.name.toString();
+                    }
+                }
+            if (challenged == 1) {
+                data.challengedByYou = true;
+                if (challenger1.arena_user.avatar)
+                    data.challengedByUser = challenger1.arena_user.avatar.toString();
+                else
+                    data.challengedByUser = challenger1.arena_user.user.name.toString();
+
+            }
+        }
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>kesav</sys_created_by>
+        <sys_created_on>2020-04-11 16:44:04</sys_created_on>
+        <sys_id>9dcd8faedb885010b6db8e474896194e</sys_id>
+        <sys_mod_count>213</sys_mod_count>
+        <sys_name>Result Page</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_9dcd8faedb885010b6db8e474896194e</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-09 10:42:44</sys_updated_on>
+        <template><![CDATA[<div class="result-wrapper" ng-show='c.showLevelResults && c.showLevelResults1'>
+  <div class="pyro">
+    <div class="before"></div>
+    <div class="after"></div>
+  </div>
+
+  <div class="glow" ng-show = " data.interviewprofile =='true'">
+    <h1>Thanks for taking the TEST</h1>
+    <h3> -KPMG</h3>
+
+  </div>
+
+
+
+  <div ng-hide = " data.interviewprofile =='true'"><!-- hiding for interview Profile -->
+
+
+    <div class="glow">
+      <h1>Your Score</h1>
+      <h2>{{data.score}}</h2>
+    </div>
+    <div class="table-wrapper">
+      <table class="darkTable">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Score</th>
+            <!--  <th>Time Taken</th> -->
+            <th>Challenges</th>
+          </tr>	
+        </thead>	
+        <tbody>	
+          <tr ng-repeat='x in data.rankArray | limitTo:5'>
+            <td>{{x.rank}}</td>
+            <td>
+              <sn-avatar ng-if="hasLiveProfile(x.lastUser)" primary="getLiveProfileByUserId(x.lastUser)" class="avatar-medium" show-presence="false" enable-context-menu="false"></sn-avatar>
+              <div class='username capitalize'>{{x.lastUserName}}</div>
+            </td>
+            <td>{{x.userHighScore}}</td>
+            <!-- <td>{{x.userHighTime}}</td> -->
+            <td ng-if="x.showChallenger">Challenged by <span class = 'capitalize'>{{x.challenger}}</span></td>
+            <td ng-if="x.showMsg">Wait till someone challenges you</td>
+            <td ng-if="x.showEnabled" id={{x.sys_id}} ng-click="c.challenger(x.sys_id,x.level,x.difficulty);"><button  type="button" class="btn btn-lg btn-success menuStyle">Challenge</button></td>
+       <!--     <td ng-if="x.showDisabled">Can't challenge this player</td> -->
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="stats">Time taken for this attempt : {{data.timeTaken}}</p>
+      <p class="stats">Number of attempts so far : {{data.attempts}}</p>
+
+      <div>
+        <button type="button" class="btn btn-lg btn-success menuStyle" ng-click="c.leaderboard()">Leaderboard</button>
+        <button type="button" class="btn btn-lg btn-success menuStyle" ng-click="c.replay(c.data.level,c.data.difficulty)">Retake<i class="glyphicon glyphicon-repeat"></i></button>
+        <button type="button" ng-show="data.nextQuiz" class="btn btn-lg btn-success menuStyle" ng-click="c.replay(data.nextLevel,data.nextDifficulty)">Next Quiz</button>
+      </div>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

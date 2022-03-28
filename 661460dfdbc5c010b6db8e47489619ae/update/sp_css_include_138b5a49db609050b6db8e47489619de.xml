@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css_include">
+    <sp_css_include action="INSERT_OR_UPDATE">
+        <name>notiflix-2.1.3.min</name>
+        <source>local</source>
+        <sp_css display_value="notiflix-2.1.3.min">0cbbda49db609050b6db8e47489619cc</sp_css>
+        <sys_class_name>sp_css_include</sys_class_name>
+        <sys_created_by>vyas</sys_created_by>
+        <sys_created_on>2020-05-01 17:35:40</sys_created_on>
+        <sys_id>138b5a49db609050b6db8e47489619de</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>notiflix-2.1.3.min</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_css_include_138b5a49db609050b6db8e47489619de</sys_update_name>
+        <sys_updated_by>vyas</sys_updated_by>
+        <sys_updated_on>2020-05-01 17:35:40</sys_updated_on>
+        <url/>
+    </sp_css_include>
+</record_update>

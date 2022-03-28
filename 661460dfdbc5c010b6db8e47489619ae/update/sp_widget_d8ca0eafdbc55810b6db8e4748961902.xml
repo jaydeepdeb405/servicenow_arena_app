@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+	/* widget controller */
+	var c = this;
+		window.onload = function() {
+		editor = CodeMirror.fromTextArea(document.getElementById("code"), {			
+			extraKeys: {"Ctrl-Space": "autocomplete"},
+			value: document.getElementById("code").innerHTML,
+			lineNumbers:true,
+			mode: "htmlmixed"
+		});
+	};
+}
+
+//			theme:"dracula"
+//mode: "htmlmixed",]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>codemirror</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>vyas</sys_created_by>
+        <sys_created_on>2020-06-03 07:18:44</sys_created_on>
+        <sys_id>d8ca0eafdbc55810b6db8e4748961902</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>codemirror</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_d8ca0eafdbc55810b6db8e4748961902</sys_update_name>
+        <sys_updated_by>vyas</sys_updated_by>
+        <sys_updated_on>2020-06-03 08:00:23</sys_updated_on>
+        <template><![CDATA[<div>
+your widget template 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.54.0/codemirror.min.css" integrity="sha256-Ez4TnBJ24JkU8Z622YHGxDaYrslkqNZ62ewvn08Skco=" crossorigin="anonymous" /> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.54.0/theme/dracula.min.css" integrity="sha256-uo0AmtydVJOOqIJSwJmit3PtOk9VFa6cL5N6ikyzmd8=" crossorigin="anonymous" />-->
+  
+  <textarea id="code" style="font-size:20px !important;text-align:left;font-family courier, serif !important;"></textarea>           
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.54.0/codemirror.min.js" integrity="sha256-zW3RviTWD2qcjPDA/ByugxSFO5EPHb8Yl0Z6o7X9Zqk=" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.54.0/mode/htmlmixed/htmlmixed.min.js" integrity="sha256-GQZ9+vs5r8hhzJxB1fgAojLiI4Me/rpFHzPiUHh1Wks=" crossorigin="anonymous"></script> 
+  
+</div>]]></template>
+    </sp_widget>
+</record_update>

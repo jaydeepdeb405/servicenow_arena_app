@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>Service Portal</category>
+        <format>JPEG</format>
+        <height>225</height>
+        <image>e8b22f5cdbe10010b6db8e4748961954</image>
+        <name>arena-intro2-tree.jpg</name>
+        <size_bytes>8179</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-23 13:07:32</sys_created_on>
+        <sys_id>a2617a88dbc9d010b6db8e4748961904</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>arena-intro2-tree.jpg</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>db_image_a2617a88dbc9d010b6db8e4748961904</sys_update_name>
+        <sys_updated_by>jaydeep</sys_updated_by>
+        <sys_updated_on>2020-05-23 13:07:36</sys_updated_on>
+        <thumbnail/>
+        <width>225</width>
+    </db_image>
+</record_update>

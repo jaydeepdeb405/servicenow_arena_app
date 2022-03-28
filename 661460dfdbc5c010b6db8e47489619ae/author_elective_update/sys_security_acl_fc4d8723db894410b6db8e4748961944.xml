@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="DELETE">
+        <active>true</active>
+        <admin_overrides>false</admin_overrides>
+        <advanced>false</advanced>
+        <condition/>
+        <description>Default access control on x_93700_arena_arena_question</description>
+        <name>x_93700_arena_arena_question</name>
+        <operation display_value="read">read</operation>
+        <script/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-11-17 15:56:47</sys_created_on>
+        <sys_id>fc4d8723db894410b6db8e4748961944</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>x_93700_arena_arena_question</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_security_acl_fc4d8723db894410b6db8e4748961944</sys_update_name>
+        <sys_updated_by>praveen</sys_updated_by>
+        <sys_updated_on>2020-06-11 12:51:27</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_security_acl_fc4d8723db894410b6db8e4748961944</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl"><sys_security_acl action="INSERT_OR_UPDATE"><active>true</active><admin_overrides>false</admin_overrides><advanced>false</advanced><condition/><description>Default access control on x_93700_arena_arena_question</description><name>x_93700_arena_arena_question</name><operation display_value="read">read</operation><script/><sys_class_name>sys_security_acl</sys_class_name><sys_created_by>nikesh</sys_created_by><sys_created_on>2019-11-17 15:56:47</sys_created_on><sys_id>fc4d8723db894410b6db8e4748961944</sys_id><sys_mod_count>3</sys_mod_count><sys_name>x_93700_arena_arena_question</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_security_acl_fc4d8723db894410b6db8e4748961944</sys_update_name><sys_updated_by>praveen</sys_updated_by><sys_updated_on>2020-06-11 12:51:27</sys_updated_on><type display_value="record">record</type></sys_security_acl></record_update>]]></payload>
+        <payload_hash>-1362892595</payload_hash>
+        <record_name>x_93700_arena_arena_question</record_name>
+        <reverted_from/>
+        <source>3a870d56071d501037c7f2ae7c1ed0e1</source>
+        <source_table>sys_update_set</source_table>
+        <state>backedout</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-11 15:28:32</sys_created_on>
+        <sys_id>dde78d96071d501037c7f2ae7c1ed099</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>172a3ff3b850000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-11 18:22:20</sys_updated_on>
+        <type>Access Control</type>
+        <update_guid>94f3609aa5591410cd5a65fa617ca712</update_guid>
+        <update_guid_history>94f3609aa5591410cd5a65fa617ca712:-1362892595,fb63685a76591410941fd732190eaaf7:-1203852794,377c5e6dded5901072c5a3bc596d4542:-1362892595,9815817146174010e413fb11c5b0e20c:-1097360818,9815817146174010e413fb11c5b0e20c:-1097360818,f3f5ee003a5700102c7398c5ca5d1819:0,82952ecc221700105f43a16f18873852:-2053798582,844b0ab7dfc70010da71d5bb6c724be3:0,e2da4677c9c70010192a7c76db4c7278:-2053798582,3c4d8723a3894410cb5034d04baeb148:771338302</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-11 18:22:20</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl">sys_security_acl</sys_db_object>
+        <sys_id>4598969d81a1430499cbade67370fa84</sys_id>
+        <sys_metadata>fc4d8723db894410b6db8e4748961944</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena_arena_question</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent display_value="">fd1b42b7dbc70010b6db8e474896193f</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete/>
+        <sys_update_name>sys_security_acl_fc4d8723db894410b6db8e4748961944</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_fc4d8723db894410b6db8e4748961944">dde78d96071d501037c7f2ae7c1ed099</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-11 18:22:20</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

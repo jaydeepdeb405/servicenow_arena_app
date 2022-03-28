@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="sound" label="Sound" language="en" table="x_93700_arena_user">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>sound</element>
+            <help/>
+            <hint/>
+            <label>Sound</label>
+            <language>en</language>
+            <name>x_93700_arena_user</name>
+            <plural>Sounds</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>nikesh</sys_created_by>
+            <sys_created_on>2019-11-17 15:32:37</sys_created_on>
+            <sys_id>a51b42b7dbc70010b6db8e474896191b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Sound</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_documentation_x_93700_arena_user_sound_en</sys_update_name>
+            <sys_updated_by>nikesh</sys_updated_by>
+            <sys_updated_on>2019-11-17 15:32:37</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

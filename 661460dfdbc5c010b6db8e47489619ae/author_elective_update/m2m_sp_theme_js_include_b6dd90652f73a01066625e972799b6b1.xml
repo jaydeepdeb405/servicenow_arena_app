@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_theme_js_include">
+    <m2m_sp_theme_js_include action="DELETE">
+        <order/>
+        <sp_js_include display_value="materialize.min.js">4a7dd0652f73a01066625e972799b60a</sp_js_include>
+        <sp_theme display_value="Arena Test">889c1cd7075a541037c7f2ae7c1ed038</sp_theme>
+        <sys_class_name>m2m_sp_theme_js_include</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-28 07:17:34</sys_created_on>
+        <sys_id>b6dd90652f73a01066625e972799b6b1</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>materialize.min.js.Arena Test</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>m2m_sp_theme_js_include_b6dd90652f73a01066625e972799b6b1</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-09-27 10:17:41</sys_updated_on>
+    </m2m_sp_theme_js_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>m2m_sp_theme_js_include_b6dd90652f73a01066625e972799b6b1</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_theme_js_include"><m2m_sp_theme_js_include action="INSERT_OR_UPDATE"><order/><sp_js_include display_value="materialize.min.js">4a7dd0652f73a01066625e972799b60a</sp_js_include><sp_theme display_value="Arena Test">889c1cd7075a541037c7f2ae7c1ed038</sp_theme><sys_class_name>m2m_sp_theme_js_include</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2021-04-28 07:17:34</sys_created_on><sys_id>b6dd90652f73a01066625e972799b6b1</sys_id><sys_mod_count>2</sys_mod_count><sys_name>materialize.min.js.Arena Test</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>m2m_sp_theme_js_include_b6dd90652f73a01066625e972799b6b1</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2021-09-27 10:17:41</sys_updated_on></m2m_sp_theme_js_include></record_update>]]></payload>
+        <payload_hash>-1436147123</payload_hash>
+        <record_name>materialize.min.js.Arena Test</record_name>
+        <reverted_from/>
+        <source>d2715b7707ba701037c7f2ae7c1ed07d</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-10-01 23:17:24</sys_created_on>
+        <sys_id>0091df7707ba701037c7f2ae7c1ed0cb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17c3e25e8080000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-10-01 23:17:24</sys_updated_on>
+        <type>JS Includes</type>
+        <update_guid>67b8bb9ee8fa34109aa3407af6011cd2</update_guid>
+        <update_guid_history>67b8bb9ee8fa34109aa3407af6011cd2:-1436147123,67b8bb9ee8fa34109aa3407af6011cd2:-1436147123,f7ed1465b473a010f96f6454c1e1dbd1:256663924,83dd9065e373a01022afeab9615ae0b3:-1436147123</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="materialize.min.js.Arena Test">c101034d078ff01037c7f2ae7c1ed00e</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-10-05 19:17:30</sys_created_on>
+        <sys_db_object display_value="" name="m2m_sp_theme_js_include">m2m_sp_theme_js_include</sys_db_object>
+        <sys_id>0997a75e11d943d4926e270b880271c4</sys_id>
+        <sys_metadata>b6dd90652f73a01066625e972799b6b1</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>materialize.min.js.Arena Test</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>m2m_sp_theme_js_include_b6dd90652f73a01066625e972799b6b1</sys_update_name>
+        <sys_update_version display_value="m2m_sp_theme_js_include_b6dd90652f73a01066625e972799b6b1">0091df7707ba701037c7f2ae7c1ed0cb</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-10-05 19:17:30</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

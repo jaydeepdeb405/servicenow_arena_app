@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, $rootScope, spModal, spUtil) {
+    var c = this;
+	spUtil.recordWatch($scope,"x_93700_arena_dyk_feedback","userDYNAMIC90d1921e5f510100a9ad2572f2b477fe^type=bookmark",function(res){
+		$scope.server.refresh();
+	});
+	
+    $scope.change = function(record) {
+        var qid = record;
+        if (!qid) return;
+        $rootScope.$broadcast('loadContent', {
+            'qid': qid
+        });
+    };
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.card{&#13;
+  border-radius: 0.7rem;&#13;
+  height: 45vh;&#13;
+&#13;
+}&#13;
+.saved-content-title {&#13;
+  font-size: 1.4rem;&#13;
+  background: #3c7db1; /*blue*/&#13;
+  padding: 0.5rem;&#13;
+  border-radius: 0.7rem 0.7rem 0rem 0rem;&#13;
+  color: #FFF;&#13;
+  font-weight: bold;&#13;
+}&#13;
+.content-box{&#13;
+  padding: 15vh 0vh 15vh 0vh;&#13;
+  text-align: -webkit-center;&#13;
+  font-size: 3vh;&#13;
+  color: #3c7db1;&#13;
+}&#13;
+.card-wrapper{&#13;
+  padding: 5px;&#13;
+&#13;
+  overflow-y: Scroll;&#13;
+  overflow-x: hidden;&#13;
+}&#13;
+.card-wrapper p{&#13;
+  border-radius   : 5px;&#13;
+  color: #3c7db1;&#13;
+}&#13;
+.card-wrapper p:hover{&#13;
+  border-radius   : 5px;&#13;
+  padding: 5px;&#13;
+  background-color:#e4e4e4;&#13;
+}&#13;
+&#13;
+/* width */&#13;
+::-webkit-scrollbar {&#13;
+  width  : 5px;&#13;
+}&#13;
+&#13;
+::-webkit-scrollbar-thumb {&#13;
+  border-radius   : 5px;&#13;
+  background-color: rgba(0, 0, 0, 0.3);&#13;
+}&#13;
+&#13;
+/* Handle on hover */&#13;
+::-webkit-scrollbar-thumb:hover {&#13;
+  background: #555;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>DYK Bookmark</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
+    data.saved = [];
+    var rec = new GlideRecord('x_93700_arena_dyk_feedback');
+    rec.addEncodedQuery('type=bookmark^userDYNAMIC90d1921e5f510100a9ad2572f2b477fe^u_active=true');
+    rec.query();
+    while (rec.next()) {
+        var articleName = rec.dyk_content.title;
+        var articleTitle = articleName.length > 16 ? articleName.substr(0, 16) + "..." : articleName;
+
+        data.saved.push({
+            'article': articleTitle.toString(),
+            'value': rec.dyk_content.toString()
+        });
+    }
+  })();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>chandana</sys_created_by>
+        <sys_created_on>2022-02-09 12:50:06</sys_created_on>
+        <sys_id>104a23391ba54510c79742e4cc4bcb20</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>DYK Bookmark</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_104a23391ba54510c79742e4cc4bcb20</sys_update_name>
+        <sys_updated_by>chandana</sys_updated_by>
+        <sys_updated_on>2022-02-11 12:18:13</sys_updated_on>
+        <template><![CDATA[<div class="card">
+  <div class="saved-content-title">
+    <span class="fa fa-book" style="font-size:25px">
+    </span>
+    <span>My Saved Content</span> 
+  </div>
+  <div ng-if="data.saved.length==0" class="content-box">
+    You don't have any saved content
+  </div>
+  <div class="card-wrapper">
+    <div ng-repeat="record in data.saved">
+      <p ng-click="change(record.value)">{{record.article}} </p>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

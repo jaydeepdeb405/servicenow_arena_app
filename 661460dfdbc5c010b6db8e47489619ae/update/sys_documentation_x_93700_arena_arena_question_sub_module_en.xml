@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="sub_module" label="Sub-module" language="en" table="x_93700_arena_arena_question">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>sub_module</element>
+            <help/>
+            <hint/>
+            <label>Sub-module</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_question</name>
+            <plural>Sub-modules</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 17:16:43</sys_created_on>
+            <sys_id>af5181fbdb7b4050b6db8e474896190b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Sub-module</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_documentation_x_93700_arena_arena_question_sub_module_en</sys_update_name>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 17:16:43</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

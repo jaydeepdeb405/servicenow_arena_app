@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_rel_widget_clone">
+    <sp_rel_widget_clone action="INSERT_OR_UPDATE">
+        <child display_value="Home Icon">d0881dd0db44d050b6db8e4748961953</child>
+        <cloned>2020-04-04 08:14:47</cloned>
+        <last_validated>2020-04-04 08:14:47</last_validated>
+        <parent display_value="">38ec5679db200010b6db8e4748961941</parent>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;sp_widget&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function() {
+  /* widget controller */
+  var c = this;
+	
+	c.submitForm = function() {
+	
+	 var url = "$chat_support.do?queueID=3a40c019c333120071d07bfaa2d3ae17";
+     var popup = window.open (url, "popup", "width=900, height=600");
+	}
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;#feedbackModal .fa-check-circle {
+    color: #71E279;
+}
+
+.frame-bottom {
+    position: fixed;
+    margin: 0px;
+    padding: 8px 0px 9px 0px;
+    bottom: 0px;
+    width: 114px;
+    z-index: 100;
+    font-size: 16px;
+    text-align: center;
+    font-weight: thin;
+    border-radius: 0px;
+    right: 75px;
+}
+
+.frame-right {
+    position: fixed;
+    margin: 0px;
+    padding: 8px 0px 9px 0px;
+    right: -40px;
+    width: 114px;
+    z-index: 100;
+    font-size: 16px;
+    text-align: center;
+    font-weight: thin;
+    border-radius: 0px;
+    top: calc(100%/2);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.hover-bottom {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    border-width: 0px;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    z-index: 200;
+    font-size: 26px;
+    font-weight: thin;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id&gt;connect&lt;/id&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]&gt;&lt;/link&gt;&lt;name&gt;connect chat&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2019-10-18 05:33:06&lt;/sys_created_on&gt;&lt;sys_id&gt;38ec5679db200010b6db8e4748961941&lt;/sys_id&gt;&lt;sys_mod_count&gt;29&lt;/sys_mod_count&gt;&lt;sys_name&gt;connect chat&lt;/sys_name&gt;&lt;sys_package display_value="Service Portal Surveys" source="sn_portal_surveys"&gt;67ac5062db10220035417878f0b8f5c4&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Service Portal Surveys"&gt;67ac5062db10220035417878f0b8f5c4&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_38ec5679db200010b6db8e4748961941&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-10-18 06:18:45&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;!-- Remove the buttons not needed --&gt;
+&lt;button ng-show="true" id="feedbackButton" class="btn btn-primary" data-toggle="modal" data-target="#feedbackModal" role="button"&gt; &lt;i style="margin-right:7px;" class="fa fa-comment"&gt;&lt;/i&gt; &lt;span&gt;Feedback&lt;/span&gt; &lt;/button&gt;
+&lt;button ng-show="false" id="feedbackButton" class="btn btn-primary frame-right" data-toggle="modal" data-target="#feedbackModal" role="button"&gt; &lt;i style="margin-right:7px;" class="fa fa-comment"&gt;&lt;/i&gt; &lt;span&gt;Feedback&lt;/span&gt; &lt;/button&gt;
+&lt;button ng-show="false" id="feedbackButton" class="btn btn-primary frame-bottom" data-toggle="modal" data-target="#feedbackModal" role="button"&gt; &lt;i style="margin-right:7px;" class="fa fa-comment"&gt;&lt;/i&gt; &lt;span&gt;Feedback&lt;/span&gt; &lt;/button&gt;
+&lt;button ng-show="true" id="feedbackButton" class="btn btn-primary hover-bottom" data-toggle="modal" data-target="#feedbackModal" role="button"&gt;&lt;i class='fa fa-comments-o' aria-hidden='true' style='line-height:inherit;vertical-align:middle;margin-top: -8px;margin-left: -1px;'&gt;&lt;/i&gt;&lt;/button&gt;
+&lt;!-- END :: Remove the buttons not needed --&gt;
+
+&lt;div id="feedbackModal" class="modal fade" role="dialog" style="display: none"&gt;
+    &lt;div class="modal-dialog"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;form ng-model="feedback" class="ng-pristine ng-untouched ng-valid ng-not-empty" role="form" aria-invalid="false"&gt;
+                &lt;!-- Header --&gt;
+                &lt;div ng-if="!feedbackSubmitted || !autoHide" class="modal-header"&gt;
+                    &lt;button ng-disabled="feedbackSubmitting" type="button" class="close" data-dismiss="modal" role="button"&gt;&lt;i class="fa fa-times"&gt;&lt;/i&gt;&lt;/button&gt;
+                    &lt;h4&gt;&lt;i class="fa {{::c.data.wdtOptions.hdrIcon}}" aria-hidden="true"&gt;&lt;/i&gt;&amp;nbsp;&amp;nbsp;{{::c.data.wdtOptions.hdrTitle}}&lt;/h4&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Body --&gt;
+                &lt;div class="modal-body"&gt;
+                    &lt;div ng-if="!feedbackSubmitted" class='ng-scope'&gt;
+                        &lt;!-- Who --&gt;
+                        &lt;div class='showWho' ng-show="{{::c.data.wdtOptions.showWho}}"&gt;
+                            &lt;label for='feedbackWho'&gt;&lt;strong&gt;Name:&lt;/strong&gt;&lt;/label&gt;&lt;input name="feedbackWho" id="feedbackWho" ng-model='feedback.who' class="form-control feedbackInput ng-pristine ng-untouched ng-valid ng-empty" placeholder="Jane Doe"
+                                role="textbox" aria-invalid="false" /&gt;
+                            &lt;label for='feedbackEmail'&gt;&lt;strong&gt;Email:&lt;/strong&gt;&lt;/label&gt;&lt;input name="feedbackEmail" id="feedbackEmail" ng-model='feedback.email' ng-change="resetError()" class="form-control feedbackInput ng-pristine ng-untouched ng-valid ng-empty"
+                                placeholder="jane.doe@site.com" role="textbox" aria-invalid="false" /&gt;
+                        &lt;/div&gt;
+
+                        &lt;!-- Rating --&gt;
+                        &lt;div class='showRating' ng-show="{{::c.data.wdtOptions.showRating}}"&gt;
+                            &lt;label for="feedbackText"&gt;&lt;strong&gt;{{::c.data.wdtOptions.txtRating}}&lt;/strong&gt;&lt;/label&gt;
+                            &lt;div class="starRatingContainer"&gt;
+
+                                &lt;!-- Stars --&gt;
+                                &lt;div class="starRating" ng-repeat="item in c.data.wdtOptions.lvlRatingTxt"&gt;
+                                    &lt;div class="starText hidden-xs"&gt;{{item.label}}&lt;/div&gt;
+                                    &lt;span class="fa-stack fa-lg starUnselected" ng-class="starClasses[item.value]" ng-click="setSelectedStars(item.value, true)" ng-mouseover="setSelectedStars(item.value)" ng-mouseleave="offStarHover()" role="button" style=""&gt; &lt;i class="fa fa-star fa-stack-2x starFill"&gt;&lt;/i&gt; &lt;i class="fa fa-star-o fa-stack-2x starBorder"&gt;&lt;/i&gt; &lt;/span&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+
+                        &lt;!-- Text entry --&gt;
+                        &lt;label for="feedbackTextInput"&gt;&lt;strong&gt;Enter Feedback Here:&lt;/strong&gt;&lt;/label&gt;
+                        &lt;textarea name="feedbackTextInput" id="feedbackTextInput" ng-model="feedback.text" class="form-control feedbackInput ng-pristine ng-untouched ng-valid ng-empty" placeholder="Your feedback is greatly appreciated." role="textbox" aria-invalid="false"&gt;&lt;/textarea&gt;
+
+                    &lt;/div&gt;
+
+                    &lt;!-- Feedback Submitted / Error --&gt;
+                    &lt;div ng-if="feedbackSubmitted || feedbackError" class="ng-scope"&gt;
+                        &lt;div ng-if="feedbackSubmitted" class="ng-scope"&gt;
+                            &lt;div class="alert alert-success" role="alert"&gt;
+                                {{::c.data.wdtOptions.txtTYMsg}}
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div ng-if="feedbackError" class="ng-scope"&gt;
+                            &lt;div class="alert alert-danger" role="alert"&gt;
+                                Error: {{::ErrMsg}}
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Footer --&gt;
+                &lt;div ng-if="!feedbackSubmitted" class="modal-footer"&gt;
+                    &lt;button type="button" ng-disabled="feedbackSubmitting" class="btn btn-default" data-dismiss="modal" role="button"&gt;Cancel&lt;/button&gt;
+                    &lt;button ng-disabled="feedback.text.length == 0 || feedback.who.length == 0 || feedback.email.length == 0 || feedbackSubmitting || guidLoading" ng-click="submitFeedback()" type="button" class="btn btn-primary" role="button" disabled="disabled"&gt;Send&lt;/button&gt;
+                &lt;/div&gt;
+
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;</payload>
+        <sys_class_name>sp_rel_widget_clone</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-04-04 08:14:47</sys_created_on>
+        <sys_id>64881dd0db44d050b6db8e4748961956</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>d0881dd0db44d050b6db8e4748961953</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_rel_widget_clone_64881dd0db44d050b6db8e4748961956</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-04-04 08:14:47</sys_updated_on>
+    </sp_rel_widget_clone>
+</record_update>

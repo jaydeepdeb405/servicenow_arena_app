@@ -1,0 +1,1120 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_action_type_definition">
+    <sys_hub_action_type_definition action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <action_template/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <ih_action>false</ih_action>
+        <internal_name>get_row_count</internal_name>
+        <label_cache>[{"name":"{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].rowcount}}","label":"step➛Script step➛rowCount","type":"step","ref":""},{"name":"{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].recordcount}}","label":"step➛Script step➛recordCount","type":"step","ref":""},{"name":"{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].recordsysid}}","label":"step➛Script step➛recordSysId","type":"step","ref":""},{"name":"{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].tablename}}","label":"step➛Script step➛tableName","type":"step","ref":""}]</label_cache>
+        <master_snapshot>22b8f3762f27201066625e972799b644</master_snapshot>
+        <name>Get Row Count</name>
+        <natlang/>
+        <outputs/>
+        <outputs/>
+        <state>published</state>
+        <sys_class_name>sys_hub_action_type_definition</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:04:41</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>0967f3b22f27201066625e972799b6bb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Get Row Count</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_hub_action_type_definition_0967f3b22f27201066625e972799b6bb</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2022-03-24 14:09:52</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_definition>
+    <sys_translated_text action="delete_multiple" query="documentkey=0967f3b22f27201066625e972799b6bb"/>
+    <sys_variable_value action="delete_multiple" query="document_key=0967f3b22f27201066625e972799b6bb"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_definition</document>
+        <document_key>0967f3b22f27201066625e972799b6bb</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:42</sys_created_on>
+        <sys_id>66883f362f27201066625e972799b6fd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:09:42</sys_updated_on>
+        <value/>
+        <variable display_value="rowCount">e6883f362f27201066625e972799b6ed</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_definition</document>
+        <document_key>0967f3b22f27201066625e972799b6bb</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:42</sys_created_on>
+        <sys_id>a2883f362f27201066625e972799b6fd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:09:42</sys_updated_on>
+        <value/>
+        <variable display_value="recordCount">2e883f362f27201066625e972799b6f4</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=0967f3b22f27201066625e972799b6bb"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>recordcount</field>
+        <id>0967f3b22f27201066625e972799b6bb</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:42</sys_created_on>
+        <sys_id>22883f362f27201066625e972799b6fd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:09:42</sys_updated_on>
+        <table>var__m_sys_hub_action_output_0967f3b22f27201066625e972799b6bb</table>
+        <value>{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].recordcount}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>recordsysid</field>
+        <id>0967f3b22f27201066625e972799b6bb</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:16:31</sys_created_on>
+        <sys_id>e21afbf62f27201066625e972799b62e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:16:31</sys_updated_on>
+        <table>var__m_sys_hub_action_output_0967f3b22f27201066625e972799b6bb</table>
+        <value>{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].recordsysid}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>rowcount</field>
+        <id>0967f3b22f27201066625e972799b6bb</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:42</sys_created_on>
+        <sys_id>6e883f362f27201066625e972799b6fc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:09:42</sys_updated_on>
+        <table>var__m_sys_hub_action_output_0967f3b22f27201066625e972799b6bb</table>
+        <value>{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].rowcount}}</value>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="delete_multiple" query="action=0967f3b22f27201066625e972799b6bb^sys_idNOT IN1e88ff722f27201066625e972799b65c"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Get Row Count">0967f3b22f27201066625e972799b6bb</action>
+        <cid>a20942f5-9ad5-420f-91b8-0ffb6490e7a7</cid>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Script step</label>
+        <order>1</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:41</sys_created_on>
+        <sys_id>1e88ff722f27201066625e972799b65c</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:34:13</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=1e88ff722f27201066625e972799b65c"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>1e88ff722f27201066625e972799b65c</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:42</sys_created_on>
+        <sys_id>22883f362f27201066625e972799b6eb</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:34:13</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+
+var rows = new GlideRecord('x_93700_arena_shankaran_pillai_quotes');
+rows.query();
+var rowCount = rows.getRowCount();
+  outputs['rowcount'] = rowCount;
+  
+var record = new GlideRecord('x_93700_arena_shankaran_pillai_quotes');
+record.addQuery('quote_used', true);
+record.query();
+var count = record.getRowCount();
+  outputs['recordcount'] = count;
+if (rowCount == count) {
+    record.setValue('quote_used', false);
+    record.updateMultiple();
+}
+  
+})(inputs, outputs);
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>1e88ff722f27201066625e972799b65c</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:42</sys_created_on>
+        <sys_id>2e883f362f27201066625e972799b6ea</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:09:42</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=1e88ff722f27201066625e972799b65c^sys_idNOT IN9688ff722f27201066625e972799b661,ae883f362f27201066625e972799b6d5"/>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=629a33d0-f848-4fc7-9a1c-93123f664d34</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>rowcount</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>rowCount</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Script step">1e88ff722f27201066625e972799b65c</model>
+        <model_id>1e88ff722f27201066625e972799b65c</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_1e88ff722f27201066625e972799b65c</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:41</sys_created_on>
+        <sys_id>9688ff722f27201066625e972799b661</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:22:27</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=d0e9095c-0dc5-42f1-8ec9-629b0a78cacd</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>recordcount</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>recordCount</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Script step">1e88ff722f27201066625e972799b65c</model>
+        <model_id>1e88ff722f27201066625e972799b65c</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_1e88ff722f27201066625e972799b65c</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:41</sys_created_on>
+        <sys_id>ae883f362f27201066625e972799b6d5</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:22:26</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_hub_action_output action="delete_multiple" query="model=0967f3b22f27201066625e972799b6bb^sys_idNOT IN2e883f362f27201066625e972799b6f4,e6883f362f27201066625e972799b6ed"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=9d93a0b3-68e6-415a-bc50-f943f0f8f6d2</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>recordcount</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>recordCount</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Get Row Count">0967f3b22f27201066625e972799b6bb</model>
+        <model_id>0967f3b22f27201066625e972799b6bb</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_0967f3b22f27201066625e972799b6bb</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:42</sys_created_on>
+        <sys_id>2e883f362f27201066625e972799b6f4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:09:42</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=1ed3bf37-4608-4892-8d88-dfed56bcc1e9</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>rowcount</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>rowCount</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Get Row Count">0967f3b22f27201066625e972799b6bb</model>
+        <model_id>0967f3b22f27201066625e972799b6bb</model_id>
+        <model_table>sys_hub_action_type_definition</model_table>
+        <name>var__m_sys_hub_action_output_0967f3b22f27201066625e972799b6bb</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:42</sys_created_on>
+        <sys_id>e6883f362f27201066625e972799b6ed</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:09:42</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_0967f3b22f27201066625e972799b6bb^sys_idNOT IN66883f362f27201066625e972799b6f3,aa883f362f27201066625e972799b6f9"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>rowcount</element>
+        <help/>
+        <hint/>
+        <label>rowCount</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_0967f3b22f27201066625e972799b6bb</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:42</sys_created_on>
+        <sys_id>66883f362f27201066625e972799b6f3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>rowCount</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_0967f3b22f27201066625e972799b6bb_rowcount_en</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:09:42</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>recordcount</element>
+        <help/>
+        <hint/>
+        <label>recordCount</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_0967f3b22f27201066625e972799b6bb</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:09:42</sys_created_on>
+        <sys_id>aa883f362f27201066625e972799b6f9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>recordCount</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_0967f3b22f27201066625e972799b6bb_recordcount_en</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:09:42</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_action_plan action="delete_multiple" query="action_id=0967f3b22f27201066625e972799b6bb^sys_idNOT IN0bb837762f27201066625e972799b63a"/>
+    <sys_hub_action_plan action="INSERT_OR_UPDATE">
+        <action_id display_value="Get Row Count">0967f3b22f27201066625e972799b6bb</action_id>
+        <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_hub_action_plan","id":"0bb837762f27201066625e972799b63a","name":"plan"}}</plan>
+        <snapshot>db7b37ba2f27201066625e972799b6fc</snapshot>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:33</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>0bb837762f27201066625e972799b63a</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:22:39</sys_updated_on>
+    </sys_hub_action_plan>
+    <sys_hub_action_type_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <action_template/>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <internal_name>get_row_count</internal_name>
+        <label_cache>[{"name":"{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].rowcount}}","label":"step➛Script step➛rowCount","type":"step","ref":""},{"name":"{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].recordcount}}","label":"step➛Script step➛recordCount","type":"step","ref":""},{"name":"{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].recordsysid}}","label":"step➛Script step➛recordSysId","type":"step","ref":""},{"name":"{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].tablename}}","label":"step➛Script step➛tableName","type":"step","ref":""}]</label_cache>
+        <master>true</master>
+        <name>Get Row Count</name>
+        <natlang/>
+        <outputs/>
+        <outputs/>
+        <parent_action display_value="Get Row Count">0967f3b22f27201066625e972799b6bb</parent_action>
+        <sys_class_name>sys_hub_action_type_snapshot</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:31</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>22b8f3762f27201066625e972799b644</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:22:36</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=22b8f3762f27201066625e972799b644"/>
+    <sys_variable_value action="delete_multiple" query="document_key=22b8f3762f27201066625e972799b644"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_snapshot</document>
+        <document_key>22b8f3762f27201066625e972799b644</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:32</sys_created_on>
+        <sys_id>b2b8f3762f27201066625e972799b69c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:32</sys_updated_on>
+        <value/>
+        <variable display_value="rowCount">eeb8f3762f27201066625e972799b65a</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_type_snapshot</document>
+        <document_key>22b8f3762f27201066625e972799b644</document_key>
+        <order>2</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:32</sys_created_on>
+        <sys_id>feb8f3762f27201066625e972799b69b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:32</sys_updated_on>
+        <value/>
+        <variable display_value="recordCount">6ab8f3762f27201066625e972799b693</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=22b8f3762f27201066625e972799b644"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>recordcount</field>
+        <id>22b8f3762f27201066625e972799b644</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:32</sys_created_on>
+        <sys_id>7eb8f3762f27201066625e972799b69b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:32</sys_updated_on>
+        <table>var__m_sys_hub_action_output_22b8f3762f27201066625e972799b644</table>
+        <value>{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].recordcount}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>recordsysid</field>
+        <id>22b8f3762f27201066625e972799b644</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:17:33</sys_created_on>
+        <sys_id>e95af33a2f27201066625e972799b677</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:17:33</sys_updated_on>
+        <table>var__m_sys_hub_action_output_22b8f3762f27201066625e972799b644</table>
+        <value>{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].recordsysid}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>rowcount</field>
+        <id>22b8f3762f27201066625e972799b644</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:32</sys_created_on>
+        <sys_id>bab8f3762f27201066625e972799b69b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:32</sys_updated_on>
+        <table>var__m_sys_hub_action_output_22b8f3762f27201066625e972799b644</table>
+        <value>{{step[a20942f5-9ad5-420f-91b8-0ffb6490e7a7].rowcount}}</value>
+    </sys_element_mapping>
+    <sys_hub_step_instance action="delete_multiple" query="action=22b8f3762f27201066625e972799b644^sys_idNOT IN2ab8f3762f27201066625e972799b645"/>
+    <sys_hub_step_instance action="INSERT_OR_UPDATE">
+        <action display_value="Get Row Count">22b8f3762f27201066625e972799b644</action>
+        <cid>a20942f5-9ad5-420f-91b8-0ffb6490e7a7</cid>
+        <extended_inputs/>
+        <extended_outputs/>
+        <icon/>
+        <inputs/>
+        <label>Script step</label>
+        <order>1</order>
+        <outputs/>
+        <section/>
+        <step_type display_value="Script">106afb6647032200b4fad7527c9a71e7</step_type>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:31</sys_created_on>
+        <sys_id>2ab8f3762f27201066625e972799b645</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:34:20</sys_updated_on>
+    </sys_hub_step_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=2ab8f3762f27201066625e972799b645"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>2ab8f3762f27201066625e972799b645</document_key>
+        <order>600</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:31</sys_created_on>
+        <sys_id>6ab8f3762f27201066625e972799b658</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:34:20</sys_updated_on>
+        <value>(function execute(inputs, outputs) {
+
+var rows = new GlideRecord('x_93700_arena_shankaran_pillai_quotes');
+rows.query();
+var rowCount = rows.getRowCount();
+  outputs['rowcount'] = rowCount;
+  
+var record = new GlideRecord('x_93700_arena_shankaran_pillai_quotes');
+record.addQuery('quote_used', true);
+record.query();
+var count = record.getRowCount();
+  outputs['recordcount'] = count;
+if (rowCount == count) {
+    record.setValue('quote_used', false);
+    record.updateMultiple();
+}
+  
+})(inputs, outputs);
+</value>
+        <variable display_value="Script">71aa7f6647032200b4fad7527c9a719b</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_step_instance</document>
+        <document_key>2ab8f3762f27201066625e972799b645</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:31</sys_created_on>
+        <sys_id>a6b8f3762f27201066625e972799b658</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:31</sys_updated_on>
+        <value>35aa573fd7802200bdbaee5b5e610375</value>
+        <variable display_value="MID Application">f5e56d79b3101300176b051a16a8dce4</variable>
+    </sys_variable_value>
+    <sys_hub_step_ext_output action="delete_multiple" query="model=2ab8f3762f27201066625e972799b645^sys_idNOT INaeb8f3762f27201066625e972799b64f,eeb8f3762f27201066625e972799b648"/>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=d0e9095c-0dc5-42f1-8ec9-629b0a78cacd</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>recordcount</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>recordCount</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Script step">2ab8f3762f27201066625e972799b645</model>
+        <model_id>2ab8f3762f27201066625e972799b645</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_2ab8f3762f27201066625e972799b645</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:31</sys_created_on>
+        <sys_id>aeb8f3762f27201066625e972799b64f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:22:36</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_hub_step_ext_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=629a33d0-f848-4fc7-9a1c-93123f664d34</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>rowcount</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>rowCount</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Script step">2ab8f3762f27201066625e972799b645</model>
+        <model_id>2ab8f3762f27201066625e972799b645</model_id>
+        <model_table>sys_hub_step_instance</model_table>
+        <name>var__m_sys_hub_step_ext_output_2ab8f3762f27201066625e972799b645</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_step_ext_output</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:31</sys_created_on>
+        <sys_id>eeb8f3762f27201066625e972799b648</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:22:36</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_step_ext_output>
+    <sys_hub_action_output action="delete_multiple" query="model=22b8f3762f27201066625e972799b644^sys_idNOT IN6ab8f3762f27201066625e972799b693,eeb8f3762f27201066625e972799b65a"/>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=9d93a0b3-68e6-415a-bc50-f943f0f8f6d2</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>recordcount</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>recordCount</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Get Row Count">22b8f3762f27201066625e972799b644</model>
+        <model_id>22b8f3762f27201066625e972799b644</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_output_22b8f3762f27201066625e972799b644</name>
+        <next_element/>
+        <order>2</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:31</sys_created_on>
+        <sys_id>6ab8f3762f27201066625e972799b693</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:31</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_hub_action_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=integer,uiTypeLabel=Integer,uiUniqueId=1ed3bf37-4608-4892-8d88-dfed56bcc1e9</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>rowcount</element>
+        <element_prototype/>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_link/>
+        <internal_type display_value="Integer">integer</internal_type>
+        <label>rowCount</label>
+        <mandatory>true</mandatory>
+        <max_length>40</max_length>
+        <model display_value="Get Row Count">22b8f3762f27201066625e972799b644</model>
+        <model_id>22b8f3762f27201066625e972799b644</model_id>
+        <model_table>sys_hub_action_type_snapshot</model_table>
+        <name>var__m_sys_hub_action_output_22b8f3762f27201066625e972799b644</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_action_output</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:31</sys_created_on>
+        <sys_id>eeb8f3762f27201066625e972799b65a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:31</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_action_output>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_action_output_22b8f3762f27201066625e972799b644^sys_idNOT INa2b8f3762f27201066625e972799b692,b6b8f3762f27201066625e972799b698"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>rowcount</element>
+        <help/>
+        <hint/>
+        <label>rowCount</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_22b8f3762f27201066625e972799b644</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:31</sys_created_on>
+        <sys_id>a2b8f3762f27201066625e972799b692</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>rowCount</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_22b8f3762f27201066625e972799b644_rowcount_en</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:31</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>recordcount</element>
+        <help/>
+        <hint/>
+        <label>recordCount</label>
+        <language>en</language>
+        <name>var__m_sys_hub_action_output_22b8f3762f27201066625e972799b644</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:32</sys_created_on>
+        <sys_id>b6b8f3762f27201066625e972799b698</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>recordCount</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_documentation_var__m_sys_hub_action_output_22b8f3762f27201066625e972799b644_recordcount_en</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:32</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_hub_action_type_definition action="update">
+        <sys_id>0967f3b22f27201066625e972799b6bb</sys_id>
+        <latest_snapshot>22b8f3762f27201066625e972799b644</latest_snapshot>
+    </sys_hub_action_type_definition>
+</record_update>

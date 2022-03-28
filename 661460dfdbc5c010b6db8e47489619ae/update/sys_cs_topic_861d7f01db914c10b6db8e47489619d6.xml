@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cs_topic">
+    <sys_cs_topic action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applicability>true</applicability>
+        <auto_resolution_enabled>false</auto_resolution_enabled>
+        <cb_topic_id display_value="greetings2">975c7b89db914c10b6db8e47489619ae</cb_topic_id>
+        <channels/>
+        <definition>{"id":"975c7b89db914c10b6db8e47489619ae","name":"greetings2","system_topic":false,"vendor_id":"c2f0b8f187033200246ddd4c97cb0bb9","description":"greetings2","applicability":"true","category":"","key_phrases":[],"variables":[{"name":"__multipart_total__b711cbb228eb456697a7545aaba99baa","type":"java.lang.Object"},{"name":"__multipart_idx__b711cbb228eb456697a7545aaba99baa","type":"java.lang.Object"},{"name":"__multipart_valid__b711cbb228eb456697a7545aaba99baa","type":"java.lang.Object"},{"name":"__segment_trigger_c550adaba4774829974ff919debe364d_done","type":"java.lang.Object","init_value":"false"},{"name":"previous_graph_node","type":"java.lang.Object"}],"fields":[{"type":"Boolean","name":"RootDecisionBranch_a21df3c957914c10516c115137d2643d","unique":false,"default_value":"true","key_phrases":[],"static_enum_list":[]},{"type":"String","name":"__silent_Decision_RootDecision_221df3c995914c10a5f69546fb48c53d","unique":false,"key_phrases":[],"static_enum_list":[]},{"type":"String","name":"__silent_StartGoal_abc41e944ec24d1f9f7955952bc8d5f9","unique":false,"key_phrases":[],"static_enum_list":[]},{"type":"String","name":"__silent_ScriptOutputPrompt_b711cbb228eb456697a7545aaba99baa","unique":false,"key_phrases":[],"static_enum_list":[]},{"type":"String","name":"__silent_TerminateGoal_88578d2d62ee4b7da84dda04ffd2bb96","unique":false,"key_phrases":[],"static_enum_list":[]},{"type":"String","name":"__silent_Branch_RootDecisionBranch_621df3c94b914c10c6c982f9c23ef43d","unique":false,"key_phrases":[],"static_enum_list":[]},{"type":"Reference","table_name":"sys_user","name":"user","unique":false,"key_phrases":[],"static_enum_list":[]}],"actions":[],"tasks":[{"type":"Consumer to system","show_as_button":true,"name":"primary","description":"primary","applicability":"vaVars.__segment_trigger_c550adaba4774829974ff919debe364d_done==false &amp;&amp; true","mode":"Qmode","key_phrases":[],"greeting_msg":"vaInputs.initialize(\"user\");vaInputs.initialize(\"RootDecisionBranch_a21df3c957914c10516c115137d2643d\");vaInputs.initialize(\"__silent_Decision_RootDecision_221df3c995914c10a5f69546fb48c53d\");vaInputs.initialize(\"__silent_ScriptOutputPrompt_b711cbb228eb456697a7545aaba99baa\");vaInputs.initialize(\"__silent_StartGoal_abc41e944ec24d1f9f7955952bc8d5f9\");vaInputs.initialize(\"__silent_Branch_RootDecisionBranch_621df3c94b914c10c6c982f9c23ef43d\");vaInputs.initialize(\"__silent_TerminateGoal_88578d2d62ee4b7da84dda04ffd2bb96\");null;","fields":[{"name":"__silent_Decision_RootDecision_221df3c995914c10a5f69546fb48c53d","direction":"Input","required":true,"prompt_msg":"vaVars.previous_graph_node=\"RootDecision_for_goal_primary___RootDecision_221df3c995914c10a5f69546fb48c53d\";vaInputs.__silent_Decision_RootDecision_221df3c995914c10a5f69546fb48c53d=true;null;","confirm_msg_on_default_value":{"msg":"","val_for_confirm":true},"nlu_text_input":false,"nlu_confirmation_prompt":false,"acknowledge_msg":"vaVars.previous_graph_node=\"RootDecision_for_goal_primary___RootDecision_221df3c995914c10a5f69546fb48c53d\";vaInputs.RootDecisionBranch_a21df3c957914c10516c115137d2643d=true;null;"},{"name":"__silent_Branch_RootDecisionBranch_621df3c94b914c10c6c982f9c23ef43d","applicable":"vaVars.previous_graph_node==\"RootDecision_for_goal_primary___RootDecision_221df3c995914c10a5f69546fb48c53d\" &amp;&amp; ((vaInputs.RootDecisionBranch_a21df3c957914c10516c115137d2643d.getValue() == true))","direction":"Input","required":true,"prompt_msg":"vaVars.previous_graph_node=\"RootDecisionBranch_621df3c94b914c10c6c982f9c23ef43d___RootDecisionBranch_621df3c94b914c10c6c982f9c23ef43d\";vaInputs.__silent_Branch_RootDecisionBranch_621df3c94b914c10c6c982f9c23ef43d=true;null;","confirm_msg_on_default_value":{"msg":"","val_for_confirm":true},"nlu_text_input":false,"nlu_confirmation_prompt":false,"acknowledge_msg":"vaVars.previous_graph_node=\"RootDecisionBranch_621df3c94b914c10c6c982f9c23ef43d___RootDecisionBranch_621df3c94b914c10c6c982f9c23ef43d\";null;"},{"name":"__silent_StartGoal_abc41e944ec24d1f9f7955952bc8d5f9","applicable":"vaVars.previous_graph_node==\"RootDecisionBranch_621df3c94b914c10c6c982f9c23ef43d___RootDecisionBranch_621df3c94b914c10c6c982f9c23ef43d\"","direction":"Input","required":true,"prompt_msg":"vaVars.previous_graph_node=\"Start___abc41e944ec24d1f9f7955952bc8d5f9\";vaInputs.__silent_StartGoal_abc41e944ec24d1f9f7955952bc8d5f9=true;null;","confirm_msg_on_default_value":{"msg":"","val_for_confirm":true},"nlu_text_input":false,"nlu_confirmation_prompt":false,"acknowledge_msg":"vaVars.previous_graph_node=\"Start___abc41e944ec24d1f9f7955952bc8d5f9\";null;"},{"name":"__silent_ScriptOutputPrompt_b711cbb228eb456697a7545aaba99baa","applicable":"vaVars.previous_graph_node==\"Start___abc41e944ec24d1f9f7955952bc8d5f9\"","direction":"Input","required":true,"prompt_msg":"vaVars.previous_graph_node=\"node 1___b711cbb228eb456697a7545aaba99baa\";vaInputs.__silent_ScriptOutputPrompt_b711cbb228eb456697a7545aaba99baa=true;null;","confirm_msg_on_default_value":{"msg":"","val_for_confirm":true},"nlu_text_input":false,"nlu_confirmation_prompt":false,"acknowledge_msg":"vaVars.previous_graph_node=\"node 1___b711cbb228eb456697a7545aaba99baa\";(function execute() {\n   return (function execute() {\n\n      // set greeting phrase\n      var introduction = \"My name is Jarvis, I'm still learning...  but I am an expert on issues regarding Email and Outlook. I can also help you create and manage tickets!\"\n      var greeting; \n      if (vaInputs.user.first_name.getDisplayValue()) {\n            greeting = gs.getMessage('Hi ' + vaInputs.user.first_name.getDisplayValue() + ',');\n      } else {\n            greeting = gs.getMessage('Hi ' + vaInputs.user.getDisplayValue() + ',');\n      }\n      var html = '&lt;p&gt;' + greeting + '&lt;/p&gt; &lt;br&gt;' + introduction + '&lt;br&gt;&lt;div id=\"\" style=\"text-align: center; margin-top: 5px;  \"&gt;&lt;img src=\"https://www.gograyleaf.com/hubfs/bot_logo.png\" alt=\"\" style=\"width: 150px; height: auto;\"&gt; &lt;/div&gt;';\n      var singleOutMsg = new sn_cs.SinglePartOutMsg();\n\n      singleOutMsg.setHtmlPart(html);\n\n      return singleOutMsg;\n})();\n})();"},{"name":"__silent_TerminateGoal_88578d2d62ee4b7da84dda04ffd2bb96","applicable":"vaVars.previous_graph_node==\"node 1___b711cbb228eb456697a7545aaba99baa\"","direction":"Input","required":true,"prompt_msg":"vaVars.previous_graph_node=\"End___88578d2d62ee4b7da84dda04ffd2bb96\";vaInputs.__silent_TerminateGoal_88578d2d62ee4b7da84dda04ffd2bb96=true;null;","confirm_msg_on_default_value":{"msg":"","val_for_confirm":true},"nlu_text_input":false,"nlu_confirmation_prompt":false,"acknowledge_msg":"vaVars.previous_graph_node=\"End___88578d2d62ee4b7da84dda04ffd2bb96\";vaVars.__segment_trigger_c550adaba4774829974ff919debe364d_done=true;null;"}],"variables_update":[]}],"roles":[],"active":true,"published":true,"flexible_conversation_switching":true,"design_category":"23242db273603300c1dc32e954f6a79f","nlu_provider":"64c023c17300330021a044764df6a70e","nlu_model":"","nlu_intent":"","score":0.0,"visible":true,"sys_scope":"661460dfdbc5c010b6db8e47489619ae","title":"greetings2"}</definition>
+        <design_category/>
+        <discoverable>true</discoverable>
+        <fields/>
+        <flexible_conversation_switching>true</flexible_conversation_switching>
+        <is_system_topic>false</is_system_topic>
+        <key_phrases/>
+        <last_published_on/>
+        <library>false</library>
+        <library_usage/>
+        <metaphone/>
+        <name>greetings2</name>
+        <nlu_intent/>
+        <nlu_intent_label/>
+        <nlu_model/>
+        <nlu_model_label/>
+        <nlu_provider>64c023c17300330021a044764df6a70e</nlu_provider>
+        <published>true</published>
+        <roles>snc_internal</roles>
+        <sys_class_name>sys_cs_topic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-22 11:16:39</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>861d7f01db914c10b6db8e47489619d6</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>greetings2</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_cs_topic_861d7f01db914c10b6db8e47489619d6</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2021-08-15 09:49:08</sys_updated_on>
+        <title>greetings2</title>
+        <triggerable_by_notification>false</triggerable_by_notification>
+        <type>STANDARD</type>
+        <vendor display_value="ServiceNow">c2f0b8f187033200246ddd4c97cb0bb9</vendor>
+        <visible>true</visible>
+    </sys_cs_topic>
+    <sys_variable_value action="delete_multiple" query="document_key=861d7f01db914c10b6db8e47489619d6"/>
+</record_update>

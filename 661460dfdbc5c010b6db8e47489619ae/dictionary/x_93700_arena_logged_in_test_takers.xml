@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Test Taker Session" max_length="40" name="x_93700_arena_logged_in_test_takers" sizeclass="20" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element default="javascript: new GlideDateTime()" label="Login time" max_length="40" name="login_time" read_only="true" type="glide_date_time"/>
+        <element label="Logout time" max_length="40" name="logout_time" read_only="true" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Test Schedule" max_length="32" name="test_schedule" reference="x_93700_arena_test_schedule" reference_cascade_rule="delete" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Test Taker" max_length="32" name="test_taker" reference="x_93700_arena_test_takers" reference_cascade_rule="delete" type="reference"/>
+        <index name="index">
+            <element name="test_schedule"/>
+        </index>
+        <index name="index2">
+            <element name="test_taker"/>
+        </index>
+    </element>
+</database>

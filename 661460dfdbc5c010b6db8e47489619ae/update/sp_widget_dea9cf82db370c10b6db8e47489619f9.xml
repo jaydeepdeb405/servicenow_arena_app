@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+	
+
+	var radialObj = radialIndicator('#indicatorContainer', {
+    radius: 60,
+    barWidth: 22,
+    barColor: '#FF0000',
+    minValue: 0,
+    maxValue: 60,
+    fontWeight: 'normal',
+    roundCorner: true,
+		fontColor:"green",
+    format: function (value) {
+        var date = new Date();
+        return date.getHours() + ':' + date.getMinutes();
+    }
+});
+	
+	var time = 100;
+ 
+setInterval(function () {
+    radialObj.value(time);
+	time = time-1;
+	
+	if(time==0)time=100;
+	
+	
+		 
+}, 30);
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>#indicatorContainerWrap,#indicatorContainer{
+    display:inline-block;
+    position:relative;
+}
+#prgLogo{
+    position:absolute;
+    width:60px;
+    height:60px;
+    margin-top:-30px;
+    margin-left:-30px;
+}
+
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>test radial</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-03-28 16:45:51</sys_created_on>
+        <sys_id>dea9cf82db370c10b6db8e47489619f9</sys_id>
+        <sys_mod_count>22</sys_mod_count>
+        <sys_name>test radial</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_dea9cf82db370c10b6db8e47489619f9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-04-12 14:31:27</sys_updated_on>
+        <template><![CDATA[
+
+<div id="indicatorContainerWrap">
+  <div id="indicatorContainer"></div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

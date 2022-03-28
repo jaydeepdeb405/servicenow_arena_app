@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_custom_content_root_elem">
+    <sys_ux_custom_content_root_elem action="DELETE">
+        <active>true</active>
+        <applicability>single</applicability>
+        <applicable_page display_value="Arena">9997b84b0713101037c7f2ae7c1ed01b</applicable_page>
+        <attrs/>
+        <children/>
+        <component display_value="sn-workspace-toolbar-button">c599f5f3b6554fd79cd983bf4ea75968</component>
+        <is_root>true</is_root>
+        <layout/>
+        <macroponent/>
+        <macroponent_config/>
+        <name>Home Button</name>
+        <order>0</order>
+        <page display_value="Workspace Core">b70867ad0f603300bb57f4a1ff767e15</page>
+        <parent/>
+        <parent_slot/>
+        <picker/>
+        <picker_condition/>
+        <placeholder display_value="Workspace Toolbar Buttons">1232bfb5730c330075e8f358caf6a7ca</placeholder>
+        <sys_class_name>sys_ux_custom_content_root_elem</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-21 08:18:18</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>69973c8b0713101037c7f2ae7c1ed0ff</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Home Button</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ux_custom_content_root_elem_69973c8b0713101037c7f2ae7c1ed0ff</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-21 08:18:18</sys_updated_on>
+        <tree_root/>
+    </sys_ux_custom_content_root_elem>
+    <sys_variable_value action="DELETE" query="document_key=69973c8b0713101037c7f2ae7c1ed0ff"/>
+    <sys_variable_value action="DELETE">
+        <document>sys_ux_custom_content_root_elem</document>
+        <document_key>69973c8b0713101037c7f2ae7c1ed0ff</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-21 08:18:18</sys_created_on>
+        <sys_id>29977c8b0713101037c7f2ae7c1ed007</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-21 08:18:18</sys_updated_on>
+        <value>home</value>
+        <variable display_value="">f497a95e69778d0f72f3f0d2df450266</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_ux_custom_content_root_elem</document>
+        <document_key>69973c8b0713101037c7f2ae7c1ed0ff</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-21 08:18:18</sys_created_on>
+        <sys_id>ad977c8b0713101037c7f2ae7c1ed007</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-21 08:18:18</sys_updated_on>
+        <value>Home</value>
+        <variable display_value="">b5b65fd20c3c13fbd299dce1ef797184</variable>
+    </sys_variable_value>
+    <sys_variable_value action="DELETE">
+        <document>sys_ux_custom_content_root_elem</document>
+        <document_key>69973c8b0713101037c7f2ae7c1ed0ff</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-21 08:18:18</sys_created_on>
+        <sys_id>e9977c8b0713101037c7f2ae7c1ed007</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-21 08:18:18</sys_updated_on>
+        <value>home-outline</value>
+        <variable display_value="">674bdc908b8ed17eb631bec92971a228</variable>
+    </sys_variable_value>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_ux_custom_content_root_elem_69973c8b0713101037c7f2ae7c1ed0ff</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ux_custom_content_root_elem"><sys_ux_custom_content_root_elem action="INSERT_OR_UPDATE"><active>true</active><applicability>single</applicability><applicable_page display_value="Arena">9997b84b0713101037c7f2ae7c1ed01b</applicable_page><attrs/><children/><component display_value="sn-workspace-toolbar-button">c599f5f3b6554fd79cd983bf4ea75968</component><is_root>true</is_root><layout/><macroponent/><macroponent_config/><name>Home Button</name><order>0</order><page display_value="Workspace Core">b70867ad0f603300bb57f4a1ff767e15</page><parent/><parent_slot/><picker/><picker_condition/><placeholder display_value="Workspace Toolbar Buttons">1232bfb5730c330075e8f358caf6a7ca</placeholder><sys_class_name>sys_ux_custom_content_root_elem</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-09-21 08:18:18</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>69973c8b0713101037c7f2ae7c1ed0ff</sys_id><sys_mod_count>2</sys_mod_count><sys_name>Home Button</sys_name><sys_overrides/><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_ux_custom_content_root_elem_69973c8b0713101037c7f2ae7c1ed0ff</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-09-21 08:18:18</sys_updated_on><tree_root/></sys_ux_custom_content_root_elem><sys_variable_value action="delete_multiple" query="document_key=69973c8b0713101037c7f2ae7c1ed0ff"/><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_ux_custom_content_root_elem</document><document_key>69973c8b0713101037c7f2ae7c1ed0ff</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-09-21 08:18:18</sys_created_on><sys_id>29977c8b0713101037c7f2ae7c1ed007</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-09-21 08:18:18</sys_updated_on><value>home</value><variable display_value="">f497a95e69778d0f72f3f0d2df450266</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_ux_custom_content_root_elem</document><document_key>69973c8b0713101037c7f2ae7c1ed0ff</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-09-21 08:18:18</sys_created_on><sys_id>ad977c8b0713101037c7f2ae7c1ed007</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-09-21 08:18:18</sys_updated_on><value>Home</value><variable display_value="">b5b65fd20c3c13fbd299dce1ef797184</variable></sys_variable_value><sys_variable_value action="INSERT_OR_UPDATE"><document>sys_ux_custom_content_root_elem</document><document_key>69973c8b0713101037c7f2ae7c1ed0ff</document_key><order>100</order><sys_class_name>sys_variable_value</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-09-21 08:18:18</sys_created_on><sys_id>e9977c8b0713101037c7f2ae7c1ed007</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-09-21 08:18:18</sys_updated_on><value>home-outline</value><variable display_value="">674bdc908b8ed17eb631bec92971a228</variable></sys_variable_value></record_update>]]></payload>
+        <payload_hash>827680892</payload_hash>
+        <record_name>Home Button</record_name>
+        <reverted_from/>
+        <source>9d4fad12079d501037c7f2ae7c1ed0a1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-21 08:18:18</sys_created_on>
+        <sys_id>29977c8b0713101037c7f2ae7c1ed009</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>174afbdffb20000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-21 08:18:18</sys_updated_on>
+        <type>UX Custom Content Extension</type>
+        <update_guid>ed977c8b281310105d1bbe3c82ab3408</update_guid>
+        <update_guid_history>ed977c8b281310105d1bbe3c82ab3408:827680892,61977c8b9b13101064b15b871b483c02:-1447529690</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-21 08:18:21</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_custom_content_root_elem">sys_ux_custom_content_root_elem</sys_db_object>
+        <sys_id>d74c4d4a5e2243da914c8b3b3185b644</sys_id>
+        <sys_metadata>69973c8b0713101037c7f2ae7c1ed0ff</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Home Button</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_ux_custom_content_root_elem_69973c8b0713101037c7f2ae7c1ed0ff</sys_update_name>
+        <sys_update_version display_value="sys_ux_custom_content_root_elem_69973c8b0713101037c7f2ae7c1ed0ff">29977c8b0713101037c7f2ae7c1ed009</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-21 08:18:21</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

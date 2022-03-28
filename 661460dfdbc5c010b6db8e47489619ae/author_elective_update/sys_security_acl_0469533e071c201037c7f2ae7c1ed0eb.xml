@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="DELETE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <condition/>
+        <description>Default access control on x_93700_arena_baap</description>
+        <name>x_93700_arena_baap</name>
+        <operation display_value="read">read</operation>
+        <script/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-11-09 18:29:29</sys_created_on>
+        <sys_id>0469533e071c201037c7f2ae7c1ed0eb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena_baap</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_security_acl_0469533e071c201037c7f2ae7c1ed0eb</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-11-09 18:29:29</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_security_acl_0469533e071c201037c7f2ae7c1ed0eb</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl"><sys_security_acl action="INSERT_OR_UPDATE"><active>true</active><admin_overrides>true</admin_overrides><advanced>false</advanced><condition/><description>Default access control on x_93700_arena_baap</description><name>x_93700_arena_baap</name><operation display_value="read">read</operation><script/><sys_class_name>sys_security_acl</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-11-09 18:29:29</sys_created_on><sys_id>0469533e071c201037c7f2ae7c1ed0eb</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_93700_arena_baap</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_security_acl_0469533e071c201037c7f2ae7c1ed0eb</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-11-09 18:29:29</sys_updated_on><type display_value="record">record</type></sys_security_acl></record_update>]]></payload>
+        <payload_hash>1529289582</payload_hash>
+        <record_name>x_93700_arena_baap</record_name>
+        <reverted_from/>
+        <source>9d4fad12079d501037c7f2ae7c1ed0a1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-11-09 18:29:29</sys_created_on>
+        <sys_id>0469533e071c201037c7f2ae7c1ed0ef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>175ae4528470000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-11-09 18:29:29</sys_updated_on>
+        <type>Access Control</type>
+        <update_guid>0c69533e711c20108e0c3c14e739e8ee</update_guid>
+        <update_guid_history>0c69533e711c20108e0c3c14e739e8ee:1529289582</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-11-09 18:29:37</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl">sys_security_acl</sys_db_object>
+        <sys_id>ea35ed9566554fb0a35b4a67a385c840</sys_id>
+        <sys_metadata>0469533e071c201037c7f2ae7c1ed0eb</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena_baap</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent display_value="">1069933e071c201037c7f2ae7c1ed006</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_security_acl_0469533e071c201037c7f2ae7c1ed0eb</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_0469533e071c201037c7f2ae7c1ed0eb">0469533e071c201037c7f2ae7c1ed0ef</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-11-09 18:29:37</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <business_calendar/>
+        <condition><![CDATA[// Run scheduled job if property is true //
+
+if (gs.getProperty('x_93700_arena.run.scheduled.job')) {
+    true;
+} else {
+    false;
+}]]></condition>
+        <conditional>true</conditional>
+        <entered_time>1970-01-01 00:00:00</entered_time>
+        <name>Arena_ Check Challenged by Every 3 Days</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as display_value="">96d79dcbdb098010b6db8e474896190c</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period/>
+        <run_start>2020-05-03 12:15:45</run_start>
+        <run_time>1970-01-01 00:00:00</run_time>
+        <run_type>daily</run_type>
+        <script><![CDATA[/* Query Results table for records updated more than 3 days 
+ ** Check Challenged by is not empty
+ ** Check each level for user , inactive it
+ ** Get next highest record , make it active
+ */
+
+var tableName = 'x_93700_arena_results';
+
+var getChallengedBy = new GlideRecord(tableName);
+getChallengedBy.addEncodedQuery('active=true^challenged_by!=NULL' + '^sys_updated_on' + '<' + gs.daysAgo(3));
+getChallengedBy.query();
+while (getChallengedBy.next()) {
+    _challengeUser(getChallengedBy);
+    getChallengedBy.active = false;
+    getChallengedBy.challenged_by = '';
+    getChallengedBy.update();
+}
+
+/* function _challengeUser()
+ ** query result record by user , get next lowest result for that level
+ ** Parameters: getChallengedBy (Result table glide object)
+ ** Returns: nothing 
+ */
+
+function _challengeUser(getChallengedBy) {
+
+    var queryArenaUser = getChallengedBy.arena_user; //Get arena user of queried Result record 
+    var queryLevel = getChallengedBy.level; //Get level of queried Result record
+    var queryDifficulty = getChallengedBy.difficulty; //Get difficulty of queried Result record
+    var queryScore = getChallengedBy.total_score; //Get total score of queried Result record
+
+    var finalQuery = 'active=false' + '^arena_user=' + queryArenaUser + '^level=' + queryLevel + '^difficulty=' + queryDifficulty;
+    var maxScore = 0;
+    var minTime = 0;
+
+    /*
+     ** Get next highest total score compared to current record's total score **
+     */
+    var getMaxScore = new GlideAggregate(tableName);
+    getMaxScore.addEncodedQuery(finalQuery + '^total_score' + '<=' + queryScore);
+    getMaxScore.addAggregate('MAX', 'total_score');
+    getMaxScore.groupBy('arena_user');
+    getMaxScore.query();
+    while (getMaxScore.next()) {
+        maxScore = getMaxScore.getAggregate('MAX', 'total_score');
+    }
+
+    /*
+     ** Get least time taken record for the available max score's records **
+     */
+    var getMinTime = new GlideAggregate(tableName);
+    getMinTime.addEncodedQuery(finalQuery + '^total_score=' + maxScore);
+    getMinTime.addAggregate('MIN', 'time_taken');
+    getMinTime.groupBy('arena_user');
+    getMinTime.query();
+    while (getMinTime.next()) {
+        minTime = getMinTime.getAggregate('MIN', 'time_taken');
+    }
+
+    /*
+     ** Get next result which is next highest to current record along with least time taken **
+     */
+    var getNextHighestRecord = new GlideRecord(tableName);
+    getNextHighestRecord.addEncodedQuery(finalQuery + '^total_score=' + maxScore + '^time_taken=' + minTime);
+    getNextHighestRecord.query();
+    if (getNextHighestRecord.next()) {
+        getNextHighestRecord.active = true;
+        getNextHighestRecord.challenged_by = '';
+        getNextHighestRecord.update();
+    }
+
+}]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>manoj</sys_created_by>
+        <sys_created_on>2020-05-03 12:26:43</sys_created_on>
+        <sys_id>8dc56ba1db601450b6db8e4748961903</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Arena_ Check Challenged by Every 3 Days</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sysauto_script_8dc56ba1db601450b6db8e4748961903</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-07-04 07:11:37</sys_updated_on>
+        <time_zone>floating</time_zone>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

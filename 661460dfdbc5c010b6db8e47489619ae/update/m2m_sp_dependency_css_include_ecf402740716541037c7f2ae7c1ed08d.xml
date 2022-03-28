@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_dependency_css_include">
+    <m2m_sp_dependency_css_include action="INSERT_OR_UPDATE">
+        <order>100</order>
+        <sp_css_include display_value="Materialize">c9e4ca340716541037c7f2ae7c1ed08e</sp_css_include>
+        <sp_dependency display_value="Materialize">ae3402f00716541037c7f2ae7c1ed042</sp_dependency>
+        <sys_class_name>m2m_sp_dependency_css_include</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-26 21:07:10</sys_created_on>
+        <sys_id>ecf402740716541037c7f2ae7c1ed08d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Materialize.Materialize</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>m2m_sp_dependency_css_include_ecf402740716541037c7f2ae7c1ed08d</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-26 21:07:10</sys_updated_on>
+    </m2m_sp_dependency_css_include>
+</record_update>

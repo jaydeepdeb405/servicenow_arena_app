@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="difficulty" table="x_93700_arena_results" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>difficulty</element>
+            <name>x_93700_arena_results</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-03-31 17:41:33</sys_created_on>
+            <sys_id>78e9f11e079d501037c7f2ae7c1ed0af</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>difficulty</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_choice_x_93700_arena_results_difficulty</sys_update_name>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-03-31 17:41:33</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>difficulty</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Easy</label>
+            <language>en</language>
+            <name>x_93700_arena_results</name>
+            <sequence>100</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-03-31 17:41:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a5d37287dbf7cc10b6db8e4748961918</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>manoj</sys_updated_by>
+            <sys_updated_on>2020-05-05 15:38:34</sys_updated_on>
+            <value>easy</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>difficulty</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Medium</label>
+            <language>en</language>
+            <name>x_93700_arena_results</name>
+            <sequence>200</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-03-31 17:41:45</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>77d3fe47dbf7cc10b6db8e4748961967</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>manoj</sys_updated_by>
+            <sys_updated_on>2020-05-05 15:38:38</sys_updated_on>
+            <value>medium</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>difficulty</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Hard</label>
+            <language>en</language>
+            <name>x_93700_arena_results</name>
+            <sequence>300</sequence>
+            <synonyms/>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-03-31 17:42:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>b6e3fa47dbf7cc10b6db8e4748961918</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>manoj</sys_updated_by>
+            <sys_updated_on>2020-05-05 15:38:42</sys_updated_on>
+            <value>hard</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

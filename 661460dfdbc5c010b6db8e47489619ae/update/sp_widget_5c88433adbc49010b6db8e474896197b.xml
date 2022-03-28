@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function LeaderBoard($scope, $rootScope, $http) {
+    var c = this;
+
+
+    $rootScope.$on('gameScreen', function(event, obj) {
+        c.displayLeaderBoard = obj.leaderboard;
+        if (obj.leaderboard == true) {
+
+            //routing to latest level and difficulty
+            $scope.currentdifficulty = c.data.difficulty;
+            $scope.currentlevel = c.data.levl;
+
+            c.showLeaderBoard();
+        }
+    });
+
+
+
+    //Refresh leaderboard
+    c.showLeaderBoard = function() {
+        c.data.level = $scope.currentlevel;
+        c.data.diff = $scope.currentdifficulty;
+        c.data.action = 'rankEverybody';
+
+        //Notiflix.Notify.Success('#debug Calling server : ' +$scope.currentlevel+" : "+ $scope.currentdifficulty);
+        c.server.update();
+    };
+
+    //challenging
+    c.setChallenge = function(challengedPlayer) {
+        c.data.challengedPlayer = challengedPlayer;
+        c.data.currentLevel = $scope.currentlevel;
+        c.data.currentDifficulty = $scope.currentdifficulty;
+		c.data.action = 'challenge';
+
+        c.server.update();
+    };
+	
+    //fighting animation
+    c.fight = function() {
+        document.getElementById("fight").style.display = "inline";
+        setTimeout(function() {
+            document.getElementById("fight").style.display = "none";
+        }, 3850);
+    };
+
+    //avatar
+    var liveProfiles = {};
+    $scope.getLiveProfileByUserId = function(userSysId) {
+        return liveProfiles[userSysId];
+    };
+    var pending = {};
+    //Little caching implementation to make sure we only get a given user's profile once.
+    $scope.hasLiveProfile = function hasLiveProfile(userSysId) {
+        if (liveProfiles[userSysId])
+            return true;
+        else if (pending[userSysId])
+            return false;
+        else {
+            pending[userSysId] = $http.get('/api/now/live/profiles/sys_user.' + userSysId).then(function(response) { //alert(JSON.stringify(response.data.result));
+                liveProfiles[userSysId] = {
+                    userID: userSysId,
+                    name: response.data.result.name,
+                    initials: buildInitials(response.data.result.name),
+                    avatar: response.data.result.avatar
+                };
+            });
+            return false;
+        }
+    };
+
+    function buildInitials(name) {
+        if (!name)
+            return "--";
+        var initials = name.split(" ").map(function(word) {
+            return word.toUpperCase();
+        }).filter(function(word) {
+            return word.match(/^[A-Z]/);
+        }).map(function(word) {
+            return word.substring(0, 1);
+        }).join("");
+        return (initials.length > 3) ? initials.substr(0, 3) : initials;
+    }
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.par{
+  position:fixed;
+  top:0;
+  right:0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.avata
+{
+  border-radius: 50%;
+  width:50px;
+  height:50px;
+  margin-left:10%;
+  float:left;
+
+}
+
+.capitalize
+{
+  text-transform:capitalize;
+}
+
+.heading
+{	padding-top:20px;
+  font-size:65px;
+  text-shadow: 0 0 5px #FF0000;
+  color: yellow;
+}
+
+.scr
+{
+  overflow: auto;
+}
+
+.darkTable button
+{
+  background-color:#44c767;
+  border-radius:12px;
+  border:1px solid #18ab29;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  padding:2px 10px;
+  text-decoration:none;
+  text-shadow:-2px -1px 3px #2f6627;
+}
+
+.darkTable button:hover
+{
+  background-color:#5cbf2a;
+}
+
+.darkTable button:active
+{
+  position:relative;
+  top:1px;
+}
+
+.lvl
+{
+  margin:auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.dif
+{
+  margin:auto;
+  padding-top: 5px;
+  padding-bottom: 14px;
+}
+
+table.darkTable {
+  width: 100%;
+  text-align: center;
+  border-collapse: inherit;
+  margin-bottom:100px;
+}
+table.darkTable td, table.darkTable th {
+  padding: 3px 2px;
+  margin: 2px 2px 2px 2px;
+}
+table.darkTable tbody td {
+  font-size: 13px;
+  color: #ffff66;
+  background-color: rgba(0,0,0, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+table.darkTable thead {
+  background: #58196D;
+  background: -moz-linear-gradient(top, #825291 0%, #68307b 66%, #58196D 100%);
+  background: -webkit-linear-gradient(top, #825291 0%, #68307b 66%, #58196D 100%);
+  background: linear-gradient(to bottom, #825291 0%, #68307b 66%, #58196D 100%);
+  border-bottom: 3px solid #8949FF;
+}
+table.darkTable thead th {
+  font-size: 25px;
+  font-weight: bold;
+  color: #E6E6E6;
+  text-align: center;
+  border-left: 2px solid #ff80df;
+}
+
+.fight {
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0; 	
+  margin: auto;
+}
+
+table.darkTable tfoot td {
+  font-size: 12px;
+}
+
+table.userDetails td 
+{ 
+  border-width:8px;
+  border-color:#93d831;
+  background-color:rgba(153, 255, 102, 0.15);
+  color:#66ff1a;
+  font-size: 20px;
+  padding: 3px 2px;z
+  font-family: "Comic Sans MS", cursive, sans-serif; 
+  -webkit-box-shadow:0px 0px 50px 15px #9ca5e3 ;
+  -moz-box-shadow:0px 0px 50px 15px #9ca5e3 ;
+  box-shadow:0px 0px 50px 5px #9ca5e3 ;
+  text-align: center;
+  width: 1%;
+}
+
+
+table.userDetails
+{
+  border-collapse: separate;
+}
+
+@media only screen and (max-width: 500px) {
+  .hide-mobile{
+    display:none;
+  }
+}
+
+.fixi
+{
+  position:fixed;
+}
+bottom: 20px;
+}
+.parent-ul{
+  width:100%;
+}
+
+.leader-choice{
+  padding:10px;
+  border:solid 1px $arenaBlue;
+  border-radius:15px;
+  width:100%;
+  background-color:#212121;
+  color:white;
+  font-size: 20px;
+  text-transform: capitalize;
+  text-align: center;  
+  font-family: pfs-bold;
+}
+.pad-bottom{
+  padding-bottom:10px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>leaderboard</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>LeaderBoard</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	/*:
+    	We use 3 flags : 
+    	ViewerIsLeader - checks if logged in user is present in the leaderboard
+    	viewerDisplayed - checks if logged in user is displayed in the current ng-repeat loop
+    	higherThanViewer - checks if player in current ng-repeat loop is higher than logged in user
+    */
+
+
+
+	data.diffArray = ["easy", "medium", "hard"];
+	data.levelArray = ["level1", "level2", "level3", "level4"];
+
+
+	var currentUser = gs.getUserID();
+	var grUser = new GlideRecord('x_93700_arena_user');
+	grUser.setLimit(1);
+	grUser.addQuery("user", currentUser);
+	grUser.query();
+	if (grUser.next()) {
+		data.levl = grUser.level + "";
+		data.difficulty = grUser.difficulty + "";
+		data.playerID = grUser.sys_id + "";
+	}
+
+
+	if (input) {
+
+
+		///////////////////////////////////////////Ranking///////////////////////////////////////////////
+		if (input.action == 'rankEverybody') {
+
+			data.ViewerIsLeader = false;
+			data.rankArray = [];
+			refreshLeaderBoard(input.level, input.diff);
+		}
+
+
+
+		///////////////////////////////////////////Challenge///////////////////////////////////////////////
+
+		if (input.action == 'challenge') {
+
+			var result = new GlideRecord("x_93700_arena_results");
+			result.setLimit(1);
+			result.addQuery("arena_user.user", input.challengedPlayer.toString());
+			result.addQuery('difficulty', input.currentDifficulty); //the active difficulty
+			result.addQuery('level', input.currentLevel); //the active level
+			result.addQuery('active', true);
+			result.query();
+			if (result.next()) {
+				if (result.challenged_by != '') {
+					result.challenged_by = data.playerID;
+					result.update();
+				}
+				else
+					gs.addInfoMessage('Oops! Something went wrong');
+			}
+
+			data.rankArray = [];
+			refreshLeaderBoard(input.currentLevel, input.currentDifficulty);
+
+		}
+	}
+
+	function refreshLeaderBoard(level, difficulty) {
+		var player = new GlideRecord('x_93700_arena_results');
+		player.orderByDesc('total_score');
+		player.orderBy('time_taken');
+		player.addQuery('difficulty', difficulty); //the active difficulty
+		player.addQuery('level', level); //the active level
+		player.addQuery('active', true);
+		player.setLimit(5);
+		player.query();
+		var rank = 1;
+		while (player.next()) {
+
+			if (currentUser == player.arena_user.user)
+				data.ViewerIsLeader = true;
+			var playerDetails = {};
+			playerDetails.rank = rank;
+			playerDetails.highScore = player.getValue('total_score');
+			playerDetails.time = player.getValue('time_taken');
+			//playerDetails.realName = player.arena_user.user.name.getDisplayValue();
+			playerDetails.name = player.arena_user.avatar.toString() || player.arena_user.user.name.getDisplayValue();
+			playerDetails.userID = player.arena_user.user.toString();
+			playerDetails.challengedBy = player.challenged_by.avatar.toString() || player.challenged_by.user.name.getDisplayValue();
+			playerDetails.viewerDisplayed = (currentUser == player.arena_user.user);
+			playerDetails.higherThanViewer = (!data.ViewerIsLeader);
+			rank++;
+
+			data.rankArray.push(playerDetails);
+		}
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>mihir</sys_created_by>
+        <sys_created_on>2020-04-12 10:48:55</sys_created_on>
+        <sys_id>5c88433adbc49010b6db8e474896197b</sys_id>
+        <sys_mod_count>495</sys_mod_count>
+        <sys_name>LeaderBoard</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_5c88433adbc49010b6db8e474896197b</sys_update_name>
+        <sys_updated_by>vyas</sys_updated_by>
+        <sys_updated_on>2020-05-18 09:42:05</sys_updated_on>
+        <template><![CDATA[<div class="par" ng-show = "c.displayLeaderBoard">
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+  <div class="heading" style="font-family: Lobster;">Arena Leaderboard</div>
+
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3 col-xs-6 pad-bottom">
+      <select class="leader-choice" ng-model="currentlevel" ng-change="c.showLeaderBoard()" >
+        <option ng-repeat="lvl in data.levelArray" value="{{lvl}}">{{lvl}}</option>
+      </select>
+    </div>
+    <div class="col-md-3 col-xs-6 pad-bottom">
+      <select class="leader-choice" ng-model="currentdifficulty"  ng-change="c.showLeaderBoard()"  >
+        <option ng-repeat="diff in data.diffArray" value="{{diff}}">{{diff}}</option>
+      </select>
+    </div>
+
+  </div>
+  <div class="scr">
+    <table class="darkTable">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Player</th>
+          <th>Score</th>
+          <th class="hide-mobile">Time Taken</th>
+          <th>Challenge status</th>
+        </tr>	
+      </thead>	
+      <tbody>
+        <tr ng-repeat='x in data.rankArray'>
+          <td>{{x.rank}}</td>
+          <td><!--<img ng-src="{{x.img}}" class="avata" />-->{{x.name}}</td>
+          <td>{{x.highScore}}</td>
+          <td class="hide-mobile">{{x.time}}</td>
+          
+          <!--Be calm, what follows is simple-->
+          <td>
+            
+            
+            <!-----------------------If viewer is NOT on the leaderboard----------------------->
+          	<span ng-if="!data.ViewerIsLeader">
+              <span ng-if="!x.challengedBy">Unchallenged</span>
+              <span ng-if="x.challengedBy">Challenged by {{x.challengedBy}}</span>
+            </span>
+            
+            
+            
+            <!-----------------------If viewer is on the leaderboard----------------------------->
+            <span ng-if="data.ViewerIsLeader">
+              
+              <!--If viewer is being displayed-->
+                  <span ng-if="x.viewerDisplayed">
+                    <span ng-if="!x.challengedBy">Relax! Nobody has challenged you yet!</span>
+                    <span ng-if="x.challengedBy">You have been challenged by {{x.challengedBy}}</span>
+                  </span>
+
+                  <!--If viewer is NOT being displayed-->
+                  <span ng-if="!x.viewerDisplayed">
+                    	<span ng-if="x.higherThanViewer">
+                          <span ng-if="!x.challengedBy"><button class="button" ng-click="c.setChallenge(x.userID)">Challenge!</button></span>
+                          <span ng-if="x.challengedBy">Challenged by {{x.challengedBy}}</span>
+                    	</span>
+                    
+                    	<span ng-if="!x.higherThanViewer">
+                          You cannot challenge this player
+                    	</span>
+                  </span>
+              
+            </span>
+          </td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fixi">
+    <table class="userDetails" ng-if="data.loggedUser.length==1">
+      <tr>
+        <td>Rank - {{data.loggedUser[0].rnk}}</td>
+        <td><sn-avatar ng-if="hasLiveProfile(data.loggedUser[0].sys)" primary="getLiveProfileByUserId(data.loggedUser[0].sys)" class="avatar-medium" show-presence="false" enable-context-menu="false"></sn-avatar><span class="capitalize">  {{data.loggedUser[0].nyc}}</span></td>
+        <td>High Score - {{data.loggedUser[0].scr}}</td>
+        <td class="hide-mobile">Time Taken - {{data.loggedUser[0].tym}}</td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <img class="fight" id="fight" src='fighter.gif' style="display:none"/>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

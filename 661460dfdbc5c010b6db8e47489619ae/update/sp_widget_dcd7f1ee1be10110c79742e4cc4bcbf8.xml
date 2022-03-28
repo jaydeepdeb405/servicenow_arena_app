@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function controller($sce, $http, $rootScope,$scope) {
+    /* widget controller */
+    var c = this;
+    c.transition = false;
+
+    $rootScope.$on('loadContent', function(event, data) {
+        c.getContent(data.qid);
+    });
+
+    c.trustHtml = function(htmlStr) {
+        return $sce.trustAsHtml(htmlStr);
+    };
+
+    c.getContent = function(qid) {
+        c.data.qid = qid;
+        c.transition = true;
+        c.data.action = "getContent";
+        c.server.update().then(function() {
+            c.transition = false;
+            incrementViewCount();
+            c.data.action = undefined;
+        });
+    };
+
+
+    c.toggleLike = function() {
+        c.server.get({
+            action: 'toggleLike',
+            contentId: c.data.content.id,
+            currentLikeStatus: c.data.content.isLiked
+        }).then(function(response) {
+            M.Toast.dismissAll();
+            M.toast({
+                html: 'You have ' + (response.data.isLiked ? 'liked' : 'disliked') + ' this article'
+            });
+            c.data.content.isLiked = response.data.isLiked;
+        });
+    };
+    c.toggleBookmark = function() {
+
+        c.server.get({
+            action: 'toggleBookmark',
+            contentId: c.data.content.id,
+            currentBookmarkStatus: c.data.content.isBookmarked
+        }).then(function(response) {
+            M.Toast.dismissAll();
+            M.toast({
+                html: 'You have ' + (response.data.isBookmarked ? 'bookmarked' : 'unbookmarked') + ' this article'
+            });
+            c.data.content.isBookmarked = response.data.isBookmarked;
+        });
+    };
+
+    function incrementViewCount() {
+        $http.put('/api/now/ui/glideRecord/x_93700_arena_did_you_know/' + c.data.content.id, {
+            "views": (parseInt(c.data.content.views) || 0) + 1
+        });
+    }
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.question-card {
+  min-height: 300px;
+}
+
+.loader-wrapper {
+  display: flex;
+  left: 0;
+  right: 0;
+  width: 100%;
+  position: absolute;
+  z-index: 999;
+  height: 60vh;
+  top: 0;
+  bottom: 0;
+}
+
+.question-views {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.question-title {
+  display: flex !important;
+  flex-flow: row;
+  justify-content: space-between;
+  span {
+    font-weight: 600;
+    color:firebrick;
+  }
+  i {
+    padding: 0 5px;
+    cursor: pointer;
+  }
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.fa{
+  color: #4CAF50;
+}
+.fa:hover{
+  -ms-transform: scale(1.5);
+  -webkit-transform: scale(1.5); 
+  transform: scale(1.5);
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>DYK Content_v2</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    function updateFeedback(type, status, contentID) {
+        var feedback = new GlideRecord('x_93700_arena_dyk_feedback');
+        feedback.addEncodedQuery('dyk_content=' + contentID + '^user=' + gs.getUserID() + '^type=' + type + '^u_active=' + status);
+        feedback.query();
+        if (feedback.next()) {
+            feedback.u_active = !status;
+            feedback.update();
+        } else {
+            feedback.initialize();
+            feedback.dyk_content = input.contentId;
+            feedback.user = gs.getUserID();
+            feedback.type = type;
+            feedback.u_active = true;
+            feedback.insert();
+        }
+        return !status;
+    }
+    if (input && input.action === 'toggleLike') {
+        data.isLiked = updateFeedback('like', input.currentLikeStatus, input.contentId);
+    }
+    if (input && input.action === 'toggleBookmark') {
+        data.isBookmarked = updateFeedback('bookmark', input.currentBookmarkStatus, input.contentId);
+    }
+    data.contentPlaceholder = "Content not available. Check back later";
+    data.contentAvailable = false;
+
+    data.content = {
+        id: '',
+        title: '',
+        body: '',
+        views: 0
+    };
+
+    if (input && input.action === "getContent") {
+        getContent("sys_id=" + input.qid);
+        getUniqueView(input.qid);
+    }
+
+    function getUniqueView(articleID) {
+        var uniqueViews = new GlideRecord("x_93700_arena_arena_views");
+        uniqueViews.addEncodedQuery("dyk_article=" + articleID + "^user=" + gs.getUserID());
+        uniqueViews.query();
+        if (uniqueViews.next()) {
+            uniqueViews.views = parseInt(uniqueViews.getValue("views")) + 1;
+            uniqueViews.update();
+        } else {
+            uniqueViews.dyk_article = articleID;
+            uniqueViews.user = gs.getUserID();
+            uniqueViews.category = "dyk";
+            uniqueViews.views = 1;
+            uniqueViews.insert();
+        }
+    }
+
+    function getContent(filter) {
+        var contentGr = new GlideRecord("x_93700_arena_did_you_know");
+        contentGr.setLimit(1);
+        contentGr.addEncodedQuery(filter);
+        contentGr.query();
+        if (contentGr.next()) {
+            data.content.id = contentGr.getValue('sys_id');
+            data.content.title = contentGr.getValue('title');
+            data.content.body = contentGr.getValue('body');
+            data.content.views = contentGr.getValue('views') || 0;
+            data.content.isBookmarked = false;
+            data.content.isLiked = false;
+            data.contentAvailable = true;
+            getFeedback('like', contentGr);
+            getFeedback('bookmark', contentGr);
+            data.content.tags = [];
+            var tagGr = new GlideAggregate('label_entry');
+            tagGr.addQuery('label.active', true);
+            tagGr.addQuery('table', 'x_93700_arena_did_you_know');
+            tagGr.addQuery('table_key', contentGr.sys_id);
+            tagGr.groupBy('label');
+            tagGr.query();
+            while (tagGr.next()) {
+                data.content.tags.push({
+                    label: tagGr.label.getDisplayValue(),
+                    sys_id: tagGr.getValue('label')
+                });
+            }
+        }
+
+    }
+
+    function getFeedback(typeVal, contentGr) {
+        var feedback = new GlideRecord('x_93700_arena_dyk_feedback');
+        feedback.setLimit(1);
+        feedback.addQuery('dyk_content', contentGr.getValue('sys_id'));
+        feedback.addQuery('user', gs.getUserID());
+        feedback.addQuery('u_active', "true"); //added by chandana 
+        feedback.addQuery('type', typeVal);
+        feedback.query();
+        if (feedback.next()) {
+            if (typeVal == "like")
+                data.content.isLiked = true;
+            else if (typeVal == "bookmark")
+                data.content.isBookmarked = true;
+        }
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>chandana</sys_created_by>
+        <sys_created_on>2022-02-11 12:25:34</sys_created_on>
+        <sys_id>dcd7f1ee1be10110c79742e4cc4bcbf8</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>DYK Content_v2</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_dcd7f1ee1be10110c79742e4cc4bcbf8</sys_update_name>
+        <sys_updated_by>chandana</sys_updated_by>
+        <sys_updated_on>2022-02-23 12:21:56</sys_updated_on>
+        <template><![CDATA[<div>
+
+  <div class="loader-wrapper" ng-if="c.transition === true">
+    <div class="preloader-wrapper medium active" style="margin: auto;">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+        <div class="circle"></div>
+        </div><div class="circle-clipper right">
+        <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="c.data.contentAvailable === true" 
+       ng-style="c.transition === true && {'filter': 'blur(5px)'}">
+    <div class="card col s12 question-card">  
+      <div class="card-content"> 
+        <div class="card-title question-title">
+          <span>{{c.data.content.title}}</span>
+          <span><i uib-tooltip="{{data.content.isLiked ? 'Unlike' : 'Like'}} this article"
+                          class="fa {{ data.content.isLiked ? 'fa-thumbs-up' : 'fa-thumbs-o-up' }}"
+                          ng-click="c.toggleLike()">
+          </i>
+          <i uib-tooltip="{{data.content.isBookmarked ? 'UnBookmark' : 'Bookmark'}} this article"
+             class="fa {{ data.content.isBookmarked ? 'fa-bookmark' : 'fa-bookmark-o' }}"
+             ng-click="c.toggleBookmark()">
+          </i></span>
+        </div>
+        <div class="question" ng-bind-html="c.trustHtml(c.data.content.body)"></div>
+      </div>
+      <div class="question-views">
+        <div>
+          <span ng-if="data.content.tags.length > 0" style="font-weight: 600;font-size: 1.1em;">Tags:&nbsp&nbsp</span>
+          <div ng-repeat="tag in data.content.tags" class="chip">
+            {{tag.label}}
+          </div>
+        </div>
+        <div>
+          <i class="fa fa-eye pad-right"></i>
+          <span>{{c.data.content.views + " Views"}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="c.data.contentAvailable !== true" ng-style="c.transition === true && {'filter': 'blur(5px)'}">
+    <div class="card col s12 question-card">  
+      <div class="card-content"> 
+        <span class="card-title text-center bold">{{c.data.contentPlaceholder}}</span>
+      </div>
+    </div>
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

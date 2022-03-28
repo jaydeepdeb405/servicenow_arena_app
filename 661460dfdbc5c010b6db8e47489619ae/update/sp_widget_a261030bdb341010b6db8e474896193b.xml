@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($rootScope, $scope, $timeout, spUtil) {
+	/* widget controller */
+	var c = this;
+ 
+	$rootScope.$on('gameScreen', function(event, obj) {
+		//alert(obj.leaderboard + '   ' + typeof(obj.leaderboard));
+		$scope.displayLeaderBoard = obj.leaderboard;
+	});
+
+	// disabling record watch
+	// watch for new results & update $scope
+	/*spUtil.recordWatch($scope, "x_93700_arena_results", "active=true", function(response) {
+		$scope.leaderboardLoading = true;
+		c.server.update().then(function() {
+			$scope.leaderboardLoading = false;
+			initialize(false);
+		});
+	});*/
+	
+	$scope.refreshLeaderboard = function() {
+		$scope.leaderboardLoading = true;
+		c.server.update().then(function() {
+			$scope.leaderboardLoading = false;
+			initialize(false);
+		});
+	}
+	
+	//update data if level is upgraded 
+	// arena_level_update is fired from levels widget which tracks current user level thru a record watcher
+	$rootScope.$on('arena_level_update', function(event, obj) {
+		$scope.leaderboardLoading = true;
+		c.server.update().then(function() {
+			$scope.leaderboardLoading = false;
+			initialize(true);
+		});
+	});
+
+	//$scope.leaderboardData = assignColors();
+	initialize(true);
+	$scope.leaderboardLoading = false;
+	$scope.fight = false;
+	//$scope.selectedLevel = $scope.leaderboardData[c.data.currentUserLevelIndex];
+	//$scope.selectedDifficulty = $scope.selectedLevel.difficulties[c.data.currentUserDifficultyIndex];
+	//$scope.scores = $scope.selectedDifficulty.data;
+
+	$scope.changeLevel = function (levelIndex) {
+		$scope.leaderboardLoading = true;
+		$scope.currentLevelIndex = levelIndex;
+		$scope.currentDifficultyIndex = 0;
+		$scope.selectedLevel = $scope.leaderboardData[levelIndex];
+		$scope.selectedDifficulty = $scope.leaderboardData[levelIndex].difficulties[0];
+		$scope.scores = $scope.leaderboardData[levelIndex].difficulties[0].data;
+		$timeout(function() {
+			$scope.leaderboardLoading = false;
+		}, 500);
+	}    
+
+	$scope.changeDifficulty = function (difficultyIndex) {
+		$scope.leaderboardLoading = true;
+		$scope.currentDifficultyIndex = difficultyIndex;
+		$scope.selectedDifficulty =  $scope.leaderboardData[$scope.currentLevelIndex].difficulties[difficultyIndex];
+		$scope.scores = $scope.selectedDifficulty.data;
+		$timeout(function() {
+			$scope.leaderboardLoading = false;
+		}, 500);           
+	}
+
+	$scope.challenge = function (scoreIndex) {
+		Notiflix.Notify.Init({width:'500px',position:'right-top',fontSize:'1.2em'});
+		if($scope.scores[scoreIndex].challenged_by == c.data.currentArenaUserName) {
+			Notiflix.Notify.Failure("You've already challenged "+$scope.scores[scoreIndex].user_name);
+		}
+		else if($scope.scores[scoreIndex].challenged_by != "") {
+			Notiflix.Notify.Failure($scope.scores[scoreIndex].user_name+" is already challenged by "+$scope.scores[scoreIndex].challenged_by);
+		}
+		else {
+			showFightAnimation();
+			c.data.challengedPlayer = $scope.scores[scoreIndex].user_id;
+			c.data.level = $scope.selectedLevel.value;
+			c.data.difficulty = $scope.selectedDifficulty.value;
+			c.data.action = 'challenge';
+			c.server.update().then(function() {
+				c.data.action = undefined;
+				Notiflix.Notify.Success("You've challenged "+$scope.scores[scoreIndex].user_name);
+				$scope.scores[scoreIndex].challenged_by = c.data.currentArenaUserName;
+				$scope.scores[scoreIndex].challengeEnabled = false;
+			});
+		}
+		console.log($scope.scores);
+	}
+
+	function initialize(showUserLevel) {
+		$scope.leaderboardData = c.data.leaderboardData.map(function(levelData, index){
+			switch(index) {
+				case 0: levelData.color = "#4CAF50"; break;
+				case 1: levelData.color = "#5aafee"; break;
+				case 2: levelData.color = "#CDDC39"; break;
+				case 3: levelData.color = "#FF5722"; break;
+				default: break;
+			}
+			return levelData;
+		});
+		
+		if(showUserLevel == true) {
+			$scope.currentLevelIndex = c.data.currentUserLevelIndex;
+			$scope.currentDifficultyIndex = c.data.currentUserDifficultyIndex;
+		}
+	
+		$scope.selectedLevel = $scope.leaderboardData[$scope.currentLevelIndex];
+		$scope.selectedDifficulty = $scope.selectedLevel.difficulties[$scope.currentDifficultyIndex];
+		$scope.scores = $scope.selectedDifficulty.data;
+	}
+
+	function showFightAnimation () {
+		$scope.fight = true;
+		$timeout(function() {
+			$scope.fight = false;
+		}, 3850);
+	}
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>ul {
+  list-style-type: none;
+}
+
+.current-user-board {
+  position        : sticky;
+  bottom          : 0;
+  z-index         : 5;
+  background-color: $arenaTeal;
+  .score {
+    padding       : 15px 0;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width  : 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius   : 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.heading {
+  font-family: 'Lobster', cursive;
+  font-size  : 4em;
+  position   : absolute;
+  top        : -12vh;
+  right      : 0;
+  left       : 0;
+  text-shadow: 0 0 5px #FF0000;
+  color      : yellow;
+}
+
+.leaderboard {
+  margin-top: 40px;
+  height    : 70vh;
+  width     : 70vw;
+}
+
+.level-tabs,
+.difficulty-tabs {
+
+  display        : flex;
+  flex-flow      : row;
+  justify-content: space-between;
+  padding        : 0;
+  font-weight    : 400 !important;
+}
+
+.difficulty-tabs {
+  position       : sticky;
+  top            : 0;
+  justify-content: space-around;
+  margin-top     : 12px;
+  flex-shrink    : 0;
+  margin         : 0;
+  padding        : 10px 0;
+  z-index        : 5;
+}
+
+.level-tabs li {
+  position     : relative;
+  width        : 24%;
+  text-align   : center;
+  color        : black;
+  font-size    : 1.7em;
+  font-family  : monospace;
+  border-radius: 7px 7px 0 0;
+  cursor       : pointer;
+  padding      : 10px 0;
+  text-shadow  : none;
+}
+
+.level-tabs li:hover {
+  filter: brightness(110%);
+}
+
+/* .level-tabs,
+.difficulty-tabs li:hover {
+color      : white;
+text-shadow: 1px 2px 5px black;
+} */
+
+.difficulty-tabs li {
+  text-align      : center;
+  color           : black;
+  font-size       : 1.4em;
+  font-family     : monospace;
+  cursor          : pointer;
+  text-shadow     : none;
+  /* border-bottom: 3px solid white;
+  box-shadow      : 0px 1px 0px black; */
+}
+
+.difficulty-tabs li span {
+  position: relative;
+}
+
+.difficulty-tabs li span .difficulty-tab {
+  background      : #fff;
+  position        : absolute;
+  right           : 0;
+  bottom          : -5px;
+  box-shadow      : 1px 1px 3px black;
+  left            : 0;
+  height          : 3px;
+  width           : 90%;
+  margin          : 0 auto;
+  transform       : scaleY(0);
+  transform-origin: bottom;
+  transition      : transform 235ms 0ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.difficulty-tabs li span .active-tab {
+  transform: scaleY(1);
+}
+
+.leaderboard-content {
+  position         : relative;
+  height           : 100%;
+  top              : -11px;
+  overflow-y       : auto;
+  transition       : background 0.2s;
+  display          : flex;
+  flex-direction   : column;
+  /*justify-content: space-evenly;*/
+  border-radius    : 0 0 7px 7px;
+  text-shadow      : 1px 2px 5px black;
+}
+
+.leaderboard-content .leaderboard-item {
+  display        : flex;
+  justify-content: space-between;
+  padding        : 15px 0;
+  font-family    : monospace;
+  flex-shrink    : 0;
+}
+
+.leaderboard-content .leaderboard-item div:first-child {
+  margin-left: 3%;
+}
+
+.leaderboard-content .leaderboard-item div:last-child {
+  margin-right: 2%;
+}
+
+.leaderboard-content .leaderboard-item .user-avatar {
+  height             : 50px;
+  width              : 50px;
+  border-radius      : 50%;
+  box-shadow         : 2px 2px 5px;
+  background-size    : cover;
+  background-repeat  : no-repeat;
+  background-position: center;
+}
+
+.leaderboard-content .leaderboard-item .user-avatar div {
+  font-size : 2em;
+  text-align: center;
+  margin-top: 4px;
+  color     : white;
+}
+
+.leaderboard-content .leaderboard-item .points-bar {
+  position        : relative;
+  height          : 5px;
+  width           : 70%;
+  border-radius   : 5px;
+  background-color: grey;
+  margin          : auto 1% auto 1%;
+  box-shadow      : 1px 2px 2px;
+}
+
+.leaderboard-content .leaderboard-item .points-bar .user-name {
+  position   : absolute;
+  top        : -27px;
+  color      : white;
+  font-weight: 400;
+  font-size  : 1.3em;
+}
+
+.leaderboard-content .leaderboard-item .points-bar .user-points-bar {
+  position        : absolute;
+  height          : 5px;
+  border-radius   : 5px;
+  background-color: white;
+  margin          : auto 0;
+  transition      : all 1s;
+  animation       : grow 0.4s linear forwards;
+}
+
+.leaderboard-content .leaderboard-item .points-bar .challenge-note {
+  margin-top: 10px;
+  text-align: end;
+  color     : white;
+}
+
+@keyframes grow {
+  from {
+    width: 0%;
+  }
+}
+
+.leaderboard-content .leaderboard-item .challenge-btn {
+  box-shadow      : 2px 2px 5px;
+  background-color: white;
+  color           : #696969;
+  font-size       : 1em;
+  font-family     : monospace;
+  font-weight     : 600;
+}
+
+.leaderboard-content .leaderboard-item .challenge-btn:hover {
+  background-color: #ffe4c4;
+}
+
+.leaderboard-content .leaderboard-item .score {
+  margin-top: -10px;
+  width     : 15%;
+}
+
+.leaderboard-content .leaderboard-item .score .user-points {
+  font-size    : 1.1em;
+  color        : white;
+  font-weight  : 400;
+  margin-bottom: 5px;
+  font-family: sans-serif;
+}
+
+.leaderboard-loading {
+  margin: auto;
+}
+
+.no-records {
+  font-size: 2.2em;
+  color    : white;
+  margin   : auto !important;
+}
+
+.fight-animation {
+  position: absolute;
+  height  : 50%;
+  width   : 100%;
+  padding : 0 25%;
+  z-index : 5;
+  left    : 0;
+  right   : 0;
+}
+
+.leaderboard-content .refresh-button {
+    flex-shrink: 1;
+    border-radius: 50%;
+    padding: 5px 5px 0px 5px;
+    box-shadow: 2px 2px 3px black;
+    cursor: pointer;
+    border: 1px solid slategrey;
+}
+
+.leaderboard-content .refresh-button:hover {
+    animation: rotate 2s linear infinite;
+    box-shadow: none;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@media only screen and (max-width: 768px) {
+
+  .leaderboard {
+    width: 95vw;
+  }
+
+  .heading {
+    font-size: 2em;
+    top      : -8vh;
+  }
+
+  .level-tabs li,
+  .difficulty-tabs li {
+    font-size: 1.1em !important;
+  }
+
+  .level-tabs li:hover {
+    filter: none;
+  }
+
+  .leaderboard-content .leaderboard-item .user-avatar {
+    margin-right: 0;
+  }
+
+  .leaderboard-content .leaderboard-item .points-bar {
+    width: 50%;
+  }
+
+  .leaderboard-content .leaderboard-item .points-bar .user-name {
+    font-size: 1.1em;
+  }
+
+  .leaderboard-content .leaderboard-item .score .user-points {
+    font-size    : 1em;
+    margin-bottom: 0;
+  }
+
+  .leaderboard-content .leaderboard-item .score {
+    width: 25%;
+  }
+
+  .fight-animation {
+    padding: 0;
+  }
+
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>arena_leaderboard</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>Arena Leaderboard V2</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	if(input) {	
+		if (input.action == 'challenge') {
+			var result = new GlideRecord("x_93700_arena_results");
+			result.setLimit(1);
+			result.addQuery("arena_user", input.challengedPlayer);
+			result.addQuery('difficulty', input.difficulty); //the active difficulty
+			result.addQuery('level', input.level); //the active level
+			result.addQuery('active', true);
+			result.query();
+			if (result.next()) {
+				// get current arena user
+				var arenaUserGr = new GlideRecord('x_93700_arena_user');
+				arenaUserGr.get('user', gs.getUserID());
+				var userID = arenaUserGr.getValue('sys_id');
+				result.challenged_by = userID;
+				result.update();
+			}
+		}
+	}
+
+	data.leaderboardData = [];
+
+	// get level/difficulty choices
+	var arenaLevels = [];
+	var arenaDifficulties = [];
+
+	var choiceGr= new GlideRecord('sys_choice');
+	choiceGr.addQuery("name", 'x_93700_arena_user');
+	choiceGr.addQuery("element", "level").addOrCondition("element", "difficulty");
+	choiceGr.query();
+	while(choiceGr.next()) {
+		var choiceData = {};
+		if (choiceGr.element == "level") {
+			choiceData.label = choiceGr.getValue('label') || "";
+			choiceData.value = choiceGr.getValue('value') || "";
+			arenaLevels.push(choiceData);
+		}
+		else {
+			choiceData.label = choiceGr.getValue('label') || "";
+			choiceData.value = choiceGr.getValue('value') || "";
+			arenaDifficulties.push(choiceData);
+		} 
+	}
+	
+	var userGr = new GlideRecord('x_93700_arena_user');
+	userGr.setLimit(1);
+	userGr.addQuery("user", gs.getUserID());
+	userGr.query();
+	if (userGr.next()) {
+		data.currentUserLevelIndex = getLevelIndex(userGr.getValue('level') || "");
+		data.currentUserDifficultyIndex = getDifficultyIndex(userGr.getValue('difficulty') || "");
+		data.currentArenaUserID = userGr.getValue('sys_id') || "";
+		data.currentArenaUserName = userGr.avatar.toString() || userGr.user.name.getDisplayValue() || '';
+	}
+
+	// fetch data for each level/difficulty
+	arenaLevels.forEach(function(level) {
+		var levelData = {};
+		levelData.label = level.label;
+		levelData.value = level.value;
+		levelData.difficulties = [];
+		arenaDifficulties.forEach(function(difficulty) {
+			var difficultyData = {};
+			difficultyData.label = difficulty.label;
+			difficultyData.value = difficulty.value;
+			difficultyData.data = getLevelData(level.value, difficulty.value);
+			levelData.difficulties.push(difficultyData);
+		});
+		data.leaderboardData.push(levelData);
+	});
+
+	//gs.addInfoMessage(JSON.stringify(data.leaderboardData[0]));
+
+	function getLevelData(level, difficulty) {
+		var levelData = [];
+		var counter = 0;
+		var resultGr = new GlideRecord('x_93700_arena_results');
+		resultGr.orderByDesc('total_score');
+		resultGr.orderBy('time_taken');
+		resultGr.addQuery('difficulty', difficulty); //the active difficulty
+		resultGr.addQuery('level', level); //the active level
+		resultGr.addQuery('active', true);
+		//resultGr.setLimit(5);
+		resultGr.query();
+		while(resultGr.next()) {
+			var dataObj = {};
+			dataObj.user_id = resultGr.getValue('arena_user') || '';
+			dataObj.isCurrentUser = dataObj.user_id == data.currentArenaUserID;
+			dataObj.user_name = resultGr.arena_user.avatar.toString() || resultGr.arena_user.user.name.getDisplayValue() || '';
+			dataObj.score = resultGr.getValue('total_score') || '';
+			dataObj.time_taken = resultGr.getValue('time_taken') || '';
+			dataObj.avatar_src = resultGr.arena_user.profile_image.getDisplayValue() || resultGr.arena_user.user.photo.getDisplayValue() || '';
+			dataObj.initials = getInitials(dataObj.user_name);
+			dataObj.challenged_by = resultGr.challenged_by.avatar.toString() || resultGr.challenged_by.user.name.getDisplayValue() || '';
+			dataObj.challengeEnabled = validateChallengeEnabled(dataObj.user_id, dataObj.challenged_by, level, difficulty);
+			levelData.push(dataObj);
+			counter++;
+		}
+		return levelData;
+	}
+	
+	function isUserInLeaderboardAndIsRankedHigher(user_id, level, difficulty) {
+// 		var enabled = false;
+		var leaderboardUsers = [];
+		var resultGr = new GlideRecord('x_93700_arena_results');
+		resultGr.orderByDesc('total_score');
+		resultGr.orderBy('time_taken');
+		resultGr.addQuery('difficulty', difficulty); 
+		resultGr.addQuery('level', level); 
+		resultGr.addQuery('active', true);
+		//resultGr.setLimit(5);
+		resultGr.query();
+		while(resultGr.next()) {
+			leaderboardUsers.push(resultGr.getValue('arena_user')||'');
+		}
+// 		enable challenge only for higher ranked players in leaderboard - disabled
+// 		if(leaderboardUsers.indexOf(data.currentArenaUserID) !== -1)
+// 			enabled = leaderboardUsers.indexOf(user_id) < leaderboardUsers.indexOf(data.currentArenaUserID);
+// 		else 
+// 			enabled = false;
+		
+		return leaderboardUsers.indexOf(data.currentArenaUserID) !== -1 ? true : false;
+	}
+
+	function validateChallengeEnabled(user_id, challenged_by, level, difficulty) {
+		var enabled = true;
+		if(data.currentArenaUserID == user_id || challenged_by != "") enabled = false;
+		else if(challenged_by == "") {
+			var levelWeight = (getLevelIndex(level)+1)*10 + getDifficultyIndex(difficulty);
+			var userLevelWeight =  (data.currentUserLevelIndex+1)*10 +data.currentUserDifficultyIndex;
+			enabled = (levelWeight <= userLevelWeight) && isUserInLeaderboardAndIsRankedHigher(user_id, level, difficulty);
+		}
+		return enabled;
+	}
+
+	function getLevelIndex(level) {
+		for(var i=0; i<arenaLevels.length; i++) {
+			if(level == arenaLevels[i].value) return i;
+		}
+		return -1;
+	}
+
+	function getDifficultyIndex(difficulty) {
+		for(var i=0; i<arenaDifficulties.length; i++) {
+			if (difficulty == arenaDifficulties[i].value) return i;
+		}
+		return -1;
+	}
+
+	function getInitials(name) {
+		var first = (name.split(' ')[0] || '').charAt(0).toUpperCase();
+		var last = (name.split(' ')[1] || '').charAt(0).toUpperCase();
+		return first+last;
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-20 11:43:55</sys_created_on>
+        <sys_id>a261030bdb341010b6db8e474896193b</sys_id>
+        <sys_mod_count>273</sys_mod_count>
+        <sys_name>Arena Leaderboard V2</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_a261030bdb341010b6db8e474896193b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-08 10:58:54</sys_updated_on>
+        <template><![CDATA[<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+<div ng-if="displayLeaderBoard == true">
+
+  <img class="fight-animation" ng-show="fight == true" ng-src='fighter.gif' />
+
+  <div class="heading">Arena Leaderboard</div>
+
+  <div class="leaderboard" ng-style="fight == true && {'filter': 'blur(3px)'}">
+    <ul class="level-tabs">
+      <li ng-repeat="level in leaderboardData track by $index" style="background-color: {{level.color}}"
+          ng-init="levelIndex = $index" ng-click="changeLevel(levelIndex)"><span>{{level.label}}</span></li>
+    </ul>
+
+    <div class="leaderboard-content" style="background-color: {{selectedLevel.color}}">
+      <ul class="difficulty-tabs">
+        <li ng-repeat="difficulty in selectedLevel.difficulties" ng-init="difficultyIndex = $index" ng-click="changeDifficulty(difficultyIndex)">
+          <span>{{difficulty.label}}
+            <div class="difficulty-tab" ng-class="{'active-tab': difficulty.value == selectedDifficulty.value}"></div>
+          </span>
+        </li>
+        <div class="refresh-button" ng-click="refreshLeaderboard()">
+          <svg classname="bi bi-arrow-repeat" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="height: 1.3em;color: black;">
+            <path fill-rule="evenodd" d="M2.854 7.146a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L2.5 8.207l1.646 1.647a.5.5 0 0 0 .708-.708l-2-2zm13-1a.5.5 0 0 0-.708 0L13.5 7.793l-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0 0-.708z"></path>
+            <path fill-rule="evenodd" d="M8 3a4.995 4.995 0 0 0-4.192 2.273.5.5 0 0 1-.837-.546A6 6 0 0 1 14 8a.5.5 0 0 1-1.001 0 5 5 0 0 0-5-5zM2.5 7.5A.5.5 0 0 1 3 8a5 5 0 0 0 9.192 2.727.5.5 0 1 1 .837.546A6 6 0 0 1 2 8a.5.5 0 0 1 .501-.5z"></path>
+          </svg>
+        </div>
+      </ul>
+
+
+      <div class="leaderboard-loading" ng-show="leaderboardLoading"><img ng-src="leaderboard-loading.svg"/></div>
+
+
+      <div style="overflow: overlay; height: 56vh;" ng-hide="leaderboardLoading">
+        <div class="leaderboard-item" ng-repeat="score in scores track by $index" ng-init="scoreIndex = $index">
+
+          <div class="user-avatar"
+               style="background-image: url({{score.avatar_src}})" ng-style="score.avatar_src == '' && {'background-color'   : 'grey'}">
+            <div ng-if="score.avatar_src == ''">{{score.initials}}</div>
+          </div>
+
+          <div class="points-bar">
+            <div class="user-points-bar" style="width: {{score.score}}%;"></div>
+            <div class="user-name">{{$index+1}}. {{score.user_name}}</div>
+
+          </div>
+
+          <div class="score">
+            <div class="user-points text-center">{{score.score}}pts in {{score.time_taken}}s</div>
+            <button ng-if="score.challengeEnabled == true" class="btn btn-sm challenge-btn"
+                    ng-click="challenge(scoreIndex)">Challenge</button>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <div class="leaderboard-item current-user-board" ng-show="!leaderboardLoading && score.isCurrentUser == true" ng-repeat="score in scores track by $index">
+        <div class="user-avatar" style="background-image: url({{score.avatar_src}})" ng-style="score.avatar_src == '' && {'background-color'   : 'grey'}">
+          <div ng-if="score.avatar_src == ''">{{score.initials}}</div>
+        </div>
+        <div class="points-bar">
+          <div class="user-points-bar" style="width: {{score.score}}%;"></div>
+          <div class="user-name">{{$index+1}}. {{score.user_name}}</div>
+          <div ng-if="score.challenged_by != ''" class="challenge-note">Challenged by {{score.challenged_by}}</div>
+        </div>
+        <div class="score">
+          <div class="user-points text-center">{{score.score}}pts in {{score.time_taken}}s</div>
+          <button ng-hide="score.user_id == data.currentArenaUserID" class="btn btn-sm challenge-btn" ng-click="challenge(score.user_id, score.user_name, score.challenged_by)">Challenge</button>
+        </div>
+      </div>
+
+
+
+      <div class="leaderboard-item" style="height: 90%;" ng-show="!leaderboardLoading && scores.length == 0">
+        <div class="text-center no-records">
+          Nothing here
+        </div>
+      </div>
+
+
+    </div><!-- Leaderboard Content closes here-->
+  </div>
+
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

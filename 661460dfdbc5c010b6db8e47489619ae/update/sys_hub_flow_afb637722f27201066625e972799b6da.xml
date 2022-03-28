@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>false</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <compiler_build>glide-orlando-12-11-2019__patch7-08-19-2020</compiler_build>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <internal_name>populate_shankaran_pillai_quotes</internal_name>
+        <label_cache>[{"name":"b8efd82d-480a-45e3-b1d5-8772c03bd7d0.table_name","label":"5.1➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"b8efd82d-480a-45e3-b1d5-8772c03bd7d0.record","label":"5.1➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"23a837de-a91d-438a-a1e5-36ec93161249.recordsysid","label":"4➛recordSysId","reference_display":"recordSysId","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"de4209af-b662-4aa4-9662-982499776d8a"}},{"name":"e544e2da-2f3e-4848-ab10-5a9bd36ba748.table_name","label":"3➛Shankaran Pillai Quotes Table","reference":"x_93700_arena_shankaran_pillai_quotes","reference_display":"Shankaran Pillai Quotes","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e544e2da-2f3e-4848-ab10-5a9bd36ba748.record","label":"3➛Shankaran Pillai Quotes Record","reference":"x_93700_arena_shankaran_pillai_quotes","reference_display":"Shankaran Pillai Quotes","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"b7eb3f70-c4c6-4bda-9284-2ba3184148e9.Record.quote","label":"1➛Shankaran Pillai Quotes Record➛Quote","reference":"","reference_display":"Quote","type":"string","base_type":"string","parent_table_name":"x_93700_arena_shankaran_pillai_quotes","column_name":"quote"},{"name":"b7eb3f70-c4c6-4bda-9284-2ba3184148e9.Table","label":"1➛Shankaran Pillai Quotes Table","reference":"x_93700_arena_shankaran_pillai_quotes","reference_display":"Shankaran Pillai Quotes","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"b7eb3f70-c4c6-4bda-9284-2ba3184148e9.Record","label":"1➛Shankaran Pillai Quotes Record","reference":"x_93700_arena_shankaran_pillai_quotes","reference_display":"Shankaran Pillai Quotes","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"23a837de-a91d-438a-a1e5-36ec93161249.rowcount","label":"4➛rowCount","reference_display":"rowCount","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"1ed3bf37-4608-4892-8d88-dfed56bcc1e9"}},{"name":"23a837de-a91d-438a-a1e5-36ec93161249.recordcount","label":"4➛recordCount","reference_display":"recordCount","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"9d93a0b3-68e6-415a-bc50-f943f0f8f6d2"}},{"name":"cbb2e471-4946-45e5-85c7-78be79944255.record","label":"5.1➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"cbb2e471-4946-45e5-85c7-78be79944255.table_name","label":"5.1➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"1cf51c3e-da1c-487b-b3ab-697201ab5f53.record","label":"5.1➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"1cf51c3e-da1c-487b-b3ab-697201ab5f53.table_name","label":"5.1➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}}]</label_cache>
+        <master_snapshot>c1af88cf2fa7201066625e972799b6e1</master_snapshot>
+        <name>Populate Shankaran Pillai Quotes</name>
+        <natlang/>
+        <outputs/>
+        <remote_trigger_id>25afc8cf2fa7201066625e972799b63d</remote_trigger_id>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:01:51</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>afb637722f27201066625e972799b6da</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Populate Shankaran Pillai Quotes</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_hub_flow_afb637722f27201066625e972799b6da</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2022-03-24 14:09:54</sys_updated_on>
+        <type>flow</type>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=afb637722f27201066625e972799b6da"/>
+    <sys_variable_value action="delete_multiple" query="document_key=afb637722f27201066625e972799b6da"/>
+    <sys_flow_timer_trigger action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <day_of_month>1</day_of_month>
+        <day_of_week>5</day_of_week>
+        <name/>
+        <run_period/>
+        <run_start>2021-04-20 11:50:40</run_start>
+        <sys_class_name>sys_flow_timer_trigger</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:40</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>25afc8cf2fa7201066625e972799b63d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:40</sys_updated_on>
+        <time>1969-12-31 23:30:00</time>
+        <timer_type>3</timer_type>
+    </sys_flow_timer_trigger>
+    <sys_flow_trigger_auto_script action="delete_multiple" query="name=Trigger:25afc8cf2fa7201066625e972799b63d^sys_idNOT INe9afc8cf2fa7201066625e972799b63d"/>
+    <sys_flow_trigger_auto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time/>
+        <name>Trigger:25afc8cf2fa7201066625e972799b63d</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as display_value="Jaydeep Deb">6815b7450770101037c7f2ae7c1ed068</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>5</run_dayofweek>
+        <run_period/>
+        <run_start>2021-04-20 11:50:40</run_start>
+        <run_time>1969-12-31 23:30:00</run_time>
+        <run_type>weekly</run_type>
+        <script><![CDATA[sn_flow_trigger.FlowTriggerAPI.fireTimerTrigger('25afc8cf2fa7201066625e972799b63d');]]></script>
+        <sys_class_name>sys_flow_trigger_auto_script</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:40</sys_created_on>
+        <sys_id>e9afc8cf2fa7201066625e972799b63d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:40</sys_updated_on>
+        <time_zone/>
+        <trigger display_value="">25afc8cf2fa7201066625e972799b63d</trigger>
+        <upgrade_safe>true</upgrade_safe>
+    </sys_flow_trigger_auto_script>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=afb637722f27201066625e972799b6da^sys_idNOT INcca8ff362f27201066625e972799b69a"/>
+    <sys_hub_trigger_instance action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Populate Shankaran Pillai Quotes">afb637722f27201066625e972799b6da</flow>
+        <name>Weekly</name>
+        <remote_sys_id/>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:04</sys_created_on>
+        <sys_id>cca8ff362f27201066625e972799b69a</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 08:23:52</sys_updated_on>
+        <trigger_definition display_value="Weekly">cf352104c32222002841b63b12d3ae1f</trigger_definition>
+        <trigger_inputs/>
+        <trigger_outputs/>
+        <trigger_type>weekly</trigger_type>
+    </sys_hub_trigger_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=cca8ff362f27201066625e972799b69a"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>cca8ff362f27201066625e972799b69a</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:04</sys_created_on>
+        <sys_id>00a8ff362f27201066625e972799b69c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:04</sys_updated_on>
+        <value>1970-01-01 05:00:00</value>
+        <variable display_value="Time">a745a104c32222002841b63b12d3ae18</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>cca8ff362f27201066625e972799b69a</document_key>
+        <order>10</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:04</sys_created_on>
+        <sys_id>c0a8ff362f27201066625e972799b69c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:04</sys_updated_on>
+        <value>5</value>
+        <variable display_value="Day of Week">c685a104c32222002841b63b12d3aed3</variable>
+    </sys_variable_value>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=afb637722f27201066625e972799b6da^sys_idNOT IN23b637722f27201066625e972799b6dc"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>afb637722f27201066625e972799b6da</id>
+        <name>Populate Shankaran Pillai Quotes</name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:01:51</sys_created_on>
+        <sys_id>23b637722f27201066625e972799b6dc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:01:51</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_hub_action_instance action="delete_multiple" query="flow=afb637722f27201066625e972799b6da^sys_idNOT IN48a8ff362f27201066625e972799b6a3,c0a8ff362f27201066625e972799b6a7,c4a8ff362f27201066625e972799b69f,fa3abff62f27201066625e972799b6d8"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Set Property Value">35d2b3ba2fe3201066625e972799b66d</action_type>
+        <action_type_parent/>
+        <comment>Set the property value with the quote</comment>
+        <compiled_snapshot>35d2b3ba2fe3201066625e972799b66d</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Populate Shankaran Pillai Quotes">afb637722f27201066625e972799b6da</flow>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:04</sys_created_on>
+        <sys_id>48a8ff362f27201066625e972799b6a3</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 08:23:52</sys_updated_on>
+        <ui_id>aaa3c185-162c-434e-a829-c50379dcc9a5</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=48a8ff362f27201066625e972799b6a3"/>
+    <sys_element_mapping action="delete_multiple" query="id=48a8ff362f27201066625e972799b6a3"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>quote</field>
+        <id>48a8ff362f27201066625e972799b6a3</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:04</sys_created_on>
+        <sys_id>4ca8ff362f27201066625e972799b6a4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:04</sys_updated_on>
+        <table>var__m_sys_hub_action_input_35d2b3ba2fe3201066625e972799b66d</table>
+        <value>{{b7eb3f70-c4c6-4bda-9284-2ba3184148e9.Record.quote}}</value>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent/>
+        <comment>set the quote used? field to true</comment>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Populate Shankaran Pillai Quotes">afb637722f27201066625e972799b6da</flow>
+        <order>3</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:05</sys_created_on>
+        <sys_id>c0a8ff362f27201066625e972799b6a7</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 08:23:52</sys_updated_on>
+        <ui_id>e544e2da-2f3e-4848-ab10-5a9bd36ba748</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=c0a8ff362f27201066625e972799b6a7"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>c0a8ff362f27201066625e972799b6a7</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:05</sys_created_on>
+        <sys_id>04a8ff362f27201066625e972799b6a9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:05</sys_updated_on>
+        <value>x_93700_arena_shankaran_pillai_quotes</value>
+        <variable display_value="Table">b5d01916c31332002841b63b12d3aec9</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>c0a8ff362f27201066625e972799b6a7</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:05</sys_created_on>
+        <sys_id>40a8ff362f27201066625e972799b6a9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:05</sys_updated_on>
+        <value>quote_used=true</value>
+        <variable display_value="Fields">02d01916c31332002841b63b12d3aeee</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=c0a8ff362f27201066625e972799b6a7"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>record</field>
+        <id>c0a8ff362f27201066625e972799b6a7</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:05</sys_created_on>
+        <sys_id>0ca8ff362f27201066625e972799b6a8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:05</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value>{{b7eb3f70-c4c6-4bda-9284-2ba3184148e9.Record}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>table_name</field>
+        <id>c0a8ff362f27201066625e972799b6a7</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:05</sys_created_on>
+        <sys_id>48a8ff362f27201066625e972799b6a8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:05</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>values</field>
+        <id>c0a8ff362f27201066625e972799b6a7</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:05</sys_created_on>
+        <sys_id>cca8ff362f27201066625e972799b6a8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:05</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_type display_value="Look Up Record">bf0256c10b30030085c083eb37673ac0</action_type>
+        <action_type_parent/>
+        <comment/>
+        <compiled_snapshot>bf0256c10b30030085c083eb37673ac0</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Populate Shankaran Pillai Quotes">afb637722f27201066625e972799b6da</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:04</sys_created_on>
+        <sys_id>c4a8ff362f27201066625e972799b69f</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 08:23:52</sys_updated_on>
+        <ui_id>b7eb3f70-c4c6-4bda-9284-2ba3184148e9</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=c4a8ff362f27201066625e972799b69f"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>c4a8ff362f27201066625e972799b69f</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:04</sys_created_on>
+        <sys_id>0ca8ff362f27201066625e972799b6a1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:04</sys_updated_on>
+        <value>quote_used=false</value>
+        <variable display_value="Conditions">3b0256c10b30030085c083eb37673acf</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>c4a8ff362f27201066625e972799b69f</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:10:04</sys_created_on>
+        <sys_id>cca8ff362f27201066625e972799b6a1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 10:10:04</sys_updated_on>
+        <value>x_93700_arena_shankaran_pillai_quotes</value>
+        <variable display_value="Table">b70256c10b30030085c083eb37673ac3</variable>
+    </sys_variable_value>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_type display_value="Get Row Count">22b8f3762f27201066625e972799b644</action_type>
+        <action_type_parent/>
+        <comment>Once all the quotes from the Quote table is used make them reusable</comment>
+        <compiled_snapshot>22b8f3762f27201066625e972799b644</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Populate Shankaran Pillai Quotes">afb637722f27201066625e972799b6da</flow>
+        <order>4</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 10:17:06</sys_created_on>
+        <sys_id>fa3abff62f27201066625e972799b6d8</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 08:23:52</sys_updated_on>
+        <ui_id>23a837de-a91d-438a-a1e5-36ec93161249</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=fa3abff62f27201066625e972799b6d8"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=afb637722f27201066625e972799b6da^sys_idNOT IN2dafc8cf2fa7201066625e972799b63f"/>
+    <sys_flow_trigger_plan action="INSERT_OR_UPDATE">
+        <binding_strategy>com.snc.process_flow.engine.binding.RunAlways</binding_strategy>
+        <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_flow_trigger_plan","id":"2dafc8cf2fa7201066625e972799b63f","name":"plan"}}</plan>
+        <plan_id>afb637722f27201066625e972799b6da</plan_id>
+        <snapshot>c1af88cf2fa7201066625e972799b6e1</snapshot>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:40</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>2dafc8cf2fa7201066625e972799b63f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 08:23:52</sys_updated_on>
+        <trigger display_value="">25afc8cf2fa7201066625e972799b63d</trigger>
+    </sys_flow_trigger_plan>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <internal_name>populate_shankaran_pillai_quotes</internal_name>
+        <label_cache>[{"name":"b8efd82d-480a-45e3-b1d5-8772c03bd7d0.table_name","label":"5.1➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"b8efd82d-480a-45e3-b1d5-8772c03bd7d0.record","label":"5.1➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"23a837de-a91d-438a-a1e5-36ec93161249.recordsysid","label":"4➛recordSysId","reference_display":"recordSysId","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"de4209af-b662-4aa4-9662-982499776d8a"}},{"name":"e544e2da-2f3e-4848-ab10-5a9bd36ba748.table_name","label":"3➛Shankaran Pillai Quotes Table","reference":"x_93700_arena_shankaran_pillai_quotes","reference_display":"Shankaran Pillai Quotes","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"e544e2da-2f3e-4848-ab10-5a9bd36ba748.record","label":"3➛Shankaran Pillai Quotes Record","reference":"x_93700_arena_shankaran_pillai_quotes","reference_display":"Shankaran Pillai Quotes","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"b7eb3f70-c4c6-4bda-9284-2ba3184148e9.Record.quote","label":"1➛Shankaran Pillai Quotes Record➛Quote","reference":"","reference_display":"Quote","type":"string","base_type":"string","parent_table_name":"x_93700_arena_shankaran_pillai_quotes","column_name":"quote"},{"name":"b7eb3f70-c4c6-4bda-9284-2ba3184148e9.Table","label":"1➛Shankaran Pillai Quotes Table","reference":"x_93700_arena_shankaran_pillai_quotes","reference_display":"Shankaran Pillai Quotes","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"b7eb3f70-c4c6-4bda-9284-2ba3184148e9.Record","label":"1➛Shankaran Pillai Quotes Record","reference":"x_93700_arena_shankaran_pillai_quotes","reference_display":"Shankaran Pillai Quotes","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"23a837de-a91d-438a-a1e5-36ec93161249.rowcount","label":"4➛rowCount","reference_display":"rowCount","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"1ed3bf37-4608-4892-8d88-dfed56bcc1e9"}},{"name":"23a837de-a91d-438a-a1e5-36ec93161249.recordcount","label":"4➛recordCount","reference_display":"recordCount","type":"integer","base_type":"integer","attributes":{"uiType":"integer","uiTypeLabel":"Integer","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"9d93a0b3-68e6-415a-bc50-f943f0f8f6d2"}},{"name":"cbb2e471-4946-45e5-85c7-78be79944255.record","label":"5.1➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"cbb2e471-4946-45e5-85c7-78be79944255.table_name","label":"5.1➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"1cf51c3e-da1c-487b-b3ab-697201ab5f53.record","label":"5.1➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"1cf51c3e-da1c-487b-b3ab-697201ab5f53.table_name","label":"5.1➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}}]</label_cache>
+        <master>true</master>
+        <name>Populate Shankaran Pillai Quotes</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="Populate Shankaran Pillai Quotes">afb637722f27201066625e972799b6da</parent_flow>
+        <remote_trigger_id/>
+        <run_as>system</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:38</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c1af88cf2fa7201066625e972799b6e1</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 08:23:50</sys_updated_on>
+        <type>flow</type>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=c1af88cf2fa7201066625e972799b6e1"/>
+    <sys_variable_value action="delete_multiple" query="document_key=c1af88cf2fa7201066625e972799b6e1"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=c1af88cf2fa7201066625e972799b6e1^sys_idNOT IN91afc8cf2fa7201066625e972799b625"/>
+    <sys_hub_trigger_instance action="INSERT_OR_UPDATE">
+        <comment/>
+        <display_text/>
+        <flow display_value="Populate Shankaran Pillai Quotes">c1af88cf2fa7201066625e972799b6e1</flow>
+        <name>Weekly</name>
+        <remote_sys_id/>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>91afc8cf2fa7201066625e972799b625</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 08:23:52</sys_updated_on>
+        <trigger_definition display_value="Weekly">cf352104c32222002841b63b12d3ae1f</trigger_definition>
+        <trigger_inputs/>
+        <trigger_outputs/>
+        <trigger_type>weekly</trigger_type>
+    </sys_hub_trigger_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=91afc8cf2fa7201066625e972799b625"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>91afc8cf2fa7201066625e972799b625</document_key>
+        <order>10</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>91afc8cf2fa7201066625e972799b626</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:39</sys_updated_on>
+        <value>5</value>
+        <variable display_value="Day of Week">c685a104c32222002841b63b12d3aed3</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_trigger_instance</document>
+        <document_key>91afc8cf2fa7201066625e972799b625</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>ddafc8cf2fa7201066625e972799b625</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:39</sys_updated_on>
+        <value>1970-01-01 05:00:00</value>
+        <variable display_value="Time">a745a104c32222002841b63b12d3ae18</variable>
+    </sys_variable_value>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=c1af88cf2fa7201066625e972799b6e1^sys_idNOT IN81af88cf2fa7201066625e972799b6e2"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>c1af88cf2fa7201066625e972799b6e1</id>
+        <name>Populate Shankaran Pillai Quotes</name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:38</sys_created_on>
+        <sys_id>81af88cf2fa7201066625e972799b6e2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:38</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_hub_action_instance action="delete_multiple" query="flow=c1af88cf2fa7201066625e972799b6e1^sys_idNOT IN11af88cf2fa7201066625e972799b6e7,59afc8cf2fa7201066625e972799b620,99afc8cf2fa7201066625e972799b624,d1afc8cf2fa7201066625e972799b61d"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_type display_value="Look Up Record">bf0256c10b30030085c083eb37673ac0</action_type>
+        <action_type_parent display_value="Look Up Record">b93f42810b30030085c083eb37673a63</action_type_parent>
+        <comment/>
+        <compiled_snapshot>bf0256c10b30030085c083eb37673ac0</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Populate Shankaran Pillai Quotes">c1af88cf2fa7201066625e972799b6e1</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:38</sys_created_on>
+        <sys_id>11af88cf2fa7201066625e972799b6e7</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 08:23:50</sys_updated_on>
+        <ui_id>b7eb3f70-c4c6-4bda-9284-2ba3184148e9</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=11af88cf2fa7201066625e972799b6e7"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>11af88cf2fa7201066625e972799b6e7</document_key>
+        <order>1</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:38</sys_created_on>
+        <sys_id>95af88cf2fa7201066625e972799b6e9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:38</sys_updated_on>
+        <value>quote_used=false</value>
+        <variable display_value="Conditions">3b0256c10b30030085c083eb37673acf</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>11af88cf2fa7201066625e972799b6e7</document_key>
+        <order>0</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>ddaf88cf2fa7201066625e972799b6e9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:39</sys_updated_on>
+        <value>x_93700_arena_shankaran_pillai_quotes</value>
+        <variable display_value="Table">b70256c10b30030085c083eb37673ac3</variable>
+    </sys_variable_value>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <comment>set the quote used? field to true</comment>
+        <compiled_snapshot>f9d01dd2c31332002841b63b12d3aea1</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Populate Shankaran Pillai Quotes">c1af88cf2fa7201066625e972799b6e1</flow>
+        <order>3</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>59afc8cf2fa7201066625e972799b620</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 08:23:50</sys_updated_on>
+        <ui_id>e544e2da-2f3e-4848-ab10-5a9bd36ba748</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=59afc8cf2fa7201066625e972799b620"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>59afc8cf2fa7201066625e972799b620</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>19afc8cf2fa7201066625e972799b622</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:39</sys_updated_on>
+        <value>quote_used=true</value>
+        <variable display_value="Fields">02d01916c31332002841b63b12d3aeee</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>59afc8cf2fa7201066625e972799b620</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>d9afc8cf2fa7201066625e972799b622</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:39</sys_updated_on>
+        <value>x_93700_arena_shankaran_pillai_quotes</value>
+        <variable display_value="Table">b5d01916c31332002841b63b12d3aec9</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=59afc8cf2fa7201066625e972799b620"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>record</field>
+        <id>59afc8cf2fa7201066625e972799b620</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>d1afc8cf2fa7201066625e972799b622</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:39</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value>{{b7eb3f70-c4c6-4bda-9284-2ba3184148e9.Record}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>table_name</field>
+        <id>59afc8cf2fa7201066625e972799b620</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>11afc8cf2fa7201066625e972799b622</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:39</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>values</field>
+        <id>59afc8cf2fa7201066625e972799b620</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>95afc8cf2fa7201066625e972799b622</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:39</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_type display_value="Get Row Count">22b8f3762f27201066625e972799b644</action_type>
+        <action_type_parent display_value="Get Row Count">0967f3b22f27201066625e972799b6bb</action_type_parent>
+        <comment>Once all the quotes from the Quote table is used make them reusable</comment>
+        <compiled_snapshot>22b8f3762f27201066625e972799b644</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Populate Shankaran Pillai Quotes">c1af88cf2fa7201066625e972799b6e1</flow>
+        <order>4</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>99afc8cf2fa7201066625e972799b624</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 08:23:50</sys_updated_on>
+        <ui_id>23a837de-a91d-438a-a1e5-36ec93161249</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=99afc8cf2fa7201066625e972799b624"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Set Property Value">35d2b3ba2fe3201066625e972799b66d</action_type>
+        <action_type_parent display_value="Set Property Value">64e1f33a2fe3201066625e972799b618</action_type_parent>
+        <comment>Set the property value with the quote</comment>
+        <compiled_snapshot>35d2b3ba2fe3201066625e972799b66d</compiled_snapshot>
+        <display_text/>
+        <flow display_value="Populate Shankaran Pillai Quotes">c1af88cf2fa7201066625e972799b6e1</flow>
+        <order>2</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>d1afc8cf2fa7201066625e972799b61d</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 08:23:50</sys_updated_on>
+        <ui_id>aaa3c185-162c-434e-a829-c50379dcc9a5</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=d1afc8cf2fa7201066625e972799b61d"/>
+    <sys_element_mapping action="delete_multiple" query="id=d1afc8cf2fa7201066625e972799b61d"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>quote</field>
+        <id>d1afc8cf2fa7201066625e972799b61d</id>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-20 11:50:39</sys_created_on>
+        <sys_id>95afc8cf2fa7201066625e972799b61e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-20 11:50:39</sys_updated_on>
+        <table>var__m_sys_hub_action_input_35d2b3ba2fe3201066625e972799b66d</table>
+        <value>{{b7eb3f70-c4c6-4bda-9284-2ba3184148e9.Record.quote}}</value>
+    </sys_element_mapping>
+    <sys_hub_flow action="update">
+        <sys_id>afb637722f27201066625e972799b6da</sys_id>
+        <latest_snapshot>c1af88cf2fa7201066625e972799b6e1</latest_snapshot>
+    </sys_hub_flow>
+</record_update>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>Service Portal</category>
+        <format/>
+        <height/>
+        <image>91d30fb1db789010b6db8e47489619e1</image>
+        <name>arena-level-medium.svg</name>
+        <size_bytes>1559</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-16 14:41:13</sys_created_on>
+        <sys_id>b6a30bb1db789010b6db8e4748961919</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>arena-level-medium.svg</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>db_image_b6a30bb1db789010b6db8e4748961919</sys_update_name>
+        <sys_updated_by>jaydeep</sys_updated_by>
+        <sys_updated_on>2020-05-16 22:02:47</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <encryption_context/>
+        <file_name>image</file_name>
+        <hash>f631531e7cc4dba11d76698f74385f884a2ce28a32f39591f97b6f11c18097d5</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>1559</size_bytes>
+        <size_compressed>762</size_compressed>
+        <state>available</state>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-16 14:41:41</sys_created_on>
+        <sys_id>91d30fb1db789010b6db8e47489619e1</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-05-16 14:41:41</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>b6a30bb1db789010b6db8e4748961919</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="91d30fb1db789010b6db8e47489619e1">91d30fb1db789010b6db8e47489619e1</sys_attachment>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-16 14:41:41</sys_created_on>
+        <sys_id>d1d30fb1db789010b6db8e47489619e1</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>zVTbbuNGDH3OAvsPU70VmKGGM5qbG3fROEEQwNsG6HaLPhWOLDjGqpIhOXE2X78cytnGRT6gLzzU8AzJQ0o6//D0Tysem2Hc9t28QNCFaLq6X2+7zbzYjr2K0SWFxYef3787/0Epcd10zbDa98NM/LLu7xpx07YP456PBEbQoKX4/fO1uHra9cNe3LYPG3XTCeDDz1OlmfCgtbh42LZroX8UQinOf/nb4tNft1difNyI2z8uljcLUaiy/NMuyvLy0yWnQMCyvPq1EMX9fr+bleXhcICDhX7YlNfDane/rceSiGUm0qWSkiHCer8uco2c+pVeLMR2PS8Wq93qb/JpGt04fyOz0VrnTEfK7Knddl/eImJKqeQoUeeF3j0V4uuE79+dicdtc7joc0BoYTCAduEFCzHuv7bNvGi61V3bqLtV/WUz9A/detY1B/HGjZ+4ndm4W9V0bTc0YzM8NqxzQ+bsfLfa3wvS99Eb0NZJ6g4wpBYd+GjkBDVCpYPM1ksLFitpAJOXDqw++sRJMUlN8Zi80hDSFFYcbmPI9xSDo8pntYFkEkWTlZMbwIcotUINXvtWTcUnsDWl1BopzPjKmskS30LFpnW0N51UBjSnxUx6VS28VHNLDBaCCSwmLDAY6pPkZBkYNFRoSBv6CJWxUtfqKFexXOapf6cRcs1WOc/3GKolJrCkFStHkuuTXib/2JGc9C9PN/IsPkYL2iAdREiOsoMObrJt8BB0VAyJi/O5ZLs8uUiJXmTQ14g0aBqZtRTOQGOk/iLtmSHSVCF4M1l6QHA+MYTlaZrnXJZyI7WNKEMFzmBLMW8ryeDrvCia3nfr2Tq2iW3kbvKYMpBKlhTkpKxVNg/FT0BLOynGHRTlf95rD4Z2gFUFvqZteT+ZBC4dXSplXOTyZqIY+Z1oZAKfl8Kkmo6ImgNe5hSTX3GYaLmDhU8Qg6dvp6JXIUl+JEYViYLydUPP3O15uXn5IP/3bv7FEX4D0H31AxcGAAA=</data>
+        <length>1004</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="91d30fb1db789010b6db8e47489619e1">91d30fb1db789010b6db8e47489619e1</sys_attachment>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-16 14:41:41</sys_created_on>
+        <sys_id>55d30fb1db789010b6db8e47489619e1</sys_id>
+    </sys_attachment_doc>
+</record_update>

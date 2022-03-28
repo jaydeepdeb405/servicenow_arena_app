@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action">
+    <sys_ui_policy_action action="INSERT_OR_UPDATE">
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field>html_question</field>
+        <mandatory>ignore</mandatory>
+        <sys_class_name>sys_ui_policy_action</sys_class_name>
+        <sys_created_by>vyas</sys_created_by>
+        <sys_created_on>2019-11-30 18:30:12</sys_created_on>
+        <sys_id>25fc267fdbd5c810b6db8e474896199c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>html_question</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ui_policy_action_25fc267fdbd5c810b6db8e474896199c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-02-25 16:49:48</sys_updated_on>
+        <table>x_93700_arena_arena_question</table>
+        <ui_policy display_value="Show-Hide HTML question">337cea3fdbd5c810b6db8e474896193f</ui_policy>
+        <visible>true</visible>
+    </sys_ui_policy_action>
+</record_update>

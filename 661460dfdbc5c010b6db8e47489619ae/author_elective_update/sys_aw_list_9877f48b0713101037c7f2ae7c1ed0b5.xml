@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_aw_list">
+    <sys_aw_list action="DELETE">
+        <active>true</active>
+        <category/>
+        <columns>achievement_leaderboard,application_excellence,avatar,berserker,difficulty,interviewee,knight,last_played_on,leader_board_end,leader_board_start,level,music,platform_excellence,present_level,profile_image,scripting_excellence,sfx,sfx_sounds,sound,sys_created_by,sys_created_on,sys_id,sys_mod_count,sys_tags,sys_updated_by,sys_updated_on,ui_excellence,user,viking</columns>
+        <condition/>
+        <groups/>
+        <list_attributes/>
+        <order>100</order>
+        <roles/>
+        <sys_class_name>sys_aw_list</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-21 08:17:40</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>9877f48b0713101037c7f2ae7c1ed0b5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>All</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_aw_list_9877f48b0713101037c7f2ae7c1ed0b5</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-21 08:17:40</sys_updated_on>
+        <table>x_93700_arena_user</table>
+        <title>All</title>
+        <workspace display_value="Arena">cc77f48b0713101037c7f2ae7c1ed053</workspace>
+    </sys_aw_list>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_aw_list_9877f48b0713101037c7f2ae7c1ed0b5</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_aw_list"><sys_aw_list action="INSERT_OR_UPDATE"><active>true</active><category/><columns>achievement_leaderboard,application_excellence,avatar,berserker,difficulty,interviewee,knight,last_played_on,leader_board_end,leader_board_start,level,music,platform_excellence,present_level,profile_image,scripting_excellence,sfx,sfx_sounds,sound,sys_created_by,sys_created_on,sys_id,sys_mod_count,sys_tags,sys_updated_by,sys_updated_on,ui_excellence,user,viking</columns><condition/><groups/><list_attributes/><order>100</order><roles/><sys_class_name>sys_aw_list</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-09-21 08:17:40</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>9877f48b0713101037c7f2ae7c1ed0b5</sys_id><sys_mod_count>0</sys_mod_count><sys_name>All</sys_name><sys_overrides/><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_aw_list_9877f48b0713101037c7f2ae7c1ed0b5</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-09-21 08:17:40</sys_updated_on><table>x_93700_arena_user</table><title>All</title><workspace display_value="Arena">cc77f48b0713101037c7f2ae7c1ed053</workspace></sys_aw_list></record_update>]]></payload>
+        <payload_hash>1856071339</payload_hash>
+        <record_name>All</record_name>
+        <reverted_from/>
+        <source>9d4fad12079d501037c7f2ae7c1ed0a1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-21 08:17:42</sys_created_on>
+        <sys_id>a477788b0713101037c7f2ae7c1ed01d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>174afbd71d20000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-21 08:17:42</sys_updated_on>
+        <type>Workspace List</type>
+        <update_guid>9477f48bcf1310104db85210c192c7b6</update_guid>
+        <update_guid_history>9477f48bcf1310104db85210c192c7b6:-1942105222,9477f48bcf1310104db85210c192c7b6:-1942105222</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-21 08:17:44</sys_created_on>
+        <sys_db_object display_value="" name="sys_aw_list">sys_aw_list</sys_db_object>
+        <sys_id>1cb9eac653ae40e88542c73a54a95a40</sys_id>
+        <sys_metadata>9877f48b0713101037c7f2ae7c1ed0b5</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>All</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_aw_list_9877f48b0713101037c7f2ae7c1ed0b5</sys_update_name>
+        <sys_update_version display_value="sys_aw_list_9877f48b0713101037c7f2ae7c1ed0b5">a477788b0713101037c7f2ae7c1ed01d</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-21 08:17:44</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

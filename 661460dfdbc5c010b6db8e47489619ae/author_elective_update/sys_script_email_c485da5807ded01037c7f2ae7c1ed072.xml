@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_email">
+    <sys_script_email action="DELETE">
+        <name>test_invite_user_credentials</name>
+        <new_lines_to_html>false</new_lines_to_html>
+        <script><![CDATA[(function runMailScript( /* GlideRecord */ current, /* TemplatePrinter */ template,
+    /* Optional EmailOutbound */
+    email, /* Optional GlideRecord */ email_action,
+    /* Optional GlideRecord */
+    event) {
+    var recipientId = event.parm1;
+	var userId = "";
+	var userPassword = "";
+	var credentials = "";
+
+    var userGr = new GlideRecord('sys_user');
+    userGr.addQuery('sys_id', recipientId);
+    userGr.query();
+    if (userGr.next()) {
+        credentials+="<div>UserID :        "+userGr.getValue('user_name')+"</div><div>Password :      "+gs.getProperty('x_93700_arena.test.user.default_password');
+    }
+    template.print(credentials);
+})(current, template, email, email_action, event);]]></script>
+        <sys_class_name>sys_script_email</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-25 09:08:34</sys_created_on>
+        <sys_id>c485da5807ded01037c7f2ae7c1ed072</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>test_invite_user_credentials</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_script_email_c485da5807ded01037c7f2ae7c1ed072</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-25 09:27:31</sys_updated_on>
+    </sys_script_email>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_script_email_c485da5807ded01037c7f2ae7c1ed072</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_email"&gt;&lt;sys_script_email action="INSERT_OR_UPDATE"&gt;&lt;name&gt;test_invite_user_credentials&lt;/name&gt;&lt;new_lines_to_html&gt;false&lt;/new_lines_to_html&gt;&lt;script&gt;&lt;![CDATA[(function runMailScript( /* GlideRecord */ current, /* TemplatePrinter */ template,
+    /* Optional EmailOutbound */
+    email, /* Optional GlideRecord */ email_action,
+    /* Optional GlideRecord */
+    event) {
+    var recipientId = event.parm1;
+	var userId = "";
+	var userPassword = "";
+	var credentials = "";
+
+    var userGr = new GlideRecord('sys_user');
+    userGr.addQuery('sys_id', recipientId);
+    userGr.query();
+    if (userGr.next()) {
+        credentials+="&lt;div&gt;UserID :        "+userGr.getValue('user_name')+"&lt;/div&gt;&lt;div&gt;Password :      "+gs.getProperty('x_93700_arena.test.user.default_password');
+    }
+    template.print(credentials);
+})(current, template, email, email_action, event);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_email&lt;/sys_class_name&gt;&lt;sys_created_by&gt;jaydeepdeb&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-07-25 09:08:34&lt;/sys_created_on&gt;&lt;sys_id&gt;c485da5807ded01037c7f2ae7c1ed072&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;test_invite_user_credentials&lt;/sys_name&gt;&lt;sys_package display_value="Arena" source="x_93700_arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_email_c485da5807ded01037c7f2ae7c1ed072&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;jaydeepdeb&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-07-25 09:27:31&lt;/sys_updated_on&gt;&lt;/sys_script_email&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>106575137</payload_hash>
+        <record_name>test_invite_user_credentials</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-25 09:27:31</sys_created_on>
+        <sys_id>b13bde5c07ded01037c7f2ae7c1ed0eb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>173854c844e0000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-25 09:27:31</sys_updated_on>
+        <type>Email Script</type>
+        <update_guid>793bde5cecded010289d9e32f90fbeea</update_guid>
+        <update_guid_history>793bde5cecded010289d9e32f90fbeea:106575137,d4e69e58efded010aeaaab51e2b1a56a:-180917414</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-03 15:50:01</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_email">sys_script_email</sys_db_object>
+        <sys_id>32ca4605d5b442faa0cb8200b5dd0644</sys_id>
+        <sys_metadata>c485da5807ded01037c7f2ae7c1ed072</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>test_invite_user_credentials</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_script_email_c485da5807ded01037c7f2ae7c1ed072</sys_update_name>
+        <sys_update_version display_value="sys_script_email_c485da5807ded01037c7f2ae7c1ed072">b13bde5c07ded01037c7f2ae7c1ed0eb</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-03 15:50:01</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_js_include">
+    <sp_js_include action="INSERT_OR_UPDATE">
+        <display_name>drdp</display_name>
+        <source>local</source>
+        <sys_class_name>sp_js_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-06-04 13:56:16</sys_created_on>
+        <sys_id>f59f20c0dbdd9810b6db8e47489619c8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>drdp</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_ui_script display_value="x_93700_arena.drdp">c2bda440dbdd9810b6db8e474896196b</sys_ui_script>
+        <sys_update_name>sp_js_include_f59f20c0dbdd9810b6db8e47489619c8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-06-04 13:56:16</sys_updated_on>
+        <url/>
+    </sp_js_include>
+</record_update>

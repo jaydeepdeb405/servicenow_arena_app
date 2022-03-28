@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="1e17d6a2db8b1010b6db8e4748961948" sys_domain="global" table="x_93700_arena_questions" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>date</element>
+            <position>0</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:28:29</sys_created_on>
+            <sys_id>ec141eff079a01109a85f6fd7c1ed08f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:28:29</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>month</element>
+            <position>1</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:28:29</sys_created_on>
+            <sys_id>a8141eff079a01109a85f6fd7c1ed090</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:28:29</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>accept_answers</element>
+            <position>2</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:28:29</sys_created_on>
+            <sys_id>20141eff079a01109a85f6fd7c1ed091</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:28:29</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>3</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:28:29</sys_created_on>
+            <sys_id>a4141eff079a01109a85f6fd7c1ed091</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:28:29</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>active</element>
+            <position>4</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:28:29</sys_created_on>
+            <sys_id>2c141eff079a01109a85f6fd7c1ed091</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:28:29</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>year</element>
+            <position>5</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:28:29</sys_created_on>
+            <sys_id>a0141eff079a01109a85f6fd7c1ed092</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:28:29</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>view_count</element>
+            <position>6</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:28:29</sys_created_on>
+            <sys_id>28141eff079a01109a85f6fd7c1ed092</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:28:29</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>7</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:28:29</sys_created_on>
+            <sys_id>ac141eff079a01109a85f6fd7c1ed092</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:28:29</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>question_type</element>
+            <position>8</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:28:29</sys_created_on>
+            <sys_id>24141eff079a01109a85f6fd7c1ed093</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:28:29</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>title</element>
+            <position>9</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:28:29</sys_created_on>
+            <sys_id>a8141eff079a01109a85f6fd7c1ed093</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:28:29</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>question</element>
+            <position>10</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:28:29</sys_created_on>
+            <sys_id>20141eff079a01109a85f6fd7c1ed094</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:28:29</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>correct_answer</element>
+            <position>11</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:28:29</sys_created_on>
+            <sys_id>a4141eff079a01109a85f6fd7c1ed094</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:28:29</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>code</element>
+            <position>12</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2022-03-24 18:33:23</sys_created_on>
+            <sys_id>d03552b307da01109a85f6fd7c1ed0ed</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_questions" sys_domain="global" view="Default view">1e17d6a2db8b1010b6db8e4748961948</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2022-03-24 18:33:23</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_93700_arena_questions</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>praveen</sys_created_by>
+            <sys_created_on>2020-09-07 15:42:56</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1e17d6a2db8b1010b6db8e4748961948</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_93700_arena_questions</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_ui_section_1e17d6a2db8b1010b6db8e4748961948</sys_update_name>
+            <sys_updated_by>praveen</sys_updated_by>
+            <sys_updated_on>2020-09-07 15:42:56</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function LeaderBoard($scope, $rootScope, $http) {
+	var c = this;
+	//routing to latest level and difficulty
+
+
+	$rootScope.$on('gameScreen', function(event, obj) {
+		c.ll = obj.leaderboard;
+		if(obj.leaderboard == true){		
+			$scope.currentdifficulty = c.data.difficulty;
+			$scope.currentlevel = c.data.levl;
+			c.showLeaderBoard();
+		}
+	});
+	
+
+
+//refresh leaderoard
+	c.showLeaderBoard = function() {		
+		c.data.level = $scope.currentlevel;
+		c.data.diff = $scope.currentdifficulty;
+		//Notiflix.Notify.Success('#debug Calling server : ' +$scope.currentlevel+" : "+ $scope.currentdifficulty);
+		c.server.update();
+	};
+	
+//challenging
+	c.challenger = function(uID, lvl, dif) {
+		c.data.User = uID;
+		c.data.lvl = lvl;
+		c.data.dif = dif;
+		c.server.update();
+	};
+//fighting animation
+	c.fight = function()
+	{
+		document.getElementById("fight").style.display = "inline";
+		setTimeout(function(){document.getElementById( "fight" ).style.display = "none";},3850) ;
+	}
+	
+	//avatar
+	var liveProfiles = {};
+	$scope.getLiveProfileByUserId = function (userSysId){
+	return liveProfiles[userSysId] ;
+	};
+	var pending = {};
+	//Little caching implementation to make sure we only get a given user's profile once.
+	$scope.hasLiveProfile = function hasLiveProfile(userSysId){
+		if (liveProfiles[userSysId])
+			return true;
+		else if (pending[userSysId])
+			return false;
+		else {		
+			pending[userSysId] = $http.get('/api/now/live/profiles/sys_user.' + userSysId).then(function (response) {	//alert(JSON.stringify(response.data.result));
+				liveProfiles[userSysId] = {
+					userID: userSysId,
+					name: response.data.result.name,
+					initials: buildInitials(response.data.result.name),
+					avatar: response.data.result.avatar
+				};
+			});
+			return false;
+		}
+	};
+	
+	function buildInitials(name) {
+				if (!name)
+					return "--";
+				var initials = name.split(" ").map(function(word) {
+					return word.toUpperCase();
+				}).filter(function(word) {
+					return word.match(/^[A-Z]/);
+				}).map(function(word) {
+					return word.substring(0,1);
+				}).join("");
+				return (initials.length > 3) ? initials.substr(0, 3) : initials;
+			}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>a {&#13;
+  text-decoration: none;&#13;
+}&#13;
+&#13;
+nav {&#13;
+  font-family: monospace;&#13;
+}&#13;
+&#13;
+ul {&#13;
+  background: darkorange;&#13;
+  list-style: none;&#13;
+  margin: 0;&#13;
+  padding-left: 0;&#13;
+  display: inline-block;&#13;
+}&#13;
+&#13;
+li {&#13;
+  color: #fff;&#13;
+  background: darkorange;&#13;
+  float: middle;&#13;
+  padding: 1rem;&#13;
+  position: relative;&#13;
+  text-decoration: none;&#13;
+  transition-duration: 0.5s;&#13;
+  display: inline-block;&#13;
+}&#13;
+&#13;
+li a {&#13;
+  color: #fff;&#13;
+}&#13;
+&#13;
+li:hover {&#13;
+  background: red;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+ul li ul {&#13;
+  background: orange;&#13;
+  visibility: hidden;&#13;
+  opacity: 0;&#13;
+  min-width: 5rem;&#13;
+  position: absolute;&#13;
+  transition: all 0.5s ease;&#13;
+  margin-top: 1rem;&#13;
+  left: 0;&#13;
+  display: none;&#13;
+}&#13;
+&#13;
+ul li:hover &gt; ul,&#13;
+ul li ul:hover {&#13;
+  visibility: visible;&#13;
+  opacity: 1;&#13;
+  display: block;&#13;
+}&#13;
+&#13;
+ul li ul li {&#13;
+  clear: both;&#13;
+  width: 100%;&#13;
+}&#13;
+&#13;
+.par&#13;
+{&#13;
+  position:fixed;&#13;
+  top:0;&#13;
+  right:0;&#13;
+  width: 100%;&#13;
+  height: 100%;&#13;
+  text-align: center;&#13;
+  align: auto;&#13;
+  overflow:auto;&#13;
+}&#13;
+&#13;
+.avata&#13;
+{&#13;
+  border-radius: 50%;&#13;
+  width:50px;&#13;
+  height:50px;&#13;
+  margin-left:10%;&#13;
+  float:left;&#13;
+&#13;
+}&#13;
+&#13;
+.capitalize&#13;
+{&#13;
+  text-transform:capitalize;&#13;
+}&#13;
+&#13;
+.heading&#13;
+{&#13;
+  margin-top:-20px;&#13;
+  font-size:65px;&#13;
+  text-shadow: 0 0 5px #FF0000;&#13;
+  color: yellow;&#13;
+}&#13;
+&#13;
+.scr&#13;
+{&#13;
+  overflow: auto;&#13;
+}&#13;
+&#13;
+.darkTable button&#13;
+{&#13;
+  background-color:#44c767;&#13;
+  border-radius:12px;&#13;
+  border:1px solid #18ab29;&#13;
+  display:inline-block;&#13;
+  cursor:pointer;&#13;
+  color:#ffffff;&#13;
+  font-family:Arial;&#13;
+  font-size:15px;&#13;
+  padding:2px 10px;&#13;
+  text-decoration:none;&#13;
+  text-shadow:-2px -1px 3px #2f6627;&#13;
+}&#13;
+&#13;
+.darkTable button:hover&#13;
+{&#13;
+  background-color:#5cbf2a;&#13;
+}&#13;
+&#13;
+.darkTable button:active&#13;
+{&#13;
+  position:relative;&#13;
+  top:1px;&#13;
+}&#13;
+&#13;
+.lvl&#13;
+{&#13;
+  margin:auto;&#13;
+  padding-top: 5px;&#13;
+  padding-bottom: 5px;&#13;
+}&#13;
+&#13;
+.dif&#13;
+{&#13;
+  margin:auto;&#13;
+  padding-top: 5px;&#13;
+  padding-bottom: 14px;&#13;
+}&#13;
+&#13;
+table.darkTable {&#13;
+  font-family: "Comic Sans MS", cursive, sans-serif;&#13;
+  width: 100%;&#13;
+  text-align: center;&#13;
+  // border-radius:15px;&#13;
+  border-collapse: inherit;&#13;
+  margin-bottom:100px;&#13;
+}&#13;
+table.darkTable td, table.darkTable th {&#13;
+  //border: 2px solid #aaff00;&#13;
+  padding: 3px 2px;&#13;
+  //  border-radius:15px;&#13;
+  margin: 2px 2px 2px 2px;&#13;
+}&#13;
+table.darkTable tbody td {&#13;
+  font-size: 13px;&#13;
+  //  border-radius:15px;&#13;
+  color: #ffff66;&#13;
+  background-color: rgba(0,0,0, 0.4);&#13;
+  -webkit-backdrop-filter: blur(10px);&#13;
+  backdrop-filter: blur(10px);&#13;
+}&#13;
+&#13;
+table.darkTable thead {&#13;
+  background: #58196D;&#13;
+  background: -moz-linear-gradient(top, #825291 0%, #68307b 66%, #58196D 100%);&#13;
+  background: -webkit-linear-gradient(top, #825291 0%, #68307b 66%, #58196D 100%);&#13;
+  background: linear-gradient(to bottom, #825291 0%, #68307b 66%, #58196D 100%);&#13;
+  border-bottom: 3px solid #8949FF;&#13;
+  // border-radius:15px;&#13;
+}&#13;
+table.darkTable thead th {&#13;
+  font-size: 15px;&#13;
+  font-weight: bold;&#13;
+  color: #E6E6E6;&#13;
+  text-align: center;&#13;
+  border-left: 2px solid #ff80df;&#13;
+  //  border-radius:15px;&#13;
+}&#13;
+&#13;
+.fight {&#13;
+  position: absolute;&#13;
+  top:0;&#13;
+  bottom: 0;&#13;
+  left: 0;&#13;
+  right: 0; 	&#13;
+  margin: auto;&#13;
+}&#13;
+&#13;
+table.darkTable tfoot td {&#13;
+  font-size: 12px;&#13;
+}&#13;
+&#13;
+table.userDetails td &#13;
+{ &#13;
+  border-width:8px;&#13;
+  //  border-style:double;&#13;
+  border-color:#93d831;&#13;
+  background-color:rgba(153, 255, 102, 0.15);&#13;
+  color:#66ff1a;&#13;
+  font-size: 20px;&#13;
+  padding: 3px 2px;z&#13;
+  font-family: "Comic Sans MS", cursive, sans-serif; &#13;
+  -webkit-box-shadow:0px 0px 50px 15px #9ca5e3 ;&#13;
+  -moz-box-shadow:0px 0px 50px 15px #9ca5e3 ;&#13;
+  box-shadow:0px 0px 50px 5px #9ca5e3 ;&#13;
+  text-align: center;&#13;
+  width: 1%;&#13;
+}&#13;
+&#13;
+&#13;
+table.userDetails&#13;
+{&#13;
+  border-collapse: separate;&#13;
+}&#13;
+&#13;
+@media only screen and (max-width: 500px) {&#13;
+  .hide-mobile{&#13;
+    display:none;&#13;
+  }&#13;
+}&#13;
+&#13;
+.fixi&#13;
+{&#13;
+  position:fixed;&#13;
+}&#13;
+bottom: 20px;&#13;
+}&#13;
+.parent-ul{&#13;
+  width:100%;&#13;
+}&#13;
+&#13;
+.leader-choice{&#13;
+  padding:10px;&#13;
+  border:solid 1px $arenaBlue;&#13;
+  border-radius:15px;&#13;
+  width:100%;&#13;
+  background-color:#212121;&#13;
+  color:white;&#13;
+  font-size: 20px;&#13;
+  text-transform: capitalize;&#13;
+  text-align: center;  &#13;
+  font-family: pfs-bold;&#13;
+}&#13;
+.pad-bottom{&#13;
+  padding-bottom:10px;}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>Leaderboard - Backup</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+
+	data.diffArray = ["easy", "medium", "hard"];
+	data.levelArray = ["level1","level2","level3","level4"];
+
+	
+	var currentUser = gs.getUserID();
+	var grUser = new GlideRecord('x_93700_arena_user');
+    grUser.addQuery("user", currentUser);
+    grUser.query();
+    if (grUser.next()) {
+        data.levl = grUser.level+"";
+        data.difficulty = grUser.difficulty+"";
+    }
+		
+	
+	if (input) {
+		if (input.level && input.diff) {
+			data.rankArray = [];
+			var userHighScore = 0;
+			var userHighTime = 0;
+			var lastUser = "";
+			var lastUserName = "";
+			var lastUserNickName = "";
+			var image = "";
+
+			var initializer = new GlideRecord('x_93700_arena_results');
+			initializer.setLimit(5);
+			initializer.orderByDesc('total_score');
+			initializer.orderBy('time_taken');
+			initializer.addQuery('difficulty', input.diff); //the active difficulty
+			initializer.addQuery('level', input.level); //the active level
+			initializer.addQuery('active', true);
+			initializer.query();
+
+			while (initializer.next()) {
+				if (lastUser == "") //to initialize the values for further calculation
+				{
+					userHighScore = initializer.getValue('total_score');
+					userHighTime = initializer.getValue('time_taken');
+					lastUser = initializer.arena_user.user.toString();
+					lastUserName = initializer.arena_user.user.name.toString();
+					lastUserNickName = initializer.arena_user.avatar.toString();
+					var r1 = initializer.arena_user.sys_id;
+					var p1 = new GlideRecord('sys_attachment');
+					p1.addQuery('table_sys_id',r1);
+					p1.query();
+					if(p1.next())
+						image = "/" + p1.sys_id + ".iix";
+
+				} else {
+					/*if(lastUser == initializer.arena_user.user.toString())//if the next user is the same, the compare the scores
+                    {
+                    	if(userHighScore < initializer.getValue('total_score'))//if the next record score is more, update the score and time
+                    	{
+                    		userHighScore = initializer.getValue('total_score');
+                    		userHighTime = initializer.getValue('time_taken');
+                    	}
+                    	if(userHighScore==initializer.getValue('total_score')&&userHighTime>initializer.getValue('time_taken'))//if the scores are the same, the time takes in previous record is more, upadate the time
+                    		userHighTime = initializer.getValue('time_taken');
+                    }*/
+					if (lastUser != initializer.arena_user.user.toString()) {
+						data.rankArray.push({
+							"userHighScore": userHighScore,
+							"userHighTime": userHighTime,
+							"lastUser": lastUser,
+							"lastUserName": lastUserName,
+							"level": input.level,
+							"difficulty": input.diff,
+							"nickName": lastUserNickName,
+							"img": image
+						}); //as soon as the new user comes in, push the last record and update the scores
+						userHighScore = initializer.getValue('total_score');
+						userHighTime = initializer.getValue('time_taken');
+						lastUser = initializer.arena_user.user.toString();
+						lastUserName = initializer.arena_user.user.name.toString();
+						lastUserNickName = initializer.arena_user.avatar.toString();
+						var r = initializer.arena_user.sys_id;
+						var p = new GlideRecord('sys_attachment');
+						p.addQuery('table_sys_id',r);
+						p.query();
+						if(p.next())
+							image = "/" + p.sys_id + ".iix";
+					}
+					if (!initializer.hasNext()) //if no new record push the stored values
+					{
+						data.rankArray.push({
+							"userHighScore": userHighScore,
+							"userHighTime": userHighTime,
+							"lastUser": lastUser,
+							"lastUserName": lastUserName,
+							"level": input.level,
+							"difficulty": input.diff,
+							"nickName": lastUserNickName,
+							"img": image
+						});
+					}
+				}
+			}
+
+			var rankCounter = 1;
+			data.loggedUser = [];
+			for (var eye = 0; eye < data.rankArray.length; eye++) //pushing rank name in each object
+			{
+
+				data.rankArray[eye].rank = rankCounter;
+				rankCounter++;
+				var glider = new GlideRecord('x_93700_arena_results');
+				glider.addQuery('arena_user.user', data.rankArray[eye].lastUser);
+				glider.addQuery('level', data.rankArray[eye].level);
+				glider.addQuery('difficulty', data.rankArray[eye].difficulty);
+				glider.addQuery('active', true);
+				glider.query();
+				if (glider.next()) {
+					if (glider.challenged_by)
+						data.rankArray[eye].show = false;
+					if (!glider.challenged_by) {
+						data.rankArray[eye].show = true;
+					}
+					data.rankArray[eye].challenger = glider.challenged_by.user.name.toString();
+					data.rankArray[eye].challengerNick = glider.challenged_by.avatar.toString();
+				}
+
+				//setting logged-in individual's record
+				if (data.rankArray[eye].lastUser.toString() == currentUser.toString()) {
+					data.loggedUser.push({
+						"rnk": data.rankArray[eye].rank,
+						"nme": data.rankArray[eye].lastUserName,
+						"scr": data.rankArray[eye].userHighScore,
+						"tym": data.rankArray[eye].userHighTime,
+						"sys": data.rankArray[eye].lastUser,
+						"nyc": data.rankArray[eye].nickName,
+						"img": data.rankArray[eye].image
+					});
+				}
+
+			}
+		}
+		if (input.dif && input.lvl && input.User) {
+			var challengerID = new GlideRecord('x_93700_arena_user');
+			challengerID.addQuery('user', currentUser);
+			challengerID.query();
+			if (input.User != currentUser)
+				if (challengerID.next()) {
+					var challenger = new GlideRecord('x_93700_arena_results');
+					challenger.addQuery('arena_user.user', input.User);
+					challenger.addQuery('level', input.lvl);
+					challenger.addQuery('difficulty', input.dif);
+					challenger.addQuery('active', true);
+					challenger.query();
+					var challenged = 0;
+					if (input.User != currentUser)
+						if (challenger.next()) {
+							if (!challenger.challenged_by && input.User != currentUser) {
+								challenger.setValue('challenged_by', challengerID.getUniqueValue());
+								var updateKnight = new GlideRecord('x_93700_arena_user');
+								updateKnight.addQuery('user', input.User);
+								updateKnight.query();
+								if (updateKnight.next()) {
+									updateKnight.knight = parseInt(updateKnight.knight) + 1; //Increase Knight count for Arena user whenever gets challenged
+									updateKnight.update();
+								}
+
+
+								challenger.update();
+								challenged = 1;
+							}
+						}
+					challengerID.viking = parseInt(challengerID.viking) + 1; //Increase Viking count for Arena user whenever challenges others
+
+					if (challenged == 1)
+						gs.addInfoMessage("You just challenged " + challenger.arena_user.avatar.toString());
+					challengerID.update();
+
+				}
+		}
+		gs.addInfoMessage(data.rankArray.length);
+	} 
+	
+	///////////////////////////If there is no input///////////////////////////
+	else {
+		data.userID1 = currentUser;
+		data.pop = currentUser.toString();
+		data.userName1 = gs.getUserName();
+		//making changes below for redirecting the current level and difficulty to the latest given by the user.
+		var le = new GlideRecord('x_93700_arena_user');
+		le.addQuery('user', currentUser);
+		le.query();
+		if (le.next()) {
+			data.arenaUser = le.sys_id.toString();
+			var lr = new GlideRecord('x_93700_arena_results');
+			lr.addQuery('arena_user', le.sys_id);
+			lr.orderByDesc('level');
+			lr.orderByDesc('sys_updated_on');
+			lr.query();
+			if (lr.next()) {
+				data.latestLevel = lr.getValue('level').toString();
+				data.latestDiff = lr.getValue('difficulty').toString();
+			} else {
+				data.noResult = true;
+			}
+		}
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>anirudh</sys_created_by>
+        <sys_created_on>2020-05-16 18:47:46</sys_created_on>
+        <sys_id>01fbff79dbf89010b6db8e474896198c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Leaderboard - Backup</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_01fbff79dbf89010b6db8e474896198c</sys_update_name>
+        <sys_updated_by>anirudh</sys_updated_by>
+        <sys_updated_on>2020-05-16 18:47:46</sys_updated_on>
+        <template><![CDATA[<div class="par" ng-show = "c.ll">
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+  <div class="heading" style="font-family: Lobster;">Arena Leaderboard</div>
+
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3 col-xs-6 pad-bottom">
+      <select class="leader-choice" ng-model="currentlevel" ng-change="c.showLeaderBoard()" >
+        <option ng-repeat="lvl in data.levelArray" value="{{lvl}}">{{lvl}}</option>
+      </select>
+    </div>
+    <div class="col-md-3 col-xs-6 pad-bottom">
+      <select class="leader-choice" ng-model="currentdifficulty"  ng-change="c.showLeaderBoard()"  >
+        <option ng-repeat="diff in data.diffArray" value="{{diff}}">{{diff}}</option>
+      </select>
+    </div>
+
+  </div>
+  <div class="scr">
+    <table class="darkTable">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Player</th>
+          <th>Score</th>
+          <th class="hide-mobile">Time Taken</th>
+          <th>Challenges</th>
+        </tr>	
+      </thead>	
+      <tbody>	
+        <tr ng-repeat='x in data.rankArray'>
+          <td>{{x.rank}}</td> <!--ng-if="($index)<5"-->
+          <!-- <td ng-if="($index)<5"><sn-avatar ng-if="hasLiveProfile(x.lastUser)" primary="getLiveProfileByUserId(x.lastUser)" class="avatar-medium" show-presence="false" enable-context-menu="false"></sn-avatar> <span class="capitalize">  {{x.nickName}}</span></td> -->
+          <td><img ng-src="{{x.img}}" class="avata" />{{x.nickName}}</td>
+          <td>{{x.userHighScore}}</td>
+          <td class="hide-mobile">{{x.userHighTime}}</td>
+          <td ng-if="!x.show">Already challenged by<span class="capitalize"> {{x.challengerNick}}</span></td>
+          <td ng-if="x.show" ng-click="c.challenger(x.lastUser,x.level,x.difficulty); c.showLeaderBoard(); c.clicker(); c.fight();"><button ng-if="data.pop!=x.lastUser">Challenge</button> <span ng-if="data.pop==x.lastUser">Wait till some one challenges you</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fixi">
+    <table class="userDetails" ng-if="data.loggedUser.length==1">
+      <tr>
+        <td>Rank - {{data.loggedUser[0].rnk}}</td>
+        <td><sn-avatar ng-if="hasLiveProfile(data.loggedUser[0].sys)" primary="getLiveProfileByUserId(data.loggedUser[0].sys)" class="avatar-medium" show-presence="false" enable-context-menu="false"></sn-avatar><span class="capitalize">  {{data.loggedUser[0].nyc}}</span></td>
+        <td>High Score - {{data.loggedUser[0].scr}}</td>
+        <td class="hide-mobile">Time Taken - {{data.loggedUser[0].tym}}</td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <img class="fight" id="fight" src='fighter.gif' style="display:none"/>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

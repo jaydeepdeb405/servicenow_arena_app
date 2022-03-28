@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="DELETE">
+        <choices/>
+        <description/>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_93700_arena.glide.script.block.client.globals</name>
+        <read_roles/>
+        <suffix>glide.script.block.client.globals</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-13 13:29:07</sys_created_on>
+        <sys_id>3fa84d260722501037c7f2ae7c1ed0bb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena.glide.script.block.client.globals</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_properties_3fa84d260722501037c7f2ae7c1ed0bb</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-13 13:29:07</sys_updated_on>
+        <type>boolean</type>
+        <value>false</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="DELETE" query="documentkey=3fa84d260722501037c7f2ae7c1ed0bb"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_properties_3fa84d260722501037c7f2ae7c1ed0bb</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description/><ignore_cache>false</ignore_cache><is_private>false</is_private><name>x_93700_arena.glide.script.block.client.globals</name><read_roles/><suffix>glide.script.block.client.globals</suffix><sys_class_name>sys_properties</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-08-13 13:29:07</sys_created_on><sys_id>3fa84d260722501037c7f2ae7c1ed0bb</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_93700_arena.glide.script.block.client.globals</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_properties_3fa84d260722501037c7f2ae7c1ed0bb</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-08-13 13:29:07</sys_updated_on><type>boolean</type><value>false</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=3fa84d260722501037c7f2ae7c1ed0bb"/></record_update>]]></payload>
+        <payload_hash>1573165422</payload_hash>
+        <record_name>x_93700_arena.glide.script.block.client.globals</record_name>
+        <reverted_from/>
+        <source>9d4fad12079d501037c7f2ae7c1ed0a1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-13 13:29:08</sys_created_on>
+        <sys_id>6ab88d260722501037c7f2ae7c1ed010</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>173e8028e890000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-13 13:29:08</sys_updated_on>
+        <type>System Property</type>
+        <update_guid>2eb88d2685225010a3456a6e3e03060f</update_guid>
+        <update_guid_history>2eb88d2685225010a3456a6e3e03060f:1573165422</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-13 13:33:44</sys_created_on>
+        <sys_db_object display_value="" name="sys_properties">sys_properties</sys_db_object>
+        <sys_id>4f30cf6bd18e4a5ba44999c54fcf4971</sys_id>
+        <sys_metadata>3fa84d260722501037c7f2ae7c1ed0bb</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena.glide.script.block.client.globals</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_properties_3fa84d260722501037c7f2ae7c1ed0bb</sys_update_name>
+        <sys_update_version display_value="sys_properties_3fa84d260722501037c7f2ae7c1ed0bb">6ab88d260722501037c7f2ae7c1ed010</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-13 13:33:44</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_93700_arena.Hiremodeutils</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>Hiremodeutils</name>
+        <script><![CDATA[var Hiremodeutils = Class.create();
+Hiremodeutils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+
+    stophiremode: function() {
+        var setpropert = new GlideRecord('sys_properties');
+        setpropert.addQuery('name', 'x_93700_arena.enable_hiremode_in_ARENA');
+        setpropert.query();
+        if (setpropert.next()) {
+            setpropert.value = 'false';
+            setpropert.update();
+            this._resetquestions('');
+            return 'Stopped Hiring Mode';
+        }
+    },
+    _resetquestions: function(val) {
+        var reset = new GlideRecord('sys_properties');
+        reset.addQuery('name', 'x_93700_arena.Hire_mode_question_sys_id');
+        reset.query();
+        if (reset.next()) {
+            reset.value = val;
+            reset.update();
+        }
+    },
+    setQuestions: function() {
+var questionscount = gs.getProperty('x_93700_arena.questionscountforHIREMode');
+        var tempQuesIdList = [];
+        var question = new GlideRecord('x_93700_arena_arena_question');
+		question.addEncodedQuery('question_type=hire');
+        question.addQuery('active', true);
+        question.query();
+        while (question.next()) {
+            tempQuesIdList.push(question.sys_id + '');
+        }
+        var randomQuestions = this._randomiser(tempQuesIdList, questionscount, tempQuesIdList.length);
+               this._resetquestions(randomQuestions);
+
+    },
+
+
+    _randomiser: function(queArray, requiredQuestionCount) {
+        var list = [];
+        while (list.length < requiredQuestionCount) {
+            var question = queArray[Math.floor(Math.random() * Math.floor(queArray.length))];
+            if (list.indexOf(question) == -1)
+                list.push(question);
+        }
+        return list.toString();
+    }
+
+
+
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2020-05-15 04:37:49</sys_created_on>
+        <sys_id>ea5fa759dbbc1010b6db8e47489619f8</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>Hiremodeutils</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_script_include_ea5fa759dbbc1010b6db8e47489619f8</sys_update_name>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2020-05-22 09:11:00</sys_updated_on>
+    </sys_script_include>
+</record_update>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>challengePlayer</name>
+        <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	var challenged_player = request.queryParams.challenged_player || '';
+	var level = request.queryParams.level || '';
+	var difficulty = request.queryParams.difficulty || '';
+	var success = false;
+	var challengedUser = '';
+	
+    var result = new GlideRecord("x_93700_arena_results");
+    result.setLimit(1);
+    result.addQuery("arena_user", challenged_player);
+    result.addQuery('difficulty', difficulty); //the active difficulty
+    result.addQuery('level', level); //the active level
+    result.addQuery('active', true);
+    result.query();
+    if (result.next()) {
+        var arenaUserGr = new GlideRecord('x_93700_arena_user');
+        arenaUserGr.get('user', gs.getUserID());
+        var userID = arenaUserGr.getValue('sys_id');
+        result.challenged_by = userID;
+        result.update();
+		challengedUser = result.arena_user.avatar.toString() || result.arena_user.user.getDisplayValue();
+		success = true;
+    }
+	if(success === true) { 
+		response.setStatus(200); 
+		response.setBody({ message: "You've challenged "+challengedUser });
+	}
+	else throw 'Invalid parameters';
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_93700_arena/arena/challengePlayer</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/challengePlayer</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-15 15:12:24</sys_created_on>
+        <sys_id>5c8929270799901037c7f2ae7c1ed019</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>challengePlayer</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ws_operation_5c8929270799901037c7f2ae7c1ed019</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-15 15:28:37</sys_updated_on>
+        <web_service_definition display_value="Arena">5b64b26e0755101037c7f2ae7c1ed048</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

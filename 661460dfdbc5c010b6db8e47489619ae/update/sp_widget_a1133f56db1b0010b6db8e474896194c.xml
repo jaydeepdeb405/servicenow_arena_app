@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script/>
+        <controller_as>c</controller_as>
+        <css>.rotate .line {
+  width: 10%;
+  height: 10%;
+  
+ 
+}
+
+.rotate .line:nth-of-type(1) {
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.rotate .line:nth-of-type(2) {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  margin-left: 60px;
+}
+
+.rotate .line:nth-of-type(3) {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.rotate .line:nth-of-type(4) {
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
+  margin-left: -60px;
+}
+
+.rotate .line i {
+  left: 0;
+  top: 0;
+  width: 200%;
+  display: block;
+  position: absolute;
+  border-bottom: 5px dashed;
+  -webkit-animation: move 3.5s infinite linear;
+  animation: move 3.5s infinite linear;
+}
+
+.rotate .text {
+  width: 210px;
+  line-height: 80px;
+  display: block;
+  text-align: center;
+  position: absolute;
+  font-size: 40px;
+}
+
+@-webkit-keyframes 
+move {  from {
+ -webkit-transform: translateX(0%);
+ transform: translateX(0%);
+}
+
+to {
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+}
+
+@keyframes 
+move {  from {
+ -webkit-transform: translateX(0%);
+ transform: translateX(0%);
+}
+
+to {
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>timer</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>timer</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-03-04 18:06:08</sys_created_on>
+        <sys_id>a1133f56db1b0010b6db8e474896194c</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>timer</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_a1133f56db1b0010b6db8e474896194c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-03-04 18:32:39</sys_updated_on>
+        <template><![CDATA[<div class="rotate">
+  <div class="line"><i></i></div>
+  <div class="line"><i></i></div>
+  <div class="line"><i></i></div>
+  <div class="line"><i></i></div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function arenaIntro2() {
+    /* widget controller */
+    var c = this;
+
+
+    /////////////////////////Listener/////////////////////////
+    $rootScope.$on('introSequence2', function(event, obj) {
+        c.showIntroSequence2 = obj;
+		
+		
+		
+        $("#welcomeText").delay(1000).fadeIn(7000, function cinematics(){
+
+            $("#welcomeText").hide();
+            c.showIntroSequence2 = false;
+
+            var gameScreen = {
+                gameHeading: true,
+                mainMenu: true,
+                gameLevels: false,
+                quizPage: false,
+                profilePage: false,
+                leaderBoard: false,
+            };
+
+            $rootScope.$broadcast('gameScreen', gameScreen);
+        });
+    });
+
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>section{&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  justify-content:center;&#13;
+  align-items:center;&#13;
+  text-align:center;&#13;
+}&#13;
+&#13;
+&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>Arena  Intro 2</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-12-02 11:21:31</sys_created_on>
+        <sys_id>890e1b58dbe10010b6db8e4748961923</sys_id>
+        <sys_mod_count>41</sys_mod_count>
+        <sys_name>Arena  Intro 2</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_890e1b58dbe10010b6db8e4748961923</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-08 09:47:22</sys_updated_on>
+        <template><![CDATA[<div ng-show="c.showIntroSequence2" class="textStyling" >
+  
+  
+  <div id="welcomeText" style="display:none">
+    <img src="gameTree.jpg"/>
+    <div style="font-size:2em;">A Digital Lighthouse Productions</div>
+  </div>
+  
+  
+</div]]></template>
+    </sp_widget>
+</record_update>

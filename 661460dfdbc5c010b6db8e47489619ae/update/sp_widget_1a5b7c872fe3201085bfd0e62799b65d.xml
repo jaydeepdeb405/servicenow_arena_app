@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function controller($sce, $http, $rootScope) {
+	/* widget controller */
+	var c = this;
+	c.transition = false;
+
+	$rootScope.$on('loadContent', function(event, data) {
+		c.getContent(data.qid);
+	});
+
+	c.trustHtml = function(htmlStr) {
+		return $sce.trustAsHtml(htmlStr);
+	};
+
+	c.getContent = function(qid) {
+		c.data.qid = qid;
+		c.transition = true;
+		c.data.action = "getContent";
+		c.server.update().then(function() {
+			c.transition = false;
+			incrementViewCount();
+			c.data.action = undefined;
+		});
+	};
+	
+	c.toggleLike = function() {
+		c.server.get({
+			action: 'toggleLike',
+			contentId: c.data.content.id,
+			currentLikeStatus: c.data.content.isLiked
+		}).then(function(response) {
+			M.Toast.dismissAll();
+			M.toast({
+				html: 'You have ' + (response.data.isLiked ? 'liked' : 'disliked') + ' this article'
+			});
+			c.data.content.isLiked = response.data.isLiked;
+		});
+	}
+
+	function incrementViewCount() {
+		$http.put('/api/now/ui/glideRecord/x_93700_arena_did_you_know/' + c.data.content.id, {
+			"views": (parseInt(c.data.content.views) || 0) + 1
+		});
+	}
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.question-card {&#13;
+  min-height: 300px;&#13;
+}&#13;
+&#13;
+.loader-wrapper {&#13;
+  display: flex;&#13;
+  left: 0;&#13;
+  right: 0;&#13;
+  width: 100%;&#13;
+  position: absolute;&#13;
+  z-index: 999;&#13;
+  height: 60vh;&#13;
+  top: 0;&#13;
+  bottom: 0;&#13;
+}&#13;
+&#13;
+.question-views {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+  align-items: center;&#13;
+  padding: 10px;&#13;
+}&#13;
+&#13;
+.question-title {&#13;
+  display: flex !important;&#13;
+  flex-flow: row;&#13;
+  justify-content: space-between;&#13;
+  span {&#13;
+    font-weight: 600;&#13;
+    color:firebrick;&#13;
+  }&#13;
+  i {&#13;
+    padding: 0 5px;&#13;
+  	cursor: pointer;&#13;
+  }&#13;
+}&#13;
+&#13;
+.bold {&#13;
+  font-weight: 500;&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Did You Know Content</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    if (input && input.action === 'toggleLike') {
+        var feedback = new GlideRecord('x_93700_arena_dyk_feedback');
+        data.isLiked = input.currentLikeStatus;
+        if (input.currentLikeStatus === true) {
+            feedback.addEncodedQuery('dyk_content=' + input.contentId + '^user=' + gs.getUserID() + '^type=like');
+            feedback.deleteMultiple();
+            data.isLiked = false;
+        } else {
+            feedback.initialize();
+            feedback.dyk_content = input.contentId;
+            feedback.user = gs.getUserID();
+            feedback.type = 'like';
+            if (feedback.insert()) data.isLiked = true;
+        }
+        return;
+    }
+
+    data.contentPlaceholder = "Content not available. Check back later";
+    data.contentAvailable = false;
+
+    data.content = {
+        id: '',
+        title: '',
+        body: '',
+        views: 0
+    };
+
+    if (input && input.action === "getContent") {
+        getContent("sys_id=" + input.qid);
+        getUniqueView(input.qid);
+    }
+
+    function getUniqueView(articleID) {
+        var uniqueViews = new GlideRecord("x_93700_arena_arena_views");
+        uniqueViews.addEncodedQuery("dyk_article=" + articleID + "^user=" + gs.getUserID());
+        uniqueViews.query();
+        if (uniqueViews.next()) {
+            uniqueViews.views = parseInt(uniqueViews.getValue("views")) + 1;
+            uniqueViews.update();
+        } else {
+            uniqueViews.dyk_article = articleID;
+            uniqueViews.user = gs.getUserID();
+            uniqueViews.category = "dyk";
+            uniqueViews.views = 1;
+            uniqueViews.insert();
+        }
+    }
+
+    function getContent(filter) {
+        var contentGr = new GlideRecord("x_93700_arena_did_you_know");
+        contentGr.setLimit(1);
+        contentGr.addEncodedQuery(filter);
+        contentGr.query();
+        if (contentGr.next()) {
+            data.content.id = contentGr.getValue('sys_id');
+            data.content.title = contentGr.getValue('title');
+            data.content.body = contentGr.getValue('body');
+            data.content.views = contentGr.getValue('views') || 0;
+            data.content.isLiked = false;
+            data.contentAvailable = true;
+            var feedback = new GlideRecord('x_93700_arena_dyk_feedback');
+            feedback.setLimit(1);
+            feedback.addQuery('dyk_content', contentGr.getValue('sys_id'));
+            feedback.addQuery('user', gs.getUserID());
+            feedback.addQuery('type', 'like');
+            feedback.query();
+            if (feedback.next()) {
+                data.content.isLiked = true;
+            }
+
+            data.content.tags = [];
+            var tagGr = new GlideAggregate('label_entry');
+            tagGr.addQuery('label.active', true);
+            tagGr.addQuery('table', 'x_93700_arena_did_you_know');
+            tagGr.addQuery('table_key', contentGr.sys_id);
+            tagGr.groupBy('label');
+            tagGr.query();
+            while (tagGr.next()) {
+                data.content.tags.push({
+                    label: tagGr.label.getDisplayValue(),
+                    sys_id: tagGr.getValue('label')
+                });
+            }
+        }
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>akanksha</sys_created_by>
+        <sys_created_on>2021-04-20 15:02:19</sys_created_on>
+        <sys_id>1a5b7c872fe3201085bfd0e62799b65d</sys_id>
+        <sys_mod_count>33</sys_mod_count>
+        <sys_name>Did You Know Content</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_1a5b7c872fe3201085bfd0e62799b65d</sys_update_name>
+        <sys_updated_by>yaswanth</sys_updated_by>
+        <sys_updated_on>2021-10-07 08:57:29</sys_updated_on>
+        <template><![CDATA[<div>
+
+  <div class="loader-wrapper" ng-if="c.transition === true">
+    <div class="preloader-wrapper medium active" style="margin: auto;">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+        <div class="circle"></div>
+        </div><div class="circle-clipper right">
+        <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="c.data.contentAvailable === true" 
+       ng-style="c.transition === true && {'filter': 'blur(5px)'}">
+    <div class="card col s12 question-card">  
+      <div class="card-content"> 
+        <div class="card-title question-title">
+          <span>{{c.data.content.title}}</span>
+          <i uib-tooltip="{{data.content.isLiked ? 'Unlike' : 'Like'}} this article"
+             class="fa {{ data.content.isLiked ? 'fa-thumbs-up' : 'fa-thumbs-o-up' }}"
+             ng-click="c.toggleLike()">
+          </i>
+        </div>
+        <div class="question" ng-bind-html="c.trustHtml(c.data.content.body)"></div>
+      </div>
+      <div class="question-views">
+        <div>
+          <span ng-if="data.content.tags.length > 0" style="font-weight: 600;font-size: 1.1em;">Tags:&nbsp&nbsp</span>
+          <div ng-repeat="tag in data.content.tags" class="chip">
+            {{tag.label}}
+          </div>
+        </div>
+        <div>
+          <i class="fa fa-eye pad-right"></i>
+          <span>{{c.data.content.views + " Views"}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="c.data.contentAvailable !== true" ng-style="c.transition === true && {'filter': 'blur(5px)'}">
+    <div class="card col s12 question-card">  
+      <div class="card-content"> 
+        <span class="card-title text-center bold">{{c.data.contentPlaceholder}}</span>
+      </div>
+    </div>
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

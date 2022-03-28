@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_theme_css_include">
+    <m2m_sp_theme_css_include action="DELETE">
+        <order/>
+        <sp_css_include display_value="materialize.min.css">ad2d94e12f73a01066625e972799b6cc</sp_css_include>
+        <sp_theme display_value="Arena Test">889c1cd7075a541037c7f2ae7c1ed038</sp_theme>
+        <sys_class_name>m2m_sp_theme_css_include</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-28 07:15:21</sys_created_on>
+        <sys_id>6a5d90252f73a01066625e972799b6a8</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>materialize.min.css.Arena Test</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>m2m_sp_theme_css_include_6a5d90252f73a01066625e972799b6a8</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-09-27 10:09:24</sys_updated_on>
+    </m2m_sp_theme_css_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>m2m_sp_theme_css_include_6a5d90252f73a01066625e972799b6a8</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_theme_css_include"><m2m_sp_theme_css_include action="INSERT_OR_UPDATE"><order/><sp_css_include display_value="materialize.min.css">ad2d94e12f73a01066625e972799b6cc</sp_css_include><sp_theme display_value="Arena Test">889c1cd7075a541037c7f2ae7c1ed038</sp_theme><sys_class_name>m2m_sp_theme_css_include</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2021-04-28 07:15:21</sys_created_on><sys_id>6a5d90252f73a01066625e972799b6a8</sys_id><sys_mod_count>2</sys_mod_count><sys_name>materialize.min.css.Arena Test</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>m2m_sp_theme_css_include_6a5d90252f73a01066625e972799b6a8</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2021-09-27 10:09:24</sys_updated_on></m2m_sp_theme_css_include></record_update>]]></payload>
+        <payload_hash>409745111</payload_hash>
+        <record_name>materialize.min.css.Arena Test</record_name>
+        <reverted_from/>
+        <source>d2715b7707ba701037c7f2ae7c1ed07d</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-10-01 23:17:23</sys_created_on>
+        <sys_id>8c91df7707ba701037c7f2ae7c1ed0c6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17c3e25e7940000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-10-01 23:17:23</sys_updated_on>
+        <type>Stylesheets</type>
+        <update_guid>1ad633daacfa34103c8115c762b4d822</update_guid>
+        <update_guid_history>1ad633daacfa34103c8115c762b4d822:409745111,1ad633daacfa34103c8115c762b4d822:409745111,c57d90653573a01061751ae0907fb641:260332862,e65d9025d173a010c04ae4600318c9aa:409745111</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="materialize.min.css.Arena Test">8a41038d078ff01037c7f2ae7c1ed076</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-10-05 19:18:40</sys_created_on>
+        <sys_db_object display_value="" name="m2m_sp_theme_css_include">m2m_sp_theme_css_include</sys_db_object>
+        <sys_id>8a901e3bf1214300a257ac07c2a24000</sys_id>
+        <sys_metadata>6a5d90252f73a01066625e972799b6a8</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>materialize.min.css.Arena Test</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>m2m_sp_theme_css_include_6a5d90252f73a01066625e972799b6a8</sys_update_name>
+        <sys_update_version display_value="m2m_sp_theme_css_include_6a5d90252f73a01066625e972799b6a8">8c91df7707ba701037c7f2ae7c1ed0c6</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-10-05 19:18:40</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

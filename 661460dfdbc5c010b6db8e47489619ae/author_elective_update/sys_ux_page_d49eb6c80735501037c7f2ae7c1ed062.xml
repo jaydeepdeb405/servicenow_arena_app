@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_page">
+    <sys_ux_page action="DELETE">
+        <root_element display_value="arenatest">d49e3ac80735501037c7f2ae7c1ed05e</root_element>
+        <sys_class_name>sys_ux_page</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-29 20:52:06</sys_created_on>
+        <sys_id>d49eb6c80735501037c7f2ae7c1ed062</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>ArenaTest</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ux_page_d49eb6c80735501037c7f2ae7c1ed062</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-29 20:52:06</sys_updated_on>
+        <title>ArenaTest</title>
+    </sys_ux_page>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_ux_page_d49eb6c80735501037c7f2ae7c1ed062</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_page"><sys_ux_page action="INSERT_OR_UPDATE"><root_element display_value="arenatest">d49e3ac80735501037c7f2ae7c1ed05e</root_element><sys_class_name>sys_ux_page</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-06-29 20:52:06</sys_created_on><sys_id>d49eb6c80735501037c7f2ae7c1ed062</sys_id><sys_mod_count>1</sys_mod_count><sys_name>ArenaTest</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_ux_page_d49eb6c80735501037c7f2ae7c1ed062</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-06-29 20:52:06</sys_updated_on><title>ArenaTest</title></sys_ux_page></record_update>]]></payload>
+        <payload_hash>-1445357310</payload_hash>
+        <record_name>ArenaTest</record_name>
+        <reverted_from/>
+        <source>9d4fad12079d501037c7f2ae7c1ed0a1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-29 20:52:06</sys_created_on>
+        <sys_id>d09e3ac80735501037c7f2ae7c1ed063</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17301d9ee910000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-29 20:52:06</sys_updated_on>
+        <type>UX Page</type>
+        <update_guid>989e3ac836355010b5d00081c28fda62</update_guid>
+        <update_guid_history>989e3ac836355010b5d00081c28fda62:-1445357310,d89eb6c871355010b39fc1c1ce6b1a63:-263077817</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-29 20:54:18</sys_created_on>
+        <sys_db_object display_value="" name="sys_ux_page">sys_ux_page</sys_db_object>
+        <sys_id>0aca43fa8edd4037815e089e2fdaaa81</sys_id>
+        <sys_metadata>d49eb6c80735501037c7f2ae7c1ed062</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ArenaTest</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_ux_page_d49eb6c80735501037c7f2ae7c1ed062</sys_update_name>
+        <sys_update_version display_value="sys_ux_page_d49eb6c80735501037c7f2ae7c1ed062">d09e3ac80735501037c7f2ae7c1ed063</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-29 20:54:18</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

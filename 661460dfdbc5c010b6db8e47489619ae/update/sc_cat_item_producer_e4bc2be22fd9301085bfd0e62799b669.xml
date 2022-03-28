@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_producer">
+    <sc_cat_item_producer action="INSERT_OR_UPDATE">
+        <access_type/>
+        <active>true</active>
+        <additional_review>false</additional_review>
+        <allow_edit>false</allow_edit>
+        <availability>on_desktop</availability>
+        <billable>false</billable>
+        <can_cancel>false</can_cancel>
+        <category display_value="Office">109cdff8c6112276003b17991a09ad65</category>
+        <checked_out/>
+        <cost>0</cost>
+        <create_universal_request>false</create_universal_request>
+        <custom_cart/>
+        <delivery_plan display_value="DEFAULT">523da512c611228900811a37c97c2014</delivery_plan>
+        <delivery_plan_script/>
+        <delivery_time>1970-01-03 00:00:00</delivery_time>
+        <description><![CDATA[<p>Request for creation on content in Did You Know table.</p>]]></description>
+        <display_price_property>non_zero</display_price_property>
+        <entitlement_script/>
+        <flow_designer_flow/>
+        <group/>
+        <hide_sp>false</hide_sp>
+        <icon/>
+        <ignore_price>true</ignore_price>
+        <image/>
+        <list_price>0</list_price>
+        <location/>
+        <mandatory_attachment>false</mandatory_attachment>
+        <meta>DYK, Did You Know, create DYK</meta>
+        <mobile_hide_price>false</mobile_hide_price>
+        <mobile_picture/>
+        <mobile_picture_type>use_desktop_picture</mobile_picture_type>
+        <model/>
+        <name>Create DID YOU KNOW content</name>
+        <no_attachment_v2>false</no_attachment_v2>
+        <no_cart>false</no_cart>
+        <no_cart_v2>false</no_cart_v2>
+        <no_delivery_time_v2>false</no_delivery_time_v2>
+        <no_order>false</no_order>
+        <no_order_now>false</no_order_now>
+        <no_proceed_checkout>false</no_proceed_checkout>
+        <no_quantity>false</no_quantity>
+        <no_quantity_v2>false</no_quantity_v2>
+        <no_search>false</no_search>
+        <no_wishlist_v2>false</no_wishlist_v2>
+        <omit_price>false</omit_price>
+        <order>0</order>
+        <ordered_item_link/>
+        <owner/>
+        <picture/>
+        <post_insert_script/>
+        <preview>JavaScript: popupOpenStandard("com.glideapp.servicecatalog_cat_item_view.do?v=1&amp;sysparm_id=e4bc2be22fd9301085bfd0e62799b669&amp;sysparm_preview=true", "summary");</preview>
+        <price>0</price>
+        <published_ref/>
+        <recurring_frequency/>
+        <recurring_price>0</recurring_price>
+        <redirect_url>generated_record</redirect_url>
+        <request_method/>
+        <roles>snc_internal</roles>
+        <save_options/>
+        <save_script/>
+        <sc_catalogs>e0d08b13c3330100c8b837659bba8fb4</sc_catalogs>
+        <sc_ic_item_staging/>
+        <sc_ic_version/>
+        <sc_template/>
+        <script><![CDATA[current.active = false;
+current.title = producer.title;
+current.body = producer.content;
+
+producer.tags.toString().split(",").forEach(createTags);
+
+function createTags(tag) {
+    tag = tag.trim();
+	tag = tag.split(' ').map(function(t) { 
+		return t.substr(0, 1).toUpperCase() + t.substr(1, t.length); 
+	}).join(' ');
+    if (tag.length > 0) {
+        var labelSysId;
+        var labelGr = new GlideRecord('label');
+        labelGr.setLimit(1);
+        labelGr.addActiveQuery();
+        labelGr.addQuery('name', tag);
+        labelGr.query();
+        if (!labelGr.next()) {
+            var labGr = new GlideRecord('label');
+            labGr.initialize();
+            labGr.name = tag;
+            labelSysId = labGr.insert();
+        } else {
+            labelSysId = labelGr.getUniqueValue();
+        }
+        var labelEntryGr = new GlideRecord('label_entry');
+        labelEntryGr.initialize();
+        labelEntryGr.label = labelSysId;
+        labelEntryGr.title = "Did You Know - " + current.number;
+        labelEntryGr.table = "x_93700_arena_did_you_know";
+        labelEntryGr.table_key = current.sys_id;
+		labelEntryGr.id_type = current.getClassDisplayValue();
+        labelEntryGr.read = 'yes';
+        labelEntryGr.insert();
+    }
+}
+
+
+//current.u_approver = gs.getProperty('x_93700_arena.did.you.know.approver');]]></script>
+        <short_description>Create DYK Record</short_description>
+        <show_variable_help_on_load>false</show_variable_help_on_load>
+        <start_closed>false</start_closed>
+        <state/>
+        <sys_class_name>sc_cat_item_producer</sys_class_name>
+        <sys_created_by>Chandana</sys_created_by>
+        <sys_created_on>2021-07-15 14:33:21</sys_created_on>
+        <sys_id>e4bc2be22fd9301085bfd0e62799b669</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>Create DID YOU KNOW content</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sc_cat_item_producer_e4bc2be22fd9301085bfd0e62799b669</sys_update_name>
+        <sys_updated_by>akanksha.kaushal</sys_updated_by>
+        <sys_updated_on>2021-10-04 12:38:30</sys_updated_on>
+        <table_name>x_93700_arena_did_you_know</table_name>
+        <template/>
+        <template_manager_roles/>
+        <type>item</type>
+        <use_sc_layout>true</use_sc_layout>
+        <vendor/>
+        <view/>
+        <visible_bundle>true</visible_bundle>
+        <visible_guide>true</visible_guide>
+        <visible_standalone>true</visible_standalone>
+        <workflow/>
+    </sc_cat_item_producer>
+    <sys_translated_text action="delete_multiple" query="documentkey=e4bc2be22fd9301085bfd0e62799b669"/>
+    <fx_price action="delete_multiple" query="id=e4bc2be22fd9301085bfd0e62799b669"/>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>price</field>
+        <id>e4bc2be22fd9301085bfd0e62799b669</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>Chandana</sys_created_by>
+        <sys_created_on>2021-07-15 14:33:21</sys_created_on>
+        <sys_id>db9d67662fd9301085bfd0e62799b695</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>Chandana</sys_updated_by>
+        <sys_updated_on>2021-07-15 14:33:21</sys_updated_on>
+        <table>sc_cat_item_producer</table>
+        <type>calculated</type>
+    </fx_price>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>recurring_price</field>
+        <id>e4bc2be22fd9301085bfd0e62799b669</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>movvachandana2@kpmg.com</sys_created_by>
+        <sys_created_on>2021-08-05 12:28:41</sys_created_on>
+        <sys_id>ed7adb1d1bb934d06d5b117c0a4bcb07</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>movvachandana2@kpmg.com</sys_updated_by>
+        <sys_updated_on>2021-08-05 12:28:41</sys_updated_on>
+        <table>sc_cat_item_producer</table>
+        <type>calculated</type>
+    </fx_price>
+</record_update>

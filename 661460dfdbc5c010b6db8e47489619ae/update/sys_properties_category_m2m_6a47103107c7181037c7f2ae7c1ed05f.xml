@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m">
+    <sys_properties_category_m2m action="INSERT_OR_UPDATE">
+        <category display_value="Arena">b5b6ade1dbb45010b6db8e47489619fa</category>
+        <order>800</order>
+        <property display_value="x_93700_arena.test_taker.master_password" name="x_93700_arena.test_taker.master_password">42f5bd232f92941093fd5d8b2799b6c0</property>
+        <sys_class_name>sys_properties_category_m2m</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-04 22:29:06</sys_created_on>
+        <sys_id>6a47103107c7181037c7f2ae7c1ed05f</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_93700_arena.test_taker.master_password.Arena</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_properties_category_m2m_6a47103107c7181037c7f2ae7c1ed05f</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-09-22 11:32:46</sys_updated_on>
+    </sys_properties_category_m2m>
+</record_update>

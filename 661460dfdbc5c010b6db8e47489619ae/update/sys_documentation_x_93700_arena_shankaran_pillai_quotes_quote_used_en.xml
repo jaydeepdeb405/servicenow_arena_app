@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="quote_used" label="Quote Used?" language="en" table="x_93700_arena_shankaran_pillai_quotes">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>quote_used</element>
+            <help/>
+            <hint/>
+            <label>Quote Used?</label>
+            <language>en</language>
+            <name>x_93700_arena_shankaran_pillai_quotes</name>
+            <plural>Quote Used?s</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-04-19 17:30:58</sys_created_on>
+            <sys_id>b4f35c322fef601066625e972799b6c4</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Quote Used?</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_documentation_x_93700_arena_shankaran_pillai_quotes_quote_used_en</sys_update_name>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-04-19 17:30:58</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

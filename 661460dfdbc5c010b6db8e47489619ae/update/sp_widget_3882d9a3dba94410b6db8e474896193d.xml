@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($cookies) {
+  /* widget controller */
+  var c = this;
+	 
+	var counter = $cookies.get('arena_v_counter') || 0;
+	alert(counter);
+		counter++;
+	$cookies.put('arena_v_counter', counter);
+	}
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css>body {&#13;
+  background: #000;&#13;
+}&#13;
+&#13;
+.container {&#13;
+  position: absolute;&#13;
+  top: 50%;&#13;
+  left: 50%;&#13;
+  transform: translate(-50%, -50%);&#13;
+}&#13;
+&#13;
+.rim {&#13;
+  position: absolute;&#13;
+  top: 50%;&#13;
+  left: 50%;&#13;
+  transform: translate(-50%, -50%);&#13;
+  width: 300px;&#13;
+  height: 300px;&#13;
+  border: 20px solid #000;&#13;
+  border-radius: 50%;&#13;
+  animation: shift-rim 8s infinite;&#13;
+  z-index: 10;&#13;
+}&#13;
+&#13;
+.outer {&#13;
+  width: 300px;&#13;
+  height: 300px;&#13;
+  background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(8,8,71,1) 100%);&#13;
+  border: 10px solid #1A23F2;&#13;
+  border-radius: 50%;&#13;
+  box-sizing: border-box;&#13;
+  filter: blur(2px);&#13;
+  animation: shift 8s infinite;&#13;
+  &amp;::before {&#13;
+    display: block;&#13;
+    content: '';&#13;
+    position: absolute;&#13;
+    top: 50%;&#13;
+    left: 50%;&#13;
+    transform: translate(-50%, -50%);&#13;
+    width: 104%;&#13;
+    height: 104%; &#13;
+    border: 1px solid #fff;&#13;
+    box-sizing: border-box;&#13;
+    border-radius: 50%;&#13;
+    opacity: 1;&#13;
+    filter: blur(2px);&#13;
+  }&#13;
+}&#13;
+&#13;
+.inner {&#13;
+  position: absolute;&#13;
+  top: -10px;&#13;
+  left: 50%;&#13;
+  transform: translateX(-50%);&#13;
+  width: 200px;&#13;
+  height: 200px;&#13;
+    background: linear-gradient(to bottom, rgba(8,8,71,1) 0%, rgba(0,0,0,1) 100%);&#13;
+  border: 8px solid #1A23F2;&#13;
+  border-radius: 50%;&#13;
+  box-sizing: border-box;&#13;
+  box-shadow: 0 10px 20px 10px #000;&#13;
+  filter: blur(1px);&#13;
+  animation: shift-inner 8s infinite;&#13;
+    &amp;::before {&#13;
+    display: block;&#13;
+    content: '';&#13;
+    position: absolute;&#13;
+    top: 50%;&#13;
+    left: 50%;&#13;
+    transform: translate(-50%, -50%);&#13;
+    width: 100%;&#13;
+    height: 100%; &#13;
+    border: 8px solid #000;&#13;
+    box-sizing: border-box;&#13;
+    border-radius: 50%;&#13;
+    opacity: 1;&#13;
+    filter: blur(5px);&#13;
+  }&#13;
+   &amp;::after {&#13;
+    display: block;&#13;
+    content: '';&#13;
+    position: absolute;&#13;
+    top: 50%;&#13;
+    left: 50%;&#13;
+    transform: translate(-50%, -50%);&#13;
+    width: 105%;&#13;
+    height: 105%; &#13;
+    border: 1px solid #6AAEE9;&#13;
+    box-sizing: border-box;&#13;
+    border-radius: 50%;&#13;
+    opacity: 1;&#13;
+    filter: blur(3px);&#13;
+  }&#13;
+}&#13;
+&#13;
+#clock {&#13;
+  position: absolute;&#13;
+  top: -10px;&#13;
+  left: 50%;&#13;
+  transform: translateX(-50%);&#13;
+  width: 100%;&#13;
+  height: 50px;&#13;
+  color: #fff;&#13;
+  font-family: 'Baloo Tammudu', cursive;&#13;
+  font-size: 40px;&#13;
+  text-align: center;&#13;
+  text-shadow: 0 0 30px #8DCAED;&#13;
+  animation: shift-clock 8s infinite;&#13;
+}&#13;
+&#13;
+@keyframes shift {&#13;
+  0% {&#13;
+    height: 100px;&#13;
+  }&#13;
+  50% {&#13;
+    height: 280px;&#13;
+  }&#13;
+  100% {&#13;
+    height: 100px;&#13;
+  }&#13;
+}&#13;
+&#13;
+@keyframes shift-rim {&#13;
+  0% {&#13;
+    top: 40%;&#13;
+    height: 100px;&#13;
+  }&#13;
+  50% {&#13;
+    top: 50%;&#13;
+    height: 280px;&#13;
+  }&#13;
+  100% {&#13;
+    top: 40%;&#13;
+    height: 100px;&#13;
+  }&#13;
+}&#13;
+&#13;
+@keyframes shift-inner {&#13;
+  0% {&#13;
+    top: -10px;&#13;
+    height: 50px;&#13;
+  }&#13;
+  50% {&#13;
+    top: 40px;&#13;
+    height: 190px;&#13;
+  }&#13;
+  100% {&#13;
+    top: -10px;&#13;
+    height: 50px;&#13;
+  }&#13;
+}&#13;
+&#13;
+@keyframes shift-clock {&#13;
+  0% {&#13;
+    top: -10px;&#13;
+    transform: translateX(-50%) scaleY(.2);&#13;
+  }&#13;
+  50% {&#13;
+    top: 100px;&#13;
+    transform: translateX(-50%) scaleY(1);&#13;
+  }&#13;
+  100% {&#13;
+    top: -10px;&#13;
+    transform: translateX(-50%) scaleY(.2);&#13;
+  }&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>timer test</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-12-12 03:32:17</sys_created_on>
+        <sys_id>3882d9a3dba94410b6db8e474896193d</sys_id>
+        <sys_mod_count>41</sys_mod_count>
+        <sys_name>timer test</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_3882d9a3dba94410b6db8e474896193d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-12-13 05:48:08</sys_updated_on>
+        <template><![CDATA[<div class="container">
+  <div class="rim"></div>
+  <div class="outer"></div>
+  <div class="inner">
+  </div>
+  <div id="clock"></div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css_include">
+    <sp_css_include action="DELETE">
+        <name>Materialize</name>
+        <source>url</source>
+        <sp_css/>
+        <sys_class_name>sp_css_include</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-26 20:50:16</sys_created_on>
+        <sys_id>650186b00716541037c7f2ae7c1ed041</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Materialize</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_css_include_650186b00716541037c7f2ae7c1ed041</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-26 20:50:16</sys_updated_on>
+        <url>https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js</url>
+    </sp_css_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sp_css_include_650186b00716541037c7f2ae7c1ed041</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css_include"><sp_css_include action="INSERT_OR_UPDATE"><name>Materialize</name><source>url</source><sp_css/><sys_class_name>sp_css_include</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-07-26 20:50:16</sys_created_on><sys_id>650186b00716541037c7f2ae7c1ed041</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Materialize</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sp_css_include_650186b00716541037c7f2ae7c1ed041</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-07-26 20:50:16</sys_updated_on><url>https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js</url></sp_css_include></record_update>]]></payload>
+        <payload_hash>367802924</payload_hash>
+        <record_name>Materialize</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-26 20:50:16</sys_created_on>
+        <sys_id>4111c2b00716541037c7f2ae7c1ed0b5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1738ce3f6e70000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-26 20:50:16</sys_updated_on>
+        <type>CSS Include</type>
+        <update_guid>4911c2b00f165410647386e49bb3a1b4</update_guid>
+        <update_guid_history>4911c2b00f165410647386e49bb3a1b4:367802924</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Materialize">4063cef00716541037c7f2ae7c1ed093</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-26 21:00:19</sys_created_on>
+        <sys_db_object display_value="" name="sp_css_include">sp_css_include</sys_db_object>
+        <sys_id>50532128c88846a1a85a7aa7d87902a1</sys_id>
+        <sys_metadata>650186b00716541037c7f2ae7c1ed041</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Materialize</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sp_css_include_650186b00716541037c7f2ae7c1ed041</sys_update_name>
+        <sys_update_version display_value="sp_css_include_650186b00716541037c7f2ae7c1ed041">4111c2b00716541037c7f2ae7c1ed0b5</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-26 21:00:19</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

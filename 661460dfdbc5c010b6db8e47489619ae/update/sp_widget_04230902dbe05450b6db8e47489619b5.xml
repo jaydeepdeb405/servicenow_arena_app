@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope,$window) {
+  /* widget controller */
+  var c = this;
+	
+
+
+	
+	/////////////////////////Listener/////////////////////////
+	$rootScope.$on('gameScreen', function(event,obj) {
+		c.showTest = obj.test;
+	});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.centerAll{&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  justify-content:center;&#13;
+  align-items:center;&#13;
+}&#13;
+&#13;
+.fit-image{&#13;
+  max-height: 255px;&#13;
+  border-radius: 5%;&#13;
+  border: 5px solid cadetblue;&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+.rowPadding{&#13;
+padding:20px;&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+.musicSize{&#13;
+font-size:100px;&#13;
+}&#13;
+&#13;
+&#13;
+.statsIcon&#13;
+{&#13;
+max-height:50px;&#13;
+}&#13;
+&#13;
+.statsFigure&#13;
+{&#13;
+font-size: 30px;&#13;
+    color: aqua;&#13;
+}&#13;
+&#13;
+.statsDesc&#13;
+{&#13;
+font-size: 15px;&#13;
+    color: aqua;&#13;
+}&#13;
+&#13;
+&#13;
+.leftStats{&#13;
+font-size: 25px;&#13;
+color: white;&#13;
+}&#13;
+&#13;
+.leftStatsFigure&#13;
+{&#13;
+padding: 10px;&#13;
+    color: aqua;&#13;
+    font-size: 20px;&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+/**************************************************************************************************************/&#13;
+/*Toggle switches*/&#13;
+/* The switch - the box around the slider */&#13;
+.switch {&#13;
+  position: relative;&#13;
+  display: inline-block;&#13;
+  width: 60px;&#13;
+  height: 34px;&#13;
+}&#13;
+&#13;
+/* Hide default HTML checkbox */&#13;
+.switch input {&#13;
+  opacity: 0;&#13;
+  width: 0;&#13;
+  height: 0;&#13;
+}&#13;
+&#13;
+/* The slider */&#13;
+.slider {&#13;
+  position: absolute;&#13;
+  cursor: pointer;&#13;
+  top: 0;&#13;
+  left: 0;&#13;
+  right: 0;&#13;
+  bottom: 0;&#13;
+  background-color: #ccc;&#13;
+  -webkit-transition: .4s;&#13;
+  transition: .4s;&#13;
+}&#13;
+&#13;
+.slider:before {&#13;
+  position: absolute;&#13;
+  content: "";&#13;
+  height: 26px;&#13;
+  width: 26px;&#13;
+  left: 4px;&#13;
+  bottom: 4px;&#13;
+  background-color: white;&#13;
+  -webkit-transition: .4s;&#13;
+  transition: .4s;&#13;
+}&#13;
+&#13;
+input:checked + .slider {&#13;
+  background-color: #f0ad4e;&#13;
+}&#13;
+&#13;
+input:focus + .slider {&#13;
+  box-shadow: 0 0 1px #f0ad4e;&#13;
+}&#13;
+&#13;
+input:checked + .slider:before {&#13;
+  -webkit-transform: translateX(26px);&#13;
+  -ms-transform: translateX(26px);&#13;
+  transform: translateX(26px);&#13;
+}&#13;
+&#13;
+/* Rounded sliders */&#13;
+.slider.round {&#13;
+  border-radius: 7px;&#13;
+}&#13;
+&#13;
+.slider.round:before {&#13;
+  border-radius: 20%;&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+/**************************************************************************************************/&#13;
+input[type=range] {&#13;
+  -webkit-appearance: none;&#13;
+  margin: 18px 0;&#13;
+  width: 100%;&#13;
+}&#13;
+input[type=range]:focus {&#13;
+  outline: none;&#13;
+}&#13;
+input[type=range]::-webkit-slider-runnable-track {&#13;
+  width: 100%;&#13;
+  height: 8.4px;&#13;
+  animate: 0.2s;&#13;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;&#13;
+  background: #3071a9;&#13;
+  border-radius: 1.3px;&#13;
+  border: 0.2px solid #010101;&#13;
+}&#13;
+input[type=range]::-webkit-slider-thumb {&#13;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;&#13;
+  border: 1px solid #000000;&#13;
+  height: 36px;&#13;
+  width: 16px;&#13;
+  border-radius: 3px;&#13;
+  background: #ffffff;&#13;
+  -webkit-appearance: none;&#13;
+  margin-top: -14px;&#13;
+}&#13;
+input[type=range]:focus::-webkit-slider-runnable-track {&#13;
+  background: #367ebd;&#13;
+}&#13;
+input[type=range]::-moz-range-track {&#13;
+  width: 100%;&#13;
+  height: 8.4px;&#13;
+  animate: 0.2s;&#13;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;&#13;
+  background: #3071a9;&#13;
+  border-radius: 1.3px;&#13;
+  border: 0.2px solid #010101;&#13;
+}&#13;
+input[type=range]::-moz-range-thumb {&#13;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;&#13;
+  border: 1px solid #000000;&#13;
+  height: 36px;&#13;
+  width: 16px;&#13;
+  border-radius: 3px;&#13;
+  background: #ffffff;&#13;
+}&#13;
+input[type=range]::-ms-track {&#13;
+  width: 100%;&#13;
+  height: 8.4px;&#13;
+  animate: 0.2s;&#13;
+  background: transparent;&#13;
+  border-color: transparent;&#13;
+  border-width: 16px 0;&#13;
+  color: transparent;&#13;
+}&#13;
+input[type=range]::-ms-fill-lower {&#13;
+  background: #2a6495;&#13;
+  border: 0.2px solid #010101;&#13;
+  border-radius: 2.6px;&#13;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;&#13;
+}&#13;
+input[type=range]::-ms-fill-upper {&#13;
+  background: #3071a9;&#13;
+  border: 0.2px solid #010101;&#13;
+  border-radius: 2.6px;&#13;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;&#13;
+}&#13;
+input[type=range]::-ms-thumb {&#13;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;&#13;
+  border: 1px solid #000000;&#13;
+  height: 36px;&#13;
+  width: 16px;&#13;
+  border-radius: 3px;&#13;
+  background: #ffffff;&#13;
+}&#13;
+input[type=range]:focus::-ms-fill-lower {&#13;
+  background: #3071a9;&#13;
+}&#13;
+input[type=range]:focus::-ms-fill-upper {&#13;
+  background: #367ebd;&#13;
+}&#13;
+Completed Range Input&#13;
+These styles make the following input:&#13;
+&#13;
+&#13;
+Range input with completely custom styles.&#13;
+Bonus: Full LESS to Style Range Inputs in All Browsers&#13;
+There is a lot of CSS required to make identical range inputs for each browser. Using a preprocessor, you can achieve much more efficient results. Included below is the LESS file use to generate the CSS above.&#13;
+&#13;
+@track-color: #424242;&#13;
+@thumb-color: #555bc8;&#13;
+&#13;
+@thumb-radius: 8px;&#13;
+@thumb-height: 30px;&#13;
+@thumb-width: 30px;&#13;
+@thumb-shadow-size: 1px;&#13;
+@thumb-shadow-blur: 1px;&#13;
+@thumb-shadow-color: #111;&#13;
+@thumb-border-width: 1px;&#13;
+@thumb-border-color: white;&#13;
+&#13;
+@track-width: 100%;&#13;
+@track-height: 10px;&#13;
+@track-shadow-size: 2px;&#13;
+@track-shadow-blur: 2px;&#13;
+@track-shadow-color: #222;&#13;
+@track-border-width: 1px;&#13;
+@track-border-color: black;&#13;
+&#13;
+@track-radius: 5px;&#13;
+@contrast: 5%;&#13;
+&#13;
+.shadow(@shadow-size,@shadow-blur,@shadow-color) {&#13;
+  box-shadow: @shadow-size @shadow-size @shadow-blur @shadow-color, 0px 0px @shadow-size lighten(@shadow-color,5%);&#13;
+}&#13;
+&#13;
+.track() {&#13;
+  width: @track-width;&#13;
+  height: @track-height;&#13;
+  cursor: pointer;&#13;
+  animate: 0.2s;&#13;
+}&#13;
+&#13;
+.thumb() {&#13;
+  .shadow(@thumb-shadow-size,@thumb-shadow-blur,@thumb-shadow-color);&#13;
+  border: @thumb-border-width solid @thumb-border-color;&#13;
+  height: @thumb-height;&#13;
+  width: @thumb-width;&#13;
+  border-radius: @thumb-radius;&#13;
+  background: @thumb-color;&#13;
+  cursor: pointer;&#13;
+}&#13;
+&#13;
+input[type=range] {&#13;
+  -webkit-appearance: none;&#13;
+  margin: @thumb-height/2 0;&#13;
+  width: @track-width;&#13;
+&#13;
+  &amp;:focus {&#13;
+    outline: none;&#13;
+  }&#13;
+&#13;
+  &amp;::-webkit-slider-runnable-track {&#13;
+    .track();&#13;
+    .shadow(@track-shadow-size,@track-shadow-blur,@track-shadow-color);&#13;
+    background: @track-color;&#13;
+    border-radius: @track-radius;&#13;
+    border: @track-border-width solid @track-border-color;&#13;
+  }&#13;
+  &#13;
+  &amp;::-webkit-slider-thumb {&#13;
+    .thumb();&#13;
+    -webkit-appearance: none;&#13;
+    margin-top: ((-@track-border-width * 2 + @track-height) / 2) - (@thumb-height / 2);&#13;
+  }&#13;
+&#13;
+  &amp;:focus::-webkit-slider-runnable-track {&#13;
+    background: lighten(@track-color, @contrast);&#13;
+  }&#13;
+&#13;
+  &amp;::-moz-range-track {&#13;
+    .track();&#13;
+    .shadow(@track-shadow-size,@track-shadow-blur,@track-shadow-color);&#13;
+    background: @track-color;&#13;
+    border-radius: @track-radius;&#13;
+     border: @track-border-width solid @track-border-color;&#13;
+  }&#13;
+  &amp;::-moz-range-thumb {&#13;
+     .thumb();&#13;
+  }&#13;
+&#13;
+  &amp;::-ms-track {&#13;
+    .track(); &#13;
+    background: transparent;&#13;
+    border-color: transparent;&#13;
+    border-width: @thumb-width 0;&#13;
+    color: transparent;&#13;
+  }&#13;
+&#13;
+  &amp;::-ms-fill-lower {&#13;
+    background: darken(@track-color, @contrast);&#13;
+    border: @track-border-width solid @track-border-color;&#13;
+    border-radius: @track-radius*2;&#13;
+    .shadow(@track-shadow-size,@track-shadow-blur,@track-shadow-color);&#13;
+  }&#13;
+  &amp;::-ms-fill-upper {&#13;
+    background: @track-color;&#13;
+    border: @track-border-width solid @track-border-color;&#13;
+    border-radius: @track-radius*2;&#13;
+    .shadow(@track-shadow-size,@track-shadow-blur,@track-shadow-color);&#13;
+  }&#13;
+  &amp;::-ms-thumb {&#13;
+    .thumb();&#13;
+  }&#13;
+  &amp;:focus::-ms-fill-lower {&#13;
+    background: @track-color;&#13;
+  }&#13;
+  &amp;:focus::-ms-fill-upper {&#13;
+    background: lighten(@track-color, @contrast);&#13;
+  }&#13;
+}&#13;
+&#13;
+/**************************************************************************************************************/</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>Dont Click</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+ 
+	//Testing
+	var arenaUser = new GlideRecord("x_93700_arena_user");
+    arenaUser.addQuery("user", gs.getUserID());
+    arenaUser.query();
+    if (arenaUser.next()) {
+		
+		data.user = arenaUser.sys_id.toString(); //-SK- sfx -redesign
+		
+        data.musicSetting = (arenaUser.music == true);
+        data.sfxSetting = (arenaUser.sfx == true);
+        data.nickName = arenaUser.getValue('avatar');
+
+        data.excellence = [{
+                "title": "Platform Administration",
+                "skill": {"width" : arenaUser.platform_excellence.toString() + "%"}
+            },
+            {
+                "title": "Scripting",
+                "skill": {"width" : arenaUser.scripting_excellence.toString() + "%"}
+            },
+            {
+                "title": "User Interface",
+                "skill": {"width" : arenaUser.ui_excellence.toString() + "%"}
+            },
+            {
+                "title": "Application",
+                "skill": {"width" : arenaUser.application_excellence.toString() + "%"}
+            }
+        ];
+		
+
+
+    }
+	
+	
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>anirudh</sys_created_by>
+        <sys_created_on>2020-05-04 13:46:50</sys_created_on>
+        <sys_id>04230902dbe05450b6db8e47489619b5</sys_id>
+        <sys_mod_count>73</sys_mod_count>
+        <sys_name>Dont Click</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_04230902dbe05450b6db8e47489619b5</sys_update_name>
+        <sys_updated_by>anirudh</sys_updated_by>
+        <sys_updated_on>2020-05-07 13:39:50</sys_updated_on>
+        <template><![CDATA[<div ng-show="c.showTest">
+
+  
+  <div class="container">
+    
+  <div class="row" style="border:2 px solid blue">
+    
+    
+    
+    <!--Player Image-->
+     <div class="col-md-4">
+      <img src="/hermione1.jpg" class="responsive fit-image">
+    </div>
+    
+    
+    
+    <!--Left Stats-->
+    <div class="col-md-4 leftStatsMain">
+      
+      <div class="row">
+        <div class="col-md-12"><span class="leftStats">Last Played</span></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 leftStatsFigure"><span class="">Mar 22</span></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-12"><span class="leftStats">Game Hours</span></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-12 leftStatsFigure"><span class="">44</span></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-12"><span class="leftStats">Current Level</span></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-12 leftStatsFigure"><span class="">Level 3 - Hard</span></div>
+      </div>
+      
+    </div>
+    
+    
+
+    
+    
+    
+    
+    
+    <!--Right Stats-->
+    <div class="col-md-4">
+      
+      <div class="row">
+        <div class="col-md-6"><img class="statsIcon" src="/fire2.jpg"/></div>
+         <div class="col-md-6">
+          <div><span class="statsFigure">3</span></div>
+          <div><span class="statsDesc">Streaks</span></div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6"><img class="statsIcon" src="/vike.png"/></div>
+        <div class="col-md-6">
+          <div><span class="statsFigure">5</span></div>
+          <div><span class="statsDesc">Kills</span></div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6"><img class="statsIcon" src="/shield1.jpg"/></div>
+        <div class="col-md-6">
+          <div><span class="statsFigure">2</span></div>
+          <div><span class="statsDesc">Challengers</span></div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6"><img class="statsIcon" src="/wreath.jpg"/></div>
+        <div class="col-md-6">
+          <div><span class="statsFigure">5</span></div>
+          <div><span class="statsDesc">Wins</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+    
+    
+   
+      
+      
+        <div class="row rowPadding">
+          
+          <div ng-repeat="excellence in data.excellence">
+                    <h3>    
+                      <div class="col-md-4" style="color:white;">{{excellence.title}}</div>
+                     </h3>
+              
+                    <div class="col-md-8">
+                          <div class="progress" style="border-radius: 20px;">
+                              <div class="progress-bar bg-success" role="progressbar" ng-style="{{excellence.skill}}">
+                          </div>
+
+                    </div>
+          
+            </div>
+           
+      	</div>
+        
+      
+          
+          
+          
+    </div>   
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

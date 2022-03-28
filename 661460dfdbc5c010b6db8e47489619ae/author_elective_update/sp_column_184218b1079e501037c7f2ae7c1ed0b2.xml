@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_column">
+    <sp_column action="DELETE">
+        <class_name/>
+        <order>1</order>
+        <size>12</size>
+        <size_lg/>
+        <size_sm/>
+        <size_xs/>
+        <sp_row display_value="1">504218b1079e501037c7f2ae7c1ed0b0</sp_row>
+        <sys_class_name>sp_column</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-29 15:20:01</sys_created_on>
+        <sys_id>184218b1079e501037c7f2ae7c1ed0b2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_column_184218b1079e501037c7f2ae7c1ed0b2</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-29 15:20:01</sys_updated_on>
+    </sp_column>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sp_column_184218b1079e501037c7f2ae7c1ed0b2</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_column"><sp_column action="INSERT_OR_UPDATE"><class_name/><order>1</order><size>12</size><size_lg/><size_sm/><size_xs/><sp_row display_value="1">504218b1079e501037c7f2ae7c1ed0b0</sp_row><sys_class_name>sp_column</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-07-29 15:20:01</sys_created_on><sys_id>184218b1079e501037c7f2ae7c1ed0b2</sys_id><sys_mod_count>0</sys_mod_count><sys_name>1</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sp_column_184218b1079e501037c7f2ae7c1ed0b2</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-07-29 15:20:01</sys_updated_on></sp_column></record_update>]]></payload>
+        <payload_hash>526229700</payload_hash>
+        <record_name>1</record_name>
+        <reverted_from/>
+        <source>0874231b0752941037c7f2ae7c1ed098</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-29 15:20:01</sys_created_on>
+        <sys_id>684218b1079e501037c7f2ae7c1ed0b4</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>1739b28af060000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-03 22:32:01</sys_updated_on>
+        <type>Column</type>
+        <update_guid>504218b18d9e5010b4f7528ded734eb4</update_guid>
+        <update_guid_history>504218b18d9e5010b4f7528ded734eb4:526229700</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="1">71f810b107c7181037c7f2ae7c1ed06d</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-04 22:36:26</sys_created_on>
+        <sys_db_object display_value="" name="sp_column">sp_column</sys_db_object>
+        <sys_id>3e7bffbe24d7458d927976e4d934ab99</sys_id>
+        <sys_metadata>184218b1079e501037c7f2ae7c1ed0b2</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sp_column_184218b1079e501037c7f2ae7c1ed0b2</sys_update_name>
+        <sys_update_version display_value="sp_column_184218b1079e501037c7f2ae7c1ed0b2">684218b1079e501037c7f2ae7c1ed0b4</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-04 22:36:26</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

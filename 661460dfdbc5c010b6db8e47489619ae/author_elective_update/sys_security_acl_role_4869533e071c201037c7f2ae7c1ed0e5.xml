@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="DELETE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-11-09 18:29:29</sys_created_on>
+        <sys_id>4869533e071c201037c7f2ae7c1ed0e5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena_baap.x_93700_arena.admin</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_security_acl display_value="x_93700_arena_baap">0469533e071c201037c7f2ae7c1ed0df</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_4869533e071c201037c7f2ae7c1ed0e5</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-11-09 18:29:29</sys_updated_on>
+        <sys_user_role display_value="x_93700_arena.admin" name="x_93700_arena.admin">3e68a0dbdb09c010b6db8e47489619e6</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_security_acl_role_4869533e071c201037c7f2ae7c1ed0e5</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role"><sys_security_acl_role action="INSERT_OR_UPDATE"><sys_class_name>sys_security_acl_role</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-11-09 18:29:29</sys_created_on><sys_id>4869533e071c201037c7f2ae7c1ed0e5</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_93700_arena_baap.x_93700_arena.admin</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_security_acl display_value="x_93700_arena_baap">0469533e071c201037c7f2ae7c1ed0df</sys_security_acl><sys_update_name>sys_security_acl_role_4869533e071c201037c7f2ae7c1ed0e5</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-11-09 18:29:29</sys_updated_on><sys_user_role display_value="x_93700_arena.admin" name="x_93700_arena.admin">3e68a0dbdb09c010b6db8e47489619e6</sys_user_role><transaction_id/></sys_security_acl_role></record_update>]]></payload>
+        <payload_hash>-613494799</payload_hash>
+        <record_name>x_93700_arena_baap.x_93700_arena.admin</record_name>
+        <reverted_from/>
+        <source>9d4fad12079d501037c7f2ae7c1ed0a1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-11-09 18:29:29</sys_created_on>
+        <sys_id>0c69533e071c201037c7f2ae7c1ed0ea</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>175ae4527e70000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-11-09 18:29:29</sys_updated_on>
+        <type>Access Roles</type>
+        <update_guid>0469533e0c1c20106ce44f30e14f68ea</update_guid>
+        <update_guid_history>0469533e0c1c20106ce44f30e14f68ea:-613494799</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="x_93700_arena_baap.x_93700_arena.admin">4269d33e071c201037c7f2ae7c1ed0cd</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-11-09 18:29:36</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl_role">sys_security_acl_role</sys_db_object>
+        <sys_id>11e4fb4051ca47349a1281f78a68b510</sys_id>
+        <sys_metadata>4869533e071c201037c7f2ae7c1ed0e5</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena_baap.x_93700_arena.admin</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent display_value="">0469533e071c201037c7f2ae7c1ed0df</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_security_acl_role_4869533e071c201037c7f2ae7c1ed0e5</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_role_4869533e071c201037c7f2ae7c1ed0e5">0c69533e071c201037c7f2ae7c1ed0ea</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-11-09 18:29:36</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

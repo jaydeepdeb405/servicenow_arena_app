@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>1000</order>
+        <role/>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>kesav</sys_created_by>
+        <sys_created_on>2020-06-09 12:00:37</sys_created_on>
+        <sys_id>1425c6e5db959010b6db8e47489619ad</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>d825c6e5db959010b6db8e47489619a9</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_embedded_help_role_1425c6e5db959010b6db8e47489619ad</sys_update_name>
+        <sys_updated_by>kesav</sys_updated_by>
+        <sys_updated_on>2020-06-09 12:00:37</sys_updated_on>
+    </sys_embedded_help_role>
+</record_update>

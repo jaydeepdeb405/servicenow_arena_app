@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function LeaderBoard($scope, $rootScope, $http) {
+	var c = this;
+
+	//routing to latest level and difficulty
+	if(!c.data.noResult)
+	{
+		var aa = c.data.latestLevel;
+		var ma = document.getElementById(aa);
+		ma.classList.remove("inactive1");
+		ma.classList.add("active1");
+
+		var ab = c.data.latestDiff;
+		var mb = document.getElementById(ab);
+		mb.classList.remove("inactiveD");
+		mb.classList.add("activeD");
+	}
+	if(c.data.noResult)
+	{
+		var nrl = document.getElementById("level1");
+		nrl.classList.remove("inactive1");
+		nrl.classList.add("active1");
+
+		var nrd = document.getElementById("easy");
+		nrd.classList.remove("inactiveD");
+		nrd.classList.add("activeD");
+	}
+	//
+
+	$rootScope.$on('gameScreen', function(event, obj) {
+		c.ll = obj.leaderboard;
+		if(obj.leaderboard == true)
+		{
+			c.showLeaderBoard();
+		}
+	});
+
+	c.makeActive = function(bId) {
+		var clickedButtonId = bId;
+		//removing the active content first from all buttons NOT USING FOR LOOP FOR GELCLASS AS IT NOT WORKS IN SERVICENOW
+		var a = document.getElementById("level1");
+		a.classList.remove("active1");
+		a.classList.add("inactive1");
+		var b = document.getElementById("level2");
+		b.classList.remove("active1");
+		b.classList.add("inactive1");
+		var c = document.getElementById("level3");
+		c.classList.remove("active1");
+		c.classList.add("inactive1");
+		var d = document.getElementById("level4");
+		d.classList.remove("active1");
+		d.classList.add("inactive1");
+		//adding the active content to the clicked button
+		var e = document.getElementById(clickedButtonId);
+		e.classList.remove("inactive1");
+		e.classList.add("active1");
+	};
+
+	c.makeActiveD = function(bId2) {
+		var clickedButtonId2 = bId2;
+		var a2 = document.getElementById("easy");
+		a2.classList.remove("activeD");
+		a2.classList.add("inactiveD");
+		var b2 = document.getElementById("medium");
+		b2.classList.remove("activeD");
+		b2.classList.add("inactiveD");
+		var c2 = document.getElementById("hard");
+		c2.classList.remove("activeD");
+		c2.classList.add("inactiveD");
+
+		var e2 = document.getElementById(clickedButtonId2);
+		e2.classList.remove("inactiveD");
+		e2.classList.add("activeD");
+	};
+//refresh leaderoard
+	c.showLeaderBoard = function() {
+		var activeL = document.getElementsByClassName('active1');
+		var activeLid = activeL[0].id;
+		var activeD = document.getElementsByClassName('activeD');
+		var activeDid = activeD[0].id;
+		c.data.level = activeLid;
+		c.data.diff = activeDid;
+		c.server.update();
+	};
+//challenging
+	c.challenger = function(uID, lvl, dif) {
+		c.data.User = uID;
+		c.data.lvl = lvl;
+		c.data.dif = dif;
+		c.server.update();
+	};
+//fighting animation
+	c.fight = function()
+	{
+		document.getElementById("fight").style.display = "inline";
+		setTimeout(function(){document.getElementById( "fight" ).style.display = "none";},3850) ;
+	}
+	
+	//avatar
+	var liveProfiles = {};
+	$scope.getLiveProfileByUserId = function (userSysId){
+	return liveProfiles[userSysId] ;
+	};
+	var pending = {};
+	//Little caching implementation to make sure we only get a given user's profile once.
+	$scope.hasLiveProfile = function hasLiveProfile(userSysId){
+		if (liveProfiles[userSysId])
+			return true;
+		else if (pending[userSysId])
+			return false;
+		else {		
+			pending[userSysId] = $http.get('/api/now/live/profiles/sys_user.' + userSysId).then(function (response) {	//alert(JSON.stringify(response.data.result));
+				liveProfiles[userSysId] = {
+					userID: userSysId,
+					name: response.data.result.name,
+					initials: buildInitials(response.data.result.name),
+					avatar: response.data.result.avatar
+				};
+			});
+			return false;
+		}
+	};
+	
+	function buildInitials(name) {
+				if (!name)
+					return "--";
+				var initials = name.split(" ").map(function(word) {
+					return word.toUpperCase();
+				}).filter(function(word) {
+					return word.match(/^[A-Z]/);
+				}).map(function(word) {
+					return word.substring(0,1);
+				}).join("");
+				return (initials.length > 3) ? initials.substr(0, 3) : initials;
+			}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.par
+{
+  position:fixed;
+  top:0;
+  right:0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  align: auto;
+  overflow:auto;
+}
+
+.avata
+{
+  border-radius: 50%;
+  width:50px;
+  height:50px;
+  margin-left:10%;
+  float:left;
+  
+}
+
+.capitalize
+{
+  text-transform:capitalize;
+}
+
+.heading
+{
+  margin-top:-20px;
+  font-size:65px;
+  text-shadow: 0 0 5px #FF0000;
+  color: yellow;
+}
+
+.scr
+{
+  overflow: auto;
+}
+
+.active1{
+  box-shadow: 0px 1px 17px 0px #faf1af;
+  background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+  background-color:#ffec64;
+  border-radius:26px;
+  border:2px solid #fffdfa;
+  display:inline-block;
+  cursor:pointer;
+  color:#333333;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:5px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 15px #ffee66;
+}
+
+.darkTable button
+{
+  background-color:#44c767;
+  border-radius:12px;
+  border:1px solid #18ab29;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  padding:2px 10px;
+  text-decoration:none;
+  text-shadow:-2px -1px 3px #2f6627;
+}
+
+.darkTable button:hover
+{
+  background-color:#5cbf2a;
+}
+
+.darkTable button:active
+{
+  position:relative;
+  top:1px;
+}
+
+.active1:hover
+{
+  background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+  background-color:#ffab23;
+}
+
+.inactive1
+{box-shadow: 0px 1px 17px 0px #faf1af;
+  background:linear-gradient(to bottom, #7b20e3 5%, #7d2b52 100%);
+  background-color:#7b20e3;
+  border-radius:26px;
+  border:2px solid #fffdfa;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffff00;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:5px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 15px #ffee66;
+}
+
+.inactive1:hover
+{
+  background:linear-gradient(to bottom, #7d2b52 5%, #7b20e3 100%);
+  background-color:#7d2b52;
+}
+
+.activeD
+{
+  box-shadow: 3px 4px 8px 0px #8a2a21;
+  background:linear-gradient(to bottom, #e9f022 5%, #8939f0 100%);
+  background-color:#e9f022;
+  border-radius:18px;
+  border:1px solid #d02718;
+  display:inline-block;
+  cursor:pointer;
+  color:#fff419;
+  font-family:Arial;
+  font-size:17px;
+  padding:5px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 15px #810e05;
+}
+
+.activeD:hover
+{
+  background:linear-gradient(to bottom, #8939f0 5%, #e9f022 100%);
+  background-color:#8939f0;
+}
+
+.inactiveD
+{
+  box-shadow: 3px 4px 50px 0px #8a2a21;
+  background:linear-gradient(to bottom, #c62d1f 5%, #38f0b3 100%);
+  background-color:#c62d1f;
+  border-radius:18px;
+  border:1px solid #d02718;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffd919;
+  font-family:Arial;
+  font-size:17px;
+  padding:5px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 15px #810e05;
+}
+
+.inactiveD:hover
+{
+  background:linear-gradient(to bottom, #38f0b3 5%, #c62d1f 100%);
+  background-color:#38f0b3;
+}
+
+.lvl
+{
+  margin:auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.dif
+{
+  margin:auto;
+  padding-top: 5px;
+  padding-bottom: 14px;
+}
+
+table.darkTable {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  width: 100%;
+  text-align: center;
+ // border-radius:15px;
+  border-collapse: inherit;
+  margin-bottom:100px;
+}
+table.darkTable td, table.darkTable th {
+  //border: 2px solid #aaff00;
+  padding: 3px 2px;
+//  border-radius:15px;
+  margin: 2px 2px 2px 2px;
+}
+table.darkTable tbody td {
+  font-size: 13px;
+//  border-radius:15px;
+  color: #ffff66;
+  background-color: rgba(0,0,0, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+table.darkTable thead {
+  background: #58196D;
+  background: -moz-linear-gradient(top, #825291 0%, #68307b 66%, #58196D 100%);
+  background: -webkit-linear-gradient(top, #825291 0%, #68307b 66%, #58196D 100%);
+  background: linear-gradient(to bottom, #825291 0%, #68307b 66%, #58196D 100%);
+  border-bottom: 3px solid #8949FF;
+ // border-radius:15px;
+}
+table.darkTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #E6E6E6;
+  text-align: center;
+  border-left: 2px solid #ff80df;
+//  border-radius:15px;
+}
+
+.fight {
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0; 	
+  margin: auto;
+}
+
+table.darkTable tfoot td {
+  font-size: 12px;
+}
+
+table.userDetails td 
+{ 
+  border-width:8px;
+//  border-style:double;
+  border-color:#93d831;
+  background-color:rgba(153, 255, 102, 0.15);
+  color:#66ff1a;
+  font-size: 20px;
+  padding: 3px 2px;z
+  font-family: "Comic Sans MS", cursive, sans-serif; 
+  -webkit-box-shadow:0px 0px 50px 15px #9ca5e3 ;
+  -moz-box-shadow:0px 0px 50px 15px #9ca5e3 ;
+  box-shadow:0px 0px 50px 5px #9ca5e3 ;
+  text-align: center;
+  width: 1%;
+}
+
+
+table.userDetails
+{
+  border-collapse: separate;
+}
+
+@media only screen and (max-width: 500px) {
+  .hide-mobile{
+    display:none;
+}
+}
+
+.fixi
+{
+  position:fixed;
+}
+  bottom: 20px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>leaderboard2_0</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>leaderboard2.0</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	var currentUser = gs.getUserID();
+	if (input) {
+		if (input.level && input.diff) {
+			data.rankArray = [];
+			var userHighScore = 0;
+			var userHighTime = 0;
+			var lastUser = "";
+			var lastUserName = "";
+			var lastUserNickName = "";
+			var image = "";
+
+			var initializer = new GlideRecord('x_93700_arena_results');
+			initializer.addQuery('difficulty', input.diff); //the active difficulty
+			initializer.addQuery('level', input.level); //the active level
+			initializer.addQuery('active', true);
+			initializer.query();
+
+			while (initializer.next()) {
+				if (lastUser == "") //to initialize the values for further calculation
+				{
+					userHighScore = initializer.getValue('total_score');
+					userHighTime = initializer.getValue('time_taken');
+					lastUser = initializer.arena_user.user.toString();
+					lastUserName = initializer.arena_user.user.name.toString();
+					lastUserNickName = initializer.arena_user.avatar.toString();
+					var r1 = initializer.arena_user.sys_id;
+						var p1 = new GlideRecord('sys_attachment');
+						p1.addQuery('table_sys_id',r1);
+						p1.query();
+						if(p1.next())
+						image = "/" + p1.sys_id + ".iix";
+
+				} else {
+					/*if(lastUser == initializer.arena_user.user.toString())//if the next user is the same, the compare the scores
+                    {
+                    	if(userHighScore < initializer.getValue('total_score'))//if the next record score is more, update the score and time
+                    	{
+                    		userHighScore = initializer.getValue('total_score');
+                    		userHighTime = initializer.getValue('time_taken');
+                    	}
+                    	if(userHighScore==initializer.getValue('total_score')&&userHighTime>initializer.getValue('time_taken'))//if the scores are the same, the time takes in previous record is more, upadate the time
+                    		userHighTime = initializer.getValue('time_taken');
+                    }*/
+					if (lastUser != initializer.arena_user.user.toString()) {
+						data.rankArray.push({
+							"userHighScore": userHighScore,
+							"userHighTime": userHighTime,
+							"lastUser": lastUser,
+							"lastUserName": lastUserName,
+							"level": input.level,
+							"difficulty": input.diff,
+							"nickName": lastUserNickName,
+							"img": image
+						}); //as soon as the new user comes in, push the last record and update the scores
+						userHighScore = initializer.getValue('total_score');
+						userHighTime = initializer.getValue('time_taken');
+						lastUser = initializer.arena_user.user.toString();
+						lastUserName = initializer.arena_user.user.name.toString();
+						lastUserNickName = initializer.arena_user.avatar.toString();
+						var r = initializer.arena_user.sys_id;
+						var p = new GlideRecord('sys_attachment');
+						p.addQuery('table_sys_id',r);
+						p.query();
+						if(p.next())
+						image = "/" + p.sys_id + ".iix";
+					}
+					if (!initializer.hasNext()) //if no new record push the stored values
+					{
+						data.rankArray.push({
+							"userHighScore": userHighScore,
+							"userHighTime": userHighTime,
+							"lastUser": lastUser,
+							"lastUserName": lastUserName,
+							"level": input.level,
+							"difficulty": input.diff,
+							"nickName": lastUserNickName,
+							"img": image
+						});
+					}
+				}
+			}
+
+			data.rankArray = data.rankArray.sort(function(a, b) { //sorting as per mood high score and least time
+				if (b.userHighScore != a.userHighScore)
+					return b.userHighScore - a.userHighScore;
+				if (b.userHighScore == a.userHighScore)
+					return a.userHighTime - b.userHighTime;
+			});
+
+			var rankCounter = 1;
+			data.loggedUser = [];
+			for (var eye = 0; eye < data.rankArray.length; eye++) //pushing rank name in each object
+			{
+
+				data.rankArray[eye].rank = rankCounter;
+				rankCounter++;
+				var glider = new GlideRecord('x_93700_arena_results');
+				glider.addQuery('arena_user.user', data.rankArray[eye].lastUser);
+				glider.addQuery('level', data.rankArray[eye].level);
+				glider.addQuery('difficulty', data.rankArray[eye].difficulty);
+				glider.addQuery('active', true);
+				glider.query();
+				if (glider.next()) {
+					if (glider.challenged_by)
+						data.rankArray[eye].show = false;
+					if (!glider.challenged_by) {
+						data.rankArray[eye].show = true;
+					}
+					data.rankArray[eye].challenger = glider.challenged_by.user.name.toString();
+					data.rankArray[eye].challengerNick = glider.challenged_by.avatar.toString();
+				}
+
+				//setting logged-in individual's record
+				if (data.rankArray[eye].lastUser.toString() == currentUser.toString()) {
+					data.loggedUser.push({
+						"rnk": data.rankArray[eye].rank,
+						"nme": data.rankArray[eye].lastUserName,
+						"scr": data.rankArray[eye].userHighScore,
+						"tym": data.rankArray[eye].userHighTime,
+						"sys": data.rankArray[eye].lastUser,
+						"nyc": data.rankArray[eye].nickName,
+						"img": data.rankArray[eye].image
+					});
+				}
+
+			}
+		}
+		if (input.dif && input.lvl && input.User) {
+			var challengerID = new GlideRecord('x_93700_arena_user');
+			challengerID.addQuery('user', currentUser);
+			challengerID.query();
+			if (input.User != currentUser)
+				if (challengerID.next()) {
+					var challenger = new GlideRecord('x_93700_arena_results');
+					challenger.addQuery('arena_user.user', input.User);
+					challenger.addQuery('level', input.lvl);
+					challenger.addQuery('difficulty', input.dif);
+					challenger.addQuery('active', true);
+					challenger.query();
+					var challenged = 0;
+					if (input.User != currentUser)
+						if (challenger.next()) {
+							if (!challenger.challenged_by && input.User != currentUser) {
+								challenger.setValue('challenged_by', challengerID.getUniqueValue());
+								var updateKnight = new GlideRecord('x_93700_arena_user');
+								updateKnight.addQuery('user', input.User);
+								updateKnight.query();
+								if (updateKnight.next()) {
+									updateKnight.knight = parseInt(updateKnight.knight) + 1; //Increase Knight count for Arena user whenever gets challenged
+									updateKnight.update();
+								}
+
+
+								challenger.update();
+								challenged = 1;
+							}
+						}
+					challengerID.viking = parseInt(challengerID.viking) + 1; //Increase Viking count for Arena user whenever challenges others
+
+					if (challenged == 1)
+						gs.addInfoMessage("You just challenged " + challenger.arena_user.avatar.toString());
+					challengerID.update();
+
+				}
+		}
+	} else {
+		data.userID1 = currentUser;
+		data.pop = currentUser.toString();
+		data.userName1 = gs.getUserName();
+		//making changes below for redirecting the current level and difficulty to the latest given by the user.
+		var le = new GlideRecord('x_93700_arena_user');
+		le.addQuery('user', currentUser);
+		le.query();
+		if (le.next()) {
+			data.arenaUser = le.sys_id.toString();
+			var lr = new GlideRecord('x_93700_arena_results');
+			lr.addQuery('arena_user', le.sys_id);
+			lr.orderByDesc('level');
+			lr.orderByDesc('sys_updated_on');
+			lr.query();
+			if (lr.next()) {
+				data.latestLevel = lr.getValue('level').toString();
+				data.latestDiff = lr.getValue('difficulty').toString();
+			} else {
+				data.noResult = true;
+			}
+		}
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>mihir</sys_created_by>
+        <sys_created_on>2020-05-15 09:29:11</sys_created_on>
+        <sys_id>79b2786ddbb05010b6db8e47489619c0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>leaderboard2.0</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_79b2786ddbb05010b6db8e47489619c0</sys_update_name>
+        <sys_updated_by>mihir</sys_updated_by>
+        <sys_updated_on>2020-05-15 09:29:11</sys_updated_on>
+        <template><![CDATA[<div class="par" ng-show="c.ll">
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+  <div class="heading" style="font-family: Lobster;">Arena Leaderboard</div>
+  <div class="lvl">
+    <button class="inactive1" id="level1" ng-click="c.makeActive('level1'); c.showLeaderBoard();">Level 1</button>
+    <button class="inactive1" id="level2" ng-click="c.makeActive('level2'); c.showLeaderBoard();">Level 2</button>
+    <button class="inactive1" id="level3" ng-click="c.makeActive('level3'); c.showLeaderBoard();">Level 3</button>
+    <button class="inactive1" id="level4" ng-click="c.makeActive('level4'); c.showLeaderBoard();">Level 4</button>
+  </div>
+  <div class="dif">
+    <button class= "inactiveD" id="easy" ng-click="c.makeActiveD('easy'); c.showLeaderBoard()">Easy</button>
+    <button class= "inactiveD" id="medium" ng-click="c.makeActiveD('medium'); c.showLeaderBoard()">Medium</button>
+    <button class= "inactiveD" id="hard" ng-click="c.makeActiveD('hard'); c.showLeaderBoard()">Hard</button>
+  </div>
+  
+  <div class="scr">
+    <table class="darkTable">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Player</th>
+          <th>Score</th>
+          <th class="hide-mobile">Time Taken</th>
+          <th>Challenges</th>
+        </tr>	
+      </thead>	
+      <tbody>	
+        <tr ng-repeat='x in data.rankArray'>
+          <td ng-if="($index)<5">{{x.rank}}</td>
+          <!-- <td ng-if="($index)<5"><sn-avatar ng-if="hasLiveProfile(x.lastUser)" primary="getLiveProfileByUserId(x.lastUser)" class="avatar-medium" show-presence="false" enable-context-menu="false"></sn-avatar> <span class="capitalize">  {{x.nickName}}</span></td> -->
+          <td ng-if="($index)<5"><img ng-src="{{x.img}}" class="avata" />{{x.nickName}}</td>
+          <td ng-if="($index)<5">{{x.userHighScore}}</td>
+          <td class="hide-mobile" ng-if="($index)<5">{{x.userHighTime}}</td>
+          <td ng-if="!x.show && ($index)<5">Already challenged by<span class="capitalize"> {{x.challengerNick}}</span></td>
+          <td ng-if="x.show && ($index)<5" ng-click="c.challenger(x.lastUser,x.level,x.difficulty); c.showLeaderBoard(); c.clicker(); c.fight();"><button ng-if="data.pop!=x.lastUser">Challenge</button> <span ng-if="data.pop==x.lastUser">Wait till some one challenges you</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fixi">
+    <table class="userDetails" ng-if="data.loggedUser.length==1">
+      <tr>
+        <td>Rank - {{data.loggedUser[0].rnk}}</td>
+        <td><sn-avatar ng-if="hasLiveProfile(data.loggedUser[0].sys)" primary="getLiveProfileByUserId(data.loggedUser[0].sys)" class="avatar-medium" show-presence="false" enable-context-menu="false"></sn-avatar><span class="capitalize">  {{data.loggedUser[0].nyc}}</span></td>
+        <td>High Score - {{data.loggedUser[0].scr}}</td>
+        <td class="hide-mobile">Time Taken - {{data.loggedUser[0].tym}}</td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <img class="fight" id="fight" src='fighter.gif' style="display:none"/>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

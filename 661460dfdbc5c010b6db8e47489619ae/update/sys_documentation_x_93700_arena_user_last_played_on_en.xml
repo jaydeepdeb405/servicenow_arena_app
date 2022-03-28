@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="last_played_on" label="Last Played On" language="en" table="x_93700_arena_user">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>last_played_on</element>
+            <help/>
+            <hint/>
+            <label>Last Played On</label>
+            <language>en</language>
+            <name>x_93700_arena_user</name>
+            <plural>Last Played Ons</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>manoj</sys_created_by>
+            <sys_created_on>2020-05-05 16:14:38</sys_created_on>
+            <sys_id>ab9fa296dba41010b6db8e4748961939</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Last Played On</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_documentation_x_93700_arena_user_last_played_on_en</sys_update_name>
+            <sys_updated_by>manoj</sys_updated_by>
+            <sys_updated_on>2020-05-05 16:14:38</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

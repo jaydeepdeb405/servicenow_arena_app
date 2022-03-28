@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_number">
+    <sys_number action="INSERT_OR_UPDATE">
+        <category display_value="" name="x_93700_arena_questions">x_93700_arena_questions</category>
+        <maximum_digits>7</maximum_digits>
+        <number>1000</number>
+        <prefix>SPQUE</prefix>
+        <sys_class_name>sys_number</sys_class_name>
+        <sys_created_by>praveen</sys_created_by>
+        <sys_created_on>2020-09-07 15:23:39</sys_created_on>
+        <sys_id>efa2d62edb0b1010b6db8e474896191a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>SPQUE</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_number_efa2d62edb0b1010b6db8e474896191a</sys_update_name>
+        <sys_updated_by>praveen</sys_updated_by>
+        <sys_updated_on>2020-09-07 15:23:39</sys_updated_on>
+    </sys_number>
+</record_update>

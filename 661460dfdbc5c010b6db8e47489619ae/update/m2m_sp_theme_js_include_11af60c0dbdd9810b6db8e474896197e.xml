@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_theme_js_include">
+    <m2m_sp_theme_js_include action="INSERT_OR_UPDATE">
+        <order/>
+        <sp_js_include display_value="drdp">f59f20c0dbdd9810b6db8e47489619c8</sp_js_include>
+        <sp_theme display_value="Arena">28b542d7db010410b6db8e4748961961</sp_theme>
+        <sys_class_name>m2m_sp_theme_js_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-06-04 13:56:16</sys_created_on>
+        <sys_id>11af60c0dbdd9810b6db8e474896197e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>drdp.Arena</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>m2m_sp_theme_js_include_11af60c0dbdd9810b6db8e474896197e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-06-04 13:56:16</sys_updated_on>
+    </m2m_sp_theme_js_include>
+</record_update>

@@ -1,0 +1,1458 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function profilePage($scope, $rootScope, $http, snAttachmentHandler) {
+
+    var c = this;
+    var setting = '';
+    sfx.enableSfx = c.data.sfxSetting;
+    c.home = function() {
+        var gameScreen = {
+            gameHeading: true,
+            mainMenu: true,
+            quizPage: false,
+            profilePage: false
+        };
+        $rootScope.$broadcast('gameScreen', gameScreen);
+    };
+
+    $scope.avatarSrc = c.data.avatarSrc;
+
+    c.uploadAvatar = function(file, context, event) {
+        var oldAvatar = $scope.avatarSrc;
+        Notiflix.Notify.Init({
+            width: '500px',
+            position: 'right-top',
+            fontSize: '1.2em'
+        });
+        if (file instanceof Array && file.length === 1) {
+            var handler = snAttachmentHandler.create('x_93700_arena_user', c.data.user);
+            if (handler) {
+                $scope.avatarSrc = 'image-loader1.gif';
+                Notiflix.Notify.Success("Uploading avatar...");
+                handler.uploadAttachment(file[0]).then(function(response) {
+                    if (response.sys_id) {
+                        c.data.action = 'upload_avatar';
+                        c.data.attachmentId = response.sys_id;
+                        c.data.user = c.data.user;
+                        c.server.update().then(function(response) {
+                            c.data.action = undefined;
+                            $scope.avatarSrc = c.data.avatarSrc;
+
+                            Notiflix.Notify.Success("Avatar updated");
+                        });
+                    }
+                }).catch(function(error) {
+                    $scope.avatarSrc = oldAvatar;
+                    var errorMessage = error.split(':').filter(function(element, index) { if(index === 0) return false; else return true; }).join(' : ');
+                    Notiflix.Notify.Failure(errorMessage);
+				});
+            }
+        }
+    };
+
+    c.settingsToggle = function(settingName, toggleSelect) {
+        if (settingName == 'sfx') {
+
+
+            var setting = toggleSelect.target.checked;
+            sfx.enableSfx = setting;
+
+
+            // 			alert(value);
+            //             $http.put('/api/now/ui/glideRecord/x_93700_arena_user/' + c.data.user, {"sfx": value}).then(function(response) {
+            // 				alert(JSON.stringify(response));
+            // 				sfx.enableSfx = value});
+        } else if (settingName == 'nickName')
+            setting = toggleSelect;
+        else {
+            setting = toggleSelect.target.checked;
+
+            var gameBGM = document.getElementById("gameBGM");
+            if (settingName == 'music') {
+                if (setting == true) {
+                    $scope.music = true;
+                    gameBGM.play();
+                    gameBGM.volume = 0.5;
+                } else {
+                    $scope.music = false;
+                    gameBGM.pause();
+                    gameBGM.volume = 0;
+                }
+            }
+
+        }
+
+
+        c.server.get({
+            action: settingName,
+            passVal: setting
+        }).then(function(r) {
+
+        });
+    };
+
+
+
+    c.volumeControls = function(musicVolume) {
+        var gameBGM = document.getElementById("gameBGM");
+        gameBGM.volume = musicVolume / 10;
+    };
+    //Play/Pause music on page visibility//
+    // Set the name of the hidden property and the change event for visibility
+    var hidden, visibilityChange;
+    if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
+        hidden = "hidden";
+        visibilityChange = "visibilitychange";
+    } else if (typeof document.msHidden !== "undefined") {
+        hidden = "msHidden";
+        visibilityChange = "msvisibilitychange";
+    } else if (typeof document.webkitHidden !== "undefined") {
+        hidden = "webkitHidden";
+        visibilityChange = "webkitvisibilitychange";
+    }
+
+    var gameBGM = document.getElementById("gameBGM");
+
+    // If the page is hidden, pause the video;
+    // if the page is shown, play the video
+    function handleVisibilityChange() {
+        if (document[hidden]) {
+            gameBGM.pause();
+        } else {
+            if ($scope.music) {
+                gameBGM.play();
+            }
+
+        }
+    }
+
+    // Warn if the browser doesn't support addEventListener or the Page Visibility API
+    if (typeof document.addEventListener === "undefined" || hidden === undefined) {
+        console.log("This app requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
+    } else {
+        // Handle page visibility change   
+        document.addEventListener(visibilityChange, handleVisibilityChange, false);
+
+        // When the video pauses, set the title.
+        // This shows the paused
+        gameBGM.addEventListener("pause", function() {
+            //   document.title = 'Paused';
+        }, false);
+
+        // When the video plays, set the title.
+        gameBGM.addEventListener("play", function() {
+            //  document.title = 'Playing'; 
+        }, false);
+
+    }
+
+
+    /////////////////////////Listener/////////////////////////
+    $rootScope.$on('gameScreen', function(event, obj) {
+        c.showProfilePage = obj.profilePage;
+
+        //Refreshing Excellence when player wishes to see his improvement
+        if (obj.profilePage == true) {
+            c.server.update();
+        }
+
+        $scope.avatarSrc = c.data.avatarSrc;
+    });
+
+
+    /////////////////////////Notification Accept Challenge button/////////////////////////
+
+    c.challengeQuiz = function(level, difficulty) {
+        var challengeQuiz = {
+            introSequence: false,
+            gameHeading: false,
+            mainMenu: false,
+            gameLevels: false,
+            quizPage: true,
+            profilePage: false,
+            level: level,
+            difficulty: difficulty,
+            challenge: true
+        };
+        $rootScope.$broadcast('gameScreen', challengeQuiz);
+    };
+
+
+    //Avatar function 
+    var liveProfiles = {};
+    $scope.getLiveProfileByUserId = function(userSysId) {
+        return liveProfiles[userSysId];
+    };
+    var pending = {};
+    //Little caching implementation to make sure we only get a given user's profile once.
+    $scope.hasLiveProfile = function hasLiveProfile(userSysId) {
+        if (liveProfiles[userSysId])
+            return true;
+        else if (pending[userSysId])
+            return false;
+        else {
+            pending[userSysId] = $http.get('/api/now/live/profiles/sys_user.' + userSysId).then(function(response) { //alert(JSON.stringify(response.data.result));
+                liveProfiles[userSysId] = {
+                    userID: userSysId,
+                    name: response.data.result.name,
+                    initials: buildInitials(response.data.result.name),
+                    avatar: response.data.result.avatar
+                };
+            });
+            return false;
+        }
+    };
+
+    function buildInitials(name) {
+        if (!name)
+            return "--";
+        //alert (name);
+        var initials = name.split(" ").map(function(word) {
+            return word.toUpperCase();
+        }).filter(function(word) {
+            return word.match(/^[A-Z]/);
+        }).map(function(word) {
+            return word.substring(0, 1);
+        }).join("");
+        return (initials.length > 3) ? initials.substr(0, 3) : initials;
+    }
+
+
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.page {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 0px 40px;
+}
+
+/**/
+/* main styles */
+/**/
+.pcss3t {
+  min-width:400px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  font-size: 0;
+  text-align: left;
+}
+.pcss3t &gt; input {
+  position: absolute;
+  left: -9999px;
+}
+.pcss3t &gt; label {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.1s;
+  -o-transition: all 0.1s;	
+  -ms-transition: all 0.1s;	
+  -moz-transition: all 0.1s;	
+  -webkit-transition: all 0.1s;
+}
+
+.pcss3t &gt; input:checked + label {
+  cursor: default;
+}
+.pcss3t &gt; ul {
+  list-style: none;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  font-size: 13px;
+}
+.pcss3t &gt; ul &gt; li {
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  padding: 30px 40px 40px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  opacity: 0;
+  transition: all 0.5s;
+  -o-transition: all 0.5s;	
+  -ms-transition: all 0.5s;	
+  -moz-transition: all 0.5s;	
+  -webkit-transition: all 0.5s;
+}
+.pcss3t &gt; .tab-content-first:checked ~ ul .tab-content-first,
+.pcss3t &gt; .tab-content-2:checked ~ ul .tab-content-2,
+.pcss3t &gt; .tab-content-3:checked ~ ul .tab-content-3,
+.pcss3t &gt; .tab-content-4:checked ~ ul .tab-content-4,
+.pcss3t &gt; .tab-content-last:checked ~ ul .tab-content-last {
+  z-index: 1;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  overflow: hidden;
+  -webkit-transform: scale(1,1);
+  -webkit-transform: rotate(0deg);
+}
+
+
+/*----------------------------------------------------------------------------*/
+/*                                 Notification CSS                                */
+/*----------------------------------------------------------------------------*/
+
+
+.challenge_card {
+    width: 150px;
+    height: 200px;
+    position: relative;
+    display: inline-block;
+}
+.challenge_image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image: url("cards.png");
+}
+.challenge_content {
+    color: #fff;
+    text-align: center;
+}
+.challenge_profile {
+    position: absolute;
+    width: 100%;
+}
+.challenge_profile_image {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    margin: 10px auto 0;
+}
+
+.avatar-container.avatar-extra-large {
+    width: 10rem;
+    height: 12rem;
+}
+
+.challenge_count {
+    position: absolute;
+    width: 27%;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+.challenge_heading {
+    position: absolute;
+    width: 100%;
+    top: 45%;
+}
+
+.challenge_heading h3 {
+    font-size: 13px;
+    font-weight: bold;
+ 	margin-top: 7px;
+}
+.challenge_body {
+    position: absolute;
+    bottom: 35px;
+    font-size: 10px;
+    line-height: 13px;
+    width: 100%;
+    padding: 0 20px 0 24px;
+}
+.chalenge_btn {
+    color: #fff;
+    padding: 3px;
+    border: 0;
+    border-radius: 2px;
+    background-color: #0f6349;
+}
+.chalenge_btn:focus {
+    outline: 0;
+}
+
+
+
+/*our-team-main*/
+
+
+::-webkit-scrollbar-track {
+   box-shadow        : inset 0 0 6px rgba(0, 0, 0, 0.3);
+   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+   background-color  : #F5F5F5;
+}
+
+::-webkit-scrollbar {
+   width           : 5px;
+   background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+   background-color: #666;
+   border          : 1px solid #555555;
+}
+
+
+
+/*----------------------------------------------------------------------------*/
+/*                                 EXTENSIONS                                 */
+/*----------------------------------------------------------------------------*/
+
+/**/
+/* auto height */
+/**/
+.pcss3t-height-auto &gt; ul {
+  height: auto !important;
+}
+.pcss3t-height-auto &gt; ul &gt; li {
+  position: static;
+  display: none;
+  height: auto !important;
+}
+.pcss3t-height-auto &gt; .tab-content-first:checked ~ ul .tab-content-first,
+.pcss3t-height-auto &gt; .tab-content-2:checked ~ ul .tab-content-2,
+.pcss3t-height-auto &gt; .tab-content-3:checked ~ ul .tab-content-3,
+.pcss3t-height-auto &gt; .tab-content-4:checked ~ ul .tab-content-4,
+.pcss3t-height-auto &gt; .tab-content-5:checked ~ ul .tab-content-5,
+.pcss3t-height-auto &gt; .tab-content-last:checked ~ ul .tab-content-last {
+  display: block;
+}
+
+
+/**/
+/* grid */
+/**/
+.pcss3t .grid-row {
+  margin-top: 20px;
+}
+.pcss3t .grid-row:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.pcss3t .grid-row:first-child {
+  margin-top: 0;
+}
+.pcss3t .grid-col {
+  display: block;
+  float: left;
+  margin-left: 2%;
+}
+.pcss3t .grid-col:first-child {
+  margin-left: 0;
+}
+.pcss3t .grid-col .inner {
+  padding: 10px 0;
+  border-radius: 5px;
+  background: #f2f2f2;
+  text-align: center;
+}
+.pcss3t .grid-col-1 {
+  width: 15%;
+}
+.pcss3t .grid-col-2 {
+  width: 32%;
+}
+.pcss3t .grid-col-3 {
+  width: 49%;
+}
+.pcss3t .grid-col-4 {
+  width: 66%;
+}
+.pcss3t .grid-col-5 {
+  width: 83%;
+}
+.pcss3t .grid-col-offset-1 {
+  margin-left: 19%;
+}
+.pcss3t .grid-col-offset-1:first-child  {
+  margin-left: 17%;
+}
+.pcss3t .grid-col-offset-2 {
+  margin-left: 36%;	
+}
+.pcss3t .grid-col-offset-2:first-child {
+  margin-left: 34%;
+}
+.pcss3t .grid-col-offset-3 {
+  margin-left: 53%;
+}
+.pcss3t .grid-col-offset-3:first-child {
+  margin-left: 51%;
+}
+.pcss3t .grid-col-offset-4 {
+  margin-left: 70%;
+}
+.pcss3t .grid-col-offset-4:first-child {
+  margin-left: 68%;
+}
+.pcss3t .grid-col-offset-5:first-child {
+  margin-left: 85%;
+}
+
+
+
+
+
+/**/
+/* steps */
+/**/
+.pcss3t-steps &gt; label {
+  cursor: default;
+}
+
+
+/**/
+
+
+
+
+
+
+
+/*Toggle switches*/
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #f0ad4e;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #f0ad4e;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 10px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+
+/**************************************************************************************************/
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 18px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #3071a9;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  -webkit-appearance: none;
+  margin-top: -14px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #367ebd;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #3071a9;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #2a6495;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #367ebd;
+}
+Completed Range Input
+These styles make the following input:
+
+
+Range input with completely custom styles.
+Bonus: Full LESS to Style Range Inputs in All Browsers
+There is a lot of CSS required to make identical range inputs for each browser. Using a preprocessor, you can achieve much more efficient results. Included below is the LESS file use to generate the CSS above.
+
+@track-color: #424242;
+@thumb-color: #555bc8;
+
+@thumb-radius: 8px;
+@thumb-height: 30px;
+@thumb-width: 30px;
+@thumb-shadow-size: 1px;
+@thumb-shadow-blur: 1px;
+@thumb-shadow-color: #111;
+@thumb-border-width: 1px;
+@thumb-border-color: white;
+
+@track-width: 100%;
+@track-height: 10px;
+@track-shadow-size: 2px;
+@track-shadow-blur: 2px;
+@track-shadow-color: #222;
+@track-border-width: 1px;
+@track-border-color: black;
+
+@track-radius: 5px;
+@contrast: 5%;
+
+.shadow(@shadow-size,@shadow-blur,@shadow-color) {
+  box-shadow: @shadow-size @shadow-size @shadow-blur @shadow-color, 0px 0px @shadow-size lighten(@shadow-color,5%);
+}
+
+.track() {
+  width: @track-width;
+  height: @track-height;
+  cursor: pointer;
+  animate: 0.2s;
+}
+
+.thumb() {
+  .shadow(@thumb-shadow-size,@thumb-shadow-blur,@thumb-shadow-color);
+  border: @thumb-border-width solid @thumb-border-color;
+  height: @thumb-height;
+  width: @thumb-width;
+  border-radius: @thumb-radius;
+  background: @thumb-color;
+  cursor: pointer;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: @thumb-height/2 0;
+  width: @track-width;
+
+  &amp;:focus {
+    outline: none;
+  }
+
+  &amp;::-webkit-slider-runnable-track {
+    .track();
+    .shadow(@track-shadow-size,@track-shadow-blur,@track-shadow-color);
+    background: @track-color;
+    border-radius: @track-radius;
+    border: @track-border-width solid @track-border-color;
+  }
+  
+  &amp;::-webkit-slider-thumb {
+    .thumb();
+    -webkit-appearance: none;
+    margin-top: ((-@track-border-width * 2 + @track-height) / 2) - (@thumb-height / 2);
+  }
+
+  &amp;:focus::-webkit-slider-runnable-track {
+    background: lighten(@track-color, @contrast);
+  }
+
+  &amp;::-moz-range-track {
+    .track();
+    .shadow(@track-shadow-size,@track-shadow-blur,@track-shadow-color);
+    background: @track-color;
+    border-radius: @track-radius;
+     border: @track-border-width solid @track-border-color;
+  }
+  &amp;::-moz-range-thumb {
+     .thumb();
+  }
+
+  &amp;::-ms-track {
+    .track(); 
+    background: transparent;
+    border-color: transparent;
+    border-width: @thumb-width 0;
+    color: transparent;
+  }
+
+  &amp;::-ms-fill-lower {
+    background: darken(@track-color, @contrast);
+    border: @track-border-width solid @track-border-color;
+    border-radius: @track-radius*2;
+    .shadow(@track-shadow-size,@track-shadow-blur,@track-shadow-color);
+  }
+  &amp;::-ms-fill-upper {
+    background: @track-color;
+    border: @track-border-width solid @track-border-color;
+    border-radius: @track-radius*2;
+    .shadow(@track-shadow-size,@track-shadow-blur,@track-shadow-color);
+  }
+  &amp;::-ms-thumb {
+    .thumb();
+  }
+  &amp;:focus::-ms-fill-lower {
+    background: @track-color;
+  }
+  &amp;:focus::-ms-fill-upper {
+    background: lighten(@track-color, @contrast);
+  }
+}
+
+/**************************************************************************************************************/
+
+
+
+
+
+
+
+
+
+/* animation effects */
+/**/
+.pcss3t-effect-scale &gt; ul &gt; li {
+  -webkit-transform: scale(0.1,0.1);
+}
+.pcss3t-effect-rotate  &gt; ul &gt; li {
+  -webkit-transform: rotate(180deg);
+}
+.pcss3t-effect-slide-top &gt; ul &gt; li {
+  top: -40px;
+}
+.pcss3t-effect-slide-right &gt; ul &gt; li {
+  left: 80px;
+}
+.pcss3t-effect-slide-bottom &gt; ul &gt; li {
+  top: 40px;
+}
+.pcss3t-effect-slide-left &gt; ul &gt; li {
+  left: -80px;
+}
+
+
+
+/*----------------------------------------------------------------------------*/
+/*                                   LAYOUTS                                  */
+/*----------------------------------------------------------------------------*/
+
+/**/
+/* top right */
+/**/
+.pcss3t-layout-top-right {
+  text-align: right;
+}
+
+
+/**/
+/* top center */
+/**/
+.pcss3t-layout-top-center {
+  text-align: center;
+}
+
+
+/**/
+/* top combi */
+/**/
+.pcss3t &gt; .right {
+  float: right;
+}
+
+
+
+
+/*----------------------------------------------------------------------------*/
+/*                               RESPONSIVENESS                               */
+/*----------------------------------------------------------------------------*/
+
+/**/
+/* pad */
+/**/
+@media screen and (max-width: 980px) {
+
+}
+
+
+/**/
+/* phone */
+/**/
+@media screen and (max-width: 767px) {
+  .pcss3t &gt; label {
+    display: block;
+  }
+  .pcss3t &gt; .right {
+    float: none;
+  }
+}
+
+.pcss3t &gt; label {	
+  padding: 0 20px;
+  background: #e5e5e5;
+  font-size: 13px;
+  line-height: 49px;
+}
+.pcss3t &gt; label:hover {
+  background: #f2f2f2;
+}
+.pcss3t &gt; ul {
+  background: #fff;
+  text-align: left;
+}
+.pcss3t-steps &gt; label:hover {
+  background: #e5e5e5;	
+}
+
+
+/**/
+/* theme 1 */
+/**/
+.pcss3t-theme-1 &gt; label {
+  margin: 0 5px 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px rgba(0,0,0,0.2);
+  color: white;
+  font-family: pfs-bold;
+  text-transform: uppercase;
+  font-size: 15px;
+
+}
+.pcss3t-theme-1 &gt; label:hover {
+  opacity: 1;
+}
+.pcss3t-theme-1 &gt; input:checked + label {
+  margin-bottom: 0;
+  padding-bottom: 5px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  color: #2b82d9;
+  opacity: 1;
+}
+.pcss3t-theme-1 &gt; ul {
+  border-radius: 5px;
+  box-shadow: 0 3px rgba(0,0,0,0.2);
+}
+.pcss3t-theme-1 &gt; .tab-content-first:checked ~ ul {
+  border-top-left-radius: 0;
+}
+@media screen and (max-width: 767px) {
+  .pcss3t-theme-1 &gt; label {
+    margin-right: 0;
+  }
+  .pcss3t-theme-1 &gt; input:checked + label {
+    margin-bottom: 5px;
+    padding-bottom: 0;
+    border-radius: 5px;
+  }
+  .pcss3t-theme-1 &gt; .tab-content-first:checked ~ ul {
+    border-top-left-radius: 5px;
+  }
+}
+
+.pcss3t &gt; ul,
+.pcss3t &gt; ul &gt; li {
+  height: 370px;
+}
+
+
+
+.color1{ background-color:$arenaGreen !important;color:white !important}
+.color2{ background-color:$arenaYellow !important;color:white !important}
+.color3{ background-color:$arenaRed !important;color:white !important}
+.color4{ background-color:$arenaBlue !important;color:white !important}
+.typography{
+  font-family: pfs-bold;
+  text-transform: capitalize;
+  font-size:35px;
+}
+.toggele-btn{
+  background: none;
+  border: none;
+}
+.topPad15{
+  padding-top:15px;
+}
+.bottomPad10{
+  padding-bottom:10px;
+}
+.player-name{
+  text-transform: unset;
+  font-size:20px;
+    background-color: rgb(76, 175, 80);
+    //box-shadow: 0px 0px 10px;
+    color: darkorange;
+  text-shadow:2px 2px 5px black;
+  border:0;
+  border-bottom:1px solid #eee;
+}
+//// hrlp tip CSS for tab 2 
+.help-tip{
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    text-align: center;
+    background-color: #BCDBEA;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    line-height: 26px;
+    cursor: default;
+}
+
+.help-tip:before{
+    content:'i';
+    font-weight: bold;
+    color:black;
+}
+
+.help-tip:hover p{
+    display:block;
+    transform-origin: 100% 0%;
+
+    -webkit-animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+
+.help-tip p{    /* The tooltip */
+    display: none;
+    text-align: right;
+    background-color:#5cb85c ;
+    padding: 20px;
+    width: 250px;
+    position: absolute;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    right: -4px;
+    color: #FFF;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.help-tip p:before{ /* The pointer of the tooltip */
+    position: absolute;
+    content: '';
+    width:0;
+    height: 0;
+    border:6px solid transparent;
+    border-bottom-color:#1E2021;
+    right:10px;
+    top:-12px;
+}
+
+.help-tip p:after{ /* Prevents the tooltip from being hidden */
+    width:100%;
+    height:40px;
+    content:'';
+    position: absolute;
+    top:-40px;
+    left:0;
+}
+
+/* CSS animation */
+
+@-webkit-keyframes fadeIn {
+    0% { 
+        opacity:0; 
+        transform: scale(0.6);
+    }
+
+    100% {
+        opacity:100%;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity:0; }
+    100% { opacity:100%; }
+}
+.topPad10{
+padding-top:10px;
+}
+
+.image-upload {
+  margin-bottom: -30px;
+}
+
+.image-upload&gt;input {
+  display: none;
+}
+
+.file-label {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  box-shadow: 3px 3px 10px black;
+  color: darkorange;
+  text-align: center;
+  padding-top: 70px;
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: #ccc;
+}
+
+.file-input-icon {
+  visibility: hidden;
+  top: -50px; 
+  font-size: 0.6em;
+}
+
+.file-label:hover {
+  background-color: grey;
+  background-blend-mode: multiply; 
+  cursor: pointer;
+}
+
+.file-label:hover .file-input-icon {
+  visibility: visible;
+}
+
+.nickname-wrapper, .nickname {
+  text-align: center;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.nickname {
+  background: none;
+  border: none;
+  color: darkorange;
+  font-weight: bolder;
+  font-size: 0.6em;
+  text-shadow: 1px 1px 1px black;
+   border-bottom: 2px solid white;
+  box-shadow: 0px 2px 0px black;
+}
+
+.nickname:focus + .nickname-label {
+  visibility: visible;
+}
+
+.nickname-label {
+  position: absolute;
+  top: 5px;
+  color: black;
+  transform: translateX(5px);
+}
+
+.nickname-label {
+  visibility: hidden;
+}
+
+.label {
+  text-align: left;
+  font-size: 0.8em !important;
+}
+
+.control {
+  text-align: center;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>Profile Page</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+		if(input && input.action == 'upload_avatar') {
+			var attachmentGr = new GlideRecord('sys_attachment');
+			attachmentGr.addQuery('table_name', 'x_93700_arena_user');
+			attachmentGr.addQuery('table_sys_id', input.user);
+			attachmentGr.addQuery('sys_id', '!=', input.attachmentId);
+			attachmentGr.setValue('file_name', 'old_profile_image');
+			attachmentGr.updateMultiple();
+			
+			attachmentGr.get(input.attachmentId);
+			attachmentGr.file_name = 'profile_image';
+			attachmentGr.update();
+			
+			var arenaUser = new GlideRecord("x_93700_arena_user");
+			arenaUser.get(input.user);
+			data.avatarSrc = arenaUser.getDisplayValue('profile_image');
+		}
+	
+	//todo- Investigate- Why UI  Glide record is not working for non admins
+
+    //USer Profile details will be fetched the moment the game is started
+    var arenaUser = new GlideRecord("x_93700_arena_user");
+    arenaUser.addQuery("user", gs.getUserID());
+    arenaUser.query();
+    if (arenaUser.next()) {
+		
+		data.user = arenaUser.sys_id.toString(); //-SK- sfx -redesign
+		data.avatarSrc = arenaUser.getDisplayValue('profile_image') || 'no_picture.jpg';
+        data.musicSetting = (arenaUser.music == true);
+        data.sfxSetting = (arenaUser.sfx == true);
+		
+        data.nickName = arenaUser.getValue('avatar');
+
+        data.excellence = [{
+                "title": "Platform Administration",
+                "skill": {"width" : arenaUser.platform_excellence.toString() + "%"}
+            },
+            {
+                "title": "Scripting",
+                "skill": {"width" : arenaUser.scripting_excellence.toString() + "%"}
+            },
+            {
+                "title": "User Interface",
+                "skill": {"width" : arenaUser.ui_excellence.toString() + "%"}
+            },
+            {
+                "title": "Application",
+                "skill": {"width" : arenaUser.application_excellence.toString() + "%"}
+            }
+        ];
+		
+
+
+    }
+
+
+
+
+////////////////////////////////////////////////NOTIFICATION//////////////////
+
+	
+    var challenge= [];
+	var challangelist = new GlideRecord('x_93700_arena_results');
+	challangelist.addActiveQuery();
+	challangelist.addQuery('arena_user',getplayer());
+	challangelist.addNotNullQuery('challenged_by');
+	challangelist.query();
+	
+	while (challangelist.next())
+		{
+			var details = {};
+			var level = challangelist.getValue('level');
+			details.fulllevel =level;
+			details.level=level.slice(-1); //get only the numeric value of the level
+			//get Nickname or getActual name if no nick name
+	var nickname = challangelist.challenged_by.getRefRecord().getValue('avatar'); 
+	if(nickname){details.by=nickname;}
+	else{details.by = challangelist.getDisplayValue('challenged_by');}
+	
+			details.difficulty  = challangelist.getValue('difficulty');
+			details.usersys =challangelist.challenged_by.user.toString();
+			challenge.push(details);
+			
+		}
+
+
+		data.challangedetails = challenge;
+	
+	
+	function getplayer()
+	{
+		var gr = new GlideRecord('x_93700_arena_user');
+		gr.addQuery('user',gs.getUserID());
+		gr.query();
+		if(gr.next())
+			return gr.sys_id;
+		
+	}
+
+	
+	
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    if (input) {
+        if (input.action) //When Settings is configured
+        {
+            var player = new GlideRecord("x_93700_arena_user");
+            player.addQuery("user", gs.getUserID());
+            player.query();
+            if (player.next()) {
+
+                    if (input.action == 'music')
+                        player.music = input.passVal;
+                    else if (input.action == 'sfx') {
+                        player.sfx = input.passVal;
+                    } else if (input.action == 'nickName') {
+                        player.avatar = input.passVal;
+                    }
+
+                    player.update();
+            }
+        }
+    }
+
+
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-12-03 14:59:03</sys_created_on>
+        <sys_id>5e695130db218010b6db8e474896194e</sys_id>
+        <sys_mod_count>544</sys_mod_count>
+        <sys_name>Profile Page</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_5e695130db218010b6db8e474896194e</sys_update_name>
+        <sys_updated_by>41278</sys_updated_by>
+        <sys_updated_on>2020-08-09 09:24:03</sys_updated_on>
+        <template><![CDATA[<div ng-show="c.showProfilePage" class="contentPosition">
+  <div class="page">
+    <!-- tabs -->
+    <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
+      <input type="radio" name="pcss3t" checked  id="tab1"class="tab-content-first">
+      <label for="tab1" class="color1">Settings</label>
+      <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
+      <label for="tab2" class="color4">Challenges</label>
+      <input type="radio" name="pcss3t" id="tab3" class="tab-content-3">
+      <label for="tab3" class="color3">Excellence Graph</label>
+      <!--  <input type="radio" name="pcss3t" id="tab5" class="tab-content-last">
+<label for="tab5" class="color4">Placeholder</label> -->
+      <ul>
+
+
+        <!--/////////////////////////////////////////////////////////////// Tab 1 - Settings /////////////////////////////////////////////////// -->
+
+
+        <li class="tab-content tab-content-first color1 typography">    
+          
+          <div class="row">
+            <div style="text-align: center;">
+            <div class="image-upload">
+              <label for="file-input" class="file-label" style="background-image: url({{avatarSrc}})">
+                <span class="file-input-icon glyphicon glyphicon-pencil"></span>
+              </label>
+
+              <input id="file-input" ng-file-select="c.uploadAvatar($files, 0, $event)" type="file" />
+            </div>
+            <div class="nickname-wrapper">
+              <input class="nickname" type="text" id="nickname" size="13" maxlength="16" ng-model="data.nickName" ng-change="c.settingsToggle('nickName' , data.nickName )" placeholder="Your nickname" />
+              <label for="nickname" class="nickname-label">
+                <span class="glyphicon glyphicon-pencil" style="font-size: 0.5em;"></span>
+              </label>
+            </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-xs-6 label">
+              Music
+            </div>
+            <div class="col-md-6 col-xs-6 control">
+              <label class="switch">
+                <input type="checkbox" ng-checked="data.musicSetting" ng-click="c.settingsToggle('music' , $event)">
+                <span class="slider round"></span>
+              </label>
+            </div> 
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6 col-xs-6 label">
+              SFX
+            </div>
+            <div class="col-md-6 col-xs-6 control">
+              <label class="switch">
+                <input type="checkbox" ng-checked="data.sfxSetting" ng-click="c.settingsToggle('sfx' , $event)">
+                <span class="slider round"></span>
+              </label>
+            </div> 
+          </div>
+
+
+          <div class="row ">
+            <div class="col-md-6 col-xs-6 label">
+              Volume
+            </div>
+            <div class="col-md-6 col-xs-6 control">
+              <input type="range" ng-model="musicVolume" ng-change="c.volumeControls(musicVolume)" name="range" min="0" max="10">
+            </div> 
+          </div>
+
+        </li>
+
+
+
+
+        <!--/////////////////////////////////////////////////////////////// Tab 2 - Notifications /////////////////////////////////////////////////// -->
+
+        <li class="tab-content tab-content-2 color4 typography">
+
+
+          <!--Challenge Tile end-1-->
+
+          <div class="challenge_screes">
+            <div ng-if ="data.challangedetails.length == 0 ">
+              <h3>
+                Nobody has challenged you <hr> You are an undisputed champion
+              </h3>          </div>
+
+            <div class="challenge_card" ng-repeat = "info in data.challangedetails">
+              <div class="challenge_profile">
+                <div class="challenge_profile_image" >
+                  <sn-avatar ng-if="hasLiveProfile(info.usersys)"
+                             primary="getLiveProfileByUserId(info.usersys)" 
+                             class="avatar-extra-large" 
+                             show-presence="false" 
+                             enable-context-menu="false">
+                  </sn-avatar>
+
+                </div>
+              </div>
+              <div class="challenge_image">
+                <div class="challenge_content">
+                  <div class="challenge_count">
+                    <span> {{info.level}} </span>
+                  </div>
+                  <div class="challenge_heading">
+                    <h3> {{info.by}} </h3>
+                  </div>
+                  <div class="challenge_body">
+                    <a > <button class="chalenge_btn" ng-click="c.challengeQuiz(info.fulllevel,info.difficulty)"> Accept Challenge </button> </a>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+          <!--/////////////////////////////////////////////////////////////// Tab 2 - Excellence Graph /////////////////////////////////////////////////// -->
+
+        <li class="tab-content tab-content-3 color3  typography">
+
+          <!--Platform Admin-->
+          <h3 ng-repeat="excellence in data.excellence">{{excellence.title}}
+            <div class="progress" style="border-radius: 20px;">
+              <div class="progress-bar bg-success" role="progressbar" ng-style="{{excellence.skill}}">
+              </div>
+            </div>
+          </h3>
+
+
+        </li>
+        <!--/////////////////////////////////////////////////////////////// End of Tabs ////////////////////////////////////////////////////////////-->
+
+      </ul>
+    </div>
+    <!--/ tabs -->
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

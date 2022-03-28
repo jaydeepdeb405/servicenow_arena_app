@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($scope, $sce) {
+	/* widget controller */
+	var c = this;
+
+	$scope.tags = [];
+
+	var autocompleteElement = angular.element('#dyk-search-autocomplete');
+	var inputElement = angular.element('#search-tags');
+
+	$scope.addTag = function(tag) {
+		autocompleteElement.css({
+			display: '',
+			opacity: ''
+		});
+		$scope.tags.push(tag);
+		$scope.dykSearchText = '';
+		applyFilterFromTag();
+	};
+
+	$scope.removeTag = function(index) {
+		$scope.tags.splice(index, 1);
+		applyFilterFromTag();
+	};
+
+	function applyFilterFromTag() {
+		$scope.data.action = 'search';
+		$scope.data.filter = $scope.tags.map(function(tag) {
+			return 'sys_tags' + tag.sys_id + '=' + tag.sys_id;
+		}).join('^OR');
+		$scope.server.update().then(function() {
+			$scope.data.action = undefined;
+			$scope.data.filter = undefined;
+		});
+	}
+
+	$scope.showAutocomplete = function() {
+		autocompleteElement.css({
+			top: inputElement.outerHeight(),
+			width: inputElement.outerWidth(),
+			display: 'block',
+			opacity: '1'
+		});
+	}
+
+	$scope.filterOptions = function(tag, searchText) {
+		return $scope.tags.indexOf(tag) === -1 && tag.label.toLowerCase().startsWith(searchText.toLowerCase());
+	};
+
+	$scope.getAutoCompletedEntry = function(label, searchText) {
+		var searchTextLen = searchText.length;
+		var indexOfSearchText = label.toLowerCase().indexOf(searchText.toLowerCase());
+		return $sce.trustAsHtml('<span class="highlight">'+label.substr(0, indexOfSearchText + searchTextLen)+'</span>' + label.substring(indexOfSearchText + searchTextLen, label.length));
+	};
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.chips-wrapper {
+  display: flex;
+  flow-flow: row;
+  align-items: center;
+  .dyk-search-input-wrapper {
+    margin: 0 0 0 10px;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Test Chips</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	if (input && input.action === 'search') {
+		gs.addInfoMessage(input.filter);
+		return;
+	}
+
+	data.tagsAutocomplete = [];
+
+	var tagGr = new GlideAggregate('label_entry');
+	tagGr.addQuery('label.active', true);
+	tagGr.addQuery('table', 'x_93700_arena_did_you_know');
+	tagGr.groupBy('label');
+	tagGr.query();
+	while (tagGr.next()) {
+		data.tagsAutocomplete.push({
+			label: tagGr.label.getDisplayValue(),
+			sys_id: tagGr.getValue('label')
+		});
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-09-30 14:14:44</sys_created_on>
+        <sys_id>eed984230776301037c7f2ae7c1ed0ed</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_name>Test Chips</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_eed984230776301037c7f2ae7c1ed0ed</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-09-30 15:48:47</sys_updated_on>
+        <template><![CDATA[<div class="chips-wrapper">
+  <div ng-repeat="tag in tags" class="chip">
+    {{tag.label}}
+    <i ng-click="removeTag($index)" 
+       class="close material-icons">
+      close
+    </i>
+  </div>
+  <div class="input-field dyk-search-input-wrapper">
+    <input placeholder="Search by tags" 
+           id="search-tags" 
+           type="text" 
+           class="autocomplete"
+           ng-model="dykSearchText"
+           ng-keyup="showAutocomplete()" />
+    <ul id="dyk-search-autocomplete"
+        class="autocomplete-content dropdown-content" 
+        ng-show="dykSearchText">
+      <li ng-if="filterOptions(tag, dykSearchText)" 
+          ng-repeat="tag in data.tagsAutocomplete"
+          ng-click="addTag(tag)">
+        <span ng-bind-html="getAutoCompletedEntry(tag.label, dykSearchText)"></span>
+      </li>
+    </ul>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

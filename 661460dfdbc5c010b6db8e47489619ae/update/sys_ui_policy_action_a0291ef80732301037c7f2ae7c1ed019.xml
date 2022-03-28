@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action">
+    <sys_ui_policy_action action="INSERT_OR_UPDATE">
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field>groups</field>
+        <mandatory>ignore</mandatory>
+        <sys_class_name>sys_ui_policy_action</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-09-22 11:29:04</sys_created_on>
+        <sys_id>a0291ef80732301037c7f2ae7c1ed019</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>groups</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ui_policy_action_a0291ef80732301037c7f2ae7c1ed019</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-09-27 09:00:14</sys_updated_on>
+        <table>x_93700_arena_test_schedule</table>
+        <ui_policy display_value="Show/Hide fields for Certification Preparation">14df62ea072e301037c7f2ae7c1ed05a</ui_policy>
+        <visible>false</visible>
+    </sys_ui_policy_action>
+</record_update>

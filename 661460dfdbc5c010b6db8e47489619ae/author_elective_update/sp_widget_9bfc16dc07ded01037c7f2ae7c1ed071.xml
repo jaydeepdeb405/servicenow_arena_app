@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $timeout, $interval) {
+	/* widget controller */
+	var c = this;
+
+	$scope.testing = "";
+	$scope.interval = null;
+	$scope.seconds = c.data.timer;
+	$scope.timer = '0h 0m 0s';
+	$scope.questions = c.data.questions;
+	$scope.currentQuestionIndex = 0;
+	$scope.questionTransition = false;
+	$scope.showResults = false;
+
+	$scope.startTimer = function() {
+		$interval.cancel($scope.interval);
+		$scope.interval = $interval(function() { 
+			$scope.seconds--;			
+			var hours = Math.floor(($scope.seconds % (60 * 60 * 24)) / (60 * 60));
+			var minutes = Math.floor(($scope.seconds % (60 * 60)) / 60);
+			var seconds = Math.floor($scope.seconds % 60);
+
+			$scope.timer = hours+'h '+minutes+'m '+seconds+'s';
+			if($scope.seconds === 0) {
+				$interval.cancel($scope.interval);
+				$scope.submitTest();
+			}
+		}, 1000);
+	}
+
+	$scope.saveAnswer = function(question, choiceIndex) {
+		if (question.type == 'radioButton') {
+			question.choices.forEach(function(choice, index) {
+				if(index !== choiceIndex) choice.selected = false;
+			});
+		} else if (question.type == 'checkBox') {
+			question.choices.forEach(function(choice, index) {
+				if(index === choiceIndex) choice.selected = !choice.selected;
+			});
+		}
+		return;
+	}
+
+	$scope.prevQuestion = function() {
+		$scope.currentQuestionIndex--;
+	}
+
+	$scope.nextQuestion = function() {
+		$scope.currentQuestionIndex++;
+	}
+	
+	$scope.goToQuestion = function(index) {
+		$scope.currentQuestionIndex = index;
+	}
+
+	$scope.submitTest = function() {
+		alert(JSON.stringify($scope.questions));
+	}
+
+	// start timer
+	if($scope.questions.length > 0) $scope.startTimer();
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.quiz {
+  color: darkorange;
+  display: flex;
+  flex-flow: column;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.5em;
+  padding: 15px 0;
+  color: white;
+  text-shadow: 2px 2px 10px grey;
+}
+
+.quiz-divider {
+  height: 1px;
+  background-color: white;
+}
+
+.quiz-question {
+  margin-top: 15px;
+  overflow-y: auto;
+  height: 53vh;
+}
+
+.quiz ::-webkit-scrollbar {
+  width: 7px;
+}
+
+.quiz ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #555;
+}
+
+.quiz-question-title {
+  font-size: 1.6em;
+}
+
+.quiz-question-title&gt;* {
+  display: inline;
+}
+
+.quiz-question-choices ul {
+  font-size: 1.4em;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.quiz .timer {
+  margin: 30px auto 0 auto;
+  color: white;
+  font-size: 2em;
+  text-align: center;
+  text-shadow: 2px 2px 10px grey;
+}
+
+.quiz .quiz-buttons {
+  position: absolute;
+  bottom: 15%;
+  left: 1vw;
+  right: 1vw;
+
+  button {
+    background-color: lightblue;
+    padding: 2px;
+    box-shadow: 0px 3px 5px grey;
+  }
+}
+
+.quiz .seconds-bar {
+  position: fixed;
+  background-color: white;
+  box-shadow: 1px 2px 20px grey;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  transition: background-color 0.5s;
+}
+
+.question-transition {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
+  height: 125px;
+}
+
+.question-marker {
+  position: fixed;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  li {
+    text-align: center;
+    width: 9%;
+    background-color: white;
+    color: black;
+  }
+}
+
+.ng-hide.ng-hide-animate {
+     display: none !important;
+ }
+
+.ng-animate.no-animate {
+     transition: 0s none;
+     -webkit-transition: 0s none;
+     animation: 0s none;
+     -webkit-animation: 0s none;
+ }
+
+@keyframes color {
+  0%{
+    background-color: lightskyblue;
+    width: 100%;
+  }
+  25% {
+    background-color: green;
+    width: 75%;
+  }
+
+  50% {
+    background-color: yellow;
+    width: 50%;
+  }
+
+  75% {
+    background-color: orange;
+    width: 25%;
+  }
+
+  100% {
+    background-color: red;
+    width: 0%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+
+  /* For mobile phones: */
+  .quiz-question-title {
+    font-size: 1.3em;
+  }
+  .quiz .quiz-buttons {
+    left: 4vw;
+    right: 4vw;
+  }
+}
+
+
+/*styles for custom radio btns &amp; checkbox */
+
+.choices-wrapper {
+  display: flex;
+  flex-flow: column;
+
+  label {
+    position: relative;
+    padding: 10px 0 10px 2em;
+    font-size: 0.9em;
+    color: darkorange;
+    transition: all 0.25s linear;
+    text-align: left;
+  }
+
+  input[type=radio],
+  input[type=checkbox] {
+    display: none;
+  }
+
+  .radio-styled,
+  .checkbox-styled {
+    position: absolute;
+    height: 1em;
+    width: 1em;
+    border: 1px solid #AAAAAA;
+    left: 0.7em;
+    top: 0.7em;
+    border-radius: 50%;
+    transition: background 0.25s linear;
+  }
+
+  .checkbox-styled {
+    border-radius: 0.2em;
+
+    svg {
+      display: none;
+      position: absolute;
+      left: -3px;
+      top: -3px;
+      color: lightgreen;
+      font-size: 1.2em;
+    }
+  }
+
+  label:hover {
+    color: white;
+    cursor: pointer;
+  }
+
+  label:hover .radio-styled {
+    border: 1px solid white;
+  }
+
+  input[type=radio]:checked~.radio-styled {
+    border: 1px solid white;
+  }
+
+  input[type=checkbox]:checked~.checkbox-styled svg {
+    display: block;
+  }
+
+  input[type=radio]:checked~.radio-styled::after {
+    content: "";
+    position: absolute;
+    height: 0.6em;
+    width: 0.6em;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    background-color: #5cb85c;
+    transform: translate(-50%, -50%);
+  }
+
+  input[type=radio]:checked~.radio-label {
+    color: white;
+  }
+
+  @media only screen and (max-width: 768px) {
+
+    label {
+      font-size: 0.8em;
+    }
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Arena Test</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	var testId = $sp.getParameter('test_id');
+
+	var currentUserID = gs.getUserID();
+	var isTestAdmin = gs.hasRole('x_93700_arena.test_admin');
+	var questionIDs = "";
+	
+	data.questions = [];
+	data.timer = -1;
+
+	var testScheduleGr = new GlideRecord('x_93700_arena_test_schedule');
+	testScheduleGr.addQuery('sys_id', testId);
+	testScheduleGr.query();
+	if(testScheduleGr.next()) {
+		var testTakers = testScheduleGr.getValue('test_takers') || '';
+		if(testTakers.indexOf(currentUserID) === -1 && isTestAdmin === false) {
+			gs.addErrorMessage('You\'re not registered for this test');
+			return;
+		}
+		else {
+			if(testScheduleGr.question_set) {
+				var questionSet = testScheduleGr.question_set.questions;
+				if(questionSet && questionSet!==null) {
+					questionIDs = questionSet.toString();
+					data.timer = testScheduleGr.getValue('test_duration_in_minutes')*60;
+				}
+				else gs.addErrorMessage('Test not setup. Contact admin');
+			} else {
+				gs.addErrorMessage('Test not setup. Contact admin');
+			}
+		}
+	}
+	else {
+		gs.addErrorMessage('Invalid test url. Contact admin');
+		return;
+	}
+
+	//gs.addInfoMessage('Welcome');
+
+	
+
+	var questionGr = new GlideRecord('x_93700_arena_arena_question');
+	questionGr.addQuery('sys_idIN'+questionIDs);
+	questionGr.query();
+	while(questionGr.next()) {
+		var question = {};
+		question.id = questionGr.getValue('sys_id');
+		question.module = questionGr.getValue('module');
+		question.type = questionGr.getValue('type');
+		question.title = questionGr.getValue('question').trim() || '';
+		question.choices = [];
+		var questionChoiceGr = new GlideRecord('x_93700_arena_quiz_choices');
+		questionChoiceGr.setLimit(4);
+		questionChoiceGr.orderByDesc('correct');
+		questionChoiceGr.addQuery('question', questionGr.sys_id);
+		questionChoiceGr.query();
+		while(questionChoiceGr.next()) {
+			question.choices.push({
+				id: questionChoiceGr.getValue('sys_id'),
+				value: questionChoiceGr.getValue('choice'),
+				selected: false
+			});
+		}
+		question.choices = shuffle(question.choices);
+		data.questions.push(question);
+	}
+
+	function shuffle(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex;
+		while (0 !== currentIndex) {
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+		}
+		return array;
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-25 09:35:40</sys_created_on>
+        <sys_id>9bfc16dc07ded01037c7f2ae7c1ed071</sys_id>
+        <sys_mod_count>137</sys_mod_count>
+        <sys_name>Arena Test</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_9bfc16dc07ded01037c7f2ae7c1ed071</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-25 23:00:47</sys_updated_on>
+        <template><![CDATA[<div class="quiz">
+  <div class="seconds-bar" ng-style="{ 'animation': 'color {{data.timer}}s linear 0s forwards' }" ></div>
+  <div class="timer">
+    <div style="font-size: 0.6em">TIMER</div>
+    <div style="text-align: center">{{timer}}</div>
+  </div>
+  <div class="quiz-divider"></div>
+  <div class="quiz-question">
+    <div class="quiz-question-title" ng-bind-html="questions[currentQuestionIndex].title"></div>
+    <div class="quiz-question-choices">
+      <ul>
+        <div ng-show="questionTransition === false" ng-repeat="choice in questions[currentQuestionIndex].choices track by $index" ng-init="choiceIndex=$index" class="choices-wrapper">
+          <label ng-show="questions[currentQuestionIndex].type === 'radioButton'">
+            <input type="radio" name="ques-radio" ng-value="true" ng-model="choice.selected" ng-click="saveAnswer(questions[currentQuestionIndex], choiceIndex)" />
+            <span class="radio-label">{{choice.value}}</span>
+            <span class="radio-styled"></span>
+          </label>
+          <label ng-show="questions[currentQuestionIndex].type === 'checkBox'">
+            <input type="checkbox" name="ques-checkbox" ng-checked="choice.selected" ng-click="saveAnswer(questions[currentQuestionIndex], choiceIndex)" />
+            <span class="checkbox-label">{{choice.value}}</span>
+            <span class="checkbox-styled">
+              <svg class="bi bi-check" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z" />
+              </svg>
+            </span>
+          </label>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <div class="quiz-buttons">
+    <button ng-show="currentQuestionIndex > 0" class="btn btn-block" ng-click="prevQuestion()">Previous</button>
+    <button ng-show="currentQuestionIndex < questions.length - 1" class="btn btn-block" ng-click="nextQuestion()">Next</button>
+    <button ng-show="currentQuestionIndex === questions.length - 1" class="btn btn-block" ng-click="submitTest()">Submit</button>
+  </div>
+  <ul class="question-marker">
+    <li ng-repeat="question in questions track by $index" ng-init="markerIndex=$index" ng-click="goToQuestion(markerIndex)">{{markerIndex+1}}</li>
+  </ul>
+</div>]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sp_widget_9bfc16dc07ded01037c7f2ae7c1ed071</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($scope, $timeout, $interval) {
+	/* widget controller */
+	var c = this;
+
+	$scope.testing = "";
+	$scope.interval = null;
+	$scope.seconds = c.data.timer;
+	$scope.timer = '0h 0m 0s';
+	$scope.questions = c.data.questions;
+	$scope.currentQuestionIndex = 0;
+	$scope.questionTransition = false;
+	$scope.showResults = false;
+
+	$scope.startTimer = function() {
+		$interval.cancel($scope.interval);
+		$scope.interval = $interval(function() { 
+			$scope.seconds--;			
+			var hours = Math.floor(($scope.seconds % (60 * 60 * 24)) / (60 * 60));
+			var minutes = Math.floor(($scope.seconds % (60 * 60)) / 60);
+			var seconds = Math.floor($scope.seconds % 60);
+
+			$scope.timer = hours+'h '+minutes+'m '+seconds+'s';
+			if($scope.seconds === 0) {
+				$interval.cancel($scope.interval);
+				$scope.submitTest();
+			}
+		}, 1000);
+	}
+
+	$scope.saveAnswer = function(question, choiceIndex) {
+		if (question.type == 'radioButton') {
+			question.choices.forEach(function(choice, index) {
+				if(index !== choiceIndex) choice.selected = false;
+			});
+		} else if (question.type == 'checkBox') {
+			question.choices.forEach(function(choice, index) {
+				if(index === choiceIndex) choice.selected = !choice.selected;
+			});
+		}
+		return;
+	}
+
+	$scope.prevQuestion = function() {
+		$scope.currentQuestionIndex--;
+	}
+
+	$scope.nextQuestion = function() {
+		$scope.currentQuestionIndex++;
+	}
+	
+	$scope.goToQuestion = function(index) {
+		$scope.currentQuestionIndex = index;
+	}
+
+	$scope.submitTest = function() {
+		alert(JSON.stringify($scope.questions));
+	}
+
+	// start timer
+	if($scope.questions.length &gt; 0) $scope.startTimer();
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.quiz {
+  color: darkorange;
+  display: flex;
+  flex-flow: column;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.5em;
+  padding: 15px 0;
+  color: white;
+  text-shadow: 2px 2px 10px grey;
+}
+
+.quiz-divider {
+  height: 1px;
+  background-color: white;
+}
+
+.quiz-question {
+  margin-top: 15px;
+  overflow-y: auto;
+  height: 53vh;
+}
+
+.quiz ::-webkit-scrollbar {
+  width: 7px;
+}
+
+.quiz ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #555;
+}
+
+.quiz-question-title {
+  font-size: 1.6em;
+}
+
+.quiz-question-title&amp;gt;* {
+  display: inline;
+}
+
+.quiz-question-choices ul {
+  font-size: 1.4em;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.quiz .timer {
+  margin: 30px auto 0 auto;
+  color: white;
+  font-size: 2em;
+  text-align: center;
+  text-shadow: 2px 2px 10px grey;
+}
+
+.quiz .quiz-buttons {
+  position: absolute;
+  bottom: 15%;
+  left: 1vw;
+  right: 1vw;
+
+  button {
+    background-color: lightblue;
+    padding: 2px;
+    box-shadow: 0px 3px 5px grey;
+  }
+}
+
+.quiz .seconds-bar {
+  position: fixed;
+  background-color: white;
+  box-shadow: 1px 2px 20px grey;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  transition: background-color 0.5s;
+}
+
+.question-transition {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
+  height: 125px;
+}
+
+.question-marker {
+  position: fixed;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  li {
+    text-align: center;
+    width: 9%;
+    background-color: white;
+    color: black;
+  }
+}
+
+.ng-hide.ng-hide-animate {
+     display: none !important;
+ }
+
+.ng-animate.no-animate {
+     transition: 0s none;
+     -webkit-transition: 0s none;
+     animation: 0s none;
+     -webkit-animation: 0s none;
+ }
+
+@keyframes color {
+  0%{
+    background-color: lightskyblue;
+    width: 100%;
+  }
+  25% {
+    background-color: green;
+    width: 75%;
+  }
+
+  50% {
+    background-color: yellow;
+    width: 50%;
+  }
+
+  75% {
+    background-color: orange;
+    width: 25%;
+  }
+
+  100% {
+    background-color: red;
+    width: 0%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+
+  /* For mobile phones: */
+  .quiz-question-title {
+    font-size: 1.3em;
+  }
+  .quiz .quiz-buttons {
+    left: 4vw;
+    right: 4vw;
+  }
+}
+
+
+/*styles for custom radio btns &amp;amp; checkbox */
+
+.choices-wrapper {
+  display: flex;
+  flex-flow: column;
+
+  label {
+    position: relative;
+    padding: 10px 0 10px 2em;
+    font-size: 0.9em;
+    color: darkorange;
+    transition: all 0.25s linear;
+    text-align: left;
+  }
+
+  input[type=radio],
+  input[type=checkbox] {
+    display: none;
+  }
+
+  .radio-styled,
+  .checkbox-styled {
+    position: absolute;
+    height: 1em;
+    width: 1em;
+    border: 1px solid #AAAAAA;
+    left: 0.7em;
+    top: 0.7em;
+    border-radius: 50%;
+    transition: background 0.25s linear;
+  }
+
+  .checkbox-styled {
+    border-radius: 0.2em;
+
+    svg {
+      display: none;
+      position: absolute;
+      left: -3px;
+      top: -3px;
+      color: lightgreen;
+      font-size: 1.2em;
+    }
+  }
+
+  label:hover {
+    color: white;
+    cursor: pointer;
+  }
+
+  label:hover .radio-styled {
+    border: 1px solid white;
+  }
+
+  input[type=radio]:checked~.radio-styled {
+    border: 1px solid white;
+  }
+
+  input[type=checkbox]:checked~.checkbox-styled svg {
+    display: block;
+  }
+
+  input[type=radio]:checked~.radio-styled::after {
+    content: "";
+    position: absolute;
+    height: 0.6em;
+    width: 0.6em;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    background-color: #5cb85c;
+    transform: translate(-50%, -50%);
+  }
+
+  input[type=radio]:checked~.radio-label {
+    color: white;
+  }
+
+  @media only screen and (max-width: 768px) {
+
+    label {
+      font-size: 0.8em;
+    }
+  }
+}&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id/&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]&gt;&lt;/link&gt;&lt;name&gt;Arena Test&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+	var testId = $sp.getParameter('test_id');
+
+	var currentUserID = gs.getUserID();
+	var isTestAdmin = gs.hasRole('x_93700_arena.test_admin');
+	var questionIDs = "";
+	
+	data.questions = [];
+	data.timer = -1;
+
+	var testScheduleGr = new GlideRecord('x_93700_arena_test_schedule');
+	testScheduleGr.addQuery('sys_id', testId);
+	testScheduleGr.query();
+	if(testScheduleGr.next()) {
+		var testTakers = testScheduleGr.getValue('test_takers') || '';
+		if(testTakers.indexOf(currentUserID) === -1 &amp;&amp; isTestAdmin === false) {
+			gs.addErrorMessage('You\'re not registered for this test');
+			return;
+		}
+		else {
+			if(testScheduleGr.question_set) {
+				var questionSet = testScheduleGr.question_set.questions;
+				if(questionSet &amp;&amp; questionSet!==null) {
+					questionIDs = questionSet.toString();
+					data.timer = testScheduleGr.getValue('test_duration_in_minutes')*60;
+				}
+				else gs.addErrorMessage('Test not setup. Contact admin');
+			} else {
+				gs.addErrorMessage('Test not setup. Contact admin');
+			}
+		}
+	}
+	else {
+		gs.addErrorMessage('Invalid test url. Contact admin');
+		return;
+	}
+
+	//gs.addInfoMessage('Welcome');
+
+	
+
+	var questionGr = new GlideRecord('x_93700_arena_arena_question');
+	questionGr.addQuery('sys_idIN'+questionIDs);
+	questionGr.query();
+	while(questionGr.next()) {
+		var question = {};
+		question.id = questionGr.getValue('sys_id');
+		question.module = questionGr.getValue('module');
+		question.type = questionGr.getValue('type');
+		question.title = questionGr.getValue('question').trim() || '';
+		question.choices = [];
+		var questionChoiceGr = new GlideRecord('x_93700_arena_quiz_choices');
+		questionChoiceGr.setLimit(4);
+		questionChoiceGr.orderByDesc('correct');
+		questionChoiceGr.addQuery('question', questionGr.sys_id);
+		questionChoiceGr.query();
+		while(questionChoiceGr.next()) {
+			question.choices.push({
+				id: questionChoiceGr.getValue('sys_id'),
+				value: questionChoiceGr.getValue('choice'),
+				selected: false
+			});
+		}
+		question.choices = shuffle(question.choices);
+		data.questions.push(question);
+	}
+
+	function shuffle(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex;
+		while (0 !== currentIndex) {
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+		}
+		return array;
+	}
+
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;jaydeepdeb&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-07-25 09:35:40&lt;/sys_created_on&gt;&lt;sys_id&gt;9bfc16dc07ded01037c7f2ae7c1ed071&lt;/sys_id&gt;&lt;sys_mod_count&gt;137&lt;/sys_mod_count&gt;&lt;sys_name&gt;Arena Test&lt;/sys_name&gt;&lt;sys_package display_value="Arena" source="x_93700_arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_9bfc16dc07ded01037c7f2ae7c1ed071&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;jaydeepdeb&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-07-25 23:00:47&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="quiz"&gt;
+  &lt;div class="seconds-bar" ng-style="{ 'animation': 'color {{data.timer}}s linear 0s forwards' }" &gt;&lt;/div&gt;
+  &lt;div class="timer"&gt;
+    &lt;div style="font-size: 0.6em"&gt;TIMER&lt;/div&gt;
+    &lt;div style="text-align: center"&gt;{{timer}}&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="quiz-divider"&gt;&lt;/div&gt;
+  &lt;div class="quiz-question"&gt;
+    &lt;div class="quiz-question-title" ng-bind-html="questions[currentQuestionIndex].title"&gt;&lt;/div&gt;
+    &lt;div class="quiz-question-choices"&gt;
+      &lt;ul&gt;
+        &lt;div ng-show="questionTransition === false" ng-repeat="choice in questions[currentQuestionIndex].choices track by $index" ng-init="choiceIndex=$index" class="choices-wrapper"&gt;
+          &lt;label ng-show="questions[currentQuestionIndex].type === 'radioButton'"&gt;
+            &lt;input type="radio" name="ques-radio" ng-value="true" ng-model="choice.selected" ng-click="saveAnswer(questions[currentQuestionIndex], choiceIndex)" /&gt;
+            &lt;span class="radio-label"&gt;{{choice.value}}&lt;/span&gt;
+            &lt;span class="radio-styled"&gt;&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;label ng-show="questions[currentQuestionIndex].type === 'checkBox'"&gt;
+            &lt;input type="checkbox" name="ques-checkbox" ng-checked="choice.selected" ng-click="saveAnswer(questions[currentQuestionIndex], choiceIndex)" /&gt;
+            &lt;span class="checkbox-label"&gt;{{choice.value}}&lt;/span&gt;
+            &lt;span class="checkbox-styled"&gt;
+              &lt;svg class="bi bi-check" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"&gt;
+                &lt;path fillRule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z" /&gt;
+              &lt;/svg&gt;
+            &lt;/span&gt;
+          &lt;/label&gt;
+        &lt;/div&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="quiz-buttons"&gt;
+    &lt;button ng-show="currentQuestionIndex &gt; 0" class="btn btn-block" ng-click="prevQuestion()"&gt;Previous&lt;/button&gt;
+    &lt;button ng-show="currentQuestionIndex &lt; questions.length - 1" class="btn btn-block" ng-click="nextQuestion()"&gt;Next&lt;/button&gt;
+    &lt;button ng-show="currentQuestionIndex === questions.length - 1" class="btn btn-block" ng-click="submitTest()"&gt;Submit&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;ul class="question-marker"&gt;
+    &lt;li ng-repeat="question in questions track by $index" ng-init="markerIndex=$index" ng-click="goToQuestion(markerIndex)"&gt;{{markerIndex+1}}&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-148522032</payload_hash>
+        <record_name>Arena Test</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-25 23:00:47</sys_created_on>
+        <sys_id>0b5555a007d6141037c7f2ae7c1ed084</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>173883516310000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-25 23:00:47</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>cf5555a006d61410b742905b9d377f83</update_guid>
+        <update_guid_history>cf5555a006d61410b742905b9d377f83:-148522032,fbf45d6054d61410d1f2136f53e13fd9:-372013536,0054192014d61410bea86d20561f1da3:1581878159,3323d5207bd614100f14f72b2e956385:-2075820858,efc2d52037d61410e9e5f7a0277605bd:1632978561,b172d52051d614103e33ae3ec9b04e8d:-555717423,6862d1204fd6141078c9b142f52b0d0c:-1070625605,623211ecaa96141045f995f0632c8a73:43418629,f681ddec88961410d3ed7d5d55ec6b0b:-1613187636,d490512c5d9614100050f5ac5ebd77a5:1156892092,ac8fcd2cb196141030b758148c51c84c:-1177738262,6dfe8d6c6f961410e09d4150e18f172a:1424671355,f1ae81ac4b961410da851f363c168f92:-1583374999,ce2ec92c4b9614102939fab1bf3fcefc:36964197,a40d452c26961410668b18c949f58219:-1909354733,951ccde8a5961410d0407187d1f64775:1965747075,82ab89a8f2961410100388346db80e15:-1767640700,d11b05a8cb9614100430298fa28c690f:350754679,c15a89a832961410054d114d77eff007:-1443786371,831ac9e43a961410f55b9a89be76078a:1322553129,b5e849a8c6961410f274fc9a2ab03c57:909448853,83480da4949614102dd67938417a2d7a:855147187,022881a8e19614102d535b35436d373f:-383393254,b75789e47396141089dbf2f91fb5b107:645097127,cf348164c89614101c502c774e0a5aa3:155328509,8a048164f996141013c6b8b640cce956:-1527911572,bfd34964ed961410fbb3e2402f0d6d6f:-346599064,fb0009243e961410f81d893b982fa2df:-1411711778,5d1f3824309614109d2f0fae8f0aa4d6:1757233912,318eb0a01d96141082bffb561255653e:-1128411479,8ecd3c60a896141043923a01e773762a:-1056155220,ae37b4ec4a5614104ce2a86bcc15cf86:828809882,5d17b4ec035614109fb4fc06e57ad97e:-1380697474,d766bf54a2d21410360ad8c86e3c9b17:-1799581793,7255bfd0f2d21410a809adc1b5a83666:-1455169156,69a37fd03fd2141071bb540e96bc2e32:93828464,ae833f54e5d21410c4643f618ef673b1:1594400080,ef63fb54c3d214103dee8075637d3455:-454210493,4472fb906bd21410942857043e8c7cd0:-1689957335,a970bfd00bd21410afa809b00b96503b:-1624537626,de503f9040d214102d72b786a99ab894:652263826,d49f27d06bd214106e388c3609f9fe03:119572845,c47f2b90d0d2141070453d503269700f:-1890550283,869eeb9075d21410961abdc656594993:1196865799,3c3ea710c5d214103016a749e02317ec:-1448238075,7ffde390fdd214105032a5dbb218c748:1074844331,956def5065d214103c9458ee5bbcd689:1476704293,b91ca3500bd214105b499b134595636c:-552471039,1caa271012d21410215aa38e939aa82f:251848455,299a27dce392141096d5bacd3453c99b:-142131287,ad4aa39c879214107fc85e4b8f2b1a97:1263254783,cf49a7dc5c9214103ef2e4f9a101e595:1084716452,3119ef98519214106f963c1562af4fde:424332176,2118ef988d921410bc84cc729874b307:-684282962,b9b7ef5cfd921410adb67c1c4c6f018f:-1785041623,4747a7d8e49214104c953e1f774bad92:1318973695,9612ef982e921410bf37cee2b31844a7:1798225596,c9026b98849214104ef8e809e13635a1:749213638,f4816b98fc921410af8041809947af93:705450184,b621a79868921410e0c9d7e9f85e5720:-936641817,8780a718ae92141018d46c6cd4d0c3b4:-1745473233,59506f58f4921410fe61917c808abdab:-1304632028,1cdf93d451921410e0150e9b308344bf:2071637908,98ddd3d47f9214102aca1f1a80f55220:-691172067,9bccd79459921410151c6139dbf822e6:-1175442946,e71c53947e921410621bf249d7ce361b:-1173230646,e9fb13d41c921410ecd067391762c9f4:-589021849,7acb5fd0a1921410ec79017da1d1b94e:-291303581,872adf54179214105f096509ead3534c:780021574,d91adf54ef921410239adfd2cd5679de:1431994726,bd0adf54fd92141020f072f63a7dc921:-239920107,da69d7548192141089fc8822a22ca742:-997281358,e6d5db5056921410e13cc03c4e4ca1bb:-1791856334,7c840718c9521410ca9328155f907b48:426738565,7c648b94c3521410f7316b3d95a1c071:1358747199,1b14c71877521410517786576f2f2bcf:1733945885,e0f34718fb521410c7c68a522e91e5df:135968351,e2c383188d5214103cc44cb1d7f798d8:1921612831,89a30fd41e521410665c5eb8b6c41ac6:135968351,71530fd4c9521410900b4c5095fb8ef6:435593159,49130b1489521410eaafb1df71f3bb89:504337812,fbd20b140652141030b845538a7eb349:-1083764428,d3f143d4f1521410ff72b9b8aec0c5e8:2046655786,6bb10b144f5214102b4e6673c539333c:-1082126964,00fef254e652141040c18d4d4bec2bf0:126175691,c37e7e14c25214107921685ab3f9077f:596397584,4b4e7e14f7521410dccbf7be5f37656b:266710672,061efa14ea52141077c4d3c4220e762d:771820298,27cdf6d0e7521410b143340946dd5959:1233932350,5e8d3214db5214105cf88095e244363d:-1032206490,180d3214415214102ba9c47ae7c8b925:-1479635233,d24cf6d05b5214104356166a114d618f:1829708038,50fb3e90805214107e93f8e19d6a8329:-862238794,858bb2dc45121410505b6396053d1a37:149507126,d75bbe5c0b121410ad74d03e4b04b6f9:-52273308,54aa3adc4a121410a4a8dabed6def7d0:1589969338,211a72906c5214109c6f3c291e05e14d:149507126,d534f69cb3121410a7429dba8fa735bf:-573821870,2924f69cd0121410dbfccbecb59290a1:-344987533,ad43be5c66121410c438906452e7e6ed:635522610,4a33be5c04121410f7d1e5a7522ffa4f:1030768082,5a133e98ec1214101c60df65be82213a:1834141693,e882f65cd61214109f5ec6af0aaf0534:1030768082,e242365c2b12141041791933c99c61c7:1687939891,a73f6298e11214104ab03d508c65f890:1746008853,5b2f26d8d2121410cee2ede52b093985:-567752990,251fe2d83f1214108c5e6e8c43007c69:-2128125145,b4ce22d8fc1214101b4d9bf0679f2d10:-377165649,1cae6698f5121410776d73172ad0bd62:966440950,bb5e2e985c12141044d4e9f77c80ee1d:-700830786,843eaa98981214106ab8d99c8c3c4614:211602688,aaed6618f71214102993ecde2cdbd31f:853863053,4dbd62987f12141026e691a29fb12482:-1425445501,9e5d629814121410d0f350d1395b1779:172800225,005daa182a1214106a3164cf14a0e59d:280247271,6f16e614c7121410fbcf0e24a8f7e34a:-765856156,d516e6547d121410a5291b7ad9e45c00:1330726562,f0e56654ae121410a54777f97e3c1e01:-765856156,dca5a254f71214106394051671982f63:-2060228194,f945ae143112141014bcd0bb76da8fef:-168464389,8d25aed05e121410bb4418d6066707d2:1448415926,fca3a6d0d7121410b0368cadbb05356b:-100017144,9df266d0951214108ec2889b43bba220:1044109869,c652ea50c71214100cc54ebdd55e6f36:-486766304,d742ea906e1214102429d22465a9027a:1961764725,e8d12690a91214102ab974bd9b1a0d73:-1102579169,b891a25040121410d08ff823d64ef983:-929301311,4081e29001121410fb3d6806b0829812:-1618428660,a621ee50491214101546f67245dca2b5:595721552,bd1162504f12141032bd4182f54d1c7d:1078010117,7501a2508f12141054233e744a39b18e:2007202661,d7df9210201214101b0db9987335c5de:1211770060,15bf12504a1214103f781a23e485ae98:-2026516713,3c3fd6101912141054a0f6c2e860cf49:-1609084688,cb1f9a100d121410ae37f8e180976c63:2109802322,191e1210d11214109c8d6a7ed045ca6b:-1151641108,1dbd16dc80ded010f32eaf2a0fbab6af:1956557364,551d56dc7eded010f03ff639bc45ea7e:96794613</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Arena Test">f57b0213079e541037c7f2ae7c1ed05f</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-03 16:00:29</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>d9b3bc4e503b49d4bb6367258b7b91c4</sys_id>
+        <sys_metadata>9bfc16dc07ded01037c7f2ae7c1ed071</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Arena Test</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sp_widget_9bfc16dc07ded01037c7f2ae7c1ed071</sys_update_name>
+        <sys_update_version display_value="sp_widget_9bfc16dc07ded01037c7f2ae7c1ed071">0b5555a007d6141037c7f2ae7c1ed084</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-03 16:00:29</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_header_footer">
+    <sp_header_footer action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function arenaLogo() {
+
+    var c = this;
+
+
+    /////////////////////////Listener/////////////////////////
+    $rootScope.$on('gameScreen', function(event, obj) {
+        c.showgameHeading = obj.gameHeading;
+
+		document.body.style.backgroundImage = "url('Leaderboard-background-1.jpg')";
+		
+        /*if (obj.quizPage == true || obj.test == true) {
+            document.body.style.backgroundImage = "none";
+            document.body.style.backgroundColor = "black";
+        } else if (obj.leaderboard == true)
+            document.body.style.backgroundImage = "url('Leaderboard-background-1.jpg')";
+        else
+            document.body.style.backgroundImage = "url('arena_abstract1.jpg')";
+			*/
+
+    });
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.flexStyle&#13;
+{&#13;
+  display:flex;&#13;
+  flex-direction:column;&#13;
+  justify-content:center;&#13;
+  align-items:center;&#13;
+  text-align:center;&#13;
+  font-size:9em;&#13;
+}&#13;
+&#13;
+@media only screen and (max-width: 768px) {&#13;
+  .flexStyle {&#13;
+    font-size:8em;&#13;
+    margin-top: 10vh;&#13;
+  }&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>arena_logo</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>Arena Logo</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <static>false</static>
+        <sys_class_name>sp_header_footer</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2020-02-01 07:53:34</sys_created_on>
+        <sys_id>4516780cdb320010b6db8e47489619e4</sys_id>
+        <sys_mod_count>49</sys_mod_count>
+        <sys_name>Arena Logo</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_header_footer_4516780cdb320010b6db8e47489619e4</sys_update_name>
+        <sys_updated_by>jaydeep</sys_updated_by>
+        <sys_updated_on>2020-05-22 12:14:56</sys_updated_on>
+        <template><![CDATA[<div ng-show="c.showgameHeading">
+  <h1 class="textStyling flexStyle">ARENA</h1>
+</div>
+]]></template>
+    </sp_header_footer>
+</record_update>

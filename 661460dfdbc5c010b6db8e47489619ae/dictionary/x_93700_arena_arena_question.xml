@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Arena Question" max_length="40" name="x_93700_arena_arena_question" sizeclass="948" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Choices" max_length="4000" name="choices" type="simple_name_values"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="easy" label="Difficulty" mandatory="true" max_length="40" name="difficulty" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Easy" sequence="0" value="easy"/>
+                <element inactive_on_update="false" label="Medium" sequence="1" value="medium"/>
+                <element inactive_on_update="false" label="Hard" sequence="2" value="hard"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="HTML Question" max_length="65536" name="html_question" type="html"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Level" mandatory="true" max_length="40" name="level" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Level 1" sequence="100" value="level1"/>
+                <element inactive_on_update="false" label="Level 2" sequence="200" value="level2"/>
+                <element inactive_on_update="false" label="Level 3" sequence="300" value="level3"/>
+                <element inactive_on_update="false" label="Level 4" sequence="400" value="level4"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Module" mandatory="true" max_length="40" name="module" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Platform Administration" sequence="10" value="platform_admin"/>
+                <element inactive_on_update="false" label="Scripting" sequence="20" value="scripting"/>
+                <element inactive_on_update="false" label="User Interface" sequence="30" value="ui"/>
+                <element inactive_on_update="false" label="Applications" sequence="40" value="applications"/>
+                <element inactive_on_update="false" label="Certification" sequence="50" value="certification"/>
+            </choice>
+        </element>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Question" max_length="4000" name="question" type="html"/>
+        <element attributes="edge_encryption_enabled=true" label="Question" max_length="100000" name="question_script" type="script"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="play" label="Question type" max_length="40" name="question_type" type="string">
+            <choice>
+                <element inactive_on_update="false" label="play" sequence="1" value="play"/>
+                <element inactive_on_update="false" label="Hire" sequence="2" value="hire"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Revisit" max_length="40" name="revisit" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" dependent="module" dependent_on_field="module" label="Sub-module" max_length="40" name="sub_module" type="choice" use_dependent_field="true">
+            <choice>
+                <element dependent_value="certification" inactive_on_update="false" label="CSA" sequence="100" value="csa"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="Table Administration" sequence="100" value="table_administration"/>
+                <element dependent_value="certification" inactive_on_update="false" label="CIS - ITSM" sequence="200" value="cis_itsm"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="List Administration" sequence="200" value="list_administration"/>
+                <element dependent_value="certification" inactive_on_update="false" label="CIS - HRSD" sequence="300" value="cis_hrsd"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="Form Administration" sequence="300" value="form_administration"/>
+                <element dependent_value="certification" inactive_on_update="false" label="CIS - Risk and Compliance" sequence="400" value="cis_grc"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="Field Administration" sequence="400" value="field_administration"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="Localization" sequence="500" value="localization"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="Search Administration" sequence="600" value="search_administration"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="User Administration" sequence="700" value="user_administration"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="Events" sequence="800" value="events"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="Data Management" sequence="900" value="data_management"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="System Security" sequence="1000" value="system_security"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="Notifications" sequence="1100" value="notification"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="Integration Basic" sequence="1110" value="integration_basic"/>
+                <element dependent_value="platform_admin" inactive_on_update="false" label="Miscellaneous - Platform" sequence="1120" value="misc_platform"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="g_form Functions" sequence="1200" value="g_form_functions"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="g_user Functions" sequence="1300" value="g_user_functions"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="g_list Functions" sequence="1400" value="g_list_functions"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="g_scratchpad" sequence="1500" value="g_scratchpad"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="Logging Functions" sequence="1600" value="logging_functions"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="Gliderecord" sequence="1700" value="gliderecord"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="Date Scripting" sequence="1800" value="date_scripting"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="Email Scripting" sequence="1900" value="email_scripting"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="Workflow Scripting" sequence="2000" value="workflow_scripting"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="Widget Scripting" sequence="2100" value="widget_scripting"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="Jelly Scripting" sequence="2200" value="jelly_scripting"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="Integration Scripting" sequence="2300" value="integration_scripting"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="Regular Expressions" sequence="2400" value="regular_expressions"/>
+                <element dependent_value="scripting" inactive_on_update="false" label="Miscellaneous - scripting" sequence="2410" value="misc_scripting"/>
+                <element dependent_value="ui" inactive_on_update="false" label="Reports and Dashboards" sequence="2500" value="report"/>
+                <element dependent_value="ui" inactive_on_update="false" label="HTML" sequence="2600" value="html"/>
+                <element dependent_value="ui" inactive_on_update="false" label="Portal Configuration" sequence="2700" value="portal_configuration"/>
+                <element dependent_value="ui" inactive_on_update="false" label="GlideDialogWindow" sequence="2800" value="glide_dialog_window"/>
+                <element dependent_value="applications" inactive_on_update="false" label="ITSM" sequence="2900" value="itsm"/>
+                <element dependent_value="applications" inactive_on_update="false" label="CMDB" sequence="3000" value="cmdb"/>
+                <element dependent_value="applications" inactive_on_update="false" label="HR" sequence="3100" value="hr"/>
+                <element dependent_value="applications" inactive_on_update="false" label="Surveys and Assessments" sequence="3200" value="survey"/>
+                <element dependent_value="applications" inactive_on_update="false" label="PPM" sequence="3300" value="ppm"/>
+                <element dependent_value="applications" inactive_on_update="false" label="Virtual Agent" sequence="3400" value="va"/>
+                <element dependent_value="applications" inactive_on_update="false" label="ATF" sequence="3500" value="atf"/>
+                <element dependent_value="applications" inactive_on_update="false" label="GRC" sequence="3600" value="grc"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="checkBox" hint="If your question has one response, select Radio button. Else, select Check box" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Match" value="match"/>
+                <element inactive_on_update="false" label="Check box" sequence="0" value="checkBox"/>
+                <element inactive="true" inactive_on_update="true" label="Find the error" sequence="1" value="find_error"/>
+                <element inactive="true" inactive_on_update="true" label="Complete the script" sequence="2" value="complete_script"/>
+                <element inactive_on_update="false" label="Radio button" sequence="3" value="radioButton"/>
+                <element inactive="true" inactive_on_update="true" label="Yes/No" sequence="4" value="yes_no"/>
+                <element inactive_on_update="false" label="Script area" sequence="6" value="script_area"/>
+            </choice>
+        </element>
+    </element>
+</database>

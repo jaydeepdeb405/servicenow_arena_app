@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_theme_js_include">
+    <m2m_sp_theme_js_include action="DELETE">
+        <order>100</order>
+        <sp_js_include/>
+        <sp_theme display_value="Arena">28b542d7db010410b6db8e4748961961</sp_theme>
+        <sys_class_name>m2m_sp_theme_js_include</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-11-21 11:04:18</sys_created_on>
+        <sys_id>89a0febcdb19c810b6db8e474896192a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>.Arena</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>m2m_sp_theme_js_include_89a0febcdb19c810b6db8e474896192a</sys_update_name>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2019-11-21 11:04:18</sys_updated_on>
+    </m2m_sp_theme_js_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>df1c0847dba053048264f70fbf9619e0</instance_id>
+        <instance_name>dev51484</instance_name>
+        <name>m2m_sp_theme_js_include_89a0febcdb19c810b6db8e474896192a</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_theme_js_include"><m2m_sp_theme_js_include action="INSERT_OR_UPDATE"><order>100</order><sp_js_include/><sp_theme display_value="Arena">28b542d7db010410b6db8e4748961961</sp_theme><sys_class_name>m2m_sp_theme_js_include</sys_class_name><sys_created_by>nikesh</sys_created_by><sys_created_on>2019-11-21 11:04:18</sys_created_on><sys_id>89a0febcdb19c810b6db8e474896192a</sys_id><sys_mod_count>0</sys_mod_count><sys_name>.Arena</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>m2m_sp_theme_js_include_89a0febcdb19c810b6db8e474896192a</sys_update_name><sys_updated_by>nikesh</sys_updated_by><sys_updated_on>2019-11-21 11:04:18</sys_updated_on></m2m_sp_theme_js_include></record_update>]]></payload>
+        <payload_hash>1102162509</payload_hash>
+        <record_name>.Arena</record_name>
+        <reverted_from/>
+        <source>a214a857db09c010b6db8e474896194b</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-11-21 11:04:18</sys_created_on>
+        <sys_id>aba032bcdb19c810b6db8e47489619c2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16e8da25c350000001</sys_recorded_at>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2019-11-21 11:04:18</sys_updated_on>
+        <type>JS Includes</type>
+        <update_guid>a3a032bc6519c8105c6d5e69ad6992c2</update_guid>
+        <update_guid_history>a3a032bc6519c8105c6d5e69ad6992c2:1102162509</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="">e4874fb8db99c810b6db8e474896198b</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-11-21 12:44:02</sys_created_on>
+        <sys_db_object display_value="" name="m2m_sp_theme_js_include">m2m_sp_theme_js_include</sys_db_object>
+        <sys_id>01faa9f40a63471680127b29cc4e5a19</sys_id>
+        <sys_metadata>89a0febcdb19c810b6db8e474896192a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>.Arena</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>m2m_sp_theme_js_include_89a0febcdb19c810b6db8e474896192a</sys_update_name>
+        <sys_update_version display_value="m2m_sp_theme_js_include_89a0febcdb19c810b6db8e474896192a">aba032bcdb19c810b6db8e47489619c2</sys_update_version>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2019-11-21 12:44:02</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

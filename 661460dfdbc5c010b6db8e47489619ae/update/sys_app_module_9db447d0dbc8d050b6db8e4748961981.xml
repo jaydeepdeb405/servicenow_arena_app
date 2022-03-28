@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="Arena">0eb5a857db09c010b6db8e4748961953</application>
+        <assessment/>
+        <device_type/>
+        <filter/>
+        <hint/>
+        <homepage/>
+        <image/>
+        <link_type>DIRECT</link_type>
+        <map_page/>
+        <mobile_title>Pages(To be removed)</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name/>
+        <order>600</order>
+        <override_menu_roles>false</override_menu_roles>
+        <query>https://dev51484.service-now.com/sp_page.do?sys_id=1fefac1bdb49c010b6db8e474896192b&amp;sysparm_record_target=sp_page&amp;sysparm_record_row=2&amp;sysparm_record_rows=2&amp;sysparm_record_list=idSTARTSWITHarena</query>
+        <report/>
+        <roles>x_93700_arena.admin</roles>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>anirudh</sys_created_by>
+        <sys_created_on>2020-04-04 16:08:11</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>9db447d0dbc8d050b6db8e4748961981</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Pages(To be removed)</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_app_module_9db447d0dbc8d050b6db8e4748961981</sys_update_name>
+        <sys_updated_by>praveen</sys_updated_by>
+        <sys_updated_on>2020-06-03 09:27:19</sys_updated_on>
+        <timeline_page/>
+        <title>Pages(To be removed)</title>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+        <window_name>_blank</window_name>
+    </sys_app_module>
+</record_update>

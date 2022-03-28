@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function  Submit()
+{
+	//alert(	$("user_comment").value);
+	if($("user_comment").value == "STOP"){
+		alert( "you gave it");
+		var ga = new GlideAjax('x_93700_arena.Hiremodeutils');
+ga.addParam('sysparm_name', 'stophiremode');
+ga.getXML(HelloWorldParse);
+
+
+	}
+	else
+		{
+		alert('Please provide the comments exactly "STOP"');
+		return false;
+	}
+}
+function cancel() {
+ window.top.close();
+}
+
+
+function HelloWorldParse(response) {
+  var answer = response.responseXML.documentElement.getAttribute("answer");
+  alert(answer);
+//GlideDialogWindow.get().destroy();
+
+ window.top.close();}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_93700_arena_Stophiremode.do</endpoint>
+        <html><![CDATA[<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	
+		<div class="container">
+  <div class="row">
+    <div class="col-sm">
+ 
+    </div>
+    <div class="col-sm">
+      <g:ui_form id="HR dialog">
+		<style type="text/css">
+			#hr_dialog_footer input {
+				width: 100%;
+			}
+			#info_message {
+				margin-left:10px;
+				color:#667;
+			}
+		</style>
+
+		<script>
+			$j(document).ready(function() {
+				$j("#user_comment").focus();
+			});
+		</script>
+		  
+		<div >
+					<div style="padding-top:5px; padding-bottom:5px;">
+						<input class="col-sm-12 form-control" id="user_comment" name="user_comment" placeholder=" Type STOP to exist Hire Mode"  rows="3" type="text"></input>
+							</div>
+						
+		</div>
+		
+		</g:ui_form>
+	<br>
+		</br>
+		<footer id="hr_dialog_footer" class="modal-footer" style="padding: 10px 0;">
+			
+		<button class="btn-default btn" style="float:right;margin-left: 20px; " role="button" onclick=" cancel()" >${gs.getMessage('Cancel')}</button><button class="btn-primary btn" style="float:right" role="button" onclick="Submit()">${gs.getMessage('Submit')}</button>
+	</footer>
+			
+    </div>
+    <div class="col-sm">
+   
+    </div>
+  </div>
+</div>
+		
+			
+	
+</j:jelly>]]></html>
+        <name>Stophiremode</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2020-05-15 04:09:07</sys_created_on>
+        <sys_id>c1c76f15dbbc1010b6db8e4748961937</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>Stophiremode</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ui_page_c1c76f15dbbc1010b6db8e4748961937</sys_update_name>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2020-05-15 07:45:07</sys_updated_on>
+    </sys_ui_page>
+</record_update>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_container">
+    <sp_container action="INSERT_OR_UPDATE">
+        <background_color/>
+        <background_image>21d777612ffb541093fd5d8b2799b63f</background_image>
+        <background_style>cover</background_style>
+        <bootstrap_alt>false</bootstrap_alt>
+        <class_name>content</class_name>
+        <container_class_name/>
+        <name>Shankaran Pillai - Container 2</name>
+        <order>2</order>
+        <sp_page display_value="sp">7268a6b32f07581093fd5d8b2799b6df</sp_page>
+        <subheader>false</subheader>
+        <sys_class_name>sp_container</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-11 14:31:28</sys_created_on>
+        <sys_id>921d6ebb2f07581093fd5d8b2799b63d</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_name>Shankaran Pillai - Container 2</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_container_921d6ebb2f07581093fd5d8b2799b63d</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-09 07:08:20</sys_updated_on>
+        <title/>
+        <width>container-fluid</width>
+    </sp_container>
+</record_update>

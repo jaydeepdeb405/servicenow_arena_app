@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="DELETE">
+        <choices/>
+        <description/>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_93700_arena.test.user.group_id</name>
+        <read_roles>x_93700_arena.test_admin</read_roles>
+        <suffix>test.user.group_id</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-25 08:42:41</sys_created_on>
+        <sys_id>6f70569407ded01037c7f2ae7c1ed094</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena.test.user.group_id</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_properties_6f70569407ded01037c7f2ae7c1ed094</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-25 08:42:41</sys_updated_on>
+        <type>string</type>
+        <value>c9ce425407ded01037c7f2ae7c1ed0be</value>
+        <write_roles>x_93700_arena.test_admin</write_roles>
+    </sys_properties>
+    <sys_translated_text action="DELETE" query="documentkey=6f70569407ded01037c7f2ae7c1ed094"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_properties_6f70569407ded01037c7f2ae7c1ed094</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description/><ignore_cache>false</ignore_cache><is_private>false</is_private><name>x_93700_arena.test.user.group_id</name><read_roles>x_93700_arena.test_admin</read_roles><suffix>test.user.group_id</suffix><sys_class_name>sys_properties</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-07-25 08:42:41</sys_created_on><sys_id>6f70569407ded01037c7f2ae7c1ed094</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_93700_arena.test.user.group_id</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_properties_6f70569407ded01037c7f2ae7c1ed094</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-07-25 08:42:41</sys_updated_on><type>string</type><value>c9ce425407ded01037c7f2ae7c1ed0be</value><write_roles>x_93700_arena.test_admin</write_roles></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=6f70569407ded01037c7f2ae7c1ed094"/></record_update>]]></payload>
+        <payload_hash>-634770072</payload_hash>
+        <record_name>x_93700_arena.test.user.group_id</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-25 08:42:43</sys_created_on>
+        <sys_id>2df09e5407ded01037c7f2ae7c1ed054</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1738523809c0000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-25 08:42:43</sys_updated_on>
+        <type>System Property</type>
+        <update_guid>edf09e5420ded01021e22bc024517b53</update_guid>
+        <update_guid_history>edf09e5420ded01021e22bc024517b53:-634770072</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-03 15:48:48</sys_created_on>
+        <sys_db_object display_value="" name="sys_properties">sys_properties</sys_db_object>
+        <sys_id>9c5147bf11f144d091f18e8183cf2040</sys_id>
+        <sys_metadata>6f70569407ded01037c7f2ae7c1ed094</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena.test.user.group_id</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_properties_6f70569407ded01037c7f2ae7c1ed094</sys_update_name>
+        <sys_update_version display_value="sys_properties_6f70569407ded01037c7f2ae7c1ed094">2df09e5407ded01037c7f2ae7c1ed054</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-03 15:48:48</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function(spModal) {
+
+	$rootScope.$on('gameScreen', function(event, obj) {
+		$("#demo01").removeClass("bounce");
+		
+		window.setTimeout( $("#demo01").addClass("bounce"), 5000 );
+		
+	});
+	
+	$("#demo01").animatedModal();
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.hover-bottom {&#13;
+  &#13;
+    position: fixed;&#13;
+    top: 0;&#13;
+    right: 0;&#13;
+   border-radius: 50%;&#13;
+    width: 50px;&#13;
+    height: 50px;&#13;
+    margin-right: 20px;&#13;
+    margin-top: 30px;&#13;
+   color:#5cb85c;&#13;
+    font-size: 33px;&#13;
+}&#13;
+&#13;
+#animatedModal{&#13;
+background-color:floralwhite !important;&#13;
+}&#13;
+&#13;
+.close-animatedModal{&#13;
+  text-align: right;&#13;
+  font-size: xx-large;&#13;
+}&#13;
+&#13;
+.fa-custom{&#13;
+    margin-left: -7px;&#13;
+    vertical-align: 7.5%;&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+.bounce {&#13;
+  display: inline-block;&#13;
+  &#13;
+  -moz-animation: bounce 0.5s infinite linear;&#13;
+  -o-animation: bounce 0.5s infinite linear;&#13;
+  -webkit-animation: bounce 0.5s infinite linear;&#13;
+      animation: bounce 1s cubic-bezier(1, 2.13, 1, 1);&#13;
+  color:000;&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+.rotate {&#13;
+  animation: rotation 1s infinite linear;&#13;
+}&#13;
+&#13;
+@keyframes rotation {&#13;
+  from {&#13;
+    transform: rotate(0deg);&#13;
+  }&#13;
+  to {&#13;
+    transform: rotate(359deg);&#13;
+  }&#13;
+   to {&#13;
+    transform: rotate(90deg);&#13;
+  }&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description> &lt;!--&lt;div ng-repeat= topic in data.topics&gt;--&gt;&#13;
+   &#13;
+        &lt;!--&lt;a class="btn btn-link collapsed"  role="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls={{topic.title}}&gt;&#13;
+          {{topic.title}}&#13;
+        &lt;/a&gt;--&gt;&#13;
+  &#13;
+   &#13;
+    &lt;!--&lt;div id={{topic.title}} class="collapse"&gt;  &#13;
+       {{topic.message}}&#13;
+    &lt;/div&gt;--&gt;&#13;
+   &#13;
+	&lt;!--&lt;/div&gt;--&gt;</description>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>arena_info_button</id>
+        <internal>false</internal>
+        <link/>
+        <name>Info Icon</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+//     var player = new GlideRecord("x_93700_arena_user");
+//     player.addQuery("user", gs.getUserID());
+//     player.addQuery('interviewee', true);
+//     player.query();
+//     if (player.next()) {
+//         data.interview = 'true';
+//     }
+
+
+//     data.confirm_exit_heading = gs.getMessage("Confirm Exit");
+//     data.confirm_exit_message = gs.getMessage("Are you sure?");
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-07-19 10:44:34</sys_created_on>
+        <sys_id>bb433b5a2fc2d09093fd5d8b2799b687</sys_id>
+        <sys_mod_count>125</sys_mod_count>
+        <sys_name>Info Icon</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_bb433b5a2fc2d09093fd5d8b2799b687</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-08 15:24:44</sys_updated_on>
+        <template><![CDATA[<head>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
+</head>
+
+
+
+
+
+
+  
+<div><!--Block Start-->
+ 
+  
+  
+  <a id="demo01" class="hover-bottom bounce " href="#animatedModal"><i class='fa fa-question-circle fa-lg  fa-custom'  ></i></a>
+
+ 
+    <div id="animatedModal">
+        
+          <div class="close-animatedModal"> 
+             <i class="fa fa-window-close" aria-hidden="true"></i>
+          </div>
+            
+		<div class="modal-content">
+                             
+          <div class="col-md-12">
+            
+            <!--Accordion 1-->
+				<div class="accordion">     
+                  <div class="card">
+
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faq1" aria-expanded="false" aria-controls="collapseThree">
+                           What is Arena?
+                        </button>
+
+                        <div id="faq1" class="collapse" aria-labelledby="headingThree" >
+                          <div class="card-body">
+                            A gaming solution built extensively in ServiceNow for the purpose of learning and evaluation.
+                          </div>
+                        </div>
+    
+  					</div><!--Card Close-->                                  
+			</div><!--Accordion 1 close-->   
+           
+            
+            
+            <div class="accordion">       
+                  <div class="card">
+
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faq2" aria-expanded="false" aria-controls="collapseThree">
+                           How can I challenge a player?
+                        </button>
+
+                        <div id="faq2" class="collapse" aria-labelledby="headingThree" >
+                          <div class="card-body">
+                            You can challenge any player who doesn't have any active challenge for your unlocked levels from the leaderboard or from the results page.
+                          </div>
+                        </div>
+    
+  					</div><!--Card Close-->                                  
+			</div><!--Accordion 2 close-->   
+            
+            
+            
+            <div class="accordion">       
+                  <div class="card">
+
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faq3" aria-expanded="false" aria-controls="collapseThree">
+                           How will I know if someone has challenged me?
+                        </button>
+
+                        <div id="faq3" class="collapse" aria-labelledby="headingThree" >
+                          <div class="card-body">
+							You will get to see your challenges by clicking on Profile->Challenges from Arena homepage.
+                          </div>
+                        </div>
+    
+  					</div><!--Card Close-->                                  
+			</div><!--Accordion 3 close-->   
+            
+            
+            
+            <div class="accordion">       
+                  <div class="card">
+
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faq4" aria-expanded="false" aria-controls="collapseThree">
+                           What will happen if I ignore my challenges?
+                        </button>
+
+                        <div id="faq4" class="collapse" aria-labelledby="headingThree" >
+                          <div class="card-body">
+                            If you do not accept a challenge within 3 days, your current score for the challenged level-difficulty will become invalid and the next immediate highest score of yours for that level-difficulty will become valid.
+                          </div>
+                        </div>
+    
+  					</div><!--Card Close-->                                  
+			</div><!--Accordion 4 close-->   
+            
+            
+            
+            <div class="accordion">       
+                  <div class="card">
+
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faq5" aria-expanded="false" aria-controls="collapseThree">
+                           What will happen if I accept a challenge?
+                        </button>
+
+                        <div id="faq5" class="collapse" aria-labelledby="headingThree" >
+                          <div class="card-body">
+                            Once you accept a challenge, Arena will launch the quiz for the challenged level-difficulty and on completion of the quiz your new score will become valid and the challenge will be removed from your challenges.
+                          </div>
+                        </div>
+    
+  					</div><!--Card Close-->                                  
+			</div><!--Accordion 5 close-->   
+            
+            
+            
+            <div class="accordion">       
+                  <div class="card">
+
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faq6" aria-expanded="false" aria-controls="collapseThree">
+                           What will happen if I accept a challenge and quit?
+                        </button>
+
+                        <div id="faq6" class="collapse" aria-labelledby="headingThree" >
+                          <div class="card-body">
+                            Your attempt will not hold valid and the challenge will still show up in your challenges.
+                          </div>
+                        </div>
+    
+  					</div><!--Card Close-->                                  
+			</div><!--Accordion 6 close--> 
+            
+            
+            
+            <div class="accordion">       
+                  <div class="card">
+
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faq7" aria-expanded="false" aria-controls="collapseThree">
+                           Where can I see my excellence graph?
+                        </button>
+
+                        <div id="faq7" class="collapse" aria-labelledby="headingThree" >
+                          <div class="card-body">
+							You can see your excellence graph by clicking on Profile->Excellence Graph from Arena homepage.
+                          </div>
+                        </div>
+    
+  					</div><!--Card Close-->                                  
+			</div><!--Accordion 7 close--> 
+            
+            
+            
+            <div class="accordion">       
+                  <div class="card">
+
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faq8" aria-expanded="false" aria-controls="collapseThree">
+                           How can I customize my profile avatar, nickname and audio settings?
+                        </button>
+
+                        <div id="faq8" class="collapse" aria-labelledby="headingThree" >
+                          <div class="card-body">
+                            You can update it from Profile->Settings.
+                          </div>
+                        </div>
+    
+  					</div><!--Card Close-->                                  
+			</div><!--Accordion 8 close--> 
+            
+            
+            
+            
+            <div class="accordion">       
+                  <div class="card">
+
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faq9" aria-expanded="false" aria-controls="collapseThree">
+                           How can I unlock a level-difficulty?
+                        </button>
+
+                        <div id="faq9" class="collapse" aria-labelledby="headingThree" >
+                          <div class="card-body">
+							You have to successfully complete your current level-difficulty by securing a minimum score of 70.
+                          </div>
+                        </div>
+    
+  					</div><!--Card Close-->                                  
+			</div><!--Accordion 9 close--> 
+            
+            
+            
+            <div class="accordion">       
+                  <div class="card">
+
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#faq10" aria-expanded="false" aria-controls="collapseThree">
+                           How can I improve my current score?
+                        </button>
+
+                        <div id="faq10" class="collapse" aria-labelledby="headingThree" >
+                          <div class="card-body">
+							You can retake a quiz and improve your current score any number of times by clicking on "Retake" from the results page or by directly selecting the level-difficulty from the Play page.
+                          </div>
+                        </div>
+    
+  					</div><!--Card Close-->                                  
+			</div><!--Accordion 10 close--> 
+            
+            
+</div><!--Col-md-close-->   
+          
+</div><!--Modal Content close-->
+</div><!--Animated Modal close-->
+  
+  
+</div><!--Block End-->
+  
+  
+
+
+]]></template>
+    </sp_widget>
+</record_update>

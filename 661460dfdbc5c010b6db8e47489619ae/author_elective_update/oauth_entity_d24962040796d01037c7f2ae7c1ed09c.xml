@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="oauth_entity">
+    <oauth_entity action="DELETE">
+        <access>public</access>
+        <access_token_lifespan>1800</access_token_lifespan>
+        <active>true</active>
+        <auth_code_lifespan>0</auth_code_lifespan>
+        <auth_url/>
+        <certificate_url/>
+        <client_id>Nfoq7uqGQFKMDIzTbjmn4g</client_id>
+        <client_secret>IQs4bstwpvlLT8XhZ/eYft1bedXu/ZlYfSybE8gQabV7MaSa+EyjGA==</client_secret>
+        <client_uuid>524962040796d01037c7f2ae7c1ed09c</client_uuid>
+        <code_challenge_method>S256</code_challenge_method>
+        <comments/>
+        <default_grant_type>client_credentials</default_grant_type>
+        <id_token_lifespan>0</id_token_lifespan>
+        <logo_url/>
+        <message_signature_lifespan>0</message_signature_lifespan>
+        <name>Zoom</name>
+        <oauth_api_script/>
+        <protocol_name/>
+        <public_client>false</public_client>
+        <redirect_url>https://dev71980.service-now.com/oauth_redirect.do</redirect_url>
+        <refresh_token_lifespan>8640000</refresh_token_lifespan>
+        <refresh_token_url/>
+        <revoke_token_url/>
+        <salt>0</salt>
+        <send_client_credentials_as>request_body_parameter</send_client_credentials_as>
+        <skip_authorize>false</skip_authorize>
+        <sys_class_name>oauth_entity</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-24 16:13:04</sys_created_on>
+        <sys_id>d24962040796d01037c7f2ae7c1ed09c</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Zoom</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>oauth_entity_d24962040796d01037c7f2ae7c1ed09c</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-24 16:16:42</sys_updated_on>
+        <token_url>https://zoom.us/oauth/token</token_url>
+        <type>oauth_provider</type>
+        <use_mutual_auth>false</use_mutual_auth>
+        <user/>
+    </oauth_entity>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>oauth_entity_d24962040796d01037c7f2ae7c1ed09c</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="oauth_entity"><oauth_entity action="INSERT_OR_UPDATE"><access>public</access><access_token_lifespan>1800</access_token_lifespan><active>true</active><auth_code_lifespan>0</auth_code_lifespan><auth_url/><certificate_url/><client_id>Nfoq7uqGQFKMDIzTbjmn4g</client_id><client_secret>IQs4bstwpvlLT8XhZ/eYft1bedXu/ZlYfSybE8gQabV7MaSa+EyjGA==</client_secret><client_uuid>524962040796d01037c7f2ae7c1ed09c</client_uuid><code_challenge_method>S256</code_challenge_method><comments/><default_grant_type>client_credentials</default_grant_type><id_token_lifespan>0</id_token_lifespan><logo_url/><message_signature_lifespan>0</message_signature_lifespan><name>Zoom</name><oauth_api_script/><protocol_name/><public_client>false</public_client><redirect_url>https://dev71980.service-now.com/oauth_redirect.do</redirect_url><refresh_token_lifespan>8640000</refresh_token_lifespan><refresh_token_url/><revoke_token_url/><salt>0</salt><send_client_credentials_as>request_body_parameter</send_client_credentials_as><skip_authorize>false</skip_authorize><sys_class_name>oauth_entity</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-07-24 16:13:04</sys_created_on><sys_id>d24962040796d01037c7f2ae7c1ed09c</sys_id><sys_mod_count>1</sys_mod_count><sys_name>Zoom</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>oauth_entity_d24962040796d01037c7f2ae7c1ed09c</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-07-24 16:16:42</sys_updated_on><token_url>https://zoom.us/oauth/token</token_url><type>oauth_provider</type><use_mutual_auth>false</use_mutual_auth><user/></oauth_entity></record_update>]]></payload>
+        <payload_hash>-1933584402</payload_hash>
+        <record_name>Zoom</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-24 16:16:42</sys_created_on>
+        <sys_id>964fa6c40796d01037c7f2ae7c1ed068</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>173819cc9b60000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-24 16:16:42</sys_updated_on>
+        <type>Application Registries</type>
+        <update_guid>5e4fa6c4bd96d0109838a3b787fbdf67</update_guid>
+        <update_guid_history>5e4fa6c4bd96d0109838a3b787fbdf67:-1933584402,0d7e6a44b596d0104442cf91e3b468a8:1164873475</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Zoom">309fe2080796d01037c7f2ae7c1ed075</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-24 16:17:59</sys_created_on>
+        <sys_db_object display_value="" name="oauth_entity">oauth_entity</sys_db_object>
+        <sys_id>296694a81af4402c89afcc569c3fb461</sys_id>
+        <sys_metadata>d24962040796d01037c7f2ae7c1ed09c</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Zoom</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>oauth_entity_d24962040796d01037c7f2ae7c1ed09c</sys_update_name>
+        <sys_update_version display_value="oauth_entity_d24962040796d01037c7f2ae7c1ed09c">964fa6c40796d01037c7f2ae7c1ed068</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-24 16:17:59</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

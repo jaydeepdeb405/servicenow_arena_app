@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="DELETE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_93700_arena.XLSXAttachmentUtil</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>XLSXAttachmentUtil</name>
+        <script><![CDATA[var XLSXAttachmentUtil = Class.create();
+XLSXAttachmentUtil.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	saveAsAttachment: function() {
+		var content = this.getParameter('sysparm_content');
+		
+		var gr = new GlideRecord('incident');
+		gr.get('55640fcc1b420010a3fbfc86cc4bcb8c');
+		
+		gs.addInfoMessage(gr.getDisplayValue());
+		
+// 		var decodedBytes = GlideStringUtil.base64DecodeAsBytes(content);
+		
+		var gsa = new GlideSysAttachment();
+		var attachmentId = gsa.writeBase64(gr, 'Export.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', content);
+		
+		gs.addInfoMessage(attachmentId);
+		
+		return attachmentId;
+	},
+    type: 'XLSXAttachmentUtil'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-06-02 19:45:08</sys_created_on>
+        <sys_id>039897bc0760301037c7f2ae7c1ed0e2</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>XLSXAttachmentUtil</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_script_include_039897bc0760301037c7f2ae7c1ed0e2</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-06-02 19:48:04</sys_updated_on>
+    </sys_script_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_script_include_039897bc0760301037c7f2ae7c1ed0e2</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;public&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;x_93700_arena.XLSXAttachmentUtil&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;true&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;XLSXAttachmentUtil&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var XLSXAttachmentUtil = Class.create();
+XLSXAttachmentUtil.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	saveAsAttachment: function() {
+		var content = this.getParameter('sysparm_content');
+		
+		var gr = new GlideRecord('incident');
+		gr.get('55640fcc1b420010a3fbfc86cc4bcb8c');
+		
+		gs.addInfoMessage(gr.getDisplayValue());
+		
+// 		var decodedBytes = GlideStringUtil.base64DecodeAsBytes(content);
+		
+		var gsa = new GlideSysAttachment();
+		var attachmentId = gsa.writeBase64(gr, 'Export.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', content);
+		
+		gs.addInfoMessage(attachmentId);
+		
+		return attachmentId;
+	},
+    type: 'XLSXAttachmentUtil'
+});]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;jaydeepdeb&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-06-02 19:45:08&lt;/sys_created_on&gt;&lt;sys_id&gt;039897bc0760301037c7f2ae7c1ed0e2&lt;/sys_id&gt;&lt;sys_mod_count&gt;3&lt;/sys_mod_count&gt;&lt;sys_name&gt;XLSXAttachmentUtil&lt;/sys_name&gt;&lt;sys_package display_value="Arena" source="x_93700_arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_039897bc0760301037c7f2ae7c1ed0e2&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;jaydeepdeb&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-06-02 19:48:04&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1357859889</payload_hash>
+        <record_name>XLSXAttachmentUtil</record_name>
+        <reverted_from/>
+        <source>9d4fad12079d501037c7f2ae7c1ed0a1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-06-02 19:48:04</sys_created_on>
+        <sys_id>4e491bb007a0301037c7f2ae7c1ed059</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>179ce44c75b0000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-06-02 19:48:04</sys_updated_on>
+        <type>Script Include</type>
+        <update_guid>06491bb04fa03010ff589a033959a959</update_guid>
+        <update_guid_history>06491bb04fa03010ff589a033959a959:1357859889,9f091bf01ca030100f6dcf8189169da5:1216504346,10c89fb0ada0301079047f14c067bf7c:1506606507,cb9897bc4460301092218600b59e2ce5:1964057820</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-06-02 19:55:44</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_include">sys_script_include</sys_db_object>
+        <sys_id>095da46d51a84a2a8a0ac34dcbb4dee4</sys_id>
+        <sys_metadata>039897bc0760301037c7f2ae7c1ed0e2</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>XLSXAttachmentUtil</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_script_include_039897bc0760301037c7f2ae7c1ed0e2</sys_update_name>
+        <sys_update_version display_value="sys_script_include_039897bc0760301037c7f2ae7c1ed0e2">4e491bb007a0301037c7f2ae7c1ed059</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-06-02 19:55:44</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

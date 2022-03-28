@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_93700_arena.Evaluator</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Demo Data:&#13;
+&#13;
+var results = [&#13;
+{'questionID' : 'a9b92cf7db3b4050b6db8e474896193c' ,&#13;
+'module' : 'platform_admin',&#13;
+'response' : '434ce0fbdb3b4050b6db8e474896194f' ,&#13;
+'timeTaken' : '5'},&#13;
+&#13;
+{'questionID' : '0ea40008dbc09050b6db8e47489619fc' ,&#13;
+'module' : 'applications',&#13;
+'response' : 'e825c808dbc09050b6db8e47489619e1' ,&#13;
+'timeTaken' : '8'}&#13;
+&#13;
+];&#13;
+&#13;
+&#13;
+new x_93700_arena.Evaluator().getResult(results);</description>
+        <name>Evaluator</name>
+        <script><![CDATA[var Evaluator = Class.create();
+Evaluator.prototype = {
+    initialize: function() {
+ 
+        var currentUser = '';
+        var player = new GlideRecord("x_93700_arena_user");
+        player.addQuery("user", gs.getUserID());
+        player.query();
+        if (player.next()) {
+            currentUser = player.sys_id.toString();
+        }
+
+        this.currentUser = currentUser;
+        this.currentUserObj = player;
+        this.timeTaken = 0;
+
+        this.level = '';
+        this.difficulty = '';
+
+        this.platformAdmin_score = 0;
+        this.scripting_score = 0;
+        this.ui_score = 0;
+        this.applications_score = 0;
+
+        this.challenged_by = '';
+        this.active = false;
+    },
+
+
+
+
+
+    //This is the first function called from 'ArenaQuiz' widget from server
+    getResult: function(quizData, fromChallenge, quizLevel, quizDifficulty) {
+
+        //quizData is a JSON obj that contains QuestionID, timeTaken, userResponse and questionModule
+        //fromChallenge is a boolean flag that determines if the quiz was taken as fun attempt or was it taken via 'accept challenge'
+
+        //gs.addInfoMessage(JSON.stringify(quizData));
+        this.level = quizLevel;
+        this.difficulty = quizDifficulty;
+
+        for (var i = 0; i < quizData.length; i++) {
+            this._checkAnswers(quizData[i]);
+        }
+        this._processOldResult(fromChallenge);
+        //gs.info('--------------------------------------');
+        // gs.info('platformAdmin_score - ' + this.platformAdmin_score);
+        //gs.info('applications_score - ' + this.applications_score);
+        // gs.info(this.timeTaken);
+
+
+        var results = new GlideRecord("x_93700_arena_results");
+        results.initialize();
+        results.arena_user = this.currentUser;
+        results.level = this.level;
+        results.difficulty = this.difficulty;
+        results.time_taken = this.timeTaken;
+        results.active = this.active;
+
+        results.challenged_by = this.challenged_by;
+
+        //Setting module score
+        results.platform_admin = this.platformAdmin_score;
+        results.scripting = this.scripting_score;
+        results.ui = this.ui_score;
+        results.applications = this.applications_score;
+
+        var recID = results.insert();
+
+
+        //Unlock next level
+        this._unlockNextLevel();
+
+
+
+        this.currentUserObj.last_played_on = 'Today';
+        this.currentUserObj.update();
+        return recID;
+
+    },
+	
+    _checkAnswers: function(questionData) {
+
+		var playerResponse = questionData.response;
+        var playerResponseCount = playerResponse.length;
+        var correctAnswerCount = 0;
+        var playerGotRight = 0;
+
+		var choiceDB = new GlideRecord("x_93700_arena_quiz_choices");
+		choiceDB.setLimit(7);
+		choiceDB.addQuery("question", questionData.questionID.toString());
+		
+		if(questionData.type == 'radioButton' || questionData.type == 'checkBox') {
+			choiceDB.addQuery('correct', true);
+			choiceDB.query();
+			while (choiceDB.next()) {
+				correctAnswerCount++;
+				if (playerResponse.indexOf(choiceDB.sys_id.toString()) > -1)
+					playerGotRight++;
+			}
+		} else if(questionData.type == 'match') {
+			choiceDB.query();
+			while (choiceDB.next()) {
+				correctAnswerCount++;
+				if(playerResponse.filter(function(res) {
+					if(res.choice === choiceDB.sys_id.toString() && res.answer === choiceDB.answer.toString()) return true;
+					else return false;
+				}).length > 0) playerGotRight++;
+			}
+		}
+		
+		if (playerResponseCount == correctAnswerCount && playerResponseCount == playerGotRight) {
+			this._setModuleScore(questionData.module);
+		}
+
+        // gs.info('questionModule - ' + questionData.module);
+        //gs.info('correctAnswerCount - ' + correctAnswerCount);
+        // gs.info('playerResponseCount - ' + playerResponseCount);
+        // gs.info('playerGotRight - ' + playerGotRight);
+        this.timeTaken = parseInt(this.timeTaken) + parseInt(questionData.timeTaken.toString());
+        //gs.info('--------------------------------------');
+    },
+
+
+
+
+    //This function calculates the score for each of the 4 modules
+    _setModuleScore: function(questionModule) {
+
+        if (questionModule == 'platform_admin')
+            this.platformAdmin_score = parseInt(this.platformAdmin_score) + 10;
+        else if (questionModule == 'scripting')
+            this.scripting_score = parseInt(this.scripting_score) + 10;
+        else if (questionModule == 'ui')
+            this.ui_score = parseInt(this.ui_score) + 10;
+        else if (questionModule == 'applications')
+            this.applications_score = parseInt(this.applications_score) + 10;
+
+    },
+
+
+
+
+    //Set previous result inactive(if required)
+    //Clear Challenged By(if required)
+    //Decide if new result should be active
+    _processOldResult: function(status) {
+
+        var query = 'level=' + this.level + '^difficulty=' + this.difficulty + '^arena_user=' + this.currentUser + '^active=true';
+        var currentScore = parseInt(this.platformAdmin_score) + parseInt(this.scripting_score) + parseInt(this.ui_score) + parseInt(this.applications_score); //Get Current Record's Total Score
+
+        var oldResults = new GlideRecord('x_93700_arena_results');
+        oldResults.addEncodedQuery(query);
+        oldResults.query();
+       // gs.addInfoMessage('oldResults rc - ' + oldResults.getRowCount());
+        if (oldResults.next()) { //If retake
+            if (status == true) { //if retaken due to a Challenge
+
+                // Make previous result inactive and current result active
+                oldResults.active = false;
+                oldResults.challenged_by = '';
+                oldResults.update();
+                this.active = true; //This will be used in new Result creation
+            } else //if retaken for fun
+            {
+                if (currentScore < oldResults.getValue('total_score')) //Score lesser
+                {
+                   // gs.addInfoMessage('scored lesser');
+                    this.active = false;
+                } else if ((currentScore == oldResults.getValue('total_score')) && this.timeTaken > oldResults.time_taken) //Score equal but took more time
+                    this.active = false;
+                else //Scored better
+                {
+                    if (oldResults.challenged_by) //Taken for fun, without knowing you were challenged
+                    {
+                        this.challenged_by = oldResults.challenged_by.toString();
+
+                        oldResults.challenged_by = '';
+                        oldResults.active = false;
+                        oldResults.update();
+                    } else //Taken for fun, nobody had challenged you
+                    {
+                        oldResults.active = false;
+                        oldResults.update();
+                    }
+                    this.active = true;
+                }
+            }
+        } else //If fresh attempt
+            this.active = true;
+    },
+
+
+    _unlockNextLevel: function() {
+
+        var totalScore = parseInt(this.platformAdmin_score) + parseInt(this.scripting_score) + parseInt(this.ui_score) + parseInt(this.applications_score);
+
+        if (parseInt(totalScore) >= parseInt(gs.getProperty('x_93700_arena.passing_score'))) {
+            var player = new GlideRecord("x_93700_arena_user");
+            player.addQuery("user", gs.getUserID());
+            player.query();
+            if (player.next()) {
+                var playerLevel = player.level.toString();
+                var playerDifficulty = player.difficulty.toString();
+
+                //If player is not at level 4 Hard
+                if (!(playerLevel == 'level4' && playerDifficulty == 'hard')) {
+                    //Player plays his current level and difficulty - Logic begins
+                    if (playerLevel == this.level && playerDifficulty == this.difficulty) {
+                        var levelNumber = parseInt(playerLevel.substring(playerLevel.length, playerLevel.length - 1));
+						levelNumber = levelNumber + 1;
+                        if (playerDifficulty == 'hard') {
+                            player.level = 'level' + levelNumber;
+                            player.difficulty = 'easy';
+                        } else if (playerDifficulty == 'medium')
+                            player.difficulty = 'hard';
+                        else if (playerDifficulty == 'easy')
+                            player.difficulty = 'medium';
+
+
+                    } //Player plays his current level and difficulty - Logic Ends
+                } //Not level 4 hard - logic ends
+                player.update();
+            }
+        }
+    },
+
+
+
+    getAttempts: function(user, level, difficulty) {
+        var attemptsCount = 0;
+        var attempts = new GlideAggregate('x_93700_arena_results');
+        attempts.addEncodedQuery('arena_user=' + user + '^level=' + level + '^difficulty=' + difficulty);
+        attempts.addAggregate('COUNT');
+        attempts.query();
+        if (attempts.next()) {
+            attemptsCount = attempts.getAggregate('COUNT');
+        }
+        return attemptsCount;
+    },
+	
+	getTestModeResult: function(testScheduleId, testTakerId, questionResponses) {
+		// disabling old results for the particular schedule & test taker
+		var resultGr = new GlideRecord('x_93700_arena_results');
+		resultGr.addActiveQuery();
+		resultGr.addQuery('test_schedule', testScheduleId);
+		resultGr.addQuery('test_taker', testTakerId);
+		resultGr.setValue('active', 'false');
+		resultGr.updateMultiple();
+		
+		var totalQuestionCount = questionResponses.length;
+		var totalCorrectAnswers = 0;
+		var moduleScores = {
+			platform_admin: 0,
+			scripting: 0,
+			ui: 0,
+			applications: 0
+		};
+		var moduleQuestionCount = {
+			platform_admin: 0,
+			scripting: 0,
+			ui: 0,
+			applications: 0
+		};
+		
+		// looping through each question
+		questionResponses.forEach(function(question) {
+			var questionId = question.id;
+			var module = question.module;
+			var choiceGr = new GlideRecord('x_93700_arena_quiz_choices');
+			choiceGr.addQuery('question', questionId);
+			choiceGr.query();
+			var answeredCorrectly = choiceGr.hasNext();
+			while(choiceGr.next()) {
+				var isCorrect = choiceGr.getValue('correct') === '1';
+				var userChoice = question.choices.filter(function(choice) {
+					if (choice.id === choiceGr.getValue('sys_id')) {
+						choice.correct = isCorrect;
+						return true;
+					} 
+					return false;
+				})[0];
+				if (userChoice && userChoice.selected !== isCorrect) {
+					answeredCorrectly = false;
+				}
+			}
+			question.answered_correctly = answeredCorrectly;
+			// increase scores
+			if (answeredCorrectly === true) {
+				moduleScores[module]++;
+				totalCorrectAnswers++;
+			}
+			moduleQuestionCount[module]++;
+		});
+		//gs.addInfoMessage(totalCorrectAnswers); 
+		
+		// create result record
+		resultGr = new GlideRecord('x_93700_arena_results');
+		resultGr.initialize();
+		resultGr.setValue('response_json', JSON.stringify(questionResponses));
+		resultGr.setValue('type', 'test');
+		resultGr.setValue('test_schedule', testScheduleId);
+		resultGr.setValue('test_taker', testTakerId);
+		resultGr.setValue('test_score', Math.round((totalCorrectAnswers/totalQuestionCount)*100));
+		Object.keys(moduleScores).forEach(function(fieldName) {
+			resultGr.setValue(fieldName, Math.round((moduleScores[fieldName]/moduleQuestionCount[fieldName])*100));
+		});
+		return resultGr.insert();
+	}
+
+
+};
+
+
+
+
+//Add this code to in _setActive flag function inside if(status == true)
+/*
+ **Check if current score is more than previous record, if Yes increment "Berserker" field count to indicate user have won challenge
+ */
+//                 if (currentScore > oldResults.getValue('total_score')) {
+//                     this.currentUserObj.berserker = parseInt(this.currentUserObj.berserker) + 1;
+//                 } else if (currentScore == oldResults.getValue('total_score') && this.timeTaken < oldResults.getValue('time_taken')) {
+//                     this.currentUserObj.berserker = parseInt(this.currentUserObj.berserker) + 1;
+//                 }]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-12-11 13:53:48</sys_created_on>
+        <sys_id>ab76da5fdbe90410b6db8e47489619ff</sys_id>
+        <sys_mod_count>135</sys_mod_count>
+        <sys_name>Evaluator</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_script_include_ab76da5fdbe90410b6db8e47489619ff</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-09-16 21:10:43</sys_updated_on>
+    </sys_script_include>
+</record_update>

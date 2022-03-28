@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <condition/>
+        <description>Default access control on x_93700_arena_quiz_choices</description>
+        <name>x_93700_arena_quiz_choices</name>
+        <operation display_value="delete">delete</operation>
+        <script/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>anirudh</sys_created_by>
+        <sys_created_on>2020-04-02 14:20:51</sys_created_on>
+        <sys_id>1319d8fbdbf74050b6db8e47489619ef</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena_quiz_choices</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_security_acl_1319d8fbdbf74050b6db8e47489619ef</sys_update_name>
+        <sys_updated_by>anirudh</sys_updated_by>
+        <sys_updated_on>2020-04-02 14:20:51</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+</record_update>

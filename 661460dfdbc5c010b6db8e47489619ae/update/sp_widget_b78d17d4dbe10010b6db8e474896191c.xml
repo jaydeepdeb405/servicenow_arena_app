@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function arenaIntro() {
+	
+    var c = this;
+    c.showIntroSequence1 = true;
+
+    c.letsPlay = function() {
+        var screen = document.documentElement;
+        if (screen.requestFullscreen) {
+            screen.requestFullscreen();
+        } else if (screen.mozRequestFullScreen) {
+            /* Firefox */
+            screen.mozRequestFullScreen();
+        } else if (screen.webkitRequestFullscreen) {
+            /* Chrome, Safari & Opera */
+            screen.webkitRequestFullscreen();
+        } else if (screen.msRequestFullscreen) {
+            /* IE/Edge */
+            screen.msRequestFullscreen();
+        }
+
+
+        c.server.get({
+            action: 'getMusicsettings'
+        }).then(function(r) {
+            if (r.data.musicOn == true) {
+                var gameBGM = document.getElementById("gameBGM");
+                gameBGM.play();
+            }
+
+        });
+
+
+        c.showIntroSequence1 = false;
+
+        $rootScope.$broadcast('introSequence2', true);
+
+    };
+    c.skip = function() {
+        c.showIntroSequence2 = false;
+        c.showIntroSequence1 = false;
+        var gameScreen = {
+            gameHeading: true,
+            mainMenu: true,
+            gameLevels: false,
+            quizPage: false,
+            profilePage: false,
+            leaderBoard: false
+        };
+
+        $rootScope.$broadcast('gameScreen', gameScreen);
+    };
+
+
+
+
+
+    c.letshire = function() {
+        c.server.get({
+            action: 'stattest'
+        }).then(function(r) {
+
+            if (r.data.attempt == 0 && r.data.settogo == true) {
+                c.showIntroSequence1 = false;
+                var obj = {
+                    "level": "level1",
+                    "difficulty": "easy",
+                    "challenge": false,
+                    "quizPage": true,
+                    "mode": 'hire',
+                    "questionsarray": c.data.randowquestiosn.toString()
+                };
+
+                // alert(JSON.stringify(obj));
+                $rootScope.$broadcast('gameScreen', obj);
+            } else if (r.data.attempt != 0) {
+                Notiflix.Report.Init({
+                    backOverlay: false
+                });
+                Notiflix.Report.Failure('Retake Alert',
+                    '"You have already attempted the test" <br><br>- KPMG, Hiring Team',
+                    'Close');
+
+
+            } else if (r.data.settogo == false) {
+                Notiflix.Report.Init({
+                    backOverlay: false
+                });
+                Notiflix.Report.Failure('Please Wait',
+                    '"Test is yet to start." <br><br>- KPMG, Hiring Team',
+                    'Close');
+            } else if (r.data.settogo == false) {
+                Notiflix.Report.Init({
+                    backOverlay: false
+                });
+                Notiflix.Report.Failure('Please Wait',
+                    '"Test is yet to start." <br><br>- KPMG, Hiring Team',
+                    'Close');
+            }
+        });
+
+
+        /*
+	var obj ={
+			"quizPage" : true,
+			"mode": 'hire',
+			"questionsarray" : c.data.randowquestiosn.toString()
+		}
+	 alert(JSON.stringify(obj));
+	 $rootScope.$broadcast('gameScreen', obj);
+	};*/
+    }
+
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.menuStyle{&#13;
+  padding: 6px 30px;&#13;
+  font-size:1.5em;&#13;
+}&#13;
+&#13;
+.intro-text {&#13;
+  font-size: 2em;&#13;
+  margin: 1em;&#13;
+}&#13;
+&#13;
+button {&#13;
+  margin-bottom: 1em;&#13;
+}&#13;
+&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>Arena Intro  1</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+	data.isAdmin = gs.hasRole("admin");
+	var player = new GlideRecord("x_93700_arena_user");
+	player.addQuery("user", gs.getUserID());
+	player.addQuery('interviewee','true');
+	player.query();
+	if (player.next()) {
+		data.interviewprofile = 'true';
+	}
+
+	data.showhire = gs.getProperty('x_93700_arena.enable_hiremode_in_ARENA');
+	data.randowquestiosn = gs.getProperty('x_93700_arena.Hire_mode_question_sys_id');
+
+	if (input && input.action == 'getMusicsettings') {
+
+		var arenaUser = new GlideRecord("x_93700_arena_user");
+		arenaUser.addQuery("user", gs.getUserID());
+		arenaUser.query();
+		if (arenaUser.next()) {
+			data.musicOn = (arenaUser.music == true);
+		}
+
+	}
+
+	if(input && input.action == 'stattest')
+
+	{data.attempt = 0;
+	 data.settogo = false;
+	 data.hiremodestatus = false;
+	 var user = new GlideRecord("x_93700_arena_user");
+	 user.addQuery("user", gs.getUserID());
+	 user.query();
+	 if (user.next()) 
+	 {
+		 var test = new GlideRecord('x_93700_arena_results');
+		 test.addQuery('arena_user',user.sys_id);
+		 test.query();
+		 if(test.next())
+		 {
+			 data.attempt =1;
+
+		 }
+	 }
+	 var starttime= gs.getProperty('x_93700_arena.datetime_for_hiremode_test');
+	 var g = new GlideDateTime().getDisplayValue();
+	 if(g >= starttime)
+	 {
+		 data.settogo = true;
+	 }
+
+	 if(gs.getProperty('x_93700_arena.enable_hiremode_in_ARENA') == 'true')
+		 data.hiremodestatus = true;
+
+	}
+
+
+
+
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-12-02 11:19:38</sys_created_on>
+        <sys_id>b78d17d4dbe10010b6db8e474896191c</sys_id>
+        <sys_mod_count>122</sys_mod_count>
+        <sys_name>Arena Intro  1</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_b78d17d4dbe10010b6db8e474896191c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-08 09:31:01</sys_updated_on>
+        <template><![CDATA[<div class="row">
+   <!--<div class="col-sm-2" ></div>-->
+   <!--<div class="col-sm-8 vertical-middle">-->
+      <div ng-show="c.showIntroSequence1" class="textStyling text-center">
+        <div  ng-hide="data.interviewprofile =='true'">
+         <audio id="gameBGM" loop>
+            <source src="gameBGM3.mp3" type="audio/mpeg">
+         </audio>
+         <div class="intro-text">No developers were harmed in the making of this game</div>
+         <div><button type="button" class="btn btn-md btn-success menuStyle" ng-click="c.letsPlay()">Let's Play</button></div>
+          <div ng-if="data.isAdmin"><button class="btn btn-link" ng-click="c.skip()">Skip</button></div>
+        </div>
+        <br>
+         <div ng-show ="data.interviewprofile == 'true'"><button type="button" class="btn btn-md btn-success menuStyle" ng-click="c.letshire()">Begin Test</button></div>
+      </div>
+   <!--</div>-->
+  
+</div>
+
+]]></template>
+    </sp_widget>
+</record_update>

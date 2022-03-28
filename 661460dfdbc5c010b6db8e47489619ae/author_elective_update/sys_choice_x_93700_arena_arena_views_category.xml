@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="category" table="x_93700_arena_arena_views" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>category</element>
+            <name>x_93700_arena_arena_views</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>kurre</sys_created_by>
+            <sys_created_on>2021-08-03 09:54:54</sys_created_on>
+            <sys_id>251428f42f75301085bfd0e62799b627</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>category</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_choice_x_93700_arena_arena_views_category</sys_update_name>
+            <sys_updated_by>kurre</sys_updated_by>
+            <sys_updated_on>2021-08-03 09:54:54</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>DYK</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_views</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>kurre</sys_created_by>
+            <sys_created_on>2021-08-03 09:54:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a91428f42f75301085bfd0e62799b626</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>chandana</sys_updated_by>
+            <sys_updated_on>2022-02-04 10:39:57</sys_updated_on>
+            <value>dyk</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>category</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>SP</label>
+            <language>en</language>
+            <name>x_93700_arena_arena_views</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>kurre</sys_created_by>
+            <sys_created_on>2021-08-03 09:54:54</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6d1428f42f75301085bfd0e62799b628</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>kurre</sys_updated_by>
+            <sys_updated_on>2021-08-03 09:54:54</sys_updated_on>
+            <value>sp</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

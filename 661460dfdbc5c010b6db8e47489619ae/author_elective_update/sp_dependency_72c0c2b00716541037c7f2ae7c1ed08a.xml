@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_dependency">
+    <sp_dependency action="DELETE">
+        <module/>
+        <name>Materialize</name>
+        <page_load>false</page_load>
+        <sp_portals/>
+        <sys_class_name>sp_dependency</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-26 20:49:31</sys_created_on>
+        <sys_id>72c0c2b00716541037c7f2ae7c1ed08a</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Materialize</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_dependency_72c0c2b00716541037c7f2ae7c1ed08a</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-26 20:56:27</sys_updated_on>
+    </sp_dependency>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sp_dependency_72c0c2b00716541037c7f2ae7c1ed08a</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_dependency"><sp_dependency action="INSERT_OR_UPDATE"><module/><name>Materialize</name><page_load>false</page_load><sp_portals/><sys_class_name>sp_dependency</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-07-26 20:49:31</sys_created_on><sys_id>72c0c2b00716541037c7f2ae7c1ed08a</sys_id><sys_mod_count>3</sys_mod_count><sys_name>Materialize</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sp_dependency_72c0c2b00716541037c7f2ae7c1ed08a</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-07-26 20:56:27</sys_updated_on></sp_dependency></record_update>]]></payload>
+        <payload_hash>246039248</payload_hash>
+        <record_name>Materialize</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-26 20:56:27</sys_created_on>
+        <sys_id>ab7242f00716541037c7f2ae7c1ed0a6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1738ce99e750000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-26 20:56:27</sys_updated_on>
+        <type>Widget Dependency</type>
+        <update_guid>637242f00e165410fb04d8e8971af6a6</update_guid>
+        <update_guid_history>637242f00e165410fb04d8e8971af6a6:246039248,2f71cab03e1654106ae8f69acb904c4c:-1079034144,63518ab012165410b83350b7b5eec29d:780883165,42e0c2b0d716541082bc7fc0352ded90:246039248</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Materialize">216386f00716541037c7f2ae7c1ed04f</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-26 21:00:25</sys_created_on>
+        <sys_db_object display_value="" name="sp_dependency">sp_dependency</sys_db_object>
+        <sys_id>671434a55f9247799d5fa85035fd5941</sys_id>
+        <sys_metadata>72c0c2b00716541037c7f2ae7c1ed08a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Materialize</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sp_dependency_72c0c2b00716541037c7f2ae7c1ed08a</sys_update_name>
+        <sys_update_version display_value="sp_dependency_72c0c2b00716541037c7f2ae7c1ed08a">ab7242f00716541037c7f2ae7c1ed0a6</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-26 21:00:25</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

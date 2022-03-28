@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time>1970-01-01 00:00:00</entered_time>
+        <name>Set the Hire mode </name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as display_value="">a8c9dd0fdb098010b6db8e4748961925</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period>1970-01-01 00:02:00</run_period>
+        <run_start>2020-05-14 15:36:45</run_start>
+        <run_time>1969-12-31 18:32:00</run_time>
+        <run_type>periodically</run_type>
+        <script><![CDATA[var time = "2020-05-14 15:57:25";
+var setflow = new GlideDateTime(time);
+var a = setflow.after(new GlideDateTime());
+gs.info(new GlideDateTime());
+gs.info(a);
+
+if (a == true) {
+    var setpropert = new GlideRecord('sys_properties');
+    setpropert.addQuery('name', 'x_93700_arena.enable_hiremode_in_ARENA');
+    setpropert.query();
+    if (setpropert.next()) {
+        setpropert.value = 'true';
+        setpropert.update();
+    }
+}]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2020-05-14 15:47:45</sys_created_on>
+        <sys_id>644db8dddb741010b6db8e474896197e</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Set the Hire mode </sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sysauto_script_644db8dddb741010b6db8e474896197e</sys_update_name>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2020-05-14 15:52:23</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

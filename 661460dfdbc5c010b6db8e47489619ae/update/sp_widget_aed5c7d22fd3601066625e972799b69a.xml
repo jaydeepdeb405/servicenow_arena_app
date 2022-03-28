@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>nav {
+  height: 75px;
+  line-height: 75px;
+  margin-bottom: 1rem;
+}
+
+nav .header-text {
+  font-size: 1.5em;
+  font-style: italic;
+}
+
+.spillai-logo {
+  background: url('shankaran-pillai-thumbnail.jpg');
+  height: 70px;
+  width: 70px;
+  margin: 2px 10px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.quote-left {
+  display: inline-block;
+  transform: rotate(180deg);
+  font-size: 35px;
+  font-weight: 900;
+  margin-right: 5px;
+}
+
+.quote-right {
+  display: inline-block;
+  font-size: 35px;
+  font-weight: 900;
+  margin-left: 10px;
+}
+
+.quote-text {
+  vertical-align: top;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Shankaran Pillai Header</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+	data.headerText = gs.getProperty('x_93700_arena.shankaran_pillai_quote');
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-06 06:56:49</sys_created_on>
+        <sys_id>aed5c7d22fd3601066625e972799b69a</sys_id>
+        <sys_mod_count>23</sys_mod_count>
+        <sys_name>Shankaran Pillai Header</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_aed5c7d22fd3601066625e972799b69a</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-21 15:23:05</sys_updated_on>
+        <template><![CDATA[<nav class="header">
+  <div class="nav-wrapper">
+    <a href="javascript:window.location.href=window.location.href" class="brand-logo left" title="Shankaran Pillai">
+      <div class="spillai-logo"></div>
+    </a>
+    <div class="center header-text" ng-if="data.headerText">
+      <div class="quote-left">,</div>
+      <span class="quote-text">{{data.headerText}}</span>
+      <div class="quote-right">,</div>
+    </div>
+  </div>
+</nav>]]></template>
+    </sp_widget>
+</record_update>

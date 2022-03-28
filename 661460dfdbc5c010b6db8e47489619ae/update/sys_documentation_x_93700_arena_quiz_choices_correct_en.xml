@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="correct" label="Is Correct" language="en" table="x_93700_arena_quiz_choices">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>correct</element>
+            <help/>
+            <hint/>
+            <label>Is Correct</label>
+            <language>en</language>
+            <name>x_93700_arena_quiz_choices</name>
+            <plural>Is Corrects</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>anirudh</sys_created_by>
+            <sys_created_on>2020-04-02 14:25:44</sys_created_on>
+            <sys_id>b23a5c3fdbf74050b6db8e4748961988</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Is Correct</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_documentation_x_93700_arena_quiz_choices_correct_en</sys_update_name>
+            <sys_updated_by>anirudh</sys_updated_by>
+            <sys_updated_on>2020-04-02 14:25:44</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

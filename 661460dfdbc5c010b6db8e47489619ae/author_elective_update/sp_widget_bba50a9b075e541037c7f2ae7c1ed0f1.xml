@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $window) {
+    /* widget controller */
+    var c = this;
+
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Arena Test Login</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-03 15:35:29</sys_created_on>
+        <sys_id>bba50a9b075e541037c7f2ae7c1ed0f1</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>Arena Test Login</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_bba50a9b075e541037c7f2ae7c1ed0f1</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-03 16:27:28</sys_updated_on>
+        <template><![CDATA[<div>
+  <h1>
+    test
+  </h1>
+</div>]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sp_widget_bba50a9b075e541037c7f2ae7c1ed0f1</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($scope, $window) {
+    /* widget controller */
+    var c = this;
+
+
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css/&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;true&lt;/has_preview&gt;&lt;id/&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]&gt;&lt;/link&gt;&lt;name&gt;Arena Test Login&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+	
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;jaydeepdeb&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-08-03 15:35:29&lt;/sys_created_on&gt;&lt;sys_id&gt;bba50a9b075e541037c7f2ae7c1ed0f1&lt;/sys_id&gt;&lt;sys_mod_count&gt;9&lt;/sys_mod_count&gt;&lt;sys_name&gt;Arena Test Login&lt;/sys_name&gt;&lt;sys_package display_value="Arena" source="x_93700_arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_bba50a9b075e541037c7f2ae7c1ed0f1&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;jaydeepdeb&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-08-03 16:27:28&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div&gt;
+  &lt;h1&gt;
+    test
+  &lt;/h1&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-103824413</payload_hash>
+        <record_name>Arena Test Login</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-03 16:27:28</sys_created_on>
+        <sys_id>11a1d217079e541037c7f2ae7c1ed0f8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>173b5263c0b0000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-03 16:27:28</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>d5a1d217729e54108c3dc0c0a18180f7</update_guid>
+        <update_guid_history>d5a1d217729e54108c3dc0c0a18180f7:-103824413,a3615217ba9e5410ab7ac66d4459047b:-900247499,3c519ed3a39e5410d9bb6907f6a4268b:1069957887,9890d6d3219e5410cb4fd8bed7f5fe30:-1023101968,e73052d3989e54102fec9c6164203da0:-583227669,d5105e93a09e54109a8b34309f0a69bc:1902792156,27bf0a13a29e5410db4197df571a2c3b:1912106838,174f0a532e9e5410526bfda3087f9ffc:1787685926,c898465fde5e5410130f31e8329c8aac:67388720,7bb50a9b075e541052c88c915c1479df:476678229</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Arena Test Login">3c139257079e541037c7f2ae7c1ed0c4</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-03 16:33:43</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>124c9ff875bb4e0c84203c57d9cf6d71</sys_id>
+        <sys_metadata>bba50a9b075e541037c7f2ae7c1ed0f1</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Arena Test Login</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sp_widget_bba50a9b075e541037c7f2ae7c1ed0f1</sys_update_name>
+        <sys_update_version display_value="sp_widget_bba50a9b075e541037c7f2ae7c1ed0f1">11a1d217079e541037c7f2ae7c1ed0f8</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-03 16:33:43</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

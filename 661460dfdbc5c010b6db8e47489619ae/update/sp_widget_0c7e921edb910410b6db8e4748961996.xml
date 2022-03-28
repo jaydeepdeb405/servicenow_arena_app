@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+	var questionNumber =1;
+  c.currentQueNum = 0;
+	c.question = c.data.que[c.currentQueNum];
+	c.questionCount = c.data.que.length-1;
+	c.question.number = questionNumber;
+	
+	
+	c.saveAnswer = function(id,answer){	
+		alert(id + answer);	
+	}
+	
+	 c.getNextQuestion = function(){
+		 c.currentQueNum++;
+		  questionNumber++;
+	   c.question = c.data.que[c.currentQueNum];
+		 c.question.number = questionNumber;
+		 
+		 alert(JSON.stringify(c.question));
+		 
+		  if(c.questionCount == c.currentQueNum){
+					 c.haveNextQuestion = true;
+				 }
+			
+}
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>//oncontextmenu="return false"
+button {
+    position: relative;
+    float: right;
+   right: 12px;
+}
+ 
+
+.noselect {
+     width : 80%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.question-container{
+  margin: 10px;  
+}
+
+.answer-container{
+  margin-left : 25px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>mcq</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>MCQ</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.que              = [];
+	var requiredquestions = options.no_of_questions || 10; // no of questions required
+    var quesIds           = [];//to store list returned from glide aggregate - temp
+    var randomQuestionIds = []; //to store final list of questions
+
+    var ques = new GlideAggregate('x_93700_arena_arena_question');
+        ques.groupBy('sys_id');
+        ques.query();
+		while (ques.next()) {
+			quesIds.push(ques.sys_id+'');
+		}
+
+    maxQuestionCount = quesIds.length;//total number of records in question table
+
+    for (var i = 0; i < requiredquestions; i++) {
+        randomQuestionIds.push(quesIds[Math.floor(Math.random() * Math.floor(maxQuestionCount))]);
+    }
+
+    var query = "sys_idIN" + randomQuestionIds;
+	
+    var qn = new GlideRecord("x_93700_arena_arena_question");
+		qn.addEncodedQuery(query);
+		qn.query();
+		while (qn.next()) {
+			var que      = {};
+			que.question = qn.question+"";
+			var answer   = qn.choices;
+			que.choices  = Object.keys(answer);
+			que.type     = qn.type+"";
+
+			data.que.push(que);
+		}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-26 01:36:12</sys_created_on>
+        <sys_id>0c7e921edb910410b6db8e4748961996</sys_id>
+        <sys_mod_count>152</sys_mod_count>
+        <sys_name>MCQ</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_0c7e921edb910410b6db8e4748961996</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-29 14:53:40</sys_updated_on>
+        <template><![CDATA[<div class='noselect' >
+
+  <div class="card">
+
+        <div class="well question-container"><b>{{c.question.number}}.&nbsp;&nbsp;{{c.question.question}}</b></div>
+      
+        <div class='answer-container' ng-repeat="choice in c.question.choices">
+          <div ng-if="c.question.type=='mcq'" >
+            
+            <input type="checkbox" ng-value= "c.{{choice}}" ng-click="">&nbsp;&nbsp; {{choice}}  
+          </div>
+          <div ng-if="c.question.type=='yes_no'">
+            <input  type="radio" name="gender" value="male" ng-click="c.saveAnswer()"> {{choice}}<br> 
+          </div> 
+          
+           <div ng-if="c.question.type=='ctb'">
+            <input  type="radio" name="gender" value="male" ng-click="c.saveAnswer()"> {{choice}}<br> 
+          </div> 
+          
+        </div>    
+    </div>
+  
+    <button type="button" ng-if="!c.haveNextQuestion" ng-click="c.getNextQuestion()" class="btn btn-info">${Next Question}</button>
+           <button type="button" ng-if="c.haveNextQuestion" ng-click=""                    class="btn btn-info">${Submit}</button>
+  </div>
+  
+ 
+  
+  
+]]></template>
+    </sp_widget>
+</record_update>

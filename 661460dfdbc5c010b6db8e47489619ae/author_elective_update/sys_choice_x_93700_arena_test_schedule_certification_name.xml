@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="certification_name" table="x_93700_arena_test_schedule" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>certification_name</element>
+            <name>x_93700_arena_test_schedule</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-10-06 11:45:36</sys_created_on>
+            <sys_id>c723ea9d2fc7301066625e972799b6bf</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>certification_name</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_choice_x_93700_arena_test_schedule_certification_name</sys_update_name>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-10-06 11:45:36</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>certification_name</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Certified System Administrator</label>
+            <language>en</language>
+            <name>x_93700_arena_test_schedule</name>
+            <sequence>100</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-10-06 11:45:35</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1ff226512f0b301066625e972799b662</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-10-06 11:47:06</sys_updated_on>
+            <value>csa</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>certification_name</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Certified Application Developer</label>
+            <language>en</language>
+            <name>x_93700_arena_test_schedule</name>
+            <sequence>150</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-10-06 11:48:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>46a32e912f0b301066625e972799b692</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-10-06 11:48:59</sys_updated_on>
+            <value>cad</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>certification_name</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CIS - ITSM</label>
+            <language>en</language>
+            <name>x_93700_arena_test_schedule</name>
+            <sequence>200</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-10-06 11:46:18</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4b2322912f0b301066625e972799b6f3</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-10-06 11:47:10</sys_updated_on>
+            <value>cis_itsm</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>certification_name</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CIS - HRSD</label>
+            <language>en</language>
+            <name>x_93700_arena_test_schedule</name>
+            <sequence>300</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-10-06 11:46:51</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a15326512f0b301066625e972799b664</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-10-06 11:47:13</sys_updated_on>
+            <value>cis_hrsd</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>certification_name</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CIS - Risk &amp; Compliance</label>
+            <language>en</language>
+            <name>x_93700_arena_test_schedule</name>
+            <sequence>400</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-10-06 11:47:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ed73e6112f0b301066625e972799b63b</sys_id>
+            <sys_mod_count>4</sys_mod_count>
+            <sys_updated_by>jaydeepdeb@kpmg.com</sys_updated_by>
+            <sys_updated_on>2022-03-21 06:27:14</sys_updated_on>
+            <value>cis_grc</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>certification_name</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CIS - CSM</label>
+            <language>en</language>
+            <name>x_93700_arena_test_schedule</name>
+            <sequence>500</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-10-06 11:47:33</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>9593e2112f0b301066625e972799b680</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-10-06 11:48:50</sys_updated_on>
+            <value>cis_csm</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>certification_name</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CIS - Discovery</label>
+            <language>en</language>
+            <name>x_93700_arena_test_schedule</name>
+            <sequence>600</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-10-06 11:47:42</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3b9326512f0b301066625e972799b665</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-10-06 11:48:56</sys_updated_on>
+            <value>cis_discovery</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>certification_name</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CIS - PPM</label>
+            <language>en</language>
+            <name>x_93700_arena_test_schedule</name>
+            <sequence>700</sequence>
+            <synonyms/>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-10-06 11:48:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>aeb326512f0b301066625e972799b666</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-10-06 11:49:05</sys_updated_on>
+            <value>cis_ppm</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

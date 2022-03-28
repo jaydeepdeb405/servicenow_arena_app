@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="week" table="x_93700_arena_did_you_know" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>week</element>
+            <name>x_93700_arena_did_you_know</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>movva</sys_created_by>
+            <sys_created_on>2021-04-16 12:14:36</sys_created_on>
+            <sys_id>9dcee3a52fa7201085bfd0e62799b6d0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>week</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_choice_x_93700_arena_did_you_know_week</sys_update_name>
+            <sys_updated_by>movva</sys_updated_by>
+            <sys_updated_on>2021-04-16 12:14:36</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>week</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>1</label>
+            <language>en</language>
+            <name>x_93700_arena_did_you_know</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>movva</sys_created_by>
+            <sys_created_on>2021-04-16 12:14:36</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>11cee3a52fa7201085bfd0e62799b6d0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>movva</sys_updated_by>
+            <sys_updated_on>2021-04-16 12:14:36</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>week</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>First</label>
+            <language>en</language>
+            <name>x_93700_arena_did_you_know</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>Chandana</sys_created_by>
+            <sys_created_on>2021-04-16 14:14:31</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>213accb12f6b201085bfd0e62799b6a0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Chandana</sys_updated_by>
+            <sys_updated_on>2021-04-16 14:14:31</sys_updated_on>
+            <value>First</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>week</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>2</label>
+            <language>en</language>
+            <name>x_93700_arena_did_you_know</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>movva</sys_created_by>
+            <sys_created_on>2021-04-16 12:15:24</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>70fea3e52fa7201085bfd0e62799b657</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>movva</sys_updated_by>
+            <sys_updated_on>2021-04-16 12:15:24</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>week</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Second</label>
+            <language>en</language>
+            <name>x_93700_arena_did_you_know</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>Chandana</sys_created_by>
+            <sys_created_on>2021-04-16 14:14:38</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e33a8cb12f6b201085bfd0e62799b663</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Chandana</sys_updated_by>
+            <sys_updated_on>2021-04-16 14:14:38</sys_updated_on>
+            <value>Second</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>week</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>3</label>
+            <language>en</language>
+            <name>x_93700_arena_did_you_know</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>movva</sys_created_by>
+            <sys_created_on>2021-04-16 12:15:31</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e6fe232d2fa7201085bfd0e62799b61c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>movva</sys_updated_by>
+            <sys_updated_on>2021-04-16 12:15:31</sys_updated_on>
+            <value>3</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>week</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Third</label>
+            <language>en</language>
+            <name>x_93700_arena_did_you_know</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>Chandana</sys_created_by>
+            <sys_created_on>2021-04-16 14:14:45</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>854ac8b12f6b201085bfd0e62799b6b6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Chandana</sys_updated_by>
+            <sys_updated_on>2021-04-16 14:14:45</sys_updated_on>
+            <value>Third</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>week</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>4</label>
+            <language>en</language>
+            <name>x_93700_arena_did_you_know</name>
+            <sequence>3</sequence>
+            <synonyms/>
+            <sys_created_by>movva</sys_created_by>
+            <sys_created_on>2021-04-16 12:15:41</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>380f232d2fa7201085bfd0e62799b620</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>movva</sys_updated_by>
+            <sys_updated_on>2021-04-16 12:15:41</sys_updated_on>
+            <value>4</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>week</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Fourth</label>
+            <language>en</language>
+            <name>x_93700_arena_did_you_know</name>
+            <sequence>3</sequence>
+            <synonyms/>
+            <sys_created_by>Chandana</sys_created_by>
+            <sys_created_on>2021-04-16 14:14:51</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6a4a08b12f6b201085bfd0e62799b6bd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Chandana</sys_updated_by>
+            <sys_updated_on>2021-04-16 14:14:51</sys_updated_on>
+            <value>Fourth</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>week</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>5</label>
+            <language>en</language>
+            <name>x_93700_arena_did_you_know</name>
+            <sequence>4</sequence>
+            <synonyms/>
+            <sys_created_by>movva</sys_created_by>
+            <sys_created_on>2021-04-16 12:15:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e20f632d2fa7201085bfd0e62799b63a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>movva</sys_updated_by>
+            <sys_updated_on>2021-04-16 12:15:48</sys_updated_on>
+            <value>5</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>week</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Fifth</label>
+            <language>en</language>
+            <name>x_93700_arena_did_you_know</name>
+            <sequence>4</sequence>
+            <synonyms/>
+            <sys_created_by>Chandana</sys_created_by>
+            <sys_created_on>2021-04-16 14:14:57</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>805a80f12f6b201085bfd0e62799b63d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>Chandana</sys_updated_by>
+            <sys_updated_on>2021-04-16 14:14:57</sys_updated_on>
+            <value>Fifth</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>week</element>
+            <hint/>
+            <inactive>true</inactive>
+            <label>6</label>
+            <language>en</language>
+            <name>x_93700_arena_did_you_know</name>
+            <sequence>5</sequence>
+            <synonyms/>
+            <sys_created_by>movva</sys_created_by>
+            <sys_created_on>2021-04-16 12:15:55</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>541fefe92fa7201085bfd0e62799b6c2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>movva</sys_updated_by>
+            <sys_updated_on>2021-04-16 12:15:55</sys_updated_on>
+            <value>6</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

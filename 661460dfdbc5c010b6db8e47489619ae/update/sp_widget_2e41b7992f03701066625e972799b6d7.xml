@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $timeout, spUtil) {
+	var c = this;
+
+	var modalElement = angular.element('#response_modal');
+	$timeout(function () {
+		var collapsibleInstances = M.Collapsible.init(angular.element('.collapsible'), {
+			accordion: true
+		});
+		$scope.responseModal = M.Modal.init(modalElement, {});
+	}, 0);
+	
+	$scope.responseWidget = {};
+
+	$scope.openAnswers = function(testName, result) {
+		result.transition = true;
+		$scope.responseWidget = {};
+		spUtil.get("arena_test_responses", {
+			result_id: result[0]
+		}).then(function(response) {
+			$scope.responseWidget = response;
+			M.Modal.getInstance(modalElement).open();
+			result.transition = false;
+		});
+	};
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>ul.collapsible {
+  li {
+    .collapsible-header i {
+      font-size: 1.6em;
+      transform: rotate(-90deg);
+    }
+    .collapsible-header span {
+      font-size: 1.1em;
+    }
+    &amp;.active {
+      .collapsible-header i {
+        transform: none;
+      }
+    }
+    .collapsible-body {
+      padding: 0;
+      .row {
+        margin-bottom: 0;
+      }
+      table tbody tr.last {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+
+#response_modal .modal-content {
+  max-height: 80vh;
+  overflow: auto;
+  background: white;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>arena_test_my_responses</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Arena Test My Responses</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	data.currentTestTakerID = options.testTakerProfileId;
+	
+	data.testSchedules = {};
+	data.dataAvailable = false;
+	data.tableHeaders = ['Taken On', 'Score'];
+	
+	if (data.currentTestTakerID) {
+
+		var testScheduleGr = new GlideRecord('x_93700_arena_test_schedule');
+		testScheduleGr.orderBy('name');
+		testScheduleGr.addQuery('show_responses', true);
+		testScheduleGr.query();
+		while(testScheduleGr.next()) {
+			var results = [];
+			var testResultGr = new GlideRecord('x_93700_arena_results');
+			testResultGr.addNotNullQuery('response_json');
+			testResultGr.addQuery('test_schedule', testScheduleGr.sys_id);
+			testResultGr.addQuery('test_taker', data.currentTestTakerID);
+			testResultGr.query();
+			while (testResultGr.next()) {
+				results.push([
+					testResultGr.getValue('sys_id'),
+					testResultGr.getValue('interview_date') || '',
+					testResultGr.getValue('test_score') || 0
+				]);
+			}
+
+			if (results.length > 0) {
+				data.testSchedules[testScheduleGr.name.getDisplayValue()] = {
+					id: testScheduleGr.getValue('sys_id'),
+					results: results
+				};
+				data.dataAvailable = true;
+			}
+		}
+	}
+	
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-10-06 17:27:22</sys_created_on>
+        <sys_id>2e41b7992f03701066625e972799b6d7</sys_id>
+        <sys_mod_count>50</sys_mod_count>
+        <sys_name>Arena Test My Responses</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_2e41b7992f03701066625e972799b6d7</sys_update_name>
+        <sys_updated_by>jaydeepdeb@kpmg.com</sys_updated_by>
+        <sys_updated_on>2021-10-11 12:18:54</sys_updated_on>
+        <template><![CDATA[<div class="col s12 card-panel white" ng-hide="data.dataAvailable"> 
+  <div class="black-text col s12"> 
+    <h6 class="center-align">Data not available</h6> 
+  </div> 
+</div>
+
+<ul class="collapsible" ng-if="data.dataAvailable">
+  <li ng-repeat="(name, testdata) in data.testSchedules">
+    <div class="collapsible-header">
+      <i class="material-icons">arrow_drop_down</i>
+      <span>{{name}}</span>
+    </div>
+    <div class="collapsible-body">
+      <table class="centered">
+        <thead>
+          <tr>
+            <th width="35%" ng-repeat="header in data.tableHeaders">{{header}}</th>
+            <th width="30%">Answers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-class="{'last': $last}" ng-repeat="result in testdata.results">
+            <td ng-hide="$first" ng-repeat="fieldData in result">{{fieldData}}</td>
+            <td>
+              <a class="waves-effect black-text btn blue lighten-5 center-align" ng-click="openAnswers(name, result)">
+                <div ng-show="result.transition">
+                  <div class="preloader-wrapper active" style="margin: 6px auto;height: 22px;width: 22px;">
+                    <div class="spinner-layer spinner-blue-only">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                      <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                      <div class="circle"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <span ng-style="result.transition && {'visibility': 'hidden'}">
+                  Open
+                  <i class="material-icons right">launch</i>
+                </span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </li>
+</ul>
+
+<div id="response_modal" class="modal">
+  <div class="modal-content">
+    <sp-widget widget="responseWidget"></sp-widget>
+  </div>
+  <div class="modal-footer">
+    <a href="javascript:void(0);" class="modal-close waves-effect btn-flat">Close</a>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

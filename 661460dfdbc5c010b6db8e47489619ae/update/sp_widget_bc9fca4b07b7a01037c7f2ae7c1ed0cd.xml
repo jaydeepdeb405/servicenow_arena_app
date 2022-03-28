@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function($scope, $timeout) {
+	/* widget controller */
+	var c = this;
+
+	// controls links visibility
+	$scope.showLinks = true;
+
+	// link cards
+	$scope.links = [
+		{
+			label:'Arena Play', 
+			href:'arena?id=arena_home', 
+			className: 'play'
+		},
+		{
+			label:'Arena Test Mode',
+			href:'arena_test', 
+			className: 'test'
+		},
+		{
+			label:'Shankaran Pillai', 
+			href:'arena?id=sp', 
+			className: 'spillai'
+		},
+		{
+			label:'Did you know', 
+			href:'arena?id=dyk', 
+			className: 'dyk'
+		}
+	];
+
+	// default bg on page load
+	$scope.bgClass = "default";
+
+	$scope.handleMouseEvt = function(className) {
+		// don't transition once link is clicked
+		if ($scope.showLinks) {
+			// add bgclass on mouseenter/remove on mouseleave
+			$scope.bgClass = className ? className + ' blur' : "";
+			// add default bg on mouseleave post debounce duration
+			if (!className) {
+				$timeout(function() {
+					if (!$scope.bgClass) $scope.bgClass = 'default';
+				}, 500);
+			}
+		}
+	};
+
+	// hide all link cards
+	$scope.hideLinks = function() {
+		$scope.showLinks = false;
+	};
+
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.links-wrapper {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  margin-top: 35vh;
+  transition: opacity linear 0.7s;
+  opacity: 1;
+}
+
+.links-wrapper.ng-hide {
+  opacity: 0;
+}
+.ng-hide {
+  opacity: 0;
+  transition: none 0;
+}
+
+.link-card {
+  display: flex;
+  height: 200px;
+  width: 200px;
+  color: #4e9a9c;
+  font-size: 24px;
+  padding: 30px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .5s;
+  background-color: #d8d6d6;
+  border-radius: 10px;
+  box-shadow: 0 10px 15px #6d6b6b;
+}
+
+.link-card:hover {
+  height: 210px;
+  width: 210px;
+}
+
+.bg-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /*background-position: center center;*/
+  z-index: -1;
+}
+
+.fade-animation.ng-enter, .fade-animation.ng-leave {
+  transition: 0.7s linear all;
+}
+.fade-animation.ng-enter {
+  opacity: 0;
+}
+.fade-animation.ng-enter-active {
+  opacity: 1;
+}
+.fade-animation.ng-leave {
+  opacity: 1;
+}
+.fade-animation.ng-leave-active {
+  opacity: 0;
+}
+
+.blur {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: progid: DXImageTransform.Microsoft.Blur(PixelRadius='5');
+}
+
+.default {
+  background-image: url("x_488924_first_n_0.custom_portal_banner.svg");
+}
+
+.spillai {
+  background-image: url("landing_arena_spillai.png");
+}
+
+.play {
+  background-image: url("landing_arena_play.png");
+}
+
+.test {
+  background-image: url("landing_arena_test.png");
+}
+
+.dyk {
+  background-image: url("landing_arena_dyk.png");
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Arena Landing</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-05-03 07:25:50</sys_created_on>
+        <sys_id>bc9fca4b07b7a01037c7f2ae7c1ed0cd</sys_id>
+        <sys_mod_count>108</sys_mod_count>
+        <sys_name>Arena Landing</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_bc9fca4b07b7a01037c7f2ae7c1ed0cd</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-05-04 06:07:39</sys_updated_on>
+        <template><![CDATA[<div ng-show="showLinks == true" class="links-wrapper">
+  <a class="link-card" 
+     ng-repeat="link in links" 
+     ng-mouseover="handleMouseEvt(link.className)" 
+     ng-mouseleave="handleMouseEvt()"
+     ng-href="{{link.href}}"
+     ng-click="hideLinks()">
+    {{link.label}}
+  </a>
+</div>
+
+<div ng-animate-swap="bgClass" class="bg-wrapper fade-animation" ng-class="bgClass"></div>]]></template>
+    </sp_widget>
+</record_update>

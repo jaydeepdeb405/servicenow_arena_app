@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="DELETE">
+        <active>true</active>
+        <application display_value="React SPA">319e86bd07c1901037c7f2ae7c1ed079</application>
+        <assessment/>
+        <device_type/>
+        <filter/>
+        <hint/>
+        <homepage/>
+        <image/>
+        <link_type>DIRECT</link_type>
+        <map_page/>
+        <mobile_title>ArenaTest ➚</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name/>
+        <order>200</order>
+        <override_menu_roles>false</override_menu_roles>
+        <query>x/93700/arenatest</query>
+        <report/>
+        <roles/>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-29 20:56:46</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>b4af760c0735501037c7f2ae7c1ed0a5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ArenaTest ➚</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_app_module_b4af760c0735501037c7f2ae7c1ed0a5</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-29 20:56:46</sys_updated_on>
+        <timeline_page/>
+        <title>ArenaTest ➚</title>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+        <window_name>ArenaTest ➚</window_name>
+    </sys_app_module>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_app_module_b4af760c0735501037c7f2ae7c1ed0a5</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module"><sys_app_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="React SPA">319e86bd07c1901037c7f2ae7c1ed079</application><assessment/><device_type/><filter/><hint/><homepage/><image/><link_type>DIRECT</link_type><map_page/><mobile_title>ArenaTest ➚</mobile_title><mobile_view_name>Mobile</mobile_view_name><name/><order>200</order><override_menu_roles>false</override_menu_roles><query>x/93700/arenatest</query><report/><roles/><sys_class_name>sys_app_module</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-06-29 20:56:46</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>b4af760c0735501037c7f2ae7c1ed0a5</sys_id><sys_mod_count>0</sys_mod_count><sys_name>ArenaTest ➚</sys_name><sys_overrides/><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_app_module_b4af760c0735501037c7f2ae7c1ed0a5</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-06-29 20:56:46</sys_updated_on><timeline_page/><title>ArenaTest ➚</title><uncancelable>false</uncancelable><view_name/><window_name>ArenaTest ➚</window_name></sys_app_module></record_update>]]></payload>
+        <payload_hash>840412596</payload_hash>
+        <record_name>ArenaTest ➚</record_name>
+        <reverted_from/>
+        <source>9d4fad12079d501037c7f2ae7c1ed0a1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-29 20:56:46</sys_created_on>
+        <sys_id>b0af760c0735501037c7f2ae7c1ed0a7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17301de334b0000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-29 20:56:46</sys_updated_on>
+        <type>Module</type>
+        <update_guid>b8af760cd13550108194068c723aeea6</update_guid>
+        <update_guid_history>b8af760cd13550108194068c723aeea6:840412596</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="ArenaTest ➚">6bafb60c0735501037c7f2ae7c1ed059</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-29 20:56:57</sys_created_on>
+        <sys_db_object display_value="" name="sys_app_module">sys_app_module</sys_db_object>
+        <sys_id>4d8427f9214347dd8d22931ab59003f9</sys_id>
+        <sys_metadata>b4af760c0735501037c7f2ae7c1ed0a5</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ArenaTest ➚</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_app_module_b4af760c0735501037c7f2ae7c1ed0a5</sys_update_name>
+        <sys_update_version display_value="sys_app_module_b4af760c0735501037c7f2ae7c1ed0a5">b0af760c0735501037c7f2ae7c1ed0a7</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-29 20:56:57</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

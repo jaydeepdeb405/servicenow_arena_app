@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Questions" max_length="40" name="x_93700_arena_questions" sizeclass="4" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="true" label="Accept answers" max_length="40" name="accept_answers" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Code" max_length="8000" name="code" type="script"/>
+        <element attributes="edge_encryption_enabled=true" label="Correct Answer" max_length="8000" name="correct_answer" type="html"/>
+        <element attributes="edge_encryption_enabled=true" label="Date" mandatory="true" max_length="40" name="date" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Month" max_length="40" name="month" read_only="true" type="integer">
+            <choice>
+                <element inactive_on_update="false" label="January" sequence="0" value="1"/>
+                <element inactive_on_update="false" label="February" sequence="1" value="2"/>
+                <element inactive_on_update="false" label="March" sequence="2" value="3"/>
+                <element inactive_on_update="false" label="April" sequence="3" value="4"/>
+                <element inactive_on_update="false" label="May" sequence="4" value="5"/>
+                <element inactive_on_update="false" label="June" sequence="5" value="6"/>
+                <element inactive_on_update="false" label="July" sequence="6" value="7"/>
+                <element inactive_on_update="false" label="August" sequence="7" value="8"/>
+                <element inactive_on_update="false" label="September" sequence="8" value="9"/>
+                <element inactive_on_update="false" label="October" sequence="9" value="10"/>
+                <element inactive_on_update="false" label="November" sequence="10" value="11"/>
+                <element inactive_on_update="false" label="December" sequence="11" value="12"/>
+            </choice>
+        </element>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" display="true" label="Number" max_length="40" name="number" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Question" max_length="8000" name="question" type="html"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="normal" label="Question Type" max_length="40" name="question_type" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Normal" sequence="100" value="normal"/>
+                <element inactive_on_update="false" label="Code Debug" sequence="200" value="code_debug"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Title" max_length="100" name="title" type="string"/>
+        <element attributes="edge_encryption_enabled=true" default="0" label="Views" max_length="40" name="view_count" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Year" max_length="40" name="year" read_only="true" type="string"/>
+    </element>
+</database>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_widget_dependency">
+    <m2m_sp_widget_dependency action="DELETE">
+        <sp_dependency display_value="Materialize">ae3402f00716541037c7f2ae7c1ed042</sp_dependency>
+        <sp_widget display_value="Akku-Shankaran Pillai Leader Board">debaa2da0760301037c7f2ae7c1ed0e7</sp_widget>
+        <sys_class_name>m2m_sp_widget_dependency</sys_class_name>
+        <sys_created_by>akanksha.kaushal</sys_created_by>
+        <sys_created_on>2021-06-08 12:49:20</sys_created_on>
+        <sys_id>66f2f4760720301037c7f2ae7c1ed08a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Materialize.Akku-Shankaran Pillai Leader Board</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>m2m_sp_widget_dependency_66f2f4760720301037c7f2ae7c1ed08a</sys_update_name>
+        <sys_updated_by>akanksha.kaushal</sys_updated_by>
+        <sys_updated_on>2021-06-08 12:49:20</sys_updated_on>
+    </m2m_sp_widget_dependency>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>m2m_sp_widget_dependency_66f2f4760720301037c7f2ae7c1ed08a</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_widget_dependency"><m2m_sp_widget_dependency action="INSERT_OR_UPDATE"><sp_dependency display_value="Materialize">ae3402f00716541037c7f2ae7c1ed042</sp_dependency><sp_widget display_value="Akku-Shankaran Pillai Leader Board">debaa2da0760301037c7f2ae7c1ed0e7</sp_widget><sys_class_name>m2m_sp_widget_dependency</sys_class_name><sys_created_by>akanksha.kaushal</sys_created_by><sys_created_on>2021-06-08 12:49:20</sys_created_on><sys_id>66f2f4760720301037c7f2ae7c1ed08a</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Materialize.Akku-Shankaran Pillai Leader Board</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>m2m_sp_widget_dependency_66f2f4760720301037c7f2ae7c1ed08a</sys_update_name><sys_updated_by>akanksha.kaushal</sys_updated_by><sys_updated_on>2021-06-08 12:49:20</sys_updated_on></m2m_sp_widget_dependency></record_update>]]></payload>
+        <payload_hash>1252762818</payload_hash>
+        <record_name>Materialize.Akku-Shankaran Pillai Leader Board</record_name>
+        <reverted_from/>
+        <source>03d8aed20760301037c7f2ae7c1ed0f3</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>akanksha.kaushal</sys_created_by>
+        <sys_created_on>2021-06-08 12:49:20</sys_created_on>
+        <sys_id>e2f2f4b60720301037c7f2ae7c1ed0d4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>179ebab93090000001</sys_recorded_at>
+        <sys_updated_by>akanksha.kaushal</sys_updated_by>
+        <sys_updated_on>2021-06-08 12:49:20</sys_updated_on>
+        <type>Widget Dependency</type>
+        <update_guid>aaf2f4b61c203010a5d777a0cbcd43d3</update_guid>
+        <update_guid_history>aaf2f4b61c203010a5d777a0cbcd43d3:1252762818</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Materialize.Akku-Shankaran Pillai Leader Board">30c68ba70720301037c7f2ae7c1ed0d1</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>akanksha.kaushal</sys_created_by>
+        <sys_created_on>2021-06-11 07:30:27</sys_created_on>
+        <sys_db_object display_value="" name="m2m_sp_widget_dependency">m2m_sp_widget_dependency</sys_db_object>
+        <sys_id>62813f9400654ceab2929b816c617c79</sys_id>
+        <sys_metadata>66f2f4760720301037c7f2ae7c1ed08a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Materialize.Akku-Shankaran Pillai Leader Board</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>m2m_sp_widget_dependency_66f2f4760720301037c7f2ae7c1ed08a</sys_update_name>
+        <sys_update_version display_value="m2m_sp_widget_dependency_66f2f4760720301037c7f2ae7c1ed08a">e2f2f4b60720301037c7f2ae7c1ed0d4</sys_update_version>
+        <sys_updated_by>akanksha.kaushal</sys_updated_by>
+        <sys_updated_on>2021-06-11 07:30:27</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

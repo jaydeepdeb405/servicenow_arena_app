@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="DELETE" field="u_location" table="u_catalog_table_single_column" version="3">
+        <sys_choice_set action="DELETE">
+            <element>u_location</element>
+            <name>u_catalog_table_single_column</name>
+            <sys_class_name/>
+            <sys_created_by>kesav</sys_created_by>
+            <sys_created_on/>
+            <sys_id>60080175db174010b6db8e4748961990</sys_id>
+            <sys_mod_count/>
+            <sys_name>u_location</sys_name>
+            <sys_package display_value="">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_choice_u_catalog_table_single_column_u_location</sys_update_name>
+            <sys_updated_by>kesav</sys_updated_by>
+            <sys_updated_on>2020-06-11 18:21:51</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_choice_u_catalog_table_single_column_u_location</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update><sys_choice action="DELETE" field="u_location" table="u_catalog_table_single_column" version="3"><sys_choice_set action="DELETE"><element>u_location</element><name>u_catalog_table_single_column</name><sys_class_name/><sys_created_by>kesav</sys_created_by><sys_created_on/><sys_id>60080175db174010b6db8e4748961990</sys_id><sys_mod_count/><sys_name>u_location</sys_name><sys_package display_value="">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_choice_u_catalog_table_single_column_u_location</sys_update_name><sys_updated_by>kesav</sys_updated_by><sys_updated_on>2020-06-11 18:21:51</sys_updated_on></sys_choice_set></sys_choice></record_update>]]></payload>
+        <payload_hash>-352268052</payload_hash>
+        <record_name>u_catalog_table_single_column.u_location</record_name>
+        <reverted_from/>
+        <source>f7cad55c07f0101037c7f2ae7c1ed0ce</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-11 18:21:51</sys_created_on>
+        <sys_id>849fa192079d501037c7f2ae7c1ed02c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>172a49de64b0000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-11 18:21:51</sys_updated_on>
+        <type>Choice list</type>
+        <update_guid>009fa192989d5010206a0f836568ed2c</update_guid>
+        <update_guid_history>009fa192989d5010206a0f836568ed2c:-352268052,4c9fa1929a9d501006a62b78491f3528:1613225710,722549711d17401080b073208766bc1b:1458882368,722549711d17401080b073208766bc1b:1458882368,32254971271740103c1c17d3dabc4d0a:-1434682915,910622408457001027153dfcdfa13bda:0,17c56600905700104b73335340865fb5:-1680188504,1bc56600f3570010d22d58a1bb62c3b1:-1434682915,294b8ab729c7001073397f411e96d68e:0,2b0bce7746c70010974cdc5ab8144049:-1680188504,6f0bce775dc70010e5b6d7690f332045:-1434682915,a2fa66d95e2d04103be3b5cec74ed44f:1042954795</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-11 18:21:51</sys_created_on>
+        <sys_db_object display_value="" name="sys_choice_set">sys_choice_set</sys_db_object>
+        <sys_id>7eb546ab7073448e8bfeacf28bf74184</sys_id>
+        <sys_metadata>60080175db174010b6db8e4748961990</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>u_location</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete/>
+        <sys_update_name>sys_choice_u_catalog_table_single_column_u_location</sys_update_name>
+        <sys_update_version display_value="sys_choice_u_catalog_table_single_column_u_location">849fa192079d501037c7f2ae7c1ed02c</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-11 18:21:51</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

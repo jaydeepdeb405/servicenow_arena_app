@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_dependency_css_include">
+    <m2m_sp_dependency_css_include action="INSERT_OR_UPDATE">
+        <order>100</order>
+        <sp_css_include display_value="swiper.min.css">f2105622dbfc1410b6db8e4748961980</sp_css_include>
+        <sp_dependency display_value="">26ef8222dbfc1410b6db8e4748961952</sp_dependency>
+        <sys_class_name>m2m_sp_dependency_css_include</sys_class_name>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-18 18:51:30</sys_created_on>
+        <sys_id>10309222dbfc1410b6db8e47489619e8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>swiper.min.css.swiper</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>m2m_sp_dependency_css_include_10309222dbfc1410b6db8e47489619e8</sys_update_name>
+        <sys_updated_by>jaydeep</sys_updated_by>
+        <sys_updated_on>2020-05-18 18:51:30</sys_updated_on>
+    </m2m_sp_dependency_css_include>
+</record_update>

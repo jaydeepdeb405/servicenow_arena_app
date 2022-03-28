@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_grid_canvas_pane">
+    <sys_grid_canvas_pane action="INSERT_OR_UPDATE">
+        <grid_canvas display_value="PA Arena Questions Over - New Tab">434859e5db745010b6db8e47489619ee</grid_canvas>
+        <height>10</height>
+        <portal_widget display_value="Created 2020-05-15 17:46:09">73e851e5db745010b6db8e474896198c</portal_widget>
+        <posx>0</posx>
+        <posy>0</posy>
+        <sys_class_name>sys_grid_canvas_pane</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-05-15 12:16:09</sys_created_on>
+        <sys_id>37e85129db745010b6db8e47489619fb</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>434859e5db745010b6db8e47489619ee</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_grid_canvas_pane_37e85129db745010b6db8e47489619fb</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-05-15 12:53:31</sys_updated_on>
+        <width>12</width>
+    </sys_grid_canvas_pane>
+</record_update>

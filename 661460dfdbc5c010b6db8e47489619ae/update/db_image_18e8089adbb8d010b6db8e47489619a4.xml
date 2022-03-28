@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>Service Portal</category>
+        <format/>
+        <height/>
+        <image>8af8089adbb8d010b6db8e47489619b3</image>
+        <name>arena-level-lock-icon.svg</name>
+        <size_bytes>2517</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-17 14:22:04</sys_created_on>
+        <sys_id>18e8089adbb8d010b6db8e47489619a4</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>arena-level-lock-icon.svg</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>db_image_18e8089adbb8d010b6db8e47489619a4</sys_update_name>
+        <sys_updated_by>jaydeep</sys_updated_by>
+        <sys_updated_on>2020-05-23 12:57:55</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <encryption_context/>
+        <file_name>image</file_name>
+        <hash>7a8a2ac63d163aad6f8d4d52d0d0401c4fb73f19f7db9255be087aa4aae506dd</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>2517</size_bytes>
+        <size_compressed>1005</size_compressed>
+        <state>available</state>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-17 14:22:13</sys_created_on>
+        <sys_id>8af8089adbb8d010b6db8e47489619b3</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-05-17 14:22:14</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>18e8089adbb8d010b6db8e47489619a4</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="8af8089adbb8d010b6db8e47489619b3">8af8089adbb8d010b6db8e47489619b3</sys_attachment>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-17 14:22:13</sys_created_on>
+        <sys_id>caf8089adbb8d010b6db8e47489619b3</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>fVbtbls3DH0Vwfsvi6IoSkMcoPVf7yEGtIsDZGuwGnXQp985utcfGpImSHlJUeThEUX14fuPp/DX88vLbvNbGj+b8Pb3yz/fd5vj6fT6+3Z7Pp/jWeO3f5+2GctbbNiEH89fz5+/ve02KaQgafxtwvn5y+m42+D79W0Tjl+fn46ni/r48Prn6Ri+7DZ/hNJj1eK1BtGYknTTsA/qsVbPmUbprVgJuYWcY2+qWamohQNlyZROuQ9ZY4WLG9UsoZSLTqXRU0Lt9JTgHlsusOYWxc1yaIbM/PcQqlLug8vqBM37bQ++EedACW0/5DWZ16hJah4wXBeMnq9SLVrSnio3ZqK23gypa46eexHWXbRJ92AptpS8DVsSBS3YBWsRsKVBQErvWIYp5dTEFpNVKe+y+zMsrFfvqEDsxjojgG3wKwURaq6FNvWi9KStpyWTayrrbhEXMlolImcrNGqHrQRPIYMUtUxS0l3dB6qDjmpXqSQcMtdYmjdrwUC3JychQCxZeyd2hNMuIROvm5P/ImiUCtC0Ir1aZ7zsUUshFmV8rBRTQTpd02q6ypFeB+RkWtBT2qLXVFplTeJNxd+lbqUULAmgok2TGE8flNbIg+3oN2zLLRV2FlBVbEViKLq22wLDr/KGlveBTaq1NeQtOWoDA8ZMijYp5d3sRMWLUci2UqLbLOacxgXB8WDRoqMYeFPhBYE0GecRjV+fQsKhpWQ3GQR/y/o4OY99IF1VgMpNELImqAa/0hpu6lDRJVIJ8Oo8onyYJS8oDmyFX+JZ1hnT+oTHyoSn+ITHdMID51/iWdaJB7fkIscAoLySiRZav0DzcgbjNFZIeWaM5h4TL3Rd1bz49wkcOuJ+m6apME6Ru8KmvQyGmXofrOgcrE3BVKZg097R7TbTJlOwUudgfQo27WWwOpfpc5k+l1nnMuv/y2T/ZjR5s0Em1OHnc0GT13o0VVb/i+RUg8Q0xwREeCBZPpqO90GXi9o4O0F3tsp3Qhnruodx+3KoiMtMxrvDiQXGS+Mw5AhEunrRqYyZRhm9S+JYwCQzMTxDKLk45iNNzYxz2NPl0g/y1288Vuoj4nvtzF/4wq0t92B8feSJdbzD43G7Rj2QQyljRt0Q7GkFE0XuoOIwb6UMhX56VzRaqJokTGrQsXB0YYvPJJYFq2RrHDU2NuyDO5URjRKPRAdNdPcs3m1pkFoxVWHLTTH9aDMdXx+Wy3RjnrIwPll5KbdZX0hYRomUtA7PAw+0tQSHuz0fEg8yBM+I32EZLZG95XSPGi11K2sow/GOgJF3fJGawdfPzfbxgf89e/wPz/EHWNUJAAA=</data>
+        <length>1328</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="8af8089adbb8d010b6db8e47489619b3">8af8089adbb8d010b6db8e47489619b3</sys_attachment>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-17 14:22:13</sys_created_on>
+        <sys_id>4ef8089adbb8d010b6db8e47489619b3</sys_id>
+    </sys_attachment_doc>
+</record_update>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="DELETE">
+        <id>login_form</id>
+        <sp_widget display_value="Arena Test Login">1ed15217079e541037c7f2ae7c1ed0ad</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-09-18 06:32:13</sys_created_on>
+        <sys_id>ebbe2067072e341037c7f2ae7c1ed011</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>login_form</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_ng_template_ebbe2067072e341037c7f2ae7c1ed011</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-09-18 06:40:25</sys_updated_on>
+        <template><![CDATA[<div ng-style="transition === true && {'filter': 'blur(5px)'}">
+  <div class="card z-depth-3 login-form">
+    <div class="card-content">
+      <form ng-submit="login(username, password, remember_me)">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="username" type="text" ng-model="username" class="validate" required>
+            <label for="username">Username</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password" type="password" ng-model="password" class="validate" required>
+            <label for="password">Password</label>
+          </div>
+        </div>
+        <div class="switch">
+          <button type="submit" class="waves-effect waves-light btn white-text">LOGIN</button>    
+          <button type="button" class="waves-effect waves-light btn white-text" ng-click="goToRegistration()">REGISTER</button>    
+          <label class="switch-label">
+            Remember me
+            <input type="checkbox" ng-model="remember_me">
+            <span class="lever"></span>
+          </label>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_ng_template>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sp_ng_template_ebbe2067072e341037c7f2ae7c1ed011</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_ng_template"&gt;&lt;sp_ng_template action="INSERT_OR_UPDATE"&gt;&lt;id&gt;login_form&lt;/id&gt;&lt;sp_widget display_value="Arena Test Login"&gt;1ed15217079e541037c7f2ae7c1ed0ad&lt;/sp_widget&gt;&lt;sys_class_name&gt;sp_ng_template&lt;/sys_class_name&gt;&lt;sys_created_by&gt;jaydeepdeb&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-09-18 06:32:13&lt;/sys_created_on&gt;&lt;sys_id&gt;ebbe2067072e341037c7f2ae7c1ed011&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;login_form&lt;/sys_name&gt;&lt;sys_package display_value="Arena" source="x_93700_arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_ng_template_ebbe2067072e341037c7f2ae7c1ed011&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;jaydeepdeb&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-09-18 06:40:25&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div ng-style="transition === true &amp;&amp; {'filter': 'blur(5px)'}"&gt;
+  &lt;div class="card z-depth-3 login-form"&gt;
+    &lt;div class="card-content"&gt;
+      &lt;form ng-submit="login(username, password, remember_me)"&gt;
+        &lt;div class="row"&gt;
+          &lt;div class="input-field col s12"&gt;
+            &lt;input id="username" type="text" ng-model="username" class="validate" required&gt;
+            &lt;label for="username"&gt;Username&lt;/label&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="row"&gt;
+          &lt;div class="input-field col s12"&gt;
+            &lt;input id="password" type="password" ng-model="password" class="validate" required&gt;
+            &lt;label for="password"&gt;Password&lt;/label&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="switch"&gt;
+          &lt;button type="submit" class="waves-effect waves-light btn white-text"&gt;LOGIN&lt;/button&gt;    
+          &lt;button type="button" class="waves-effect waves-light btn white-text" ng-click="goToRegistration()"&gt;REGISTER&lt;/button&gt;    
+          &lt;label class="switch-label"&gt;
+            Remember me
+            &lt;input type="checkbox" ng-model="remember_me"&gt;
+            &lt;span class="lever"&gt;&lt;/span&gt;
+          &lt;/label&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_ng_template&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1227342401</payload_hash>
+        <record_name>login_form</record_name>
+        <reverted_from/>
+        <source>9d4fad12079d501037c7f2ae7c1ed0a1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-09-18 06:40:25</sys_created_on>
+        <sys_id>45b07c6b072e341037c7f2ae7c1ed084</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>17bf7a27a530000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-09-24 10:08:47</sys_updated_on>
+        <type>Angular ng-template</type>
+        <update_guid>0db07c6b602e34103a21902158984583</update_guid>
+        <update_guid_history>0db07c6b602e34103a21902158984583:-1227342401,85de2863132e3410b4374a8481d0e5dc:469040658</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="login_form">1cedbc6707ae341037c7f2ae7c1ed010</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-09-18 07:37:59</sys_created_on>
+        <sys_db_object display_value="" name="sp_ng_template">sp_ng_template</sys_db_object>
+        <sys_id>26433ff5455a473c8709836dde0cec24</sys_id>
+        <sys_metadata>ebbe2067072e341037c7f2ae7c1ed011</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>login_form</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sp_ng_template_ebbe2067072e341037c7f2ae7c1ed011</sys_update_name>
+        <sys_update_version display_value="sp_ng_template_ebbe2067072e341037c7f2ae7c1ed011">45b07c6b072e341037c7f2ae7c1ed084</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-09-18 07:37:59</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

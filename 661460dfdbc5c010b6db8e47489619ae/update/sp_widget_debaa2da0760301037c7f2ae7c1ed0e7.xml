@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function($scope,$window) {
+  /* widget controller */
+  var c = this;
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>table {
+  font-family: arial, sans-serif;
+  width: 100%;
+}
+
+
+td, th {
+  text-align: center;
+  padding: 8px;
+}
+
+.tree-card-title {
+  display:flex;
+  flex-flow:row;
+  align-items:center;
+  justify-content:space-between;
+  font-family:sans-serif;
+  font-size: 16px;
+  text-align: right;
+  height:40px;
+  padding: 0px 15px;
+  color: #fff;
+  background: $shankaran-pillai-primary;
+}
+
+.usercard{
+  display:flex;
+  flex-flow:row;
+  align-items:center;
+  justify-content:space-between;
+  padding: 7px 15px;
+  font-size: 14px;
+  font-family: sans-serif;
+  margin: 9px 0px;
+  box-shadow:0 0px 2px 0 rgba(0,0,0,0.14), 0 2px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+}
+
+.card-wrapper{
+  padding: 0px 10px;
+  height:37vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}
+
+/* width */
+::-webkit-scrollbar {
+  width  : 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius   : 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>spillai_leaderboard</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Shankaran Pillai Leader Board</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
+    data.board = [];
+    var ag = new GlideAggregate('x_93700_arena_answer');
+    ag.addQuery('correct', true);
+    ag.addAggregate('COUNT', 'user');
+    ag.query();
+    while (ag.next()) {
+        var fullName = ag.user.getDisplayValue();
+        var userName = fullName.length > 16 ? fullName.substr(0, 16) + "..." : fullName;
+        var corrects = ag.getAggregate('COUNT', 'user');
+        data.board.push({
+            'userAvatar': {
+                'userID': ag.user.toString(),
+                'name': userName,
+                'initials': getInitials(userName),
+                'userImage': ag.user.photo.getDisplayValue()
+            },
+            'userName': userName,
+            'userFullName': fullName,
+            'corrects': corrects,
+            'correctLabel': corrects > 1 ? corrects + ' saves' : corrects + ' save'
+        });
+    }
+    data.board = data.board.sort(function(a, b) {
+        return b.corrects - a.corrects;
+    });
+
+    function getInitials(name) {
+        var first = (name.split(' ')[0] || '').charAt(0).toUpperCase();
+        var last = (name.split(' ')[1] || '').charAt(0).toUpperCase();
+        return first + last;
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>akanksha.kaushal</sys_created_by>
+        <sys_created_on>2021-06-07 08:37:51</sys_created_on>
+        <sys_id>debaa2da0760301037c7f2ae7c1ed0e7</sys_id>
+        <sys_mod_count>106</sys_mod_count>
+        <sys_name>Shankaran Pillai Leader Board</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_debaa2da0760301037c7f2ae7c1ed0e7</sys_update_name>
+        <sys_updated_by>akanksha.kaushal</sys_updated_by>
+        <sys_updated_on>2021-06-09 14:48:40</sys_updated_on>
+        <template><![CDATA[<div class="card">
+  <div class="tree-card-title">
+    <span class="fa fa-trophy" style="font-size:25px">
+    </span>
+   <span>LEADERBOARD</span> 
+  </div>
+  <div class="card-wrapper">
+    <div class="usercard" ng-repeat="record in data.board">
+      <span><sn-avatar class="avatar-small" primary="record.userAvatar"/></span>
+        <span title="{{record.userFullName}}">{{record.userName}}</span>
+        <span>{{record.correctLabel}}</span>
+    </div>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>Hiring mode - Password of master user record for external candidates</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_93700_arena.test_taker.master_password</name>
+        <read_roles>x_93700_arena.test_admin</read_roles>
+        <suffix>test_taker.master_password</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>anirudh</sys_created_by>
+        <sys_created_on>2020-08-04 09:05:48</sys_created_on>
+        <sys_id>42f5bd232f92941093fd5d8b2799b6c0</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>x_93700_arena.test_taker.master_password</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_properties_42f5bd232f92941093fd5d8b2799b6c0</sys_update_name>
+        <sys_updated_by>jaydeepdeb@kpmg.com</sys_updated_by>
+        <sys_updated_on>2021-10-06 10:19:52</sys_updated_on>
+        <type>password2</type>
+        <value>{{gpaes}}DD42vb964Hb3t1LcKEbfQg==</value>
+        <write_roles>x_93700_arena.test_admin</write_roles>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=42f5bd232f92941093fd5d8b2799b6c0"/>
+</record_update>

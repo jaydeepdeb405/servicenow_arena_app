@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function startExport() {
+
+    var gm = new GlideModal("hierarchical_progress_viewer", false, "40em", "10.5em");
+	gm.setTitle('Exporting...');
+	gm.setPreference("sysparm_ajax_processor", 'x_93700_arena.ExportUtilAJAX');
+    gm.setPreference("sysparm_ajax_processor_export_table", g_list.getTableName());
+    gm.setPreference("sysparm_ajax_processor_export_filter", g_list.getQuery());
+	gm.setPreference("sysparm_ajax_processor_export_fields", g_list.fields);
+	gm.setPreference("sysparm_ajax_processor_export_title", g_list.title);
+	gm.setPreference("sysparm_ajax_processor_export_rows", g_list.totalRows);
+	
+    gm.on("executionStarted", function(response) {
+		var trackerId = response.responseXML.documentElement.getAttribute("answer");
+		console.log('started')
+		console.log(trackerId)
+		
+		var cancelBtn = new Element("button", {
+			'id': 'sysparm_button_cancel',
+			'type': 'button',
+			'class': 'btn btn-default',
+			'style': 'margin-left: 5px; float:right;'
+		}).update("Cancel");
+		
+		cancelBtn.onclick = function() {
+			console.log('trying to cancel')
+		};
+        // (5) Event listeners are attached to the buttons
+//         var newIncidentsBtn = $("sysparm_button_new_incidents");
+//         if (newIncidentsBtn) {
+//             newIncidentsBtn.on('click', function() {
+//                 location.href = trackerObj.result.url_new_incidents;
+//             });
+//         }
+//         var closeBtn = $("sysparm_button_close");
+//         if (closeBtn) {
+//             closeBtn.on('click', function() {
+//                 gm.destroy();
+//             });
+//         }
+
+    });
+	
+	gm.on("executionComplete", function(trackerObj) {
+		console.log(trackerObj);
+		console.log(trackerObj.result.url);
+// 		var downloadBtn = new Element("button", {
+// 			'id': 'sysparm_button_download',
+// 			'type': 'button',
+// 			'class': 'btn btn-primary',
+// 			'style': 'margin-left: 5px; float:right;'
+// 		}).update("Download");
+	});
+
+    gm.render();
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_93700_arena_export_csv.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<button class="btn btn-primary btn-block" onclick="startExport()">Start</button>
+</j:jelly>]]></html>
+        <name>export_csv</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-24 14:14:43</sys_created_on>
+        <sys_id>38e5618c07abd01037c7f2ae7c1ed0f5</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>export_csv</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ui_page_38e5618c07abd01037c7f2ae7c1ed0f5</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-24 16:37:07</sys_updated_on>
+    </sys_ui_page>
+</record_update>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_widget_dependency">
+    <m2m_sp_widget_dependency action="INSERT_OR_UPDATE">
+        <sp_dependency display_value="test">959e2840dbdd9810b6db8e474896197e</sp_dependency>
+        <sp_widget display_value="drag and drop ">f3b9a08cdb9d9810b6db8e47489619ca</sp_widget>
+        <sys_class_name>m2m_sp_widget_dependency</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-06-04 13:51:57</sys_created_on>
+        <sys_id>deaee080dbdd9810b6db8e4748961997</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>test.drag and drop </sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>m2m_sp_widget_dependency_deaee080dbdd9810b6db8e4748961997</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-06-04 13:51:57</sys_updated_on>
+    </m2m_sp_widget_dependency>
+</record_update>

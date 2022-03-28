@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css_include">
+    <sp_css_include action="INSERT_OR_UPDATE">
+        <name>swiper.min.css</name>
+        <source>local</source>
+        <sp_css display_value="Swiper CSS">a3c8c8962f31545093fd5d8b2799b69f</sp_css>
+        <sys_class_name>sp_css_include</sys_class_name>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-18 18:51:30</sys_created_on>
+        <sys_id>f2105622dbfc1410b6db8e4748961980</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>swiper.min.css</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_css_include_f2105622dbfc1410b6db8e4748961980</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-07-06 07:35:10</sys_updated_on>
+        <url>https://unpkg.com/swiper/css/swiper.min.css</url>
+    </sp_css_include>
+</record_update>

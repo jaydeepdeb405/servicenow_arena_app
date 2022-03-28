@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="INSERT_OR_UPDATE">
+        <before>false</before>
+        <description/>
+        <name>Beat the computer</name>
+        <record_for_rollback>false</record_for_rollback>
+        <script><![CDATA[//Pick a table
+//Get custom fields
+//Pick a CRUD action
+//Select Single or multiple(only Read, Update, Delete)
+//If single, use get()/setLimit(1)
+//If multiple, addQuery() or addEncodedQuery
+
+var tables = ['incident', 'sc_task'];
+var fieldTypes = ['reference', 'choice'];
+var referenceTables = ['sys_user', 'cmn_location', 'sys_user_group'];
+
+var selectedTable = randomPicker(tables);
+var selectedFieldType = randomPicker(fieldTypes);
+
+
+var queryParameters = queryGenerator(selectedTable, selectedFieldType, referenceTables);
+var selectedColumnName = queryParameters.columnName;
+
+
+gs.info(selectedTable + '   ' + selectedFieldType + '    ' + queryParameters.columnLabel + '  ' + queryParameters.columnName);
+
+
+
+
+
+
+
+
+var scriptLine1 = 'var gr = new GlideRecord' + '("' + selectedTable + '");';
+
+//gs.info(selectedTable + '   ' + selectedFieldType + '    ' + queryParameters.columnLabel + '  ' + queryParameters.columnName);
+function randomPicker(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+
+function queryGenerator(table, fieldType, referenceTables) {
+	var queryParameters = {};
+    var dictionary = new GlideRecord("sys_dictionary");
+    dictionary.addEncodedQuery("name=" + table + "^ORnameIN" + table + ",task");
+    dictionary.addQuery('internal_type', '=', fieldType);
+    
+	if (fieldType == 'reference')
+	{
+		var selectedRefTable = randomPicker(referenceTables);
+        dictionary.addEncodedQuery("reference=" + selectedRefTable);
+	}
+    
+    dictionary.query();
+    if (dictionary.next()) {
+        queryParameters.columnLabel = dictionary.column_label;
+		queryParameters.columnName = dictionary.element;
+		return queryParameters;
+		
+    }
+
+// 	var fieldVal = new GlideRecord();
+// 	fieldVal.addQuery("name", "value");
+// 	fieldVal.query();
+// 	if (fieldVal.next()) {
+
+// 	}
+	
+}]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-12-01 08:54:20</sys_created_on>
+        <sys_id>9292b9c8db610c10b6db8e474896192d</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>Beat the computer</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_script_fix_9292b9c8db610c10b6db8e474896192d</sys_update_name>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2019-12-01 14:17:00</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+</record_update>

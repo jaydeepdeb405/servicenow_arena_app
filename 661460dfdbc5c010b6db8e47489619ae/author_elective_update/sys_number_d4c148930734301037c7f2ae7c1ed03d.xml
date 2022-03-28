@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_number">
+    <sys_number action="DELETE">
+        <category display_value="" name="x_93700_arena_did_you_know_comments">x_93700_arena_did_you_know_comments</category>
+        <maximum_digits>7</maximum_digits>
+        <number>1000</number>
+        <prefix>COMM</prefix>
+        <sys_class_name>sys_number</sys_class_name>
+        <sys_created_by>akanksha.kaushal</sys_created_by>
+        <sys_created_on>2021-06-22 08:47:38</sys_created_on>
+        <sys_id>d4c148930734301037c7f2ae7c1ed03d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>COMM</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_number_d4c148930734301037c7f2ae7c1ed03d</sys_update_name>
+        <sys_updated_by>akanksha.kaushal</sys_updated_by>
+        <sys_updated_on>2021-06-22 08:47:38</sys_updated_on>
+    </sys_number>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_number_d4c148930734301037c7f2ae7c1ed03d</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_number"><sys_number action="INSERT_OR_UPDATE"><category display_value="" name="x_93700_arena_did_you_know_comments">x_93700_arena_did_you_know_comments</category><maximum_digits>7</maximum_digits><number>1000</number><prefix>COMM</prefix><sys_class_name>sys_number</sys_class_name><sys_created_by>akanksha.kaushal</sys_created_by><sys_created_on>2021-06-22 08:47:38</sys_created_on><sys_id>d4c148930734301037c7f2ae7c1ed03d</sys_id><sys_mod_count>0</sys_mod_count><sys_name>COMM</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_number_d4c148930734301037c7f2ae7c1ed03d</sys_update_name><sys_updated_by>akanksha.kaushal</sys_updated_by><sys_updated_on>2021-06-22 08:47:38</sys_updated_on></sys_number></record_update>]]></payload>
+        <payload_hash>-1393278021</payload_hash>
+        <record_name>COMM</record_name>
+        <reverted_from/>
+        <source>964774150730301037c7f2ae7c1ed0b2</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>akanksha.kaushal</sys_created_by>
+        <sys_created_on>2021-06-22 08:47:39</sys_created_on>
+        <sys_id>8fe1cc930734301037c7f2ae7c1ed04b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17a32e7559f0000001</sys_recorded_at>
+        <sys_updated_by>akanksha.kaushal</sys_updated_by>
+        <sys_updated_on>2021-06-22 08:47:39</sys_updated_on>
+        <type>Number</type>
+        <update_guid>87e1cc93f2343010e8119b4b425add4b</update_guid>
+        <update_guid_history>87e1cc93f2343010e8119b4b425add4b:-1393278021</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>akanksha.kaushal</sys_created_by>
+        <sys_created_on>2021-09-26 13:24:23</sys_created_on>
+        <sys_db_object display_value="" name="sys_number">sys_number</sys_db_object>
+        <sys_id>0104e305e2934c8c8001cab3a1dac3a4</sys_id>
+        <sys_metadata>d4c148930734301037c7f2ae7c1ed03d</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>COMM</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent display_value="">eaaefbcb07f0301037c7f2ae7c1ed056</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_number_d4c148930734301037c7f2ae7c1ed03d</sys_update_name>
+        <sys_update_version display_value="sys_number_d4c148930734301037c7f2ae7c1ed03d">8fe1cc930734301037c7f2ae7c1ed04b</sys_update_version>
+        <sys_updated_by>akanksha.kaushal</sys_updated_by>
+        <sys_updated_on>2021-09-26 13:24:23</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope,$http) {
+  /* widget controller */
+  var c = this;
+//		c.getint = function(val)
+		//{
+		//	alert('in');
+		//	$http.get('/api/now/live/profiles/sys_user.' + val).then(function (response) {
+	//	alert(JSON.stringify(response.data.result.initials));
+			
+				//c.data.response.data.result.initials
+	//	});
+
+
+	var liveProfiles = {};
+	
+	$scope.getLiveProfileByUserId = function (userSysId){
+		
+		return liveProfiles[userSysId] ;
+	};
+	
+	var pending = {};
+
+	
+	//Little caching implementation to make sure we only get a given user's profile once.
+	$scope.hasLiveProfile = function hasLiveProfile(userSysId){
+		if (liveProfiles[userSysId])
+			return true;
+		else if (pending[userSysId])
+			return false;
+		else {
+			
+			pending[userSysId] = $http.get('/api/now/live/profiles/sys_user.' + userSysId).then(function (response) {
+				//alert(JSON.stringify(response.data.result));
+				liveProfiles[userSysId] = {
+					userID: userSysId,
+					name: response.data.result.name,
+					initials: buildInitials(response.data.result.name),
+				//	initials:response.data.result.initials,
+					avatar: response.data.result.avatar
+				};
+			});
+			return false;
+		}
+	};
+	
+	function buildInitials(name) {
+				if (!name)
+					return "--";
+alert (name);
+				var initials = name.split(" ").map(function(word) {
+					return word.toUpperCase();
+				}).filter(function(word) {
+					return word.match(/^[A-Z]/);
+				}).map(function(word) {
+					return word.substring(0,1);
+				}).join("");
+
+				return (initials.length > 3) ? initials.substr(0, 3) : initials;
+			}
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.row.heading h2 {
+    color: #fff;
+    font-size: 52.52px;
+    line-height: 95px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 40px;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+}
+ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.heading.heading-icon {
+    display: block;
+}
+.padding-lg {
+	display: block;
+	padding-top: 60px;
+	padding-bottom: 60px;
+}
+.practice-area.padding-lg {
+    padding-bottom: 55px;
+    padding-top: 55px;
+}
+.practice-area .inner{ 
+     border:1px solid #999999; 
+	 text-align:center; 
+	 margin-bottom:28px; 
+	 padding:40px 25px;
+}
+.our-webcoderskull .cnt-block:hover {
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+    border: 0;
+}
+.practice-area .inner h3{ 
+    color:#3c3c3c; 
+	font-size:24px; 
+	font-weight:500;
+	font-family: 'Poppins', sans-serif;
+	padding: 10px 0;
+}
+.practice-area .inner p{ 
+    font-size:14px; 
+	line-height:22px; 
+	font-weight:400;
+}
+.practice-area .inner img{
+	display:inline-block;
+}
+
+
+.our-webcoderskull{
+  background: url("http://www.webcoderskull.com/img/right-sider-banner.png") no-repeat center top / cover;
+  
+}
+.our-webcoderskull .cnt-block{ 
+   float:left; 
+   width:100%; 
+   background:#fff; 
+   padding:30px 20px; 
+   text-align:center; 
+   border:2px solid #d5d5d5;
+   margin: 0 0 28px;
+}
+.our-webcoderskull .cnt-block figure{
+   width:148px; 
+   height:148px; 
+   border-radius:100%; 
+   display:inline-block;
+   margin-bottom: 15px;
+}
+.our-webcoderskull .cnt-block img{ 
+   width:148px; 
+   height:148px; 
+   border-radius:100%; 
+}
+.our-webcoderskull .cnt-block h3{ 
+   color:#2a2a2a; 
+   font-size:20px; 
+   font-weight:500; 
+   padding:6px 0;
+   text-transform:uppercase;
+}
+.our-webcoderskull .cnt-block h3 a{
+  text-decoration:none;
+	color:#2a2a2a;
+}
+.our-webcoderskull .cnt-block h3 a:hover{
+	color:#337ab7;
+}
+.our-webcoderskull .cnt-block p{ 
+   color:#2a2a2a; 
+   font-size:13px; 
+   line-height:20px; 
+   font-weight:400;
+}
+.our-webcoderskull .cnt-block .follow-us{
+	margin:20px 0 0;
+}
+.our-webcoderskull .cnt-block .follow-us li{ 
+    display:inline-block; 
+	width:auto; 
+	margin:0 5px;
+}
+.our-webcoderskull .cnt-block .follow-us li .fa{ 
+   font-size:24px; 
+   color:#767676;
+}
+.our-webcoderskull .cnt-block .follow-us li .fa:hover{ 
+   color:#025a8e;
+}
+
+#home_quicklinks {
+    padding: 20px 0;
+    text-align: center;
+}
+a.quicklink.link1 {
+    background: #fc6719;
+}
+a.quicklink {
+    display: inline-block;
+    width: 302px;
+    height: 173px;
+    position: relative;
+    margin: 90px 30px;
+}
+a.quicklink .ql_caption {
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.outer {
+    display: table;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    border-spacing: 0px;
+    padding: 0px;
+}
+.inner {
+    display: table-cell;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    border-spacing: 0px;
+    padding: 0px;
+}
+a.quicklink .ql_caption h2 {
+    margin: 0px;
+    padding: 0px;
+    text-transform: uppercase;
+    line-height: 1.46em;
+    color: #fff;
+}
+a.quicklink.link1 .ql_top {
+    border-bottom-color: #fc6719;
+}
+a.quicklink.link1 .ql_bottom {
+    border-top-color: #fc6719;
+}
+
+
+.ql_top {
+    bottom: 173px;
+    border-bottom: 89px solid #ccc;
+}
+.ql_bottom {
+    top: 173px;
+    border-top: 89px solid #ccc;
+}
+.ql_top, .ql_bottom {
+    position: absolute;
+    left: 0px;
+    width: 0px;
+    border-left: 151px solid transparent;
+    border-right: 151px solid transparent;
+}
+
+
+a.quicklink {
+    font-size: 36px;
+    font-weight: 500;
+    text-decoration:none;
+}
+.hexagon {
+  position: relative;
+  width: 300px; 
+  height: 173.21px;
+  margin: 86.60px 0;
+  background-image: url(http://csshexagon.com/img/meow.jpg);
+  background-size: auto 334.8632px;
+  background-position: center;
+  box-shadow: 0 0 20px rgba(0,128,192,0.6);
+  border-left: solid 5px #4a401c;
+  border-right: solid 5px #4a401c;
+}
+
+.hexTop,
+.hexBottom {
+  position: absolute;
+  z-index: 1;
+  width: 212.13px;
+  height: 212.13px;
+  overflow: hidden;
+  -webkit-transform: scaleY(0.5774) rotate(-45deg);
+  -ms-transform: scaleY(0.5774) rotate(-45deg);
+  transform: scaleY(0.5774) rotate(-45deg);
+  background: inherit;
+  left: 38.93px;
+  box-shadow: 0 0 20px rgba(0,128,192,0.6);
+}
+
+
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>ArenaChallenge</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  var callange= [];
+	var chgid ='';
+	var challangelist = new GlideRecord('x_93700_arena_results');
+	challangelist.addQuery('arena_user',getplayer());
+	challangelist.addNotNullQuery('challenged_by');
+	challangelist.query()
+	data.count = challangelist.getRowCount();
+	while (challangelist.next())
+		{
+			//gs.addInfoMessage(challangelist.challenged_by.user);
+			chgid = challangelist.challenged_by.user;
+			gs.addInfoMessage(chgid);
+			var details = {};
+			details.level = challangelist.getDisplayValue('level');
+			details.by = challangelist.getDisplayValue('challenged_by');
+			details.chgsid =challangelist.challenged_by.user.toString();
+			details.url = '/arena'; //lets take it to home page for now
+			details.difficulty  = challangelist.getDisplayValue('difficulty');
+			
+			//gs.addInfoMessage(JSON.stringify(details));
+		  callange.push(details);
+			
+		}
+
+//TODO need to figure out passing the avatar
+	  data.urls = ['http://www.webcoderskull.com/img/team4.png','http://www.webcoderskull.com/img/team2.png'];
+		data.challangedetails = callange;
+	
+	gs.addInfoMessage(JSON.stringify(callange));
+	
+	
+	function getplayer()
+	{
+		var gr = new GlideRecord('x_93700_arena_user');
+		gr.addQuery('user',gs.getUserID());
+		gr.query();
+		if(gr.next())
+			return gr.sys_id;
+		
+	}
+	
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>praveen</sys_created_by>
+        <sys_created_on>2020-04-22 13:52:25</sys_created_on>
+        <sys_id>46f15b0edb501810b6db8e4748961907</sys_id>
+        <sys_mod_count>133</sys_mod_count>
+        <sys_name>ArenaChallenge</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_46f15b0edb501810b6db8e4748961907</sys_update_name>
+        <sys_updated_by>praveen</sys_updated_by>
+        <sys_updated_on>2020-04-24 08:28:03</sys_updated_on>
+        <template><![CDATA[<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Included the above in HEAD tag ---------->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div >
+ <div ng-hide="toggle">
+  <div id="home_quicklinks"  >
+    <a class="quicklink link1" >
+      <span class="ql_caption">
+        <span class="outer">
+        <span class="inner">
+      <h2  href="javascript:void(0)" ng-click="toggle=!toggle">Challenge </h2>
+      </span>
+       </span>
+         </span>                                                            
+         <span class="ql_top"></span>
+            <span class="ql_bottom"></span>
+            </a>                        
+    </div>
+    </div>
+     </div>    
+                                                           
+    
+
+
+
+         
+<div ng-show="toggle">
+  <section class="our-webcoderskull padding-lg">
+  <div class="container">
+    <div class="row heading heading-icon">
+        <h2>You have been challenged by</h2>
+    </div>
+    <ul class="row">
+      <li class="col-12 col-md-6 col-lg-3"  ng-repeat='info in data.challangedetails'>
+          <div class="cnt-block equal-hight" style="height: 349px;">
+             
+             <figure>
+        <sn-avatar ng-if="hasLiveProfile(info.chgsid)"
+                   primary="getLiveProfileByUserId(info.chgsid)" 
+                   class="avatar-extra-large" 
+                   show-presence="false" 
+                   enable-context-menu="false">
+            </sn-avatar>
+            </figure>
+              <h3> {{info.by}} </h3> 
+             <h4>{{info.level}}</h4>
+              <div>
+                <br> <a href="{{info.url}}" class="btn btn-primary btn-success"><span class="glyphicon glyphicon-hand-right"></span> Accept Challenge</a> 
+              </div>
+            </div>
+            </li>   
+        </ul>
+    
+  </div>
+     <p align = "center">
+ <a href ='/arena' type="button" class="btn btn-danger btn-rounded">Home</a>
+</p>
+</section>
+  
+   </div>
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     <!--   <li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="http://www.webcoderskull.com/img/team1.png" class="img-responsive" alt=""></figure>
+            <h3>{{info.by}}</h3>
+            <h4>
+              {{info.level}}
+                        </h4>
+            <button type="button" class="btn btn-outline-secondary mb-3">Accept Challenge</button>
+          </div>
+      </li>
+      <li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="http://www.webcoderskull.com/img/team4.png" class="img-responsive" alt=""></figure>
+            <h3>{{info.by}}</h3>
+            <h4>
+              {{data.level[1]}}
+            </h4>
+            <button type="button" class="btn btn-outline-secondary mb-3">Accept Challenge</button>
+          </div>
+       </li>
+      <li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="http://www.webcoderskull.com/img/team2.png" class="img-responsive" alt=""></figure>
+            <h3>{{info.by}}</h3>
+          <h4>
+              {{data.level[2]}}
+            </h4>
+        <ul class="follow-us clearfix">
+              <li><a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+              <li><a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+              <li><a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+            </ul> 
+            <button type="button" class="btn btn-outline-secondary mb-3">Accept Challenge</button>
+          </div>
+      </li>
+ <a href="javascript:void(0)" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-hand-right"></span> Accept Challenge</a>
+ <button type="button"   class="btn btn-outline-secondary mb-3">Accept Challenge</button>
+
+-->
+]]></template>
+    </sp_widget>
+</record_update>

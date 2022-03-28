@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+	c.showLeaderBoard =false;//made false temporarily
+	
+	$rootScope.$on('gameScreen', function(event,commands) {
+	
+		c.showRP = true;
+  });
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.castle-img{&#13;
+border-radius: 50%;&#13;
+  width&#13;
+}&#13;
+.trophy-text{&#13;
+  font-size: 35px;&#13;
+  margin-top: 19%; &#13;
+}&#13;
+&#13;
+.trophy-front-text{&#13;
+  word-wrap: break-word;&#13;
+  font-size: 23px;&#13;
+  margin-top: 39%; &#13;
+}&#13;
+&#13;
+&#13;
+.fa-5x {&#13;
+    margin-top: 19%;&#13;
+    font-size: 7em;&#13;
+}&#13;
+&#13;
+&#13;
+.modal {&#13;
+  display: none; /* Hidden by default */&#13;
+  position: fixed; /* Stay in place */&#13;
+  z-index: 1; /* Sit on top */&#13;
+  left: 0;&#13;
+  top: 0;&#13;
+  width: 100%; /* Full width */&#13;
+  height: 100%; /* Full height */&#13;
+  overflow: auto; /* Enable scroll if needed */&#13;
+  background-color: rgb(0,0,0); /* Fallback color */&#13;
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */&#13;
+}&#13;
+&#13;
+/* Modal Content/Box */&#13;
+.modal-content {&#13;
+  background-color: #fefefe;&#13;
+  margin: 15% auto; /* 15% from the top and centered */&#13;
+  padding: 20px;&#13;
+  border: 1px solid #888;&#13;
+  width: 80%; /* Could be more or less, depending on screen size */&#13;
+}&#13;
+&#13;
+/* The Close Button */&#13;
+.close {&#13;
+  color: #aaa;&#13;
+  float: right;&#13;
+  font-size: 28px;&#13;
+  font-weight: bold;&#13;
+}&#13;
+&#13;
+.close:hover,&#13;
+.close:focus {&#13;
+  color: black;&#13;
+  text-decoration: none;&#13;
+  cursor: pointer;&#13;
+}&#13;
+.flip-card {&#13;
+ &#13;
+  margin-top: 30px;&#13;
+  background-color: transparent;&#13;
+  width: 100%;&#13;
+  height: 50%;&#13;
+  perspective: 1000px;&#13;
+}&#13;
+&#13;
+.flip-card-inner {&#13;
+  border-style: double;&#13;
+    border-radius: 20px;&#13;
+  position: relative;&#13;
+  width: 100%;&#13;
+  height: 100%;&#13;
+  text-align: center;&#13;
+  transition: transform 0.6s;&#13;
+  transform-style: preserve-3d;&#13;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);&#13;
+}&#13;
+&#13;
+.flip-card:hover .flip-card-inner {&#13;
+  transform: rotateY(180deg);&#13;
+}&#13;
+&#13;
+.flip-card-front, .flip-card-back {&#13;
+  border-radius: 20px;&#13;
+  position: absolute;&#13;
+  width: 100%;&#13;
+  height: 100%;&#13;
+  backface-visibility: hidden;&#13;
+}&#13;
+&#13;
+.flip-card-front {&#13;
+  background-color: #bbb;&#13;
+  color: black;&#13;
+}&#13;
+&#13;
+.flip-card-back {&#13;
+  background-color: #2980b9;&#13;
+  color: white;&#13;
+  transform: rotateY(180deg);&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+.bs-callout {&#13;
+  border-radius: 15px;&#13;
+  margin: 10px 0 !important;&#13;
+  padding: 10px 20px 10px 20px !important;&#13;
+  border-left-style: solid;&#13;
+  border-left-width: 10px;&#13;
+  color: $gray-dark;&#13;
+}&#13;
+&#13;
+.bs-callout-outage {&#13;
+  background-color: lighten($danger, 40%);&#13;
+  border-color: $danger;&#13;
+}&#13;
+&#13;
+.bs-callout-degradation {&#13;
+  background-color: lighten($warning, 35%);&#13;
+  border-color: $warning;&#13;
+}&#13;
+&#13;
+.bs-callout-planned {&#13;
+  background-color: lighten($info, 35%);&#13;
+  border-color: $info;&#13;
+}&#13;
+&#13;
+.bs-callout-success {&#13;
+  background-color: lighten($success, 40%);&#13;
+  border-color: $success;&#13;
+}&#13;
+&#13;
+.tooltip-inner {&#13;
+    width: 150px;&#13;
+}&#13;
+&#13;
+a {&#13;
+  color: #3a3f51;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description>&lt;i class="fa fa-trophy fa-5x" aria-hidden="true"&gt;&lt;/i&gt;</description>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>result_page</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>ArenaResults</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+	
+	var users = [];
+	 var rank = 1;
+	
+	var gr = new GlideRecord("x_93700_arena_user");
+      gr.orderByDesc('total_score'); 
+      gr.query();
+			while(gr.next()) {
+				var user = {};
+				user.name  = gr.user.getDisplayValue();
+				user.rank  = rank++;
+        users.push(user);
+			}
+
+data.users = users;
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-12-15 16:31:14</sys_created_on>
+        <sys_id>e801abecdbf1c810b6db8e4748961900</sys_id>
+        <sys_mod_count>93</sys_mod_count>
+        <sys_name>ArenaResults</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_e801abecdbf1c810b6db8e4748961900</sys_update_name>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2020-03-29 16:30:08</sys_updated_on>
+        <template><![CDATA[ 
+<div ng-show="c.showRP">
+  <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+  
+<div class="castle-img"><img src='castle.png'></div>
+      </div>
+ <!-- <div  ng-repeat="user in data.users" class=" col-xs-4 col-md-2">
+<div class="flip-card" >
+  <div class="flip-card-inner align-middle">
+    <div class="flip-card-front">
+     <div class='trophy-text'>
+        {{user.rank}}
+      </div>
+      <div ng-if="user.rank == 1">
+        <img src="king_1.jpg" width="123" height="123"/>
+      </div>
+       
+         <div ng-if="user.rank == 2">
+        <img src="minister.jpg" width="123" height="123"/>
+      </div>
+      
+    </div>
+    <div class="flip-card-back" >
+      <div class="trophy-front-text ">
+       
+        <div class='text-uppercase'>
+           {{user.name}}
+        </div>
+       
+      </div>
+      
+       <div>
+          <a href="https://www.w3schools.com">View Progress!</a>
+        </div>
+     
+    </div>
+  </div>
+</div>
+    </div>
+  -->
+   </div>
+
+
+
+]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-07-15 12:38:20</sys_created_on>
+        <sys_id>9b66e3812fce9c5093fd5d8b2799b65b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena_results.x_93700_arena.play</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_security_acl display_value="x_93700_arena_results">33727247dbf7cc10b6db8e4748961951</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_9b66e3812fce9c5093fd5d8b2799b65b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-07-15 12:38:20</sys_updated_on>
+        <sys_user_role display_value="x_93700_arena.play" name="x_93700_arena.play">1234ac93db09c010b6db8e474896198e</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+</record_update>

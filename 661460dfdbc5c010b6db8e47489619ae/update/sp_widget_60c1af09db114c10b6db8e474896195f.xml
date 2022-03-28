@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+    /* widget controller */
+    var d = this;
+
+    d.loadingPage = true;
+    d.showQuiz = false;
+    d.showCompletePage = false;
+
+    setTimeout(function() {
+
+        $(".arena-img").animate({
+            marginLeft: '+=120%'
+        }, 20000);
+
+    }, 400);
+
+    setTimeout(function() {
+        //  d.loadingPage = false;
+        d.showQuiz = true;
+    }, 7000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}]]></client_script>
+        <controller_as>d</controller_as>
+        <css>.load-page&#13;
+{&#13;
+  height :100%;&#13;
+}&#13;
+&#13;
+.arena-img{&#13;
+    margin-top: 15%;&#13;
+    height: 50%;&#13;
+    width: 30%;&#13;
+    margin-left: -27%;&#13;
+    vertical-align: middle;&#13;
+}&#13;
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>main-quiz-widget</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>Quiz Main</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-22 09:18:05</sys_created_on>
+        <sys_id>60c1af09db114c10b6db8e474896195f</sys_id>
+        <sys_mod_count>54</sys_mod_count>
+        <sys_name>Quiz Main</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_60c1af09db114c10b6db8e474896195f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-11-26 01:32:05</sys_updated_on>
+        <template><![CDATA[<div class="load-page" ng-if="d.loadingPage" >
+ 
+  
+  <img class="arena-img" src="loading animation.gif" alt="Smiley face" >
+ Preparing to Fight!!
+</div>
+
+<div class="load-page" ng-if="d.showCompletePage" >
+  <img class="arena-img" src="complete test.gif" alt="Smiley face" >
+</div>
+
+
+
+{{d.showQuiz}}
+
+<table ng-if="d.showQuiz" class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+  
+]]></template>
+    </sp_widget>
+</record_update>

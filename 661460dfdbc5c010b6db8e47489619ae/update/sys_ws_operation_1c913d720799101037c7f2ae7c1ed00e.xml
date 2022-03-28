@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>getQuestions</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	var level = request.queryParams.level.toString();
+	var difficulty = request.queryParams.difficulty.toString();
+	
+	var timerInSeconds = gs.getProperty('x_93700_arena.quizTimer.time');
+	var questionsPerRound = 10;
+	
+	var responseBody = {};
+	responseBody.timer = timerInSeconds;
+	responseBody.questions = [];
+	
+	var allQuestionIds = [];
+	var questionGr = new GlideRecord('x_93700_arena_arena_question');
+	questionGr.addActiveQuery();
+	questionGr.addQuery('level', level);
+	questionGr.addQuery('difficulty', difficulty);
+	questionGr.query();
+	while(questionGr.next()) {
+		allQuestionIds.push(questionGr.getValue('sys_id'));
+	}
+	
+	for(var i=0; i<questionsPerRound; i++) {
+		if(i === 0) {
+			level = { label: questionGr.getDisplayValue('level'), value: questionGr.getValue('level') };
+			difficulty = { label: questionGr.getDisplayValue('difficulty'), value: questionGr.getValue('difficulty') };
+		}
+		var questionCount = allQuestionIds.length;
+		var randomIndex = Math.floor(Math.random()*questionCount);
+		questionGr = new GlideRecord('x_93700_arena_arena_question');
+		questionGr.get(allQuestionIds[randomIndex]);
+		
+		var question = {};
+		question.id = questionGr.getValue('sys_id');
+		question.module = questionGr.getValue('module');
+		question.type = questionGr.getValue('type');
+		question.title = questionGr.getValue('question') || '';
+		question.choices = [];
+		var questionChoiceGr = new GlideRecord('x_93700_arena_quiz_choices');
+		questionChoiceGr.setLimit(4);
+		questionChoiceGr.orderByDesc('correct');
+		questionChoiceGr.addQuery('question', questionGr.sys_id);
+		questionChoiceGr.query();
+		while(questionChoiceGr.next()) {
+			question.choices.push({
+				id: questionChoiceGr.getValue('sys_id'),
+				value: questionChoiceGr.getValue('choice')
+			});
+		}
+		allQuestionIds.splice(randomIndex, 1);
+		responseBody.questions.push(question);
+	}
+	
+	responseBody.level = level;
+	responseBody.difficulty = difficulty;
+	response.setBody(responseBody);
+	response.setStatus(200);
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_93700_arena/arena/getQuestions</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/getQuestions</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-13 07:48:34</sys_created_on>
+        <sys_id>1c913d720799101037c7f2ae7c1ed00e</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>getQuestions</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ws_operation_1c913d720799101037c7f2ae7c1ed00e</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-16 16:30:41</sys_updated_on>
+        <web_service_definition display_value="Arena">5b64b26e0755101037c7f2ae7c1ed048</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

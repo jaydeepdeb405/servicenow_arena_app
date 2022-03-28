@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_93700_arena.ngMaterialInit</name>
+        <script><![CDATA[(function(angular) {
+    var app = angular.module('sn.$sp');
+    app.requires.push('ngMaterial');
+    app.config(function($mdThemingProvider, $mdIconProvider) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('indigo')
+            .accentPalette('yellow');
+
+        $mdIconProvider
+            .defaultFontSet('material-icons');
+    });
+})(angular);]]></script>
+        <script_name>ngMaterialInit</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-04-26 16:32:17</sys_created_on>
+        <sys_id>9ff808010773201037c7f2ae7c1ed02a</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>x_93700_arena.ngMaterialInit</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ui_script_9ff808010773201037c7f2ae7c1ed02a</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-26 17:16:45</sys_updated_on>
+        <ui_type>0</ui_type>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

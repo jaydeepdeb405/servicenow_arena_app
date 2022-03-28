@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cb_topic">
+    <sys_cb_topic action="INSERT_OR_UPDATE">
+        <applicability/>
+        <applicability_mode/>
+        <auto_resolution_enabled>false</auto_resolution_enabled>
+        <category/>
+        <channels/>
+        <connect_queue/>
+        <description/>
+        <flexible_conversation_switching>true</flexible_conversation_switching>
+        <graph>{
+  "graph_api_version": "1.0.13",
+  "goals": {
+    "48626bb79e2347e09436168d146cf9c0": {
+      "id": "48626bb79e2347e09436168d146cf9c0",
+      "trigger": {
+        "type": "primary"
+      },
+      "name": "primary",
+      "applicability": "",
+      "description": "",
+      "nodes": {
+        "abc41e944ec24d1f9f7955952bc8d5f9": {
+          "id": "abc41e944ec24d1f9f7955952bc8d5f9",
+          "stepType": "Start",
+          "name": "Start",
+          "greetingResponse": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "88578d2d62ee4b7da84dda04ffd2bb96": {
+          "id": "88578d2d62ee4b7da84dda04ffd2bb96",
+          "stepType": "TerminateGoal",
+          "name": "End",
+          "confirmationMessage": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "b711cbb228eb456697a7545aaba99baa": {
+          "id": "b711cbb228eb456697a7545aaba99baa",
+          "stepType": "ScriptOutput",
+          "name": "node 1",
+          "output_type": "single_part",
+          "script": "(function execute() {\n\n      // set greeting phrase\n      var introduction = \"My name is Jarvis, I'm still learning...  but I am an expert on issues regarding Email and Outlook. I can also help you create and manage tickets!\"\n      var greeting; \n      if (vaInputs.user.first_name.getDisplayValue()) {\n            greeting = gs.getMessage('Hi ' + vaInputs.user.first_name.getDisplayValue() + ',');\n      } else {\n            greeting = gs.getMessage('Hi ' + vaInputs.user.getDisplayValue() + ',');\n      }\n      var html = '&lt;p&gt;' + greeting + '&lt;/p&gt; &lt;br&gt;' + introduction + '&lt;br&gt;&lt;div id=\"\" style=\"text-align: center; margin-top: 5px;  \"&gt;&lt;img src=\"https://www.gograyleaf.com/hubfs/bot_logo.png\" alt=\"\" style=\"width: 150px; height: auto;\"&gt; &lt;/div&gt;';\n      var singleOutMsg = new sn_cs.SinglePartOutMsg();\n\n      singleOutMsg.setHtmlPart(html);\n\n      return singleOutMsg;\n})()",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        }
+      },
+      "edges": [
+        {
+          "id": "8c66871aa55940019a4c0088d41ac533",
+          "edgeType": "Edge",
+          "source": "abc41e944ec24d1f9f7955952bc8d5f9",
+          "target": "b711cbb228eb456697a7545aaba99baa",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "dbadf36385a949af80f425725b6f66f4",
+          "edgeType": "Edge",
+          "source": "b711cbb228eb456697a7545aaba99baa",
+          "target": "88578d2d62ee4b7da84dda04ffd2bb96",
+          "sourcePort": "",
+          "targetPort": ""
+        }
+      ]
+    }
+  },
+  "variables": {}
+}</graph>
+        <key_phrases/>
+        <library>false</library>
+        <live_agent>false</live_agent>
+        <name>greetings2</name>
+        <nlu_intent/>
+        <nlu_intent_label/>
+        <nlu_model/>
+        <nlu_model_label/>
+        <nlu_provider>64c023c17300330021a044764df6a70e</nlu_provider>
+        <roles/>
+        <source_topic_id/>
+        <sys_class_name>sys_cb_topic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-22 11:13:28</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>975c7b89db914c10b6db8e47489619ae</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>greetings2</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_cb_topic_975c7b89db914c10b6db8e47489619ae</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2021-08-15 09:49:08</sys_updated_on>
+        <triggerable_by_notification>false</triggerable_by_notification>
+        <type>SMALL_TALK</type>
+        <variables/>
+    </sys_cb_topic>
+    <sys_variable_value action="delete_multiple" query="document_key=975c7b89db914c10b6db8e47489619ae"/>
+</record_update>

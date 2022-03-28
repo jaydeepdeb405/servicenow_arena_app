@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var testTakerRow = "%3Cdiv%20id=%22row-index%22%3E%3Cspan%20class=%22required-marker%20test-taker-mandatory-index%22%20style=%22display:%20inline;%22%3E%3C/span%3E%3Clabel%20id=%22label-index%22%3ETest%20taker%20index%3C/label%3E%3Cdiv%20class=%22row%22%3E%3Cdiv%20class=%22col-sm-4%22%3E%3Cinput%20type=%22text%22%20class=%22form-control%22%20id=%22test-taker-firstname-index%22%20placeholder=%22First%20name%22%20autocomplete=%22off%22%20onchange=%22handleChange(index,%20'first_name',%20this)%22/%3E%3C/div%3E%3Cdiv%20class=%22col-sm-4%22%3E%3Cinput%20type=%22text%22%20class=%22form-control%22%20id=%22test-taker-lastname-index%22%20placeholder=%22Last%20name%22%20autocomplete=%22off%22%20onchange=%22handleChange(index,%20'last_name',%20this)%22/%3E%3C/div%3E%3Cdiv%20class=%22col-sm-4%22%3E%3Cinput%20type=%22email%22%20class=%22form-control%22%20id=%22test-taker-email-index%22%20placeholder=%22Email%22%20autocomplete=%22off%22%20required=%22true%22%20onchange=%22handleChange(index,%20'email',%20this)%22/%3E%3C/div%3E%3C/div%3E%3C/div%3E";
+
+var testTakerArr = [];
+
+function addRow() {
+	testTakerArr.push({ first_name: '', last_name: '', email: '' });
+	$j('#test-taker-rows').append(decodeURI(testTakerRow).replace(/index/gi, testTakerArr.length));
+}
+
+function removeRow() {
+	var removeIndex = testTakerArr.length;
+	if (removeIndex > 1) {
+		testTakerArr.pop();
+		$j('#test-taker-rows #row-'+removeIndex).remove();
+	}
+}
+
+function handleChange(index, field, element) {
+	testTakerArr[index-1][field] = element.value;
+	$j('#testTakerArr').val(JSON.stringify(testTakerArr));
+	if ($j('#test-taker-email-'+index).prop('validity').valid === true) $j('.test-taker-mandatory-'+index).addClass('grey');
+	else $j('.test-taker-mandatory-'+index).removeClass('grey');
+}
+
+addRow();
+var currentSysId = g_form.getUniqueValue();
+var currentUrl = window.location.href;
+$j('#currentSysId').val(currentSysId);
+$j('#currentUrl').val(currentUrl);]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_93700_arena_add_new_test_takers.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<g:ui_form>
+		<div class="add-remove-btn">
+			<span class="icon-not-started-circle icon-btn" onclick="removeRow()"></span>
+			<span class="icon-add-circle icon-btn" onclick="addRow()"></span>
+		</div>
+		<div id="test-taker-rows"></div>
+		<input type="hidden" id="testTakerArr" name="testTakerArr" />
+		<input type="hidden" id="currentSysId" name="currentSysId" />
+		<input type="hidden" id="currentUrl" name="currentUrl" />
+		<button class="btn btn-primary submit-btn" id="ok_button" onclick="return true" type="submit">Create</button>
+	</g:ui_form>
+	
+	<style>
+		.add-remove-btn {
+			height: 30px;
+			padding: 0 10px;
+		}
+		.icon-btn {
+			font-size: 20px;
+			float: right;
+			margin-right: 15px;
+			cursor: pointer;
+		}
+		.row {
+			margin-bottom: 10px;
+		}
+		#test-taker-rows {
+			height: 70vh;
+			overflow: auto;
+			padding: 0px 25px;
+		}
+		.col-sm-4 {
+			margin: 5px 0;
+		}
+		.submit-btn {
+			float: right;
+			margin: 15px 25px 0 0;
+		}
+		span.grey:before{
+			color: #2e2e2e !important;            
+		}
+	</style>
+</j:jelly>]]></html>
+        <name>add_new_test_takers</name>
+        <processing_script><![CDATA[var count = 0;
+
+var testScheduleGr = new GlideRecord('x_93700_arena_test_schedule');
+testScheduleGr.setLimit(1);
+testScheduleGr.addQuery('sys_id', currentSysId);
+testScheduleGr.query();
+if (testScheduleGr.next()) {
+	var currentTestTakers = testScheduleGr.test_takers.toString().length >= 32 ? testScheduleGr.test_takers.toString().split(',') : [];
+
+	var testTakerIds = [];
+	var testTakers = JSON.parse(testTakerArr) || [];
+
+	testTakers.forEach(function(testTaker) {
+		var user = new GlideRecord('sys_user');
+		user.setLimit(1);
+		user.addQuery('email', testTaker.email);
+		user.query();
+		var isExternalUser = user.hasNext();
+		
+		var sys_id = null;
+		var testTakerGr = new GlideRecord('x_93700_arena_test_takers');
+		testTakerGr.setLimit(1);
+		testTakerGr.addQuery('email', testTaker.email);
+		testTakerGr.query();
+		if (testTakerGr.next()) {
+			testTakerGr.setValue('first_name', testTaker.first_name);
+			testTakerGr.setValue('last_name', testTaker.last_name);
+			testTakerGr.setValue('external_user', isExternalUser);
+			sys_id = testTakerGr.update();
+		} else {
+			testTakerGr.initialize();
+			testTakerGr.setValue('active', 'true');
+			testTakerGr.setValue('first_name', testTaker.first_name);
+			testTakerGr.setValue('last_name', testTaker.last_name);
+			testTakerGr.setValue('email', testTaker.email);
+			testTakerGr.setValue('external_user', isExternalUser);
+			sys_id = testTakerGr.insert();
+		}
+		if (sys_id && currentTestTakers.indexOf(sys_id) === -1) {
+			currentTestTakers.push(sys_id);
+			count++;
+		}
+	});
+
+	testScheduleGr.setValue('test_takers', currentTestTakers);
+	testScheduleGr.update();
+}
+
+response.sendRedirect(currentUrl);
+gs.addInfoMessage('Added '+count+' test taker profiles');]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-08 07:12:31</sys_created_on>
+        <sys_id>23cb2db207831c1037c7f2ae7c1ed012</sys_id>
+        <sys_mod_count>68</sys_mod_count>
+        <sys_name>add_new_test_takers</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ui_page_23cb2db207831c1037c7f2ae7c1ed012</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-09-22 12:13:41</sys_updated_on>
+    </sys_ui_page>
+</record_update>

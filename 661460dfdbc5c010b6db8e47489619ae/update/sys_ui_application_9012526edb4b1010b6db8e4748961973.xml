@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_application">
+    <sys_ui_application action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <hint/>
+        <name>SP Questions</name>
+        <order/>
+        <roles>x_93700_arena.play</roles>
+        <sys_class_name>sys_ui_application</sys_class_name>
+        <sys_created_by>praveen</sys_created_by>
+        <sys_created_on>2020-09-07 15:20:58</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>9012526edb4b1010b6db8e4748961973</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>SP Questions</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ui_application_9012526edb4b1010b6db8e4748961973</sys_update_name>
+        <sys_updated_by>praveen</sys_updated_by>
+        <sys_updated_on>2020-09-07 15:20:58</sys_updated_on>
+    </sys_ui_application>
+</record_update>

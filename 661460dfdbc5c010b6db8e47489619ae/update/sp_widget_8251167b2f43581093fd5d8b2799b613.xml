@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $sce, spUtil, $http, $rootScope, $timeout) {
+	/* widget controller */
+	var c = this;
+
+	c.transition = false;
+	c.userInput = "";
+
+	$rootScope.$on('loadQuestion', function(event, data) {
+		c.getQuestion(data.qid);
+	});
+
+	c.trustHtml = function(htmlStr) {
+		return $sce.trustAsHtml(htmlStr);
+	}
+
+	c.postAnswer = function() {
+		if (c.data.question.accept_answers === true) {
+			if (!c.userInput) {
+				M.Toast.dismissAll();
+				M.toast({
+					html: 'Please enter your answer', 
+					classes: 'rounded',
+					timeRemaining: 5000
+				});
+				return;
+			}
+			c.transition = true;
+			c.data.action = "userInput";
+			c.data.userInput = c.userInput;
+			c.data.questionId = c.data.question.id;
+			c.server.update().then(function() {
+				c.transition = false;
+				c.data.question.accept_answers = false;
+				c.userInput = "";
+			});
+		}
+	}
+
+	c.getQuestion = function(qid) {
+		c.data.responses = [];
+		c.data.qid = qid;
+		c.transition = true;
+		c.data.action = "getQuestion";
+		c.server.update().then(function() {
+			c.transition = false;
+			incrementViewCount();
+			//startWatcherOnUserResponses();
+			c.data.action = undefined;
+			loadCodemirror()
+		});
+	}
+
+	c.markCorrectAnswer = function(answer, value) {
+		if (c.data.isAdmin == true) {
+			c.server.get({
+				action: 'markCorrectAnswer',
+				sys_id: answer.id,
+				value: value
+			}).then(function() {
+				answer.correct = value;
+			});
+		}
+	}
+
+	c.showHideMarkIncorrect = function(event, answer, mouseIn) {
+		event.stopPropagation();
+		if (c.data.isAdmin == true && answer.correct == 1 && mouseIn == true) answer.showMarkIncorrect = true;
+		else answer.showMarkIncorrect = false;
+	}
+
+	function loadCodemirror() {
+		var options = {
+			mode: "javascript",
+			lineNumbers: true,
+			lineWrapping: false,
+			readOnly: "nocursor",
+			viewportMargin: Infinity,
+			foldGutter: true,
+			gutters: ["CodeMirror-linenumbers", "CodeMirror-lint-markers", "CodeMirror-foldgutter"],
+			lint: {
+				asi: true
+			},
+			indentWithTabs: true,
+			indentUnit: 2,
+			tabSize: 2,
+			matchBrackets: true,
+			autoCloseBrackets: true,
+			theme: "snc"
+		};
+		$timeout(function() {
+			var elem = angular.element('.CodeMirror');
+			if (elem) {
+				var cm = CodeMirror.fromTextArea(elem.get(0), options);
+				//cm.setOption('readOnly', true);
+				console.log(cm)
+			}
+		}, 0);
+	}
+
+	function incrementViewCount() {
+		$http.put('/api/now/ui/glideRecord/x_93700_arena_questions/' + c.data.question.id, {
+			"view_count": (parseInt(c.data.question.views) || 0) + 1
+		});
+	}
+
+	function startWatcherOnUserResponses() {
+		spUtil.recordWatch($scope, 'x_93700_arena_answer', 'question=' + c.data.question.id, function(message) {
+			var action = message.data.action;
+
+			if (action === "entry") {
+				var sys_id = message.data.sys_id;
+
+				var duplicateResponses = c.data.responses.filter(function(res) {
+					if (res.id == sys_id) return true;
+				});
+
+				if (duplicateResponses.length === 0) {
+					c.server.get({
+						action: "newResponse",
+						sys_id: message.data.sys_id
+					}).then(function(response) {
+						c.data.responses.push(response.data.newResponse);
+					});
+				}
+
+			} 
+		});
+	}
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.padding-top {
+  padding-top: 0rem;
+}
+
+.question {
+	margin: 20px auto;
+}
+
+.question-card {
+  min-height: 200px;
+}
+
+.responses {
+  overflow: auto;
+  /*height: 55vh;*/
+  margin: auto;
+  float: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.question-title{
+  font-weight: 600;
+  color:firebrick;
+}
+
+.correct-answer-card {
+  padding: 0;
+}
+
+.user-card-title {
+  display: flex !important;
+  font-size: 1em;
+  font-weight: 600;
+  &amp;.correct {
+    cursor: pointer;
+    &amp;:hover {
+      .correct-answer {
+        font-size: 1.05rem;
+      }
+    }
+  }
+}
+
+.user-card-title span {
+  width: 33.33%; 
+}
+
+.correct-answer-card-title span {
+  width: 50%;
+}
+
+.user-card-title .user-avatar {
+  display						 : inline-block;
+  height             : 30px;
+  width              : 30px;
+  border-radius      : 50%;
+  box-shadow         : 1px 1px 5px;
+  background-size    : cover;
+  background-repeat  : no-repeat;
+  background-position: center;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+.user-card-title .pillai-sir-avatar {
+  background-image: url('shankaran-pillai-thumbnail.jpg');
+}
+
+.user-card-title .user-avatar div {
+  font-size: 13px;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+
+.valign-top {
+  vertical-align: top;
+}
+
+.answer-card {
+  padding: 18px 8px 0px 8px;
+}
+
+.response-card {
+  padding: 14px 24px;
+}
+
+.question-created {
+  text-align: center;
+  padding-top: 12px;
+
+}
+
+.ques-btn {
+  margin-top: 10px;
+}
+
+.ques-btn:nth-of-type(1) {
+  float: left;
+}
+
+.ques-btn:nth-of-type(2) {
+  float: right;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width  : 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius   : 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.loader-wrapper {
+  display: flex;
+  left: 0;
+  right: 0;
+  width: 100%;
+  position: absolute;
+  z-index: 999;
+  height: 60vh;
+  top: 0;
+  bottom: 0;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.question-views {
+  position: absolute;
+  right: 24px;
+  bottom: 22px;
+}
+
+.ng-leave { 
+  display:none; 
+}
+
+.ng-hide.ng-hide-animate{
+  display: none !important;
+}
+
+.border-green {
+  border: 2px solid #c2e9c7;
+}
+
+.border-red {
+  border: 2px solid red;
+}
+
+.correct-answer {
+  transition: all 0.5s;
+  .fa-check-circle {
+    color: #5cb85c;
+    font-size: 25px;
+  }
+  .fa-times-circle {
+    color: red;
+    font-size: 25px;
+  }
+}
+
+.d-none {
+  display: none;
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>shankaran-pillai-home</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Shankaran Pillai Content</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+	data.isAdmin = gs.hasRole('x_93700_arena.admin');
+	
+	data.questionPlaceholder = "Question not available. Check back later";
+	data.questionAvailable = false;
+	data.question = {};
+	data.responses = [];
+	
+	if (input) {
+		var answerGr = null;
+		if (input.action === "userInput") {
+			answerGr = new GlideRecord('x_93700_arena_answer');
+			answerGr.initialize();
+			answerGr.setValue('question', input.questionId);
+			answerGr.setValue('answer', input.userInput);
+			answerGr.setValue('user', gs.getUserID());
+			answerGr.setValue('active', true);
+			answerGr.insert();
+			getQuestion("sys_id=" + input.questionId);
+		} 
+		if (input.action === "getQuestion") {
+			getQuestion("sys_id=" + input.qid);
+		}
+		if (input.action === "markCorrectAnswer") {
+			answerGr = new GlideRecord('x_93700_arena_answer');
+			answerGr.get(input.sys_id);
+			answerGr.correct = input.value;
+			answerGr.update();
+		}
+		if (input.action === "newResponse") {
+			answerGr = new GlideRecord('x_93700_arena_answer');
+			answerGr.get(input.sys_id);
+			data.newResponse = {
+				id: answerGr.getValue('sys_id'),
+				value: answerGr.getValue('answer') || '',
+				correct_answer: answerGr.getValue('correct'),
+				created_on: answerGr.getDisplayValue('sys_created_on'),
+				user: {
+					name: answerGr.getDisplayValue('user'),
+					avatar_src: answerGr.user.photo.getDisplayValue(),
+					initials: getInitials(answerGr.getDisplayValue('user'))
+				}
+			};
+		}
+		return;
+	}
+
+	function getQuestion(questionFilter) {
+		var questionGr = new GlideRecord('x_93700_arena_questions');
+		questionGr.setLimit(1);
+		questionGr.orderByDesc('date');
+		questionGr.addActiveQuery();
+		questionGr.addEncodedQuery(questionFilter);
+		questionGr.query();
+		if (questionGr.next()) {
+			data.question.id = questionGr.getValue('sys_id');
+			data.question.type = questionGr.getValue('question_type') || 'normal';
+			data.question.number = questionGr.getValue('number');
+			data.question.title = questionGr.getValue('title');
+			data.question.content = questionGr.getValue('question') || '';
+			data.question.code = questionGr.getValue('question_type') === 'code_debug' ?
+				questionGr.getValue('code') || '' : '';
+			data.question.answer = questionGr.getValue('correct_answer') || '';
+			data.question.accept_answers = questionGr.getValue('accept_answers') == 1 ? true : false;
+			data.question.correct_answer = data.question.accept_answers ? "" : questionGr.getValue('correct_answer');
+			data.question.created_on = questionGr.getValue('date');
+			data.question.views = questionGr.getValue('view_count') || 0;
+			data.questionAvailable = true;
+			var currentUserId = gs.getUserID();
+			var answerGr = new GlideRecord('x_93700_arena_answer');
+			answerGr.addQuery('question', questionGr.sys_id);
+			answerGr.addActiveQuery();
+			answerGr.orderByDesc('correct');
+			answerGr.query();
+			while (answerGr.next()) {
+				if (currentUserId === answerGr.user.toString()) data.question.accept_answers = false;
+				data.responses.push({
+					id: answerGr.getValue('sys_id'),
+					value: answerGr.getValue('answer') || '',
+					correct: answerGr.getValue('correct'),
+					created_on: answerGr.getValue('sys_created_on'),
+					user: {
+						name: answerGr.getDisplayValue('user'),
+						avatar_src: answerGr.user.photo.getDisplayValue(),
+						initials: getInitials(answerGr.getDisplayValue('user'))
+					}
+				});
+			}
+			return true;
+		}
+		return false;
+	}
+
+	function getInitials(name) {
+		var first = (name.split(' ')[0] || '').charAt(0).toUpperCase();
+		var last = (name.split(' ')[1] || '').charAt(0).toUpperCase();
+		return first + last;
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-11 12:30:44</sys_created_on>
+        <sys_id>8251167b2f43581093fd5d8b2799b613</sys_id>
+        <sys_mod_count>370</sys_mod_count>
+        <sys_name>Shankaran Pillai Content</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_8251167b2f43581093fd5d8b2799b613</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2022-03-28 14:48:56</sys_updated_on>
+        <template><![CDATA[<div>
+
+  <div class="loader-wrapper" ng-if="c.transition === true">
+    <div class="preloader-wrapper medium active" style="margin: auto;">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+        <div class="circle"></div>
+        </div><div class="circle-clipper right">
+        <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div ng-if="c.data.questionAvailable === true" ng-style="c.transition === true && {'filter': 'blur(5px)'}">
+    <div class="card col s12 question-card">  
+      <div class="card-content"> 
+        <span class="card-title question-title">{{c.data.question.title}}</span>
+        <div class="question" ng-bind-html="c.trustHtml(c.data.question.content)"></div>
+        <div ng-if="data.question.type === 'code_debug'" class="question">
+          <textarea class="CodeMirror" name="questionCode" ng-model="data.question.code" style="width: 100%;"></textarea>
+        </div>
+      </div>
+      <div class="question-views">
+        <i class="fa fa-eye pad-right"></i>
+        <span>{{data.question.views + " Views"}}</span>
+      </div>
+    </div>
+
+    <div class="card col s12 correct-answer-card" ng-if="c.data.question.accept_answers == false && c.data.question.correct_answer"> 
+      <div class="card-content response-card border-green"> 
+        <span class="card-title user-card-title correct-answer-card-title"> 
+          <span> 
+            <div class="user-avatar pillai-sir-avatar"></div>
+            <span class="valign-top">Pillai Sir says :</span> 
+          </span>  
+          <span class="correct-answer text-right"> 
+            <i class="fa fa-check-circle"></i> 
+            <span class="valign-top">Correct answer</span> 
+          </span>
+        </span> 
+        <div class="user-answer-wrapper" ng-bind-html="c.trustHtml(c.data.question.correct_answer)"></div> 
+      </div>  
+    </div>
+
+    <div class="row">
+      <div ng-if="c.data.question.accept_answers != true || data.isAdmin == true" class="responses col s12">
+        <div class="card" ng-repeat="answer in c.data.responses" ng-class="{'border-green': answer.correct == 1}" ng-style="{'border-color': answer.showMarkIncorrect == true ? 'red' : '#c2e9c7'}">
+          <div class="card-content response-card"> 
+            <span class="card-title user-card-title" ng-class="{'correct': c.data.isAdmin == true && answer.correct == 1}"
+                  ng-mouseover="c.showHideMarkIncorrect($event, answer, true)"
+                  ng-mouseout="c.showHideMarkIncorrect($event, answer, false)">
+              <span>
+                <div class="user-avatar" style="background-image: url({{answer.user.avatar_src}})"
+                     ng-style="answer.user.avatar_src == '' && {'background-color'   : 'grey'}">
+                  <div ng-if="answer.user.avatar_src == ''">{{answer.user.initials}}</div>
+                </div>
+                <span class="valign-top">{{answer.user.name}}</span>
+              </span>
+
+              <span class="correct-answer text-center">
+
+                <span ng-if="answer.correct == 1">
+
+                  <span ng-if="answer.showMarkIncorrect != true">
+                    <i class="fa fa-check-circle"></i>
+                    <span class="valign-top">Correct answer</span>
+                  </span>
+
+                  <span ng-if="answer.showMarkIncorrect == true" ng-click="c.markCorrectAnswer(answer, 0)">
+                    <i class="fa fa-times-circle"></i>
+                    <span class="valign-top">Mark incorrect</span>
+                  </span>
+
+                </span>
+
+                <button ng-if="answer.correct != 1 && data.isAdmin == true" 
+                        class="waves-effect waves-light btn-small bg-secondary"
+                        ng-click="c.markCorrectAnswer(answer, 1)">
+                  Mark correct
+                </button>
+
+              </span>
+
+              <span class="text-right">
+                <i class="fa fa-clock-o" title="Time of post"></i>
+                <sn-time-ago timestamp="answer.created_on" />
+              </span>
+            </span>
+            <div class="user-answer-wrapper" ng-bind-html="c.trustHtml(answer.value)"></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card col s12" ng-if="c.data.question.accept_answers == true">
+        <div class="card-content answer-card"> 
+          <span class="card-title bold">Your answer</span>
+          <form class="row" ng-submit="c.postAnswer()">
+            <div class="input-field col s12"> 
+              <sp-tinymce-editor ng-model="c.userInput" ng-model-options="{getterSetter: true}"></sp-tinymce-editor>
+              <!-- <textarea ng-model="c.userInput" class="materialize-textarea validate" role="textbox" maxlength="100000" required></textarea> -->
+            </div> 
+            <div class="col s12">
+              <button type="submit" class="waves-effect waves-light btn-small bg-secondary">Post</button>
+            </div> 
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div> 
+
+
+  <div ng-if="c.data.questionAvailable !== true" ng-style="c.transition === true && {'filter': 'blur(5px)'}">
+    <div class="card col s12 question-card">  
+      <div class="card-content"> 
+        <span class="card-title question-title">{{c.data.questionPlaceholder}}</span>
+      </div>
+    </div>
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

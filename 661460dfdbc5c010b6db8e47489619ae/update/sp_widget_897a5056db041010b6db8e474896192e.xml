@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function LeaderBoard($scope, $rootScope) {
+    var c = this;
+    //document.body.style.backgroundImage = "url('Leaderboard-background-1.jpg')";
+    $rootScope.$on('gameScreen', function(event, obj) {
+        c.ll = obj.leaderboard;
+    });
+
+    c.clicker = function() {
+        var x = document.getElementById("sound123");
+        x.play();
+    };
+
+    c.makeActive = function(bId) {
+        var clickedButtonId = bId;
+        //removing the active content first from all buttons NOT USING FOR LOOP FOR GELCLASS AS IT NOT WORKS IN SERVICENOW
+        var a = document.getElementById("level1");
+        a.classList.remove("active1");
+        a.classList.add("inactive1");
+        var b = document.getElementById("level2");
+        b.classList.remove("active1");
+        b.classList.add("inactive1");
+        var c = document.getElementById("level3");
+        c.classList.remove("active1");
+        c.classList.add("inactive1");
+        var d = document.getElementById("level4");
+        d.classList.remove("active1");
+        d.classList.add("inactive1");
+        //adding the active content to the clicked button
+        var e = document.getElementById(clickedButtonId);
+        e.classList.remove("inactive1");
+        e.classList.add("active1");
+    };
+
+    c.makeActiveD = function(bId2) {
+        var clickedButtonId2 = bId2;
+        var a2 = document.getElementById("easy");
+        a2.classList.remove("activeD");
+        a2.classList.add("inactiveD");
+        var b2 = document.getElementById("medium");
+        b2.classList.remove("activeD");
+        b2.classList.add("inactiveD");
+        var c2 = document.getElementById("hard");
+        c2.classList.remove("activeD");
+        c2.classList.add("inactiveD");
+
+        var e2 = document.getElementById(clickedButtonId2);
+        e2.classList.remove("inactiveD");
+        e2.classList.add("activeD");
+    };
+
+    c.showLeaderBoard = function() {
+        var activeL = document.getElementsByClassName('active1');
+        var activeLid = activeL[0].id;
+        var activeD = document.getElementsByClassName('activeD');
+        var activeDid = activeD[0].id;
+        c.data.level = activeLid;
+        c.data.diff = activeDid;
+        c.server.update();
+    };
+
+    c.challenger = function(uID, lvl, dif) {
+        c.data.User = uID;
+        c.data.lvl = lvl;
+        c.data.dif = dif;
+        c.server.update();
+    };
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.active1{
+  box-shadow: 0px 1px 17px 0px #faf1af;
+  background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+  background-color:#ffec64;
+  border-radius:26px;
+  border:2px solid #fffdfa;
+  display:inline-block;
+  cursor:pointer;
+  color:#333333;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:5px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 15px #ffee66;
+}
+
+.lvl
+{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.dif
+{
+  padding-top: 2px;
+  padding-bottom: 9px;
+}
+
+.active1:hover
+{
+  background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+  background-color:#ffab23;
+}
+
+.inactive1
+{box-shadow: 0px 1px 17px 0px #faf1af;
+  background:linear-gradient(to bottom, #7b20e3 5%, #7d2b52 100%);
+  background-color:#7b20e3;
+  border-radius:26px;
+  border:2px solid #fffdfa;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffff00;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:5px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 15px #ffee66;
+}
+
+.inactive1:hover
+{
+  background:linear-gradient(to bottom, #7d2b52 5%, #7b20e3 100%);
+  background-color:#7d2b52;
+}
+
+.activeD
+{
+  box-shadow: 3px 4px 8px 0px #8a2a21;
+  background:linear-gradient(to bottom, #e9f022 5%, #8939f0 100%);
+  background-color:#e9f022;
+  border-radius:18px;
+  border:1px solid #d02718;
+  display:inline-block;
+  cursor:pointer;
+  color:#fff419;
+  font-family:Arial;
+  font-size:17px;
+  padding:5px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 15px #810e05;
+}
+
+.activeD:hover
+{
+  background:linear-gradient(to bottom, #8939f0 5%, #e9f022 100%);
+  background-color:#8939f0;
+}
+
+.inactiveD
+{
+  box-shadow: 3px 4px 50px 0px #8a2a21;
+  background:linear-gradient(to bottom, #c62d1f 5%, #38f0b3 100%);
+  background-color:#c62d1f;
+  border-radius:18px;
+  border:1px solid #d02718;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffd919;
+  font-family:Arial;
+  font-size:17px;
+  padding:5px 24px;
+  text-decoration:none;
+  text-shadow:0px 1px 15px #810e05;
+}
+
+.inactiveD:hover
+{
+  background:linear-gradient(to bottom, #38f0b3 5%, #c62d1f 100%);
+  background-color:#38f0b3;
+}
+
+.demo {
+  border:1px solid #C0C0C0;
+  border-collapse:collapse;
+  padding:5px;
+}
+.demo th {
+  border:1px solid #C0C0C0;
+  padding:5px;
+  background:#EED211;
+}
+.demo td {
+  border:1px solid #C0C0C0;
+  padding:5px;
+  background:#9CF5ED;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>weeee</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>weeee</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	if (input) 
+	{
+		if(input.level && input.diff)
+		{
+			data.rankArray = [];
+			var userHighScore = 0;
+			var userHighTime = 0;
+			var lastUser = "";
+			var lastUserName = "";
+
+
+			var initializer = new GlideRecord('x_93700_arena_results');
+			initializer.addQuery('difficulty',input.diff);//the active difficulty
+			initializer.addQuery('level',input.level);//the active level
+			initializer.orderBy('arena_user');
+			initializer.query();
+
+			while(initializer.next())
+			{
+				if(lastUser == "")//to initialize the values for further calculation
+				{
+					userHighScore = initializer.getValue('total_score');
+					userHighTime = initializer.getValue('time_taken');
+					lastUser = initializer.arena_user.user.toString();
+					lastUserName = initializer.arena_user.user.name.toString();
+				}
+				else
+				{
+					if(lastUser == initializer.arena_user.user.toString())//if the next user is the same, the compare the scores
+					{
+						if(userHighScore < initializer.getValue('total_score'))//if the next record score is more, update the score and time
+						{
+							userHighScore = initializer.getValue('total_score');
+							userHighTime = initializer.getValue('time_taken');
+						}
+						if(userHighScore==initializer.getValue('total_score')&&userHighTime>initializer.getValue('time_taken'))//if the scores are the same, the time takes in previous record is more, upadate the time
+							userHighTime = initializer.getValue('time_taken');
+					}
+					if(lastUser!=initializer.arena_user.user.toString())
+					{
+						data.rankArray.push({"userHighScore":userHighScore,"userHighTime":userHighTime,"lastUser":lastUser,"lastUserName":lastUserName,"level":input.level,"difficulty":input.diff});//as soon as the new user comes in, push the last record and update the scores
+						userHighScore = initializer.getValue('total_score');
+						userHighTime = initializer.getValue('time_taken');
+						lastUser = initializer.arena_user.user.toString();
+						lastUserName = initializer.arena_user.user.name.toString();
+					}
+					if(!initializer.hasNext())//if no new record push the stored values
+					{
+						data.rankArray.push({"userHighScore":userHighScore,"userHighTime":userHighTime,"lastUser":lastUser,"lastUserName":lastUserName,"level":input.level,"difficulty":input.diff});
+					}
+				}
+			}
+
+			data.rankArray = data.rankArray.sort(function(a, b) {//sorting as per mood high score and least time
+				if(b.userHighScore != a.userHighScore)
+					return b.userHighScore - a.userHighScore;
+				if(b.userHighScore == a.userHighScore)
+					return a.userHighTime - b.userHighTime;	
+			});
+
+			var rankCounter = 1;
+
+			for(var eye = 0; eye<data.rankArray.length; eye++)//pushing rank name in each object
+			{
+				data.rankArray[eye].rank = rankCounter;
+				rankCounter++;
+				var glider = new GlideRecord('x_93700_arena_results');
+				glider.addQuery('arena_user.user',data.rankArray[eye].lastUser);
+				glider.addQuery('level',data.rankArray[eye].level);
+				glider.addQuery('difficulty',data.rankArray[eye].difficulty);
+				glider.query();
+				if(glider.next())
+				{
+					if(glider.challenged_by)
+						data.rankArray[eye].show = false;
+					if(!glider.challenged_by)
+					{
+						data.rankArray[eye].show = true;
+					}
+					data.rankArray[eye].challenger = glider.challenged_by.user.name.toString();
+				}
+			}
+		}
+		if(input.dif && input.lvl && input.User)
+		{
+			var challengerID = new GlideRecord('x_93700_arena_user');
+			challengerID.addQuery('user', gs.getUserID());
+			challengerID.query();
+
+			if(challengerID.next())
+			{
+				var challenger = new GlideRecord('x_93700_arena_results');
+				challenger.addQuery('arena_user.user',input.User);
+				challenger.addQuery('level',input.lvl);
+				challenger.addQuery('difficulty',input.dif);
+				challenger.query();
+				var challenged = 0;
+				while(challenger.next())
+				{
+					if(!challenger.challenged_by)
+					{
+						challenger.setValue('challenged_by',challengerID.getUniqueValue());
+						challenger.update();
+						challenged = 1;
+					}
+				}
+				if(challenged == 1)
+					gs.addInfoMessage("You just challenged "+challenger.arena_user.user.name.toString());
+			}
+		}
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>mihir</sys_created_by>
+        <sys_created_on>2020-04-10 08:51:30</sys_created_on>
+        <sys_id>897a5056db041010b6db8e474896192e</sys_id>
+        <sys_mod_count>254</sys_mod_count>
+        <sys_name>weeee</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_897a5056db041010b6db8e474896192e</sys_update_name>
+        <sys_updated_by>mihir</sys_updated_by>
+        <sys_updated_on>2020-04-18 10:46:19</sys_updated_on>
+        <template><![CDATA[<audio autoplay id="sound123" src="Click.mp3" preload="auto"></audio>
+<div class="lvl">
+  <button class="active1" id="level1" ng-click="c.clicker(); c.makeActive('level1'); c.showLeaderBoard()">Level 1</button>
+  <button class="inactive1" id="level2" ng-click="c.clicker(); c.makeActive('level2'); c.showLeaderBoard()">Level 2</button>
+  <button class="inactive1" id="level3" ng-click="c.clicker(); c.makeActive('level3'); c.showLeaderBoard()">Level 3</button>
+  <button class="inactive1" id="level4" ng-click="c.clicker(); c.makeActive('level4'); c.showLeaderBoard()">Level 4</button>
+</div>
+
+<div class="dif">
+  <button class= "activeD" id="easy" ng-click="c.clicker(); c.makeActiveD('easy'); c.showLeaderBoard()">Easy</button>
+  <button class= "inactiveD" id="medium" ng-click="c.clicker(); c.makeActiveD('medium'); c.showLeaderBoard()">Medium</button>
+  <button class= "inactiveD" id="hard" ng-click="c.clicker(); c.makeActiveD('hard'); c.showLeaderBoard()">Hard</button>
+</div>
+<table class="demo">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Player</th>
+      <th>Score</th>
+      <th>Time Taken</th>
+      <th>Challenges</th>
+    </tr>	
+  </thead>	
+  <tbody>	
+    <tr ng-repeat='x in data.rankArray'>
+      <td>{{x.rank}}</td>
+      <td>{{x.lastUserName}}</td>
+      <td>{{x.userHighScore}}</td>
+      <td>{{x.userHighTime}}</td>
+      <td ng-if="!x.show">Already challenged by {{x.challenger}}</td>
+      <td ng-if="x.show" ng-click="c.challenger(x.lastUser,x.level,x.difficulty); c.showLeaderBoard()"><button>Challenge</button></td>
+    </tr>
+  </tbody>
+</table>]]></template>
+    </sp_widget>
+</record_update>

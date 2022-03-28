@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function quizPage($sce, $timeout, $scope) {
+
+
+
+    // 	chrome.tabs.onActivated.addListener(callback);
+
+    // 	function callback()
+    // 	{alert("tab changed");
+    // 	}
+
+
+    // ///////////////WIP//////////////////////////	
+
+    // 	//Play/Pause music on page visibility//
+    // // Set the name of the hidden property and the change event for visibility
+    // var hidden, visibilityChange; 
+    // if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
+    //   hidden = "hidden";
+    //   visibilityChange = "visibilitychange";
+    // } else if (typeof document.msHidden !== "undefined") {
+    //   hidden = "msHidden";
+    //   visibilityChange = "msvisibilitychange";
+    // } else if (typeof document.webkitHidden !== "undefined") {
+    //   hidden = "webkitHidden";
+    //   visibilityChange = "webkitvisibilitychange";
+    // }
+
+
+
+    // // If the page is hidden, pause the video;
+    // // if the page is shown, play the video
+    // function handleVisibilityChange() {
+
+    // 	window.close();
+    // 	//alert("visibility change");
+    //   if (document[hidden]) {
+
+
+    //      c.gameScreen = {
+    // 			introSequence: false,
+    // 			gameHeading: true,
+    // 			mainMenu: true,
+    // 			gameLevels: false,
+    // 			quizPage: false,
+    // 			profilePage: false
+    // 		};
+    // 		$rootScope.$broadcast('gameScreen', c.gameScreen);
+
+    //   } 
+    // }
+
+    // // Warn if the browser doesn't support addEventListener or the Page Visibility API
+    // if (typeof document.addEventListener === "undefined" || hidden === undefined) {
+    //   console.log("This app requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
+    // } else {
+    //   // Handle page visibility change   
+    //   document.addEventListener(visibilityChange, handleVisibilityChange, false);
+
+    //   // When the video pauses, set the title.
+    //   // This shows the paused
+    //   gameBGM.addEventListener("pause", function(){
+    //  //   document.title = 'Paused';
+    //   }, false);
+
+    //   // When the video plays, set the title.
+    //   gameBGM.addEventListener("play", function(){
+    //   //  document.title = 'Playing'; 
+    //   }, false);
+
+    // }
+
+    ////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+    var c = this;
+    //c.showQuizPage = true;	
+    c.hasOpenSession = false;
+    c.fromChallenge = false;
+    c.level = '';
+    c.difficulty = '';
+
+    c.labels = {};
+    c.labels['easy'] = 'Easy';
+    c.labels['medium'] = 'Medium';
+    c.labels['hard'] = 'Hard';
+    c.labels['level1'] = 'Level 1';
+    c.labels['level2'] = 'Level 2';
+    c.labels['level3'] = 'Level 3';
+    c.labels['level4'] = 'Level 4';
+
+
+    c.showtimer = function() {
+        c.color = '#FF0000';
+        c.time = 60;
+
+        if (!c.hasOpenSession) {
+
+            c.hasOpenSession = true; // used to prevent duplicate timer initialisation.
+
+            c.radialObj = radialIndicator('#indicatorContainer', {
+                radius: 45,
+                barWidth: 15,
+                barColor: c.color,
+                minValue: 0,
+                maxValue: 60,
+                fontWeight: 'normal',
+                roundCorner: true,
+                fontSize: 55,
+                fontColor: "green",
+                format: function(value) {
+                    var date = new Date();
+                    return c.time;
+                }
+            });
+
+        }
+
+        c.timer = setInterval(function() {
+
+            c.radialObj.value(c.time);
+            c.time = c.time - 1;
+
+            if (c.time == 0) {
+                c.time = 60;
+                clearInterval(c.timer);
+
+                if (c.currentQueNum == c.maxQuestions - 1) {
+                    c.submitAnswer();
+                    clearInterval(c.timer);
+                } else {
+                    c.getNextQuestion();
+                }
+            }
+
+            if (c.time < 10) {
+                sfx.playTik();
+            }
+
+        }, 1000);
+    };
+
+
+
+    c.saveAnswer = function(type, id) {
+        sfx.playTik();
+
+        if (type == 'radio') {
+            c.answerCache = [];
+            c.answerCache.push(id);
+        } else if (type == 'checkbox') {
+            var index = c.answerCache.indexOf(id);
+            if (index === -1) c.answerCache.push(id);
+            else c.answerCache.splice(index, 1);
+        }
+    };
+
+    c.processHTML = function(param, type, QNnumber) {
+        if (type)
+            return $sce.trustAsHtml('<b>' + QNnumber + '.' + param.replace('<p>', '').replace('</p>', '') + '</b>');
+    };
+
+
+
+
+    c.initialize = function(r) {
+        c.isLastQuestion = false;
+        c.answerCache = [];
+        c.answers = [];
+        c.maxQuestions = r.data.requiredQuestions;
+        c.data.questions = _.shuffle(r.data.questions);
+        c.time = c.data.timer;
+
+        clearInterval(c.timer); // clear any old timer
+        c.showtimer(); // start timer
+
+        c.currentQueNum = 0;
+        c.number = 1;
+        c.question = c.data.questions[c.currentQueNum];
+        c.question.ques = c.processHTML(c.question.question, "ques", c.number);
+
+    };
+
+    //alert(c.data.questions.length)
+    //if (c.data.questions.length > 0)
+    // c.initialize();
+
+    c.clearTestSession = function() {
+        clearInterval(c.timer);
+
+        c.data.questions.length = 0;
+    };
+
+
+    c.submitAnswer = function() {
+        clearInterval(c.timer); //stop timer
+        c.storeAnswer(); //store last answer
+
+        c.clearTestSession();
+        c.isLoading = true;
+
+
+
+        c.server.get({
+            action: "submitTest",
+            answers: c.answers,
+            fromChallenge: c.fromChallenge,
+            level: c.level,
+            difficulty: c.difficulty
+        }).then(function(r) {
+            var gameScreen = {
+                resultID: r.data.result, //sys_id of current result record
+                attempts: '2', //tbd
+                level: c.labels[c.level],
+                difficulty: c.labels[c.difficulty],
+                quizPage: false,
+                resultPage: true
+            };
+
+            c.isLoading = false;
+            $rootScope.$broadcast('gameScreen', gameScreen);
+        });
+
+    };
+
+    c.storeAnswer = function() {
+
+        var answer = {};
+        answer.questionID = c.question.id;
+        answer.module = c.question.module;
+		answer.type = c.question.type;
+        answer.response = c.answerCache;
+        answer.timeTaken = (60 - c.time); //TBD - populate dynamically
+
+        c.answers.push(answer);
+        c.answerCache = []; //clear answer cache	
+    };
+
+
+    c.getNextQuestion = function() {
+
+        // timeout to fix displaying of prev ques choices
+        c.isLoading = true;
+        $timeout(function() {
+            c.isLoading = false;
+        }, 500);
+
+        clearInterval(c.timer); //stop timer
+        c.storeAnswer(); //store previous question's answer
+
+        c.currentQueNum++;
+        c.question = c.data.questions[c.currentQueNum];
+        c.question.ques = c.processHTML(c.question.question, "ques", ++c.number);
+
+        if (c.number >= c.data.questions.length) { //predict last question
+            c.isLastQuestion = true;
+        }
+
+        c.showtimer(); //restart timer
+        _.defer(function() {
+            $scope.$apply();
+        });
+    };
+
+	// callbacks for match type questions
+    $scope.sortableCallbacks = {
+        accept: function(sourceItemHandleScope, destSortableScope, destItemScope) {
+            return sourceItemHandleScope.itemScope.sortableScope.$parent.$id == destSortableScope.$parent.$id;
+        },
+        orderChanged: function(event) {
+
+        },
+        itemMoved: function(event) {
+
+        },
+        dragStart: function(event) {
+
+        },
+        dragEnd: function(event) {
+			var updatedRhs = event.dest.sortableScope.modelValue;
+			c.answerCache = c.question.choices.map(function(choice, index) {
+				return {
+					choice: choice.id,
+					answer: updatedRhs[index]
+				};
+			});
+            c.question.choices[event.dest.index].changed = true;
+        }
+    };
+
+
+
+
+    /////////////// /////////////////////////Listener////////////////////////////////////////////////
+
+
+    //To clear ongoing session when user leaves test seesion by clicking  home button
+    $rootScope.$on('truncateTest', function(event, obj) {
+        c.clearTestSession(); //Functionality not yet tested -TBD 
+    });
+
+    $rootScope.$on('gameScreen', function(event, obj) {
+
+        c.showQuizPage = obj.quizPage;
+        if (c.showQuizPage) {
+            c.isLoading = true;
+            c.level = obj.level;
+            c.difficulty = obj.difficulty;
+            c.fromChallenge = obj.challenge;
+            c.mode = obj.mode; //hire / normal mode
+
+            c.server.get({
+                action: "startTest",
+                level: obj.level,
+                difficulty: obj.difficulty,
+                mode: obj.mode,
+                hireQuestions: obj.questionsarray
+
+            }).then(function(r) {
+                c.initialize(r); //Begin Processing
+                c.isLoading = false;
+            });
+        }
+    });
+
+    
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  padding-top: 145px;
+  padding-left: 7px;
+}
+
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 40px 40px;
+}
+
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  margin: -4px 0 0 -4px;
+}
+
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+
+.lds-roller div:nth-child(1):after {
+  top: 63px;
+  left: 63px;
+}
+
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+
+.lds-roller div:nth-child(2):after {
+  top: 68px;
+  left: 56px;
+}
+
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+
+.lds-roller div:nth-child(3):after {
+  top: 71px;
+  left: 48px;
+}
+
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+
+.lds-roller div:nth-child(4):after {
+  top: 72px;
+  left: 40px;
+}
+
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+
+.lds-roller div:nth-child(5):after {
+  top: 71px;
+  left: 32px;
+}
+
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+
+.lds-roller div:nth-child(6):after {
+  top: 68px;
+  left: 24px;
+}
+
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+
+.lds-roller div:nth-child(7):after {
+  top: 63px;
+  left: 17px;
+}
+
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+
+.lds-roller div:nth-child(8):after {
+  top: 56px;
+  left: 12px;
+}
+
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.pretty {
+  position: relative;
+  display: table;
+  margin-right: 1em;
+  margin-top: 1em;
+  white-space: wrap;
+  line-height: 1;
+}
+
+.btn-margin {
+  margin-top: 20px;
+}
+
+.align-middle {
+  padding-top: 2%;
+}
+
+.fixedbutton {
+  position: fixed;
+  bottom: 4px;
+  right: 10px;
+}
+
+#indicatorContainerWrap,
+#indicatorContainer {
+  display: inline-block;
+  position: relative;
+}
+
+.responsive-question {
+  font-size: 1.8em;
+}
+
+.responsive-answer {
+  display: block;
+  font-size: 1.6em;
+}
+
+.fixed {
+  position: fixed;
+  bottom: 25;
+  right: 15;
+}
+
+.outer-container {
+  height: 600px;
+}
+
+@media only screen and (max-width: 768px) {
+  .responsive-answer {
+    font-size: 1.4em;
+    width: 90vw;
+    margin: 0 auto;
+  }
+  .responsive-question {
+    font-size: 1.6em;
+    width: 90vw;
+    margin: 0 auto;
+  }
+  .fixed {
+    position: fixed;
+    bottom: 25px;
+    right: 0px;
+    width: 100%;
+  }
+  .next-btn,
+  .submit-btn {
+    width: 100%;
+  }
+  hr {
+    width: 90vw;
+  }
+}
+
+
+/*margin between btn icon &amp; text*/
+
+.next-btn,
+.submit-btn {
+  i {
+    margin-left: 10px;
+  }
+}
+
+.next-btn,
+.submit-btn {
+  float: right;
+}
+
+.quiz-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%
+}
+
+#prgLogo {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  margin-top: -30px;
+  margin-left: -30px;
+}
+
+.match-question {
+  display: flex;
+  justify-content: space-around;
+  .match-lhs,.match-rhs {
+    padding: 25px 0;
+    font-size: 0.9em;
+    text-align: start;
+  }
+  .option-wrapper {
+  	width: 50%;
+  }
+  .match-lhs,.match-rhs {
+    padding: 25px 0;
+    font-size: 0.9em;
+  }
+  .match-lhs {
+    padding-right: 30px;
+    text-align: center;
+  }
+  .match-rhs {
+    text-align: start;
+  }
+  .match-rhs .glyphicon{
+    color: white;
+  }
+}
+
+/*styles for custom radio btns &amp; checkbox - jaydeep*/
+
+.answer-container {
+  display: flex;
+  flex-flow: column;
+  label {
+    position: relative;
+    padding: 10px 0 10px 2em;
+    font-size: 0.9em;
+    /*cursor: pointer;*/
+    color: darkorange;
+    transition: all 0.25s linear;
+    text-align: left;
+  }
+  input[type=radio],
+  input[type=checkbox] {
+    display: none;
+  }
+  .radio-styled,
+  .checkbox-styled {
+    position: absolute;
+    height: 1em;
+    width: 1em;
+    border: 1px solid #AAAAAA;
+    left: 0.7em;
+    top: 0.7em;
+    border-radius: 50%;
+    transition: background 0.25s linear;
+  }
+  .checkbox-styled {
+    border-radius: 0.2em;
+    span {
+      position: absolute;
+      display: none;
+      color: #5cb85c;
+      font-size: 0.8em;
+    }
+  }
+  label:hover {
+    color: white;
+  }
+  label:hover .radio-styled {
+    border: 1px solid white;
+  }
+  /*label:hover .checkbox-styled span {
+  display: block;
+  opacity: 0.3;
+}*/
+  input[type=radio]:checked~.radio-styled {
+    border: 1px solid white;
+  }
+  input[type=checkbox]:checked~.checkbox-styled span {
+    display: block;
+  }
+  input[type=radio]:checked~.radio-styled::after {
+    content: "";
+    position: absolute;
+    height: 0.6em;
+    width: 0.6em;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    background-color: #5cb85c;
+    transform: translate(-50%, -50%);
+  }
+  input[type=radio]:checked~.radio-label {
+    color: white;
+  }
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .radio-styled,
+    .checkbox-styled {
+      top: 1em;
+    }
+    /*label:hover .checkbox-styled span {
+    display: none;
+    opacity: 1;
+  }*/
+  }
+}
+textarea {
+  width: 100%; 
+  overflow: hidden scroll; 
+  overflow-wrap: break-word;
+  resize: none;
+  display: block;
+  font-size:20px !important;
+  text-align:left;
+  font-family: courier, serif !important;
+}
+/*end of styles for custom radiobtns &amp; checkbox*/</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>ArenaQuiz</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	//The 'fromChallenge' flag determines if the test is being taken because of somebody's Challenge(clicking Accept Challenge from Profile page) or just being taken for fun,We will also send this flag to the 'Evaluator' script include to determine the type of action performed on Result records
+
+
+	data.questions          = [];
+	data.timer              = gs.getProperty('x_93700_arena.quizTimer.time') || 40;
+	data.requiredQuestions  = options.no_of_questions || 10; // no of questions required
+	data.quesIds            = []; //to store list returned from glide aggregate - temp
+	data.randomQuestionIds  = []; //to store final list of questions
+	data.moduleWeightage    = JSON.parse(gs.getProperty('x_93700_arena.ModuleWeightage'));
+
+	var player = new GlideRecord("x_93700_arena_user");
+	player.addQuery("user", gs.getUserID());
+	player.addQuery('interviewee','true');
+	player.query();
+	if (player.next()) {
+		data.interviewprofile = 'true';
+	}
+
+	/** 
+     * Description: Generate random questions from a list of questions
+     * Parameters: Questions Array, No of questions required
+     * Returns: Randomised questions sys_ids
+     */
+	function randomiser(queArray, requiredQuestionCount) {
+		var list = [];
+		var loopCount = 0;// used to terminate
+		var stopProcessing;
+		while (list.length < requiredQuestionCount && !stopProcessing ) {
+			var question = queArray[Math.floor(Math.random() * Math.floor(queArray.length))];
+			loopCount++;
+			if(loopCount > 1000000)           stopProcessing = true;
+			if(list.indexOf(question) == -1)  list.push(question);     
+		}
+		return list;
+	}
+
+	function mergeArray(array1, array2) {
+		return array1.concat(array2);
+	}
+
+
+	function getAnswers(questionId) {
+		var choices = [];
+		var rec = new GlideRecord("x_93700_arena_quiz_choices");
+		rec.addQuery("question", questionId);
+		rec.orderBy('sys_updated_on');
+		rec.query();
+		while (rec.next()) {
+			var choice = {};
+			choice.value = rec.choice.toString();
+			choice.id    = rec.sys_id.toString();
+			choices.push(choice);
+		}
+		return choices;
+	}
+	
+	function getMatches(questionId) {
+		var matches = [];
+		var rec = new GlideRecord("x_93700_arena_quiz_choices");
+		rec.addQuery("question", questionId);
+		rec.query();
+		while (rec.next()) {
+				matches.push(rec.answer.toString());
+		}
+		matches = shuffle(matches);
+		return matches;
+	}
+
+	function shuffle(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex;
+		while (0 !== currentIndex) {
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+		}
+		return array;
+	}
+
+	function getquestion(module) {
+
+		var tempQuesIdList = [];
+		var question = new GlideAggregate('x_93700_arena_arena_question');
+		question.addQuery('module', module);
+		question.addQuery('active', true);
+
+		if(data.selected_level)
+			question.addQuery('level', data.selected_level);
+
+		if(data.selected_difficulty)
+			question.addQuery('difficulty', data.selected_difficulty);
+
+		question.groupBy('sys_id');
+		question.query();
+		while (question.next()) {
+			tempQuesIdList.push(question.sys_id + '');
+		}
+
+		//gs.addInfoMessage(JSON.stringify(tempQuesIdList));
+		var randomQuestions = randomiser(tempQuesIdList, data.moduleWeightage[module], tempQuesIdList.length);
+
+		//	gs.addInfoMessage(randomQuestions);
+		data.quesIds = mergeArray(data.quesIds, randomQuestions);
+	}
+
+
+	function initialize() { //runs during first time loading
+
+
+		if(data.mode != 'hire'){
+			var moduleName = Object.keys(data.moduleWeightage);
+
+			for (var quest = 0; quest < moduleName.length; quest++) {
+				getquestion(moduleName[quest]);
+			}
+		}
+		else{
+			data.quesIds = data.hire_questions;
+		}
+
+
+		var qn = new GlideRecord("x_93700_arena_arena_question");
+		qn.addEncodedQuery('sys_idIN' + data.quesIds.toString());
+		qn.addQuery('active','true');
+		qn.query();
+		while (qn.next()) {
+			var que      = {};
+			que.id       = qn.sys_id + "";
+			que.module   = qn.module + "";
+			que.type     = qn.type + "";
+			que.question = qn.question + "";
+			que.choices  = getAnswers(que.id);
+			if(que.type == 'match') que.matches = getMatches(que.id);
+			data.questions.push(que);
+		}
+	}
+
+	//initialize();
+
+	if (input) {// Begin processing
+
+		if (input.action == "startTest") {
+			data.selected_level      = input.level;
+			data.selected_difficulty = input.difficulty;
+			data.mode                = input.mode;
+			data.hire_questions      = input.hireQuestions;
+
+			initialize(); // The starting point
+		} else if (input.action == "submitTest") {
+			data.result = new Evaluator().getResult(input.answers, input.fromChallenge, input.level, input.difficulty);      
+		}
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>vyas</sys_created_by>
+        <sys_created_on>2019-11-30 19:26:14</sys_created_on>
+        <sys_id>efd9323fdb19c810b6db8e4748961980</sys_id>
+        <sys_mod_count>1326</sys_mod_count>
+        <sys_name>ArenaQuiz</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_efd9323fdb19c810b6db8e4748961980</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-08 10:55:39</sys_updated_on>
+        <template><![CDATA[<div ng-show="c.showQuizPage " oncontextmenu="return false;" class="textStyling  noselect">
+
+  <!--container start--> <!--Removed classes 'noselect' and 'well' temporarily--> 
+  <div class='container outer-container '>
+    <div class="row">
+      <div class="col-lg-12 col-md-12"  >
+        <div>
+          <div class="row">
+            <div ng-hide = "data.interviewprofile == 'true'">
+
+              <div class="col-lg-4 col-md-4 text-right hidden-xs align-middle" >
+                <h2>{{c.labels[c.level]}}</h2>
+              </div>
+              <div class="col-lg-4 col-md-4 hidden-xs align-middle" >
+                <h2>Difficulty : {{c.labels[c.difficulty]}}</h2>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+              <div  id="indicatorContainerWrap">
+                <div id="indicatorContainer"></div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-4" ></div>
+            <div class="col-sm-4 text-center" >
+              <div ng-if='c.isLoading'>
+                <div class="lds-roller">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4" ></div>
+          </div>
+          <div ng-if='!c.isLoading' >
+            <div class="responsive-question text-left d-flex flex-column">
+              <div ng-bind-html="c.question.ques"></div>
+            </div>
+            <div class="answer-container responsive-answer d-flex flex-column">
+
+              <label ng-if="c.question.type =='radioButton'" ng-repeat="choice in c.question.choices">
+                <input type="radio" name="ques-radio" ng-value='choice.id' ng-click="c.saveAnswer('radio', choice.id)"/>
+                <span class="radio-label">{{choice.value}}</span>
+                <span class="radio-styled"></span>
+              </label>
+
+              <label ng-if="c.question.type =='checkBox'" ng-repeat="choice in c.question.choices">
+                <input type="checkbox" name="ques-checkbox" ng-value='choice.id' ng-click="c.saveAnswer('checkbox', choice.id)"/>
+                <span class="checkbox-label">{{choice.value}}</span>
+                <span class="checkbox-styled"><span class="glyphicon glyphicon-ok"></span></span>
+              </label>  
+
+             
+
+              <div ng-if="c.question.type =='match'" class="match-question">
+                <div class="option-wrapper">
+                  <div class="match-lhs" ng-style="choice.changed && {'text-align':'end'}" ng-repeat="choice in c.question.choices">{{choice.value}}</div>
+                </div>
+                <div class="option-wrapper" as-sortable="sortableCallbacks" ng-model="c.question.matches">
+                  <div ng-repeat="match in c.question.matches" as-sortable-item>
+                    <div class="match-rhs"><span class="glyphicon glyphicon-menu-hamburger" as-sortable-item-handle></span>{{match}}</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Footer - fix-bottom-right Buttons-->
+  <div ng-if='!c.isLoading' class="row quiz-footer">
+    <button ng-if='!c.isLastQuestion' type="button" ng-click="c.getNextQuestion()" class="btn btn-primary btn-lg next-btn">${Next Question}<i class="fa fa-arrow-circle-right"></i></button>
+    <button ng-if='c.isLastQuestion'  type="button" ng-click="c.submitAnswer()" class="btn btn-primary btn-lg submit-btn">${submit}<i class="fa fa-arrow-circle-right"></i></button>
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

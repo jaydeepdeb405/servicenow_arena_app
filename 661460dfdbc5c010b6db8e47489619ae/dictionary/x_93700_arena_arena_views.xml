@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Arena Views" max_length="40" name="x_93700_arena_arena_views" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Category" max_length="40" name="category" type="string">
+            <choice>
+                <element inactive_on_update="false" label="DYK" sequence="0" value="dyk"/>
+                <element inactive_on_update="false" label="SP" sequence="1" value="sp"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="DYK Article" max_length="32" name="dyk_article" reference="x_93700_arena_did_you_know" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="SP Question" max_length="32" name="sp_question" reference="x_93700_arena_questions" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" display="true" label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Views" max_length="40" name="views" type="integer"/>
+        <index name="index">
+            <element name="dyk_article"/>
+        </index>
+        <index name="index2">
+            <element name="sp_question"/>
+        </index>
+        <index name="index3">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* width */
+::-webkit-scrollbar {
+  width  : 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius   : 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.tree-picker {
+  padding: 0 5px 5px 5px;
+  height: 40vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>SP leader board</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	/* populate the 'data' object */
+	/* e.g., data.table = $sp.getValue('table'); */
+	data.leaderboard=[];
+	var ag = new GlideAggregate('x_93700_arena_answer');
+	ag.addQuery('correct', true);
+	ag.addAggregate('COUNT', 'user');
+	ag.query();
+	while(ag.next()) {
+		data.leaderboard.push({
+			'name':ag.user.getDisplayValue(),
+			'score':ag.getAggregate('COUNT', 'user')
+		});
+	}
+	data.leaderboard = data.leaderboard.sort(function(a,b){
+		return b.score-a.score;
+	});
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>yashwanth.reddy</sys_created_by>
+        <sys_created_on>2021-06-07 10:19:00</sys_created_on>
+        <sys_id>f8b58bd60724301037c7f2ae7c1ed069</sys_id>
+        <sys_mod_count>50</sys_mod_count>
+        <sys_name>SP leader board</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_f8b58bd60724301037c7f2ae7c1ed069</sys_update_name>
+        <sys_updated_by>yashwanth.reddy</sys_updated_by>
+        <sys_updated_on>2021-06-08 15:32:37</sys_updated_on>
+        <template><![CDATA[<div class="card" >
+  <h5 style="color:red"><b>Shankaran Pillai Super Hero's</b></h5> 
+  <div class="tree-picker">
+    <table>
+      <thead>
+        <tr style="color:skyblue">
+          <td><b>Name</b></td>
+          <td><b>Life save count</b></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="users in data.leaderboard" style="color:green">
+          <td>{{users.name}}</td>
+          <td style="color:red;text-align:center;">{{users.score}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

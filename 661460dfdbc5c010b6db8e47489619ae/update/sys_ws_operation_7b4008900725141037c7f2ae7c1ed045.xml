@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>POST</http_method>
+        <name>validateQuizResponses</name>
+        <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+    var level = request.body.data.level;
+    var difficulty = request.body.data.difficulty;
+    var responses = request.body.data.answers;
+
+    var resultId = new Evaluator().getResult(responses, false, level, difficulty);
+    if (resultId && resultId !== null && resultId !== undefined && resultId !== '') {
+        var resultGr = new GlideRecord('x_93700_arena_results');
+        resultGr.get(resultId);
+		
+		var responseBody = {
+			score: resultGr.getValue('total_score'),
+			timeTaken: resultGr.getValue('time_taken'),
+			nextLevel: null,
+			nextDifficulty: null
+		};
+		
+		var nextLevelData = getNextLevelData(level, difficulty);
+		responseBody.nextLevel = nextLevelData.level;
+		responseBody.nextDifficulty = nextLevelData.difficulty;
+		
+        response.setBody(responseBody);
+        response.setStatus(200);
+    } else {
+        throw 'Invalid request';
+    }
+	
+	function getNextLevelData(level, difficulty) {
+		var nextLevel = null, nextDifficulty = null;
+		var levelLabels = ['Level 1', 'Level 2', 'Level 3', 'Level 4'];
+		var difficultyLabels = ['Easy', 'Medium', 'Hard'];
+		
+		var userGr = new GlideRecord('x_93700_arena_user');
+		userGr.get('user', gs.getUserID());
+		
+		var levelChoices = userGr.getElement('level').getChoices();
+		var difficultyChoices = userGr.getElement('difficulty').getChoices();
+		
+		var newUserLevelIndex = levelChoices.indexOf(userGr.getValue('level'));
+		var newUserDifficultyIndex = difficultyChoices.indexOf(userGr.getValue('difficulty'));
+		
+		var currentLevelIndex = levelChoices.indexOf(level);
+		var currentDifficultyIndex = difficultyChoices.indexOf(difficulty);
+		
+		if(newUserLevelIndex > currentLevelIndex || newUserDifficultyIndex > currentDifficultyIndex) {
+			if(difficultyChoices.length === (currentDifficultyIndex+1)) {
+				nextLevel = {label: levelLabels[currentLevelIndex+1], value: levelChoices[currentLevelIndex+1]};
+				nextDifficulty = {label: difficultyLabels[0], value: difficultyChoices[0]};
+			}
+			else{
+				nextLevel = {label: levelLabels[currentLevelIndex], value: levelChoices[currentLevelIndex]};
+				nextDifficulty = {label: difficultyLabels[currentDifficultyIndex+1], value: difficultyChoices[currentDifficultyIndex+1]};
+			}
+		}
+	
+		return {
+			level: nextLevel,
+			difficulty: nextDifficulty
+		};
+	}
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_93700_arena/arena/validateQuizResponses</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/validateQuizResponses</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-17 15:27:33</sys_created_on>
+        <sys_id>7b4008900725141037c7f2ae7c1ed045</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>validateQuizResponses</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ws_operation_7b4008900725141037c7f2ae7c1ed045</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-18 09:04:17</sys_updated_on>
+        <web_service_definition display_value="Arena">5b64b26e0755101037c7f2ae7c1ed048</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

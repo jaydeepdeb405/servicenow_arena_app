@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css_include">
+    <sp_css_include action="INSERT_OR_UPDATE">
+        <name>Materialize</name>
+        <source>local</source>
+        <sp_css display_value="materialize.min.css">1a4f876307a0301037c7f2ae7c1ed017</sp_css>
+        <sys_class_name>sp_css_include</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-26 21:07:10</sys_created_on>
+        <sys_id>c9e4ca340716541037c7f2ae7c1ed08e</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Materialize</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_css_include_c9e4ca340716541037c7f2ae7c1ed08e</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-06-11 08:10:54</sys_updated_on>
+        <url/>
+    </sp_css_include>
+</record_update>

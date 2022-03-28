@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role_contains">
+    <sys_user_role_contains action="INSERT_OR_UPDATE">
+        <contains display_value="x_93700_arena.question_team" name="x_93700_arena.question_team">aabae2a7db895810b6db8e474896197d</contains>
+        <role display_value="x_93700_arena.admin" name="x_93700_arena.admin">3e68a0dbdb09c010b6db8e47489619e6</role>
+        <sys_class_name>sys_user_role_contains</sys_class_name>
+        <sys_created_by>praveen</sys_created_by>
+        <sys_created_on>2020-06-09 14:08:40</sys_created_on>
+        <sys_id>44726e25db199010b6db8e474896190f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena.question_team.x_93700_arena.admin</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_user_role_contains_44726e25db199010b6db8e474896190f</sys_update_name>
+        <sys_updated_by>praveen</sys_updated_by>
+        <sys_updated_on>2020-06-09 14:08:40</sys_updated_on>
+    </sys_user_role_contains>
+</record_update>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Arena Player" max_length="40" name="x_93700_arena_user" sizeclass="9" type="collection">
+        <element label="Achievement on Leaderboard" max_length="140" name="achievement_leaderboard" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Application Excellence" max_length="40" name="application_excellence" type="integer"/>
+        <element label="Nickname" max_length="15" name="avatar" type="string"/>
+        <element attributes="edge_encryption_enabled=true" hint="Number of times User have won challenges" label="Berserker" max_length="40" name="berserker" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="easy" label="Difficulty" max_length="40" name="difficulty" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Easy" sequence="100" value="easy"/>
+                <element inactive_on_update="false" label="Medium" sequence="200" value="medium"/>
+                <element inactive_on_update="false" label="Hard" sequence="300" value="hard"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" hint="job seeker" label="Interviewee" max_length="40" name="interviewee" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" hint="Number of times User have been challenged by others." label="Knight" max_length="40" name="knight" type="integer"/>
+        <element label="Last Played On" max_length="80" name="last_played_on" type="string"/>
+        <element label="Leader Board End" max_length="40" name="leader_board_end" type="glide_date_time"/>
+        <element label="Leader Board Start" max_length="40" name="leader_board_start" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" default="level1" label="Level" max_length="40" name="level" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Level 1" value="level1"/>
+                <element inactive_on_update="false" label="Level 2" value="level2"/>
+                <element inactive_on_update="false" label="Level 3" value="level3"/>
+                <element inactive_on_update="false" label="Level 4" value="level4"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Music" max_length="40" name="music" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Platform Excellence" max_length="40" name="platform_excellence" type="integer"/>
+        <element hint="Displays the maximum level user have played till now" label="Highest Level Played" max_length="40" name="present_level" type="string"/>
+        <element attributes="edge_encryption_enabled=true,pdf_cell_type=image" label="Profile Image" max_length="40" name="profile_image" type="user_image"/>
+        <element attributes="edge_encryption_enabled=true" label="Scripting Excellence" max_length="40" name="scripting_excellence" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="SFX" max_length="40" name="sfx" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="3" default="pop" label="SFX Sounds" max_length="40" name="sfx_sounds" type="string">
+            <choice>
+                <element inactive_on_update="false" label="pop" sequence="0" value="pop.mp3"/>
+                <element inactive_on_update="false" label="ding" sequence="1" value="ding.mp3"/>
+                <element inactive_on_update="false" label="dab" sequence="2" value="dab.mp3"/>
+                <element inactive_on_update="false" label="drop" sequence="3" value="drop.mp3"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Sound" max_length="40" name="sound" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="UI Excellence" max_length="40" name="ui_excellence" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" display="true" label="Player" max_length="32" name="user" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" hint="Number of times User have challenged others" label="Viking" max_length="40" name="viking" type="integer"/>
+        <index name="index">
+            <element name="user"/>
+        </index>
+    </element>
+</database>

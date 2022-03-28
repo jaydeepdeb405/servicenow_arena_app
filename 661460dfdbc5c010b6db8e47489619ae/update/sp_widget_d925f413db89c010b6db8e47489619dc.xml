@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function mainPageFunctions() {
+
+	
+
+	
+    var c = this;
+	
+	
+	///////////////////////////////////////////Play Music//////////////////////////////////////////
+	setTimeout(function() {
+        c.playingMusic = new Audio('gameBGM2.mp3').play();
+
+    }, 1000);
+	
+	
+	$("html").css("cursor: url('gameCursor.jpg'), auto");
+	
+	
+    var loadStep = 0;
+
+    var idArray = ['#play', '#settings', '#leader_board', '#exit'];
+    var step = 0;
+    c.showSettings = false;
+    c.showHome = false;
+    c.showCompany = true;
+    c.loadingPage = false;
+    c.quizHome = false;
+
+	
+	
+	
+    c.goToHome = function() {
+        c.showSettings = false;
+        c.showHome = true;
+        c.showCompany = false;
+    };
+
+	
+	
+	
+    c.playSound = function(param) {
+        //play only if user sound preference is turned on
+        if (c.data.userPrSound) {
+            new Audio(param).play();
+        }
+
+    };
+
+
+
+
+	
+	
+	
+    c.hideList = function() {
+
+        $("#play").hide();
+        $("#settings").hide();
+        $("#leader_board").hide();
+        $("#exit").hide();
+
+    };
+    c.hideList();
+
+    c.trigger = function() {
+
+        setTimeout(function() {
+
+            $(idArray[step]).show();
+            $(idArray[step]).addClass("animated bounceInLeft");
+            step++;
+            if (step < 4)
+                c.trigger();
+        }, 100);
+
+    }; //trigger end
+
+
+    c.openMenu = function() {
+		
+       // c.showCompany = false;
+		$('#introSeq').hide();
+        c.showHome = true;
+        c.trigger();
+        c.playSound('arrow.mp3');
+    };
+
+   
+		c.openMenu();
+        //c.trigger();
+
+
+    c.process = function(action) {
+        c.playSound('arrow.mp3');
+        if (action == 'settings') {
+            c.showSettings = true;
+            c.showHome = false;
+        } else if (action == 'play') {
+            c.showSettings = false;
+            c.showHome = false;
+            c.showCompany = false;
+
+            c.quizHome = true;
+        }
+
+
+
+
+
+    }; //process end
+
+
+    //update user preference
+    c.saveUserPreference = function(value, field) {
+
+        c.server.get({
+            parameter: field,
+            Value: value,
+            action: "userPreference"
+        }).then(function(response) {
+
+        });
+    };
+
+    //end
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.settings{&#13;
+    height: 100%;&#13;
+}&#13;
+.arena-img{&#13;
+    height: 50%;&#13;
+    width: 30%;&#13;
+    margin-left: 35%;&#13;
+    vertical-align: middle;&#13;
+}&#13;
+&#13;
+&#13;
+#introSeq {&#13;
+  position: fixed;&#13;
+  right: 0;&#13;
+  bottom: 0;&#13;
+  min-width: 100%; &#13;
+  min-height: 100%;&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+$base: 4rem;&#13;
+&#13;
+.container {&#13;
+ display: flex;&#13;
+ justify-content: center;&#13;
+&#13;
+ width: 100%;&#13;
+ height: 100vh;&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+.companyName {&#13;
+    text-align: center;&#13;
+    text-shadow: -4px 6px 1px #ff0000;&#13;
+    font-family: Cursive;&#13;
+    font-size: 200px;&#13;
+    font-style: italic;&#13;
+    font-weight: normal;&#13;
+    text-transform: none;&#13;
+    color: #00ffc6;&#13;
+}&#13;
+&#13;
+td{&#13;
+     border: none !important;&#13;
+     font-size: 30px;&#13;
+     color: white;&#13;
+}&#13;
+&#13;
+.arena-settings-table{&#13;
+  height : 100%&#13;
+  width : 40%;&#13;
+  margin : auto;&#13;
+}&#13;
+&#13;
+.switch {&#13;
+  position: relative;&#13;
+  display: inline-block;&#13;
+  width: 60px;&#13;
+  height: 34px;&#13;
+}&#13;
+&#13;
+.switch input { &#13;
+  opacity: 0;&#13;
+  width: 0;&#13;
+  height: 0;&#13;
+}&#13;
+&#13;
+.slider {&#13;
+  position: absolute;&#13;
+  cursor: pointer;&#13;
+  top: 0;&#13;
+  left: 0;&#13;
+  right: 0;&#13;
+  bottom: 0;&#13;
+  background-color: #ccc;&#13;
+  -webkit-transition: .4s;&#13;
+  transition: .4s;&#13;
+}&#13;
+&#13;
+.slider:before {&#13;
+  position: absolute;&#13;
+  content: "";&#13;
+  height: 26px;&#13;
+  width: 26px;&#13;
+  left: 4px;&#13;
+  bottom: 4px;&#13;
+  background-color: white;&#13;
+  -webkit-transition: .4s;&#13;
+  transition: .4s;&#13;
+}&#13;
+&#13;
+input:checked + .slider {&#13;
+  background-color: #2196F3;&#13;
+}&#13;
+&#13;
+input:focus + .slider {&#13;
+  box-shadow: 0 0 1px #2196F3;&#13;
+}&#13;
+&#13;
+input:checked + .slider:before {&#13;
+  -webkit-transform: translateX(26px);&#13;
+  -ms-transform: translateX(26px);&#13;
+  transform: translateX(26px);&#13;
+}&#13;
+&#13;
+/* Rounded sliders */&#13;
+.slider.round {&#13;
+  border-radius: 34px;&#13;
+}&#13;
+&#13;
+.slider.round:before {&#13;
+  border-radius: 50%;&#13;
+}&#13;
+&#13;
+&#13;
+#panel-body&#13;
+{&#13;
+  overflow: hidden; &#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+#list-arena li {&#13;
+  font-size:31px;&#13;
+   text-align: center;&#13;
+   border: 2px solid red;&#13;
+   border-radius: 28px;&#13;
+   background: #d1703c;&#13;
+   color: #fff;&#13;
+   overflow: hidden;&#13;
+   line-height: 2em;&#13;
+   width:90%;&#13;
+   margin: 2em 0;  &#13;
+}&#13;
+&#13;
+#list-arena{&#13;
+  padding-left: 26%;&#13;
+  padding-right: 26%;&#13;
+ &#13;
+}&#13;
+&#13;
+@-webkit-keyframes bounceInUp {&#13;
+	0%,&#13;
+	60%,&#13;
+	75%,&#13;
+	90%,&#13;
+	to {&#13;
+		-webkit-animation-timing-function: cubic-bezier(.215, .61, .355, 1);&#13;
+		animation-timing-function: cubic-bezier(.215, .61, .355, 1)&#13;
+	}&#13;
+	0% {&#13;
+		opacity: 0;&#13;
+		-webkit-transform: translate3d(0, 3000px, 0);&#13;
+		transform: translate3d(0, 3000px, 0)&#13;
+	}&#13;
+	60% {&#13;
+		opacity: 1;&#13;
+		-webkit-transform: translate3d(0, -20px, 0);&#13;
+		transform: translate3d(0, -20px, 0)&#13;
+	}&#13;
+	75% {&#13;
+		-webkit-transform: translate3d(0, 10px, 0);&#13;
+		transform: translate3d(0, 10px, 0)&#13;
+	}&#13;
+	90% {&#13;
+		-webkit-transform: translate3d(0, -5px, 0);&#13;
+		transform: translate3d(0, -5px, 0)&#13;
+	}&#13;
+	to {&#13;
+		-webkit-transform: translateZ(0);&#13;
+		transform: translateZ(0)&#13;
+	}&#13;
+}&#13;
+&#13;
+@keyframes bounceInUp {&#13;
+	0%,&#13;
+	60%,&#13;
+	75%,&#13;
+	90%,&#13;
+	to {&#13;
+		-webkit-animation-timing-function: cubic-bezier(.215, .61, .355, 1);&#13;
+		animation-timing-function: cubic-bezier(.215, .61, .355, 1)&#13;
+	}&#13;
+	0% {&#13;
+		opacity: 0;&#13;
+		-webkit-transform: translate3d(0, 3000px, 0);&#13;
+		transform: translate3d(0, 3000px, 0)&#13;
+	}&#13;
+	60% {&#13;
+		opacity: 1;&#13;
+		-webkit-transform: translate3d(0, -20px, 0);&#13;
+		transform: translate3d(0, -20px, 0)&#13;
+	}&#13;
+	75% {&#13;
+		-webkit-transform: translate3d(0, 10px, 0);&#13;
+		transform: translate3d(0, 10px, 0)&#13;
+	}&#13;
+	90% {&#13;
+		-webkit-transform: translate3d(0, -5px, 0);&#13;
+		transform: translate3d(0, -5px, 0)&#13;
+	}&#13;
+	to {&#13;
+		-webkit-transform: translateZ(0);&#13;
+		transform: translateZ(0)&#13;
+	}&#13;
+}&#13;
+&#13;
+.bounceInUp {&#13;
+	-webkit-animation-name: bounceInUp;&#13;
+	animation-name: bounceInUp&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+@media only screen and (max-width: 768px) {&#13;
+  /* For mobile phones: */&#13;
+  #list-arena li {&#13;
+  font-size:25px;&#13;
+   text-align: center;&#13;
+   border: 2px solid red;&#13;
+   border-radius: 14px;&#13;
+   background: #d1703c;&#13;
+   color: #fff;&#13;
+   overflow: hidden;&#13;
+   line-height: 2em;&#13;
+   width:90%;&#13;
+   margin: 2em 0;  &#13;
+}&#13;
+&#13;
+#list-arena{&#13;
+  padding-left: 10%;&#13;
+  padding-right: 5%;&#13;
+}&#13;
+  &#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>arena-main</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>Arena Main</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function () {
+	var userTable = "x_93700_arena_user";
+	var userId    = gs.getUserID();
+	var arenauserID ;
+	var user;
+
+gs.addInfoMessage(userTable);
+		
+		var arenaUser = new GlideRecord(userTable);
+		arenaUser.addQuery("user", userId);
+		arenaUser.query();
+		if (arenaUser.next()) {
+			arenauserID = arenaUser.sys_id;
+			
+			gs.addInfoMessage(arenauserID);
+		} else {
+			gs.addInfoMessage("new user");
+			arenaUser.initialize();
+			arenaUser.user = userId;
+			arenaUser.sound = true;
+			arenaUser.music = true;
+			arenauserID = arenaUser.insert();
+		}
+	
+
+	user = new GlideRecord(userTable);
+	user.get(arenauserID);
+	if (user) {
+		data.userPrSound = Boolean(user.sound);
+		data.userPrMusic = Boolean(user.music);
+	}
+
+
+	if (input && input.action == "userPreference") {
+
+		var field = (input.parameter == 'sound') ? "sound" : "music";
+
+		user = new GlideRecord(userTable);
+		user.addQuery("user", userId);
+		user.query();
+		if (user.next()) {
+			user.setValue(field, input.Value);
+			user.update();
+		}
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-11-16 10:23:14</sys_created_on>
+        <sys_id>d925f413db89c010b6db8e47489619dc</sys_id>
+        <sys_mod_count>520</sys_mod_count>
+        <sys_name>Arena Main</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_d925f413db89c010b6db8e47489619dc</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-01-06 11:36:01</sys_updated_on>
+        <template><![CDATA[<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+
+
+
+<!-- Company Name --> 
+<!--<div ng-if="c.showCompany">
+   <h1 class="companyName">Arena</h1>
+   <div ng-click="c.openMenu()" >
+     <button type="button" class="glow-on-hover">Continue</button>
+   </div>
+</div>-->
+  
+
+
+
+<!-- main menu list --> 
+<div>
+   <div ng-if="c.showHome" class="panel-body happy ">
+ 
+      <ul id="list-arena">
+         <li id="play"     	  ng-click="c.process('play')">${Play}</li>
+         <li id="settings"    ng-click="c.process('settings')">${Settings} </li>
+         <li id="leader_board"ng-click="c.process()"> ${Leader Board}</li>
+         <li id="exit"        ng-click="c.process()"> ${Exit} </li>
+      </ul>
+   </div>
+</div>
+  
+
+
+
+
+<!-- settings page --> 
+<div ng-if="c.showSettings" class="settings">
+    <i class="fa fa-arrow-circle-left fa-4x" ng-click="c.goToHome()" ></i>
+   <table class="table arena-settings-table">
+      <tbody>
+         <tr>
+            <td>${Sound}</td>
+            <td>
+               <label class="switch">
+               <input ng-model="c.data.userPrSound" type="checkbox" ng-click="c.saveUserPreference(c.data.userPrSound,'sound')">
+               <span class="slider round"></span>
+               </label>
+            </td>
+         </tr>
+         <tr>
+            <td>${Music}</td>
+            <td>
+               <label class="switch">
+               <input ng-model="c.data.userPrMusic" type="checkbox" ng-click="c.saveUserPreference(c.data.userPrMusic,'music')" >
+               <span class="slider round"></span>
+               </label>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+
+
+
+
+<div ng-if="c.quizHome">
+    <widget id="main-quiz-widget"></widget>
+</div>]]></template>
+    </sp_widget>
+</record_update>

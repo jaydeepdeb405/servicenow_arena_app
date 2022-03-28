@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>Service Portal</category>
+        <format/>
+        <height/>
+        <image>bae30bb1db789010b6db8e474896194d</image>
+        <name>arena-level-easy.svg</name>
+        <size_bytes>1232</size_bytes>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-16 14:40:19</sys_created_on>
+        <sys_id>4c73c7b1db789010b6db8e4748961987</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>arena-level-easy.svg</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>db_image_4c73c7b1db789010b6db8e4748961987</sys_update_name>
+        <sys_updated_by>jaydeep</sys_updated_by>
+        <sys_updated_on>2020-05-16 22:02:37</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg+xml</content_type>
+        <encryption_context/>
+        <file_name>image</file_name>
+        <hash>f0714b9a87b9beb3d83d12c4273f7267595295be4c1fe7866b0b2e8b343fa266</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>1232</size_bytes>
+        <size_compressed>646</size_compressed>
+        <state>available</state>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-16 14:42:03</sys_created_on>
+        <sys_id>bae30bb1db789010b6db8e474896194d</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-05-16 14:42:03</sys_updated_on>
+        <table_name>ZZ_YYdb_image</table_name>
+        <table_sys_id>4c73c7b1db789010b6db8e4748961987</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="bae30bb1db789010b6db8e474896194d">bae30bb1db789010b6db8e474896194d</sys_attachment>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-16 14:42:03</sys_created_on>
+        <sys_id>fae30bb1db789010b6db8e474896194d</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>1VPbTtwwEH1eJP7B9Vslx/Etvmx3i8qyokilRYJu1acqbKIkIk2iJHuBr+84GygFfqAv45nxmXNmJs7sZP+7RNu07Yq6mmNOGUZpta6TosrmuOjqwNrIBRyffDw+mr0LAnSeVmkb93U7RZ+S+jZFF2W56fohhbimjDKCrlfnaLlv6rZHV+UmCy4qRIfk6qA0RQBk6HRTlAli7xEKgoH/7Nvi5ufVEnXbDF19P/1ysUA4CMMfchGGZzdnAwWnPAyXXzHCed830zDc7XZ0J2ndZuF5Gzd5se5CAIYeCEUhkHFOkz7BXsNTP5uXY1Qkc7yIm/gX+LCNqpu/wSwYY55phEz3ZVHdvQXkzrlwuAXoHLNmj9H94Tw+mqBdkfT5HCunaeScv8zTIsv7Q0r7xLZId6e1r0UMjcDh1Bh1/X2ZznFaxbdlGtzG67usrTdVMq3SHXqF/zBIQsPTronXUNe0aZe223TYRAZmcrCTWVOX91ldoaYuqh42IKykSgky8KAhiv6J5GM0meBw5Ij7HMEyLyUT1ESWKCOodnIlrKZCRGtGWCA15cKAY6BRwraGSqVKoalxisD7cVaWnNohEJRZBVWWahkREGOWcEUV4x6plBkjrz7JOcCVWwinKINyZQ1l0pCnZiwDAkFeNPeALoUxMJ0mSkvqoM0AxuMSWoRWjQkArtXoe2sHue5Zmvy9NGtfrAgbcpYAyojRB2vNtYA+rHkUIy/EH14tU3BHnfNAWIAWfkxuZK4dTB7ljEZW5n4yuQ3gymq+YgthOZVEUaEjwmEfzjgCi/efkDtJreJPdAJQ1n0eVUb5WeifxWj/C9f/m3D+ATbGaZbQBAAA</data>
+        <length>848</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="bae30bb1db789010b6db8e474896194d">bae30bb1db789010b6db8e474896194d</sys_attachment>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-05-16 14:42:03</sys_created_on>
+        <sys_id>7ee30bb1db789010b6db8e474896194d</sys_id>
+    </sys_attachment_doc>
+</record_update>

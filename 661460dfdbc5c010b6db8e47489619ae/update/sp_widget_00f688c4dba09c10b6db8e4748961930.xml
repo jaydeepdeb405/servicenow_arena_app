@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function() {
+  /* widget controller */
+  var c = this;
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+ 
+}
+
+img:hover {
+  box-shadow: 0 0 2px 1px rgb(236, 8, 8);
+}
+.ground 
+{
+  background-color:black ;
+}
+
+h1 { color: white; font-family: "Great Vibes", cursive; font-size:150px ne-height: 150px ; font-weight: normal; margin-bottom: 0px; margin-top: 40px; text-align: center; text-shadow: 0 1px 1px #fff; }
+.caption {
+    display: block;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+ 
+}
+.logos{ 
+      margin:0 auto; 
+      text-align:center;
+      display:table;
+
+}
+
+///overlay effect
+.container {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .image {
+  opacity: 0.3;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>ARENA - Credits</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2020-04-28 04:12:14</sys_created_on>
+        <sys_id>00f688c4dba09c10b6db8e4748961930</sys_id>
+        <sys_mod_count>65</sys_mod_count>
+        <sys_name>ARENA - Credits</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_00f688c4dba09c10b6db8e4748961930</sys_update_name>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2020-04-28 10:26:55</sys_updated_on>
+        <template><![CDATA[<div class = "ground"> 
+  
+  <h1  >
+ARENA Artists
+  </h1>
+  <br>
+ 
+  <br>
+
+<div class="container">
+  <img src="hermione1.jpg" width="150px" alt="Avatar" class="image logos">
+  <div class="middle">
+    <div class="text">
+  <P>  Rajiv </P>
+  <p> ARENA SME  </p>
+    </div>
+  </div>
+</div>
+  
+
+
+  <br>
+  <div class="logos" style="margin:0 auto;">
+    
+ 
+  <ul class="logos"   >
+ <img src="hermione1.jpg" width="150px"  role="presentation" />
+
+      <img src="hermione1.jpg" width="150px"  role="presentation" />
+      <img src="hermione1.jpg" width="150px"  role="presentation" />
+    </ul>
+     </div>
+  <br>
+  
+    <div class="logos" style="margin:0 auto;">
+    <ul  class="logos"  >
+    <img src="hermione1.jpg" width="150px"  role="presentation" />
+      <img src="hermione1.jpg" width="150px"  role="presentation" />
+      <img src="hermione1.jpg" width="150px"  role="presentation" />
+      <img src="hermione1.jpg" width="150px"  role="presentation" />
+          <img src="hermione1.jpg" width="150px"  role="presentation" />
+      <br>
+      <img src="hermione1.jpg" width="150px"  role="presentation" />
+      <img src="hermione1.jpg" width="150px"  role="presentation" />
+      <img src="hermione1.jpg" width="150px"  role="presentation" />
+          <img src="hermione1.jpg" width="150px"  role="presentation" />
+  
+ 
+      </ul>
+    
+  </div>
+      <br>
+</div>]]></template>
+    </sp_widget>
+</record_update>

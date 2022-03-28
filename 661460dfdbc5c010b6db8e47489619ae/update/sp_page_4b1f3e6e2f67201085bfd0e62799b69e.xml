@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <css>section.page {&#13;
+  background-color:white// #e6f2ff;&#13;
+  background-repeat: no-repeat;&#13;
+  background-size:cover;&#13;
+}&#13;
+&#13;
+.no-spacing {&#13;
+  padding: 0;&#13;
+  margin:0;&#13;
+}&#13;
+&#13;
+/*sticky footer*/&#13;
+main.body {&#13;
+  padding-top: 0;&#13;
+  display: flex;&#13;
+  flex-flow: column;&#13;
+  height: 100%;&#13;
+}&#13;
+&#13;
+.content {&#13;
+  flex: 1 0 auto;&#13;
+}&#13;
+&#13;
+.footer {&#13;
+  position: static;&#13;
+  flex-shrink: 0;&#13;
+}&#13;
+.margin50{&#13;
+margin-top:50px;&#13;
+}&#13;
+&#13;
+.bg-primary {&#13;
+  background-color: $dyk-primary !important;&#13;
+}&#13;
+&#13;
+.bg-secondary {&#13;
+  background-color: $dyk-secondary !important;&#13;
+}&#13;
+&#13;
+nav.header, footer.page-footer {&#13;
+  background-color: $dyk-primary !important;&#13;
+}&#13;
+&#13;
+button.bg-secondary:hover {&#13;
+  background-color: $dyk-tertiary !important;&#13;
+}&#13;
+&#13;
+.nav-pills &gt; li.active &gt; a, .nav-pills &gt; li.active &gt; a:hover, .nav-pills &gt; li.active &gt; a:focus {&#13;
+  background-color: $dyk-secondary !important;&#13;
+}&#13;
+&#13;
+a {&#13;
+   color: $dyk-secondary;&#13;
+}</css>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <id>dyk_v1</id>
+        <internal>false</internal>
+        <omit_watcher>false</omit_watcher>
+        <public>false</public>
+        <roles/>
+        <seo_script/>
+        <short_description/>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>akanksha</sys_created_by>
+        <sys_created_on>2021-04-19 11:22:36</sys_created_on>
+        <sys_id>4b1f3e6e2f67201085bfd0e62799b69e</sys_id>
+        <sys_mod_count>24</sys_mod_count>
+        <sys_name>dyk_v1</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_page_4b1f3e6e2f67201085bfd0e62799b69e</sys_update_name>
+        <sys_updated_by>chandana</sys_updated_by>
+        <sys_updated_on>2022-02-23 10:15:12</sys_updated_on>
+        <title>Did You Know</title>
+        <use_seo_script>false</use_seo_script>
+    </sp_page>
+    <sys_translated_text action="delete_multiple" query="documentkey=4b1f3e6e2f67201085bfd0e62799b69e"/>
+</record_update>

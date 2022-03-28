@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_css">
+    <sp_css action="INSERT_OR_UPDATE">
+        <css>/* &#13;
+   abn-tree.css&#13;
+&#13;
+   style for the angular-bootstrap-nav-tree&#13;
+   for both Bootstrap 2 and Bootstrap 3&#13;
+&#13;
+*/&#13;
+&#13;
+&#13;
+&#13;
+/* ------------------------------------------&#13;
+AngularJS Animations...&#13;
+&#13;
+The first selector is for Angular 1.1.5&#13;
+The second selector is for Angular 1.2.0&#13;
+&#13;
+*/&#13;
+.abn-tree-animate-enter,&#13;
+li.abn-tree-row.ng-enter {&#13;
+  transition: 200ms linear all;&#13;
+  position: relative;&#13;
+  display: block;&#13;
+  opacity: 0;&#13;
+  max-height:0px;&#13;
+}&#13;
+.abn-tree-animate-enter.abn-tree-animate-enter-active,&#13;
+li.abn-tree-row.ng-enter-active{&#13;
+  opacity: 1;&#13;
+  max-height:30px;&#13;
+}&#13;
+&#13;
+.abn-tree-animate-leave,&#13;
+li.abn-tree-row.ng-leave {&#13;
+  transition: 200ms linear all;&#13;
+  position: relative;&#13;
+  display: block;&#13;
+  height:30px;&#13;
+  max-height: 30px;&#13;
+  opacity: 1;&#13;
+}&#13;
+.abn-tree-animate-leave.abn-tree-animate-leave-active,&#13;
+li.abn-tree-row.ng-leave-active {  &#13;
+  height: 0px;&#13;
+  max-height:0px;&#13;
+  opacity: 0;&#13;
+}&#13;
+&#13;
+&#13;
+/* &#13;
+------------------------------------------&#13;
+Angular 1.2.0 Animation &#13;
+*/&#13;
+&#13;
+&#13;
+.abn-tree-animate.ng-enter{&#13;
+&#13;
+}&#13;
+.abn-tree-animate.ng-enter{&#13;
+&#13;
+}&#13;
+&#13;
+&#13;
+&#13;
+&#13;
+/*&#13;
+   end animation stuff&#13;
+-----------------------------------------&#13;
+   begin normal css stuff&#13;
+*/&#13;
+ul.abn-tree li.abn-tree-row {  &#13;
+  padding: 0px;&#13;
+  margin:0px;&#13;
+}&#13;
+&#13;
+ul.abn-tree li.abn-tree-row a {&#13;
+  padding: 3px 10px;&#13;
+}&#13;
+&#13;
+ul.abn-tree i.indented {&#13;
+  padding: 2px;&#13;
+}&#13;
+&#13;
+.abn-tree {&#13;
+  cursor: pointer;&#13;
+}&#13;
+ul.nav.abn-tree .level-1 .indented {&#13;
+  position: relative;&#13;
+  left: 0px;&#13;
+}&#13;
+ul.nav.abn-tree .level-2 .indented {&#13;
+  position: relative;&#13;
+  left: 20px;&#13;
+}&#13;
+ul.nav.abn-tree .level-3 .indented {&#13;
+  position: relative;&#13;
+  left: 40px;&#13;
+}&#13;
+ul.nav.abn-tree .level-4 .indented {&#13;
+  position: relative;&#13;
+  left: 60px;&#13;
+}&#13;
+ul.nav.abn-tree .level-5 .indented {&#13;
+  position: relative;&#13;
+  left: 80px;&#13;
+}&#13;
+ul.nav.abn-tree .level-6 .indented {&#13;
+  position: relative;&#13;
+  left: 100px;&#13;
+}&#13;
+ul.nav.nav-list.abn-tree .level-7 .indented {&#13;
+  position: relative;&#13;
+  left: 120px;&#13;
+}&#13;
+ul.nav.nav-list.abn-tree .level-8 .indented {&#13;
+  position: relative;&#13;
+  left: 140px;&#13;
+}&#13;
+ul.nav.nav-list.abn-tree .level-9 .indented {&#13;
+  position: relative;&#13;
+  left: 160px;&#13;
+}</css>
+        <name>treePicker.css</name>
+        <sys_class_name>sp_css</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-02 05:12:06</sys_created_on>
+        <sys_id>a366b0a6db631010b6db8e47489619d0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>treePicker.css</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_css_a366b0a6db631010b6db8e47489619d0</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-23 09:38:44</sys_updated_on>
+    </sp_css>
+</record_update>

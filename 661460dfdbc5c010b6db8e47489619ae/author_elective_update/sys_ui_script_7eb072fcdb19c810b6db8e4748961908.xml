@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_script">
+    <sys_ui_script action="DELETE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_93700_arena.ArenaBGM</name>
+        <script><![CDATA[var x_93700_arena = x_93700_arena || {};
+
+x_93700_arena.ArenaBGM = (function() {new Audio('arena_bg2.mp3').play();
+//	"use strict";
+
+	
+/* set your private variables and functions here. For example: 
+	var privateVar = 0; 
+	function private_function() {
+		return ++privateVar;
+	}
+*/
+	
+/* Share variables between multiple UI scripts by adding them to your scope object. For example: 
+	x_93700_arena.sharedVar = 0; 
+
+ Then access them in your scripts the same way. For example: 
+	function get_shared() {
+		return x_93700_arena.sharedVar;
+	}
+*/
+
+	return {
+/* set your public API here. For example:
+		incrementAndReturnPrivateVar: function() {
+			return private_function();
+		},
+*/
+		type:  "ArenaBGM"
+	};
+})();
+]]></script>
+        <script_name>ArenaBGM</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-11-21 11:09:55</sys_created_on>
+        <sys_id>7eb072fcdb19c810b6db8e4748961908</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>x_93700_arena.ArenaBGM</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ui_script_7eb072fcdb19c810b6db8e4748961908</sys_update_name>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2019-11-21 13:57:26</sys_updated_on>
+        <ui_type>0</ui_type>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>df1c0847dba053048264f70fbf9619e0</instance_id>
+        <instance_name>dev51484</instance_name>
+        <name>sys_ui_script_7eb072fcdb19c810b6db8e4748961908</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ui_script"&gt;&lt;sys_ui_script action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;description/&gt;&lt;global&gt;false&lt;/global&gt;&lt;name&gt;x_93700_arena.ArenaBGM&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var x_93700_arena = x_93700_arena || {};
+
+x_93700_arena.ArenaBGM = (function() {new Audio('arena_bg2.mp3').play();
+//	"use strict";
+
+	
+/* set your private variables and functions here. For example: 
+	var privateVar = 0; 
+	function private_function() {
+		return ++privateVar;
+	}
+*/
+	
+/* Share variables between multiple UI scripts by adding them to your scope object. For example: 
+	x_93700_arena.sharedVar = 0; 
+
+ Then access them in your scripts the same way. For example: 
+	function get_shared() {
+		return x_93700_arena.sharedVar;
+	}
+*/
+
+	return {
+/* set your public API here. For example:
+		incrementAndReturnPrivateVar: function() {
+			return private_function();
+		},
+*/
+		type:  "ArenaBGM"
+	};
+})();
+]]&gt;&lt;/script&gt;&lt;script_name&gt;ArenaBGM&lt;/script_name&gt;&lt;sys_class_name&gt;sys_ui_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;nikesh&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2019-11-21 11:09:55&lt;/sys_created_on&gt;&lt;sys_id&gt;7eb072fcdb19c810b6db8e4748961908&lt;/sys_id&gt;&lt;sys_mod_count&gt;5&lt;/sys_mod_count&gt;&lt;sys_name&gt;x_93700_arena.ArenaBGM&lt;/sys_name&gt;&lt;sys_package display_value="Arena" source="x_93700_arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_script_7eb072fcdb19c810b6db8e4748961908&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;nikesh&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2019-11-21 13:57:26&lt;/sys_updated_on&gt;&lt;ui_type&gt;0&lt;/ui_type&gt;&lt;use_scoped_format&gt;false&lt;/use_scoped_format&gt;&lt;/sys_ui_script&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1071283380</payload_hash>
+        <record_name>x_93700_arena.ArenaBGM</record_name>
+        <reverted_from/>
+        <source>a214a857db09c010b6db8e474896194b</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-11-21 13:57:26</sys_created_on>
+        <sys_id>f34857b0db1dc810b6db8e474896199d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16e8e40e1230000001</sys_recorded_at>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2019-11-21 13:57:26</sys_updated_on>
+        <type>UI Script</type>
+        <update_guid>bb4857b0a81dc81079b54e5d1489029c</update_guid>
+        <update_guid_history>bb4857b0a81dc81079b54e5d1489029c:-1071283380,46f71b70881dc81041be4f61b8b492e3:-263946631,a83c4bbc9099c81089b608b95dcc6539:-631769199,f8b8833cf399c81063adcef085ac7140:580846015,66e2fa703c59c81078901d26c1e9ddcf:-656684346,fdf13a307f59c810f572977102c9c39b:-274015077</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2019-12-02 10:32:22</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_script">sys_ui_script</sys_db_object>
+        <sys_id>7af04760de624af49edfa0773fe6e2a4</sys_id>
+        <sys_metadata>7eb072fcdb19c810b6db8e4748961908</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_93700_arena.ArenaBGM</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_ui_script_7eb072fcdb19c810b6db8e4748961908</sys_update_name>
+        <sys_update_version display_value="sys_ui_script_7eb072fcdb19c810b6db8e4748961908">f34857b0db1dc810b6db8e474896199d</sys_update_version>
+        <sys_updated_by>nikesh</sys_updated_by>
+        <sys_updated_on>2019-12-02 10:32:22</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

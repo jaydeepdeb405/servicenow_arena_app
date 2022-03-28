@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="INSERT_OR_UPDATE">
+        <before>false</before>
+        <description/>
+        <name>Fix Question Types</name>
+        <record_for_rollback>false</record_for_rollback>
+        <script><![CDATA[var que = new GlideRecord('x_93700_arena_arena_question');
+//que.setLimit(10);
+//que.get('f2ea5019db0c1010b6db8e474896190e');
+que.query();
+
+var results_count = [];
+while (que.next()) {
+    var result = new GlideRecord("x_93700_arena_quiz_choices");
+    result.addQuery("question", que.sys_id.toString());
+    result.addQuery('correct', true);
+    result.query();
+
+    que.type = 'checkBox';
+
+    if (result.getRowCount() == 1)
+        que.type = 'radioButton';
+
+    que.update();
+}]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>anirudh</sys_created_by>
+        <sys_created_on>2020-04-19 10:17:58</sys_created_on>
+        <sys_id>5b744fc5db581410b6db8e4748961911</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>Fix Question Types</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_script_fix_5b744fc5db581410b6db8e4748961911</sys_update_name>
+        <sys_updated_by>anirudh</sys_updated_by>
+        <sys_updated_on>2020-04-19 10:33:12</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+</record_update>

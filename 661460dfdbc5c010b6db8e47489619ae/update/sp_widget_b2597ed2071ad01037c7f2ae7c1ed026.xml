@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $http, $timeout, $window) {
+	/* widget controller */
+	var c = this;
+	
+	$timeout(function () {
+		var stepper = document.querySelector('.stepper');
+		var stepperInstance = new MStepper(stepper, {
+			firstActive: 0
+		});
+
+		var datePickers = document.querySelectorAll('.datepicker');
+		M.Datepicker.init(datePickers, {
+			autoClose: true,
+			format: 'yyyy-mm-dd',
+			showClearBtn: true
+		});
+
+		var timePickers = document.querySelectorAll('.timepicker');
+		M.Timepicker.init(timePickers, {
+			autoClose: true,
+			showClearBtn: true,
+			twelveHour: false,
+			vibrate: true,
+			defaultTime: 'now'
+		});
+
+		var rangeInputs  = document.querySelectorAll("input[type=range]");
+		M.Range.init(rangeInputs);
+
+	}, 0);
+
+	$scope.initializeForm = function() {
+		$scope.scheduleForm = {
+			scheduleName: '',
+			scheduleStartDate: "",
+			scheduleStartTime: "",
+			scheduleDuration: '',
+			questionSet: {
+				displayValue: '',
+				value: ''
+			},
+			totalQuestionCount: 0,
+			selectedQuestionsCount: {
+				level1: 0,
+				level2: 0,
+				level3: 0,
+				level4: 0
+			},
+			testTakers: [{name: "", email: "", sys_id: ""}]
+		};
+
+		$scope.autopopulatedUsers = [];
+		$scope.autopopulatedQuestionSets = [];
+
+		$scope.questionSetDropdown = false;
+		$scope.questionSetArrowDownCount = -1;
+		$scope.testTakerDropdown = false;
+		$scope.testTakerIndexInFocus = -1;
+		$scope.testTakerArrowDownCount = -1;
+		$scope.totalSelectedQuestions = 0;
+	}
+
+	$scope.calculateTotalCount = function(levelName) {		
+		$scope.scheduleForm.totalQuestionCount  = 0;
+		var levels = Object.keys($scope.scheduleForm.selectedQuestionsCount);
+		levels.forEach(function(level) {
+			$scope.scheduleForm.totalQuestionCount += parseInt($scope.scheduleForm.selectedQuestionsCount[level]);
+		});
+	}
+
+	$scope.addTestTaker = function() {
+		$scope.scheduleForm.testTakers.push({name: "", email: "", sys_id: ""})
+	}
+
+	$scope.removeTestTaker = function() {
+		if($scope.scheduleForm.testTakers.length>1) $scope.scheduleForm.testTakers.pop();
+	}
+
+	$scope.openDatePickerOnFocus = function(event) {
+		M.Datepicker.getInstance(event.target).open();
+	}
+
+	$scope.selectUser = function(user, testTakerIndex) {
+		$scope.scheduleForm.testTakers[testTakerIndex].name = user.name;
+		$scope.scheduleForm.testTakers[testTakerIndex].email = user.email;
+		$scope.scheduleForm.testTakers[testTakerIndex].sys_id = user.sys_id;
+		$scope.testTakerDropdown = false;
+		angular.element('#test-taker-name-'+testTakerIndex).removeClass('invalid');
+		angular.element('#test-taker-name-'+testTakerIndex).addClass('valid');
+	}
+
+	$scope.selectQuestionSet = function(set) {
+		$scope.scheduleForm.questionSet.displayValue = set.name;
+		$scope.scheduleForm.questionSet.value = set.sys_id;
+		$scope.questionSetDropdown = false;
+		M.toast({ html: 'Exising question set selected : '+set.name });
+	}
+
+	$scope.submitForm = function() {
+		console.log($scope.scheduleForm);
+		c.data.action = 'createTestSchedule';
+		c.data.scheduleForm = JSON.stringify($scope.scheduleForm);
+		c.server.update().then(function(response) {
+			c.data.action = undefined;
+			M.toast({ html: c.data.successMessage });
+			$window.location.reload();
+		});
+	}
+
+	$scope.autopopulateEmail = function(testTakerIndex) {
+		var email = $scope.scheduleForm.testTakers[testTakerIndex].email || '';
+
+		if(email.length === 0) return;
+
+		$timeout.cancel($scope.timeout);
+		$scope.timeout = $timeout(function() {
+			$http({
+				method: 'GET',
+				url: '/api/now/table/x_93700_arena_test_takers?sysparm_fields=email%2Csys_id%2Cname&sysparm_query=emailSTARTSWITH'+email
+			}).then(function successCallback(response) {
+				$scope.autopopulatedUsers = response.data.result;
+			}, function errorCallback(response) {
+			});
+		}, 300);
+	}
+
+	$scope.clearTestTaker = function(testTakerIndex) {
+		$scope.autopopulatedUsers = [];
+		$scope.scheduleForm.testTakers[testTakerIndex] = {name: "", email: "", sys_id: ""};
+	}
+
+	$scope.autopopulateQuestionSets = function() {
+		var questionSetInput = $scope.scheduleForm.questionSet.displayValue;
+		if(!questionSetInput || questionSetInput < 1) {
+			$scope.clearQuestionSet();
+			return;
+		}
+		$timeout.cancel($scope.timeout);
+		$scope.timeout = $timeout(function() {
+			$http({
+				method: 'GET',
+				url: '/api/now/table/x_93700_arena_question_set?sysparm_fields=name%2Csys_id%2Cname&sysparm_query=nameLIKE'+questionSetInput
+			}).then(function successCallback(response) {
+				$scope.autopopulatedQuestionSets = response.data.result;
+				$scope.questionSetDropdown = true;
+			}, function errorCallback(response) {
+			});
+		}, 300);
+	}
+
+	$scope.clearQuestionSet = function() {
+		$scope.autopopulatedQuestionSets = [];
+		$scope.scheduleForm.questionSet = { displayValue: '', value: '' };
+	}
+
+	$scope.handleQuestionSetDropdown = function(focus) {
+		if(focus === true) {
+			$scope.questionSetDropdown = true;
+		} else {
+			$timeout(function() {
+				$scope.questionSetArrowDownCount = 0;
+				$scope.questionSetDropdown = false;
+			}, 200);
+		}
+	}
+
+	$scope.handleTestTakerDropdown = function(testTakerIndex, focus) {
+		if(focus === true) {
+			if($scope.testTakerIndexInFocus !== testTakerIndex) {
+				$scope.autopopulatedUsers = [];
+				$scope.autopopulateEmail(testTakerIndex);
+			} 
+			$scope.testTakerIndexInFocus = testTakerIndex;
+			$scope.testTakerDropdown = true;
+		} else {
+			$timeout(function() {
+				$scope.testTakerArrowDownCount = 0;
+				$scope.testTakerDropdown = false;
+			}, 200);
+		}
+	}
+
+	$scope.testTakersOnArrowKeys = function(event, testTakerIndex) {
+		$scope.handleTestTakerDropdown(testTakerIndex, true);
+		var keycode = event.keyCode;
+		//arrow down
+		if(keycode === 40) {
+			event.preventDefault();
+			var max = $scope.autopopulatedUsers.length;
+			max = max === 0 ? 0 : max-1;
+			$scope.testTakerArrowDownCount = $scope.testTakerArrowDownCount >= max ? max : ++$scope.testTakerArrowDownCount;
+		}
+		//arrow up
+		else if(keycode === 38) {
+			event.preventDefault();
+			$scope.testTakerArrowDownCount = $scope.testTakerArrowDownCount <= 0 ? 0 : --$scope.testTakerArrowDownCount;
+		}
+		// return key
+		else if(keycode === 13) {
+			$scope.selectUser($scope.autopopulatedUsers[$scope.testTakerArrowDownCount], testTakerIndex);
+		}
+	}
+
+	$scope.questionSetOnArrowKeys = function(event) {
+		$scope.handleQuestionSetDropdown(true);
+		var keycode = event.keyCode;
+		//arrow down
+		if(keycode === 40) {
+			event.preventDefault();
+			var max = $scope.autopopulatedQuestionSets.length;
+			max = max === 0 ? 0 : max-1;
+			$scope.questionSetArrowDownCount = $scope.questionSetArrowDownCount >= max ? max : ++$scope.questionSetArrowDownCount;
+		}
+		//arrow up
+		else if(keycode === 38) {
+			event.preventDefault();
+			$scope.questionSetArrowDownCount = $scope.questionSetArrowDownCount <= 0 ? 0 : --$scope.questionSetArrowDownCount;
+		}
+		// return key
+		else if(keycode === 13) {
+			$scope.selectQuestionSet($scope.autopopulatedQuestionSets[$scope.questionSetArrowDownCount]);
+		}
+	}
+
+	$scope.initializeForm();
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.dropdown-content {
+  display: block;
+  opacity: 1;
+  width: calc(100% - 22px);
+  top: 0;
+  left: 10px;
+  transform: scaleX(1) scaleY(1) translateY(46px);
+  max-height: 150px;
+}
+
+.dropdown-item-active {
+  background-color: #eee;
+}
+
+.add-remove-btns {
+  position: absolute;
+  right: 5px;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  top: 11px;
+  background-color: white;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Arena Test Scheduler</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	if (input && input.action == 'createTestSchedule') {
+
+		var scheduleForm = JSON.parse(input.scheduleForm);
+
+		if (scheduleForm.questionSet.value.length === 0) {
+			scheduleForm.questionSet = createQuestionSet(scheduleForm);
+		}
+
+		var testTakerIds = createTestTakerProfiles(scheduleForm.testTakers);
+
+		var testScheduleGr = new GlideRecord('x_93700_arena_test_schedule');
+		testScheduleGr.initialize();
+		testScheduleGr.setValue('name', scheduleForm.scheduleName);
+		testScheduleGr.setValue('test_duration_in_minutes', scheduleForm.scheduleDuration);
+		testScheduleGr.start_time = scheduleForm.scheduleStartDate + ' ' + scheduleForm.scheduleStartTime + ':00';
+		testScheduleGr.setValue('question_set', scheduleForm.questionSet.value);
+		testScheduleGr.setValue('test_takers', testTakerIds.toString());
+		if (testScheduleGr.insert()) {
+			data.successMessage = 'Schedule successfully created';
+		}
+	}
+
+	function createTestTakerProfiles(testTakers) {
+		var testTakerIds = [];
+		testTakers.forEach(function(testTaker) {
+			var testTakerId = '';
+			var testTakerGr = new GlideRecord('x_93700_arena_test_takers');
+			testTakerGr.setLimit(1);
+			if (testTaker.sys_id.length > 0) testTakerGr.addQuery('sys_id', testTaker.sys_id);
+			testTakerGr.addQuery('email', testTaker.email);
+			testTakerGr.query();
+			if (testTakerGr.next()) {
+				testTakerId = testTakerIds.push(testTakerGr.getValue('sys_id'));
+			} else {
+				var nameParts = testTaker.name.split(' ');
+				var firstName = nameParts[0];
+				nameParts.shift();
+				var lastName = nameParts.join(' ');
+				testTakerGr.initialize();
+				testTakerGr.setValue('first_name', firstName);
+				testTakerGr.setValue('last_name', lastName);
+				testTakerGr.setValue('email', testTaker.email);
+				testTakerId = testTakerGr.insert() || '';
+			}
+			if (testTakerId.length > 0) testTakerIds.push(testTakerId);
+		});
+		return testTakerIds;
+	}
+
+	function createQuestionSet(scheduleForm) {
+		var questionSetGr = new GlideRecord('x_93700_arena_question_set');
+		questionSetGr.initialize();
+		questionSetGr.setValue('name', scheduleForm.questionSet.displayValue);
+		questionSetGr.setValue('level_1_count', scheduleForm.selectedQuestionsCount.level1);
+		questionSetGr.setValue('level_2_count', scheduleForm.selectedQuestionsCount.level2);
+		questionSetGr.setValue('level_3_count', scheduleForm.selectedQuestionsCount.level3);
+		questionSetGr.setValue('level_4_count', scheduleForm.selectedQuestionsCount.level4);
+		var questionSetId = questionSetGr.insert();
+
+		return {
+			displayValue: scheduleForm.scheduleName,
+			value: questionSetId
+		};
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-31 16:47:15</sys_created_on>
+        <sys_id>b2597ed2071ad01037c7f2ae7c1ed026</sys_id>
+        <sys_mod_count>158</sys_mod_count>
+        <sys_name>Arena Test Scheduler</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_b2597ed2071ad01037c7f2ae7c1ed026</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-03 09:23:32</sys_updated_on>
+        <template><![CDATA[<div class="row">
+  <div class="card z-depth-3">
+    <div class="card-content">
+      <form id="test_scheduler_form" ng-submit="submitForm()">
+        <ul class="stepper" style="min-height: 70vh">
+          <li class="step active">
+            <div class="step-title waves-effect">Basic Information</div>
+            <div class="step-content">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="name" type="text" ng-model="scheduleForm.scheduleName" class="validate" placeholder="eg. - KGS ServiceNow Recruitment Drive" required>
+                  <label class="active" for="name">Schedule name</label>
+                  <span class="helper-text" data-error="Can't leave this field empty"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" ng-model="scheduleForm.scheduleStartDate" ng-focus="openDatePickerOnFocus($event)" id="start_date" class="datepicker validate" placeholder="yyyy-mm-dd" required>
+                  <label class="active" for="start_date">Start Date</label>
+                  <span class="helper-text" data-error="Can't leave this field empty"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="text" ng-model="scheduleForm.scheduleStartTime" id="start_time" class="timepicker validate" placeholder="hh:mm" required>
+                  <label class="active" for="start_time">Start Time</label>
+                  <span class="helper-text" data-error="Can't leave this field empty"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="number" class="form-control" id="test_duration" class="validate" ng-model="scheduleForm.scheduleDuration" placeholder="eg. - 30" min="0" required/>
+                  <label class="active" for="name">Test duration (in minutes)</label>
+                  <span class="helper-text" data-error="Can't leave this field empty"></span>
+                </div>
+              </div>
+              <div class="step-actions">
+                <a class="waves-effect waves-light btn blue white-text next-step">CONTINUE</a>
+              </div>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-title waves-effect">Select questions</div>
+            <div class="step-content">
+              <div class="row">
+                <div class="input-field col s12">
+                  <i ng-hide="scheduleForm.questionSet.value.length === 0" class="material-icons clear-btn" ng-click="clearQuestionSet()">clear</i>
+                  <input id="question_set" type="text" placeholder="eg.- KGS-SNOW-Medium (Start typing for dropdown)" ng-model="scheduleForm.questionSet.displayValue" ng-focus="handleQuestionSetDropdown(true)" ng-blur="handleQuestionSetDropdown(false)" ng-keydown="questionSetOnArrowKeys($event)" ng-change="autopopulateQuestionSets()" required>
+                  <label class="active" for="question_set">Question set name</label>
+                  <span class="helper-text" data-error="Can't leave this field empty"></span>
+                  <ul class="dropdown-content" ng-show="questionSetDropdown === true">
+                    <li ng-class="{'dropdown-item-active': questionSetArrowDownCount === questionSetIndex}" ng-repeat="set in autopopulatedQuestionSets track by $index" ng-init="questionSetIndex = $index"><span ng-click="selectQuestionSet(set)">{{set.name}}</span></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="question-set-generator" ng-show="scheduleForm.questionSet.value.length === 0">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="range" class="form-control-range" ng-change="calculateTotalCount()" ng-model="scheduleForm.selectedQuestionsCount.level1" min="0" step="1" id="level_1_count">
+                    <label class="active" for="level_1_count">Level 1 questions count : {{scheduleForm.selectedQuestionsCount.level1}}</label>
+                    <span class="helper-text" data-error="Can't leave this field empty"></span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="range" class="form-control-range" ng-change="calculateTotalCount()" ng-model="scheduleForm.selectedQuestionsCount.level2" min="0" step="1" id="level_2_count">
+                    <label class="active" for="level_2_count">Level 2 questions count : {{scheduleForm.selectedQuestionsCount.level2}}</label>
+                    <span class="helper-text" data-error="Can't leave this field empty"></span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="range" class="form-control-range" ng-change="calculateTotalCount()" ng-model="scheduleForm.selectedQuestionsCount.level3" min="0" step="1" id="level_3_count">
+                    <label class="active" for="level_3_count">Level 3 questions count : {{scheduleForm.selectedQuestionsCount.level3}}</label>
+                    <span class="helper-text" data-error="Can't leave this field empty"></span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="range" class="form-control-range" ng-change="calculateTotalCount()" ng-model="scheduleForm.selectedQuestionsCount.level4" min="0" step="1" id="level_4_count">
+                    <label class="active" for="level_4_count">Level 4 questions count : {{scheduleForm.selectedQuestionsCount.level4}}</label>
+                    <span class="helper-text" data-error="Can't leave this field empty"></span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="total_questions" type="number" ng-model="scheduleForm.totalQuestionCount" min="0" disabled>
+                    <label class="active" for="total_questions">Total questions picked</label>
+                  </div>
+                </div>
+              </div>
+              <div class="step-actions">
+                <a class="waves-effect waves-light btn blue white-text previous-step">BACK</a>
+                <a class="waves-effect waves-light btn blue white-text next-step">CONTINUE</a>
+              </div>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-title waves-effect">Add Test Takers</div>
+            <div class="step-content">
+              <div class="add-remove-btns">
+                <a class="btn-floating btn-small waves-effect waves-light blue" ng-click="addTestTaker()"><i class="material-icons">add</i></a>
+                <a class="btn-floating btn-small waves-effect waves-light blue" ng-click="removeTestTaker()"><i class="material-icons">remove</i></a>
+              </div>
+              <div ng-repeat="row in scheduleForm.testTakers track by $index" ng-init="testTakerIndex = $index" id="testTakerRow-{{testTakerIndex}}">
+                <label class="test-taker-label">Test Taker <span>{{testTakerIndex+1}}</span></label>
+                <div class="row">
+                  <div class="input-field col s12 xl6">
+                    <input id="test-taker-name-{{testTakerIndex}}" type="text" class="validate" placeholder="Full Name" autocomplete="no" ng-model="scheduleForm.testTakers[testTakerIndex].name" ng-disabled="scheduleForm.testTakers[testTakerIndex].sys_id.length === 32" required>
+                    <span class="helper-text" data-error="Can't leave this field empty"></span>
+                  </div>
+                  <div class="input-field col s12 xl6">
+                    <i ng-hide="scheduleForm.testTakers[testTakerIndex].sys_id.length === 0" class="material-icons clear-btn" ng-click="clearTestTaker(testTakerIndex)">clear</i>
+                    <input id="test-taker-email-{{testTakerIndex}}" type="text" class="validate" placeholder="Email (Start typing for dropdown)" autocomplete="no" ng-model="scheduleForm.testTakers[testTakerIndex].email" ng-disabled="scheduleForm.testTakers[testTakerIndex].sys_id.length === 32" ng-focus="handleTestTakerDropdown(testTakerIndex, true)" ng-blur="handleTestTakerDropdown(testTakerIndex, false)"  ng-keydown="testTakersOnArrowKeys($event, testTakerIndex)" ng-change="autopopulateEmail(testTakerIndex)" required>
+                    <span class="helper-text" data-error="Invalid email"></span>
+                    <ul class="dropdown-content" ng-show="testTakerIndexInFocus === testTakerIndex && testTakerDropdown === true">
+                      <li ng-class="{'dropdown-item-active': testTakerArrowDownCount === autopopulatedUsersIndex}" ng-repeat="user in autopopulatedUsers track by $index" ng-init="autopopulatedUsersIndex = $index"><span ng-click="selectUser(user, testTakerIndex)">{{user.email}}</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="step-actions">
+                <a class="waves-effect waves-light btn blue white-text previous-step">BACK</a>
+                <button class="waves-effect waves-light btn blue white-text" type="submit">SCHEDULE</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

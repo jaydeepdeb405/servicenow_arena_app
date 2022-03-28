@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="INSERT_OR_UPDATE">
+        <before>false</before>
+        <description/>
+        <name>Question script</name>
+        <record_for_rollback>false</record_for_rollback>
+        <script><![CDATA[var moduleWeightage = JSON.parse(gs.getProperty('x_93700_arena.ModuleWeightage'));
+gs.info(moduleweigtage);
+
+
+
+
+var moduleName = Object.keys(moduleWeightage);
+var quesIds = []; //to store list returned from glide aggregate 
+var queList = [];
+
+
+for (quest = 0; quest < moduleName.length; quest++) {
+    getquestion(moduleName[quest]);
+}
+
+gs.info(queList);
+
+function getquestion(module) {
+    var tempQuesIdList = [];
+    var question = new GlideAggregate('x_93700_arena_arena_question');
+    question.addQuery('module', module);
+    question.groupBy('sys_id');
+    question.query();
+    while (question.next()) {
+        tempQuesIdList.push(question.sys_id + '');
+    }
+
+var randomQuestions = randomiser(tempQuesId, moduleWeightage[module], tempQuesIdList.length);
+	
+quesIds = mergeArray(quesIds ,randomQuestions);
+    
+}
+
+
+function mergeArray(array1, array2) {
+ return array1.concat(array2);
+}
+
+function randomiser(queArray, requiredQuestionCount, maxQuestionCount) {
+
+    var list = [];
+    while (list.length < requiredQuestionCount) {
+        var question = queArray[Math.floor(Math.random() * Math.floor(maxQuestionCount))];
+
+        if (list.indexOf(question) == -1)
+            list.push(question);
+    }
+	
+	return list;
+}
+]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>praveen</sys_created_by>
+        <sys_created_on>2020-03-03 14:37:56</sys_created_on>
+        <sys_id>f50d7dc2db178010b6db8e4748961918</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Question script</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_script_fix_f50d7dc2db178010b6db8e4748961918</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-03-04 16:35:34</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+</record_update>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_widget_dependency">
+    <m2m_sp_widget_dependency action="DELETE">
+        <sp_dependency display_value="Materialize">ae3402f00716541037c7f2ae7c1ed042</sp_dependency>
+        <sp_widget display_value="Copy of Test scheduler">4d5dc43d075e501037c7f2ae7c1ed092</sp_widget>
+        <sys_class_name>m2m_sp_widget_dependency</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-29 14:58:44</sys_created_on>
+        <sys_id>686d007d075e501037c7f2ae7c1ed08f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Materialize.Copy of Test scheduler</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>m2m_sp_widget_dependency_686d007d075e501037c7f2ae7c1ed08f</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-29 14:58:44</sys_updated_on>
+    </m2m_sp_widget_dependency>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>m2m_sp_widget_dependency_686d007d075e501037c7f2ae7c1ed08f</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_widget_dependency"><m2m_sp_widget_dependency action="INSERT_OR_UPDATE"><sp_dependency display_value="Materialize">ae3402f00716541037c7f2ae7c1ed042</sp_dependency><sp_widget display_value="Copy of Test scheduler">4d5dc43d075e501037c7f2ae7c1ed092</sp_widget><sys_class_name>m2m_sp_widget_dependency</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-07-29 14:58:44</sys_created_on><sys_id>686d007d075e501037c7f2ae7c1ed08f</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Materialize.Copy of Test scheduler</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>m2m_sp_widget_dependency_686d007d075e501037c7f2ae7c1ed08f</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-07-29 14:58:44</sys_updated_on></m2m_sp_widget_dependency></record_update>]]></payload>
+        <payload_hash>235649748</payload_hash>
+        <record_name>Materialize.Copy of Test scheduler</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-29 14:58:44</sys_created_on>
+        <sys_id>286d007d075e501037c7f2ae7c1ed091</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1739b1530e90000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-29 14:58:44</sys_updated_on>
+        <type>Widget Dependency</type>
+        <update_guid>206d007dc35e501054fcb6c32330b791</update_guid>
+        <update_guid_history>206d007dc35e501054fcb6c32330b791:235649748</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Materialize.Copy of Test scheduler">4eb97656071ad01037c7f2ae7c1ed0c4</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-31 16:48:39</sys_created_on>
+        <sys_db_object display_value="" name="m2m_sp_widget_dependency">m2m_sp_widget_dependency</sys_db_object>
+        <sys_id>3088db5908814f598b43f21d3d7f6b89</sys_id>
+        <sys_metadata>686d007d075e501037c7f2ae7c1ed08f</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Materialize.Copy of Test scheduler</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>m2m_sp_widget_dependency_686d007d075e501037c7f2ae7c1ed08f</sys_update_name>
+        <sys_update_version display_value="m2m_sp_widget_dependency_686d007d075e501037c7f2ae7c1ed08f">286d007d075e501037c7f2ae7c1ed091</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-31 16:48:39</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

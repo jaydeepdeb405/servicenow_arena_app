@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_widget_dependency">
+    <m2m_sp_widget_dependency action="DELETE">
+        <sp_dependency display_value="Materialize">ae3402f00716541037c7f2ae7c1ed042</sp_dependency>
+        <sp_widget display_value="Arena Test Login">bba50a9b075e541037c7f2ae7c1ed0f1</sp_widget>
+        <sys_class_name>m2m_sp_widget_dependency</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-03 15:52:25</sys_created_on>
+        <sys_id>7b99c69f075e541037c7f2ae7c1ed024</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Materialize.Arena Test Login</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>m2m_sp_widget_dependency_7b99c69f075e541037c7f2ae7c1ed024</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-03 15:52:25</sys_updated_on>
+    </m2m_sp_widget_dependency>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>m2m_sp_widget_dependency_7b99c69f075e541037c7f2ae7c1ed024</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_widget_dependency"><m2m_sp_widget_dependency action="INSERT_OR_UPDATE"><sp_dependency display_value="Materialize">ae3402f00716541037c7f2ae7c1ed042</sp_dependency><sp_widget display_value="Arena Test Login">bba50a9b075e541037c7f2ae7c1ed0f1</sp_widget><sys_class_name>m2m_sp_widget_dependency</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-08-03 15:52:25</sys_created_on><sys_id>7b99c69f075e541037c7f2ae7c1ed024</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Materialize.Arena Test Login</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>m2m_sp_widget_dependency_7b99c69f075e541037c7f2ae7c1ed024</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-08-03 15:52:25</sys_updated_on></m2m_sp_widget_dependency></record_update>]]></payload>
+        <payload_hash>35579249</payload_hash>
+        <record_name>Materialize.Arena Test Login</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-03 15:52:25</sys_created_on>
+        <sys_id>7799c69f075e541037c7f2ae7c1ed027</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>173b50625520000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-03 15:52:25</sys_updated_on>
+        <type>Widget Dependency</type>
+        <update_guid>7f99c69fdf5e5410f1edc7bdc06b0c26</update_guid>
+        <update_guid_history>7f99c69fdf5e5410f1edc7bdc06b0c26:35579249</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Materialize.Arena Test Login">74139257079e541037c7f2ae7c1ed0c0</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-03 16:33:43</sys_created_on>
+        <sys_db_object display_value="" name="m2m_sp_widget_dependency">m2m_sp_widget_dependency</sys_db_object>
+        <sys_id>a43cecf01cb246f58ba6ee6e879edcd1</sys_id>
+        <sys_metadata>7b99c69f075e541037c7f2ae7c1ed024</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Materialize.Arena Test Login</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>m2m_sp_widget_dependency_7b99c69f075e541037c7f2ae7c1ed024</sys_update_name>
+        <sys_update_version display_value="m2m_sp_widget_dependency_7b99c69f075e541037c7f2ae7c1ed024">7799c69f075e541037c7f2ae7c1ed027</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-03 16:33:43</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

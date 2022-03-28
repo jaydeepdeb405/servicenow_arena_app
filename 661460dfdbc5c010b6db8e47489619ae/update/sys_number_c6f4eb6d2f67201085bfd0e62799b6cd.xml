@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_number">
+    <sys_number action="INSERT_OR_UPDATE">
+        <category display_value="" name="x_93700_arena_did_you_know">x_93700_arena_did_you_know</category>
+        <maximum_digits>7</maximum_digits>
+        <number>1000</number>
+        <prefix>DID</prefix>
+        <sys_class_name>sys_number</sys_class_name>
+        <sys_created_by>movva</sys_created_by>
+        <sys_created_on>2021-04-16 11:31:47</sys_created_on>
+        <sys_id>c6f4eb6d2f67201085bfd0e62799b6cd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>DID</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_number_c6f4eb6d2f67201085bfd0e62799b6cd</sys_update_name>
+        <sys_updated_by>movva</sys_updated_by>
+        <sys_updated_on>2021-04-16 11:31:47</sys_updated_on>
+    </sys_number>
+</record_update>

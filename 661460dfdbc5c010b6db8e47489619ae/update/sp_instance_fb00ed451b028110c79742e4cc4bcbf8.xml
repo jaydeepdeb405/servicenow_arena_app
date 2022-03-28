@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">0fa931e21b250110c79742e4cc4bcb1b</sp_column>
+        <sp_widget display_value="Did You Know Footer">5cb30f262fa7201085bfd0e62799b6cd</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>chandana</sys_created_by>
+        <sys_created_on>2022-03-03 15:22:16</sys_created_on>
+        <sys_id>fb00ed451b028110c79742e4cc4bcbf8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_instance_fb00ed451b028110c79742e4cc4bcbf8</sys_update_name>
+        <sys_updated_by>chandana</sys_updated_by>
+        <sys_updated_on>2022-03-03 15:22:16</sys_updated_on>
+        <title/>
+        <url/>
+        <widget_parameters/>
+    </sp_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=fb00ed451b028110c79742e4cc4bcbf8"/>
+</record_update>

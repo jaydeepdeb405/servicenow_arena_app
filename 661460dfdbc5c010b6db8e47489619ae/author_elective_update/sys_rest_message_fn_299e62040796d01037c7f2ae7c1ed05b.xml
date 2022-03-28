@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn">
+    <sys_rest_message_fn action="DELETE">
+        <authentication_type>inherit_from_parent</authentication_type>
+        <basic_auth_password/>
+        <basic_auth_profile/>
+        <basic_auth_user/>
+        <content/>
+        <function_name>Default GET</function_name>
+        <http_method>get</http_method>
+        <lock>false</lock>
+        <oauth2_profile/>
+        <protocol_name/>
+        <qualified_name>Zoom [ Default GET ]</qualified_name>
+        <rest_endpoint>https://zoom.us/</rest_endpoint>
+        <rest_message display_value="Zoom">f18ee6c40796d01037c7f2ae7c1ed080</rest_message>
+        <sys_class_name>sys_rest_message_fn</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-24 16:13:39</sys_created_on>
+        <sys_id>299e62040796d01037c7f2ae7c1ed05b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Default GET</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_rest_message_fn_299e62040796d01037c7f2ae7c1ed05b</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-24 16:13:39</sys_updated_on>
+        <use_basic_auth>false</use_basic_auth>
+        <use_mid_server/>
+        <use_mutual_auth>false</use_mutual_auth>
+    </sys_rest_message_fn>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_rest_message_fn_299e62040796d01037c7f2ae7c1ed05b</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn"><sys_rest_message_fn action="INSERT_OR_UPDATE"><authentication_type>inherit_from_parent</authentication_type><basic_auth_password/><basic_auth_profile/><basic_auth_user/><content/><function_name>Default GET</function_name><http_method>get</http_method><lock>false</lock><oauth2_profile/><protocol_name/><qualified_name>Zoom [ Default GET ]</qualified_name><rest_endpoint>https://zoom.us/</rest_endpoint><rest_message display_value="Zoom">f18ee6c40796d01037c7f2ae7c1ed080</rest_message><sys_class_name>sys_rest_message_fn</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-07-24 16:13:39</sys_created_on><sys_id>299e62040796d01037c7f2ae7c1ed05b</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Default GET</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_rest_message_fn_299e62040796d01037c7f2ae7c1ed05b</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-07-24 16:13:39</sys_updated_on><use_basic_auth>false</use_basic_auth><use_mid_server/><use_mutual_auth>false</use_mutual_auth></sys_rest_message_fn></record_update>]]></payload>
+        <payload_hash>1261134561</payload_hash>
+        <record_name>Default GET</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-24 16:13:39</sys_created_on>
+        <sys_id>ed9e62040796d01037c7f2ae7c1ed05d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1738199fe650000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-24 16:13:39</sys_updated_on>
+        <type>HTTP Method</type>
+        <update_guid>e59e62049596d010f5663a53ee088b5d</update_guid>
+        <update_guid_history>e59e62049596d010f5663a53ee088b5d:1261134561</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-24 16:17:38</sys_created_on>
+        <sys_db_object display_value="" name="sys_rest_message_fn">sys_rest_message_fn</sys_db_object>
+        <sys_id>7f7c4d719a694222bd1a7a93ad5c1b44</sys_id>
+        <sys_metadata>299e62040796d01037c7f2ae7c1ed05b</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Default GET</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent display_value="">f18ee6c40796d01037c7f2ae7c1ed080</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_rest_message_fn_299e62040796d01037c7f2ae7c1ed05b</sys_update_name>
+        <sys_update_version display_value="sys_rest_message_fn_299e62040796d01037c7f2ae7c1ed05b">ed9e62040796d01037c7f2ae7c1ed05d</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-24 16:17:38</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="859f93122f7a341066625e972799b6bc" sys_domain="global" table="x_93700_arena_question_staging" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_serial_no_</element>
+            <position>0</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-09-27 08:27:45</sys_created_on>
+            <sys_id>059fdf522f7a341066625e972799b616</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_question_staging" sys_domain="global" view="Default view">859f93122f7a341066625e972799b6bc</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-09-27 08:27:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_choices</element>
+            <position>1</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-09-27 08:27:45</sys_created_on>
+            <sys_id>0d9fdf522f7a341066625e972799b616</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_question_staging" sys_domain="global" view="Default view">859f93122f7a341066625e972799b6bc</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-09-27 08:27:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_questions</element>
+            <position>2</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-09-27 08:27:45</sys_created_on>
+            <sys_id>8d9fdf522f7a341066625e972799b616</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_question_staging" sys_domain="global" view="Default view">859f93122f7a341066625e972799b6bc</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-09-27 08:27:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_answer</element>
+            <position>3</position>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-09-27 08:27:45</sys_created_on>
+            <sys_id>019fdf522f7a341066625e972799b617</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_93700_arena_question_staging" sys_domain="global" view="Default view">859f93122f7a341066625e972799b6bc</sys_ui_section>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-09-27 08:27:45</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_93700_arena_question_staging</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2021-09-27 08:27:44</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>859f93122f7a341066625e972799b6bc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_93700_arena_question_staging</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_ui_section_859f93122f7a341066625e972799b6bc</sys_update_name>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2021-09-27 08:27:44</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

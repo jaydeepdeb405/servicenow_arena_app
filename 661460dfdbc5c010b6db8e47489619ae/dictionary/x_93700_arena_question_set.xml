@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Question set" max_length="40" name="x_93700_arena_question_set" sizeclass="18" type="collection">
+        <element label="Current question" max_length="32" name="current_question" reference="x_93700_arena_arena_question" type="reference"/>
+        <element attributes="condition_builder=v2,edge_encryption_enabled=true,show_condition_count=true" default="active=true" dependent="question_table" dependent_on_field="question_table" label="Filter" max_length="4000" name="filter" type="conditions" use_dependent_field="true"/>
+        <element attributes="edge_encryption_enabled=true" label="Level 1 count" max_length="40" name="level_1_count" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" calculation="(function calculatedFieldValue(current) {&#10;&#9;var totalQuestionCount = parseInt(current.getValue('number_of_questions') || 0);&#10;&#9;var levelOneCount = parseInt(current.getValue('level_1_count') || 0);&#10;&#9;if(levelOneCount &gt; 0 &amp;&amp; totalQuestionCount &gt; 0) return (levelOneCount/totalQuestionCount) * 100; &#10;&#9;else return 0;&#10;})(current);" label="Level 1 weightage" max_length="15" name="level_1_weightage" type="percent_complete" virtual="true"/>
+        <element attributes="edge_encryption_enabled=true" label="Level 2 count" max_length="40" name="level_2_count" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" calculation="(function calculatedFieldValue(current) {&#10;    var totalQuestionCount = parseInt(current.getValue('number_of_questions') || 0);&#10;    var levelTwoCount = parseInt(current.getValue('level_2_count') || 0);&#10;    if (levelTwoCount &gt; 0 &amp;&amp; totalQuestionCount &gt; 0) return (levelTwoCount / totalQuestionCount) * 100;&#10;    else return 0;&#10;})(current);" label="Level 2 weightage" max_length="15" name="level_2_weightage" type="percent_complete" virtual="true"/>
+        <element attributes="edge_encryption_enabled=true" label="Level 3 count" max_length="40" name="level_3_count" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" calculation="(function calculatedFieldValue(current) {&#10;    var totalQuestionCount = parseInt(current.getValue('number_of_questions') || 0);&#10;    var levelThreeCount = parseInt(current.getValue('level_3_count') || 0);&#10;    if (levelThreeCount &gt; 0 &amp;&amp; totalQuestionCount &gt; 0) return (levelThreeCount / totalQuestionCount) * 100;&#10;    else return 0;&#10;})(current);" label="Level 3 weightage" max_length="15" name="level_3_weightage" type="percent_complete" virtual="true"/>
+        <element attributes="edge_encryption_enabled=true" label="Level 4 count" max_length="40" name="level_4_count" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" calculation="(function calculatedFieldValue(current) {&#10;    var totalQuestionCount = parseInt(current.getValue('number_of_questions') || 0);&#10;    var levelFourCount = parseInt(current.getValue('level_4_count') || 0);&#10;    if (levelFourCount &gt; 0 &amp;&amp; totalQuestionCount &gt; 0) return (levelFourCount / totalQuestionCount) * 100;&#10;    else return 0;&#10;})(current);" label="Level 4 weightage" max_length="15" name="level_4_weightage" type="percent_complete" virtual="true"/>
+        <element display="true" label="Name" max_length="40" name="name" type="string"/>
+        <element attributes="edge_encryption_enabled=true" calculation="(function calculatedFieldValue(current) {&#10;&#9;var numberOfQuestions = 0;&#10;&#9;var questions = current.getValue('questions');&#10;&#9;if(questions !== null) {&#10;&#9;&#9;numberOfQuestions = questions.split(',').length;&#10;&#9;}&#10;&#9;return numberOfQuestions;&#10;})(current);" label="Number of questions selected" max_length="40" name="number_of_questions" type="integer" virtual="true"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Selected questions" max_length="4000" name="questions" reference="x_93700_arena_arena_question" type="glide_list"/>
+        <element attributes="base_start=true,edge_encryption_enabled=true" default="x_93700_arena_arena_question" label="Question Table" max_length="80" name="question_table" read_only="true" type="table_name"/>
+        <element attributes="edge_encryption_enabled=true" label="Select randomly" max_length="40" name="select_randomly" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Total count" max_length="40" name="total_count" type="integer"/>
+        <index name="index">
+            <element name="current_question"/>
+        </index>
+    </element>
+</database>

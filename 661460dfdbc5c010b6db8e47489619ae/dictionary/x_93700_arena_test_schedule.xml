@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Test schedule" max_length="40" name="x_93700_arena_test_schedule" sizeclass="16" type="collection">
+        <element attributes="edge_encryption_enabled=true" default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Certification Preparation" max_length="40" name="appear_anytime" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="Certification Name" max_length="40" name="certification_name" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Certified System Administrator" sequence="100" value="csa"/>
+                <element inactive_on_update="false" label="Certified Application Developer" sequence="150" value="cad"/>
+                <element inactive_on_update="false" label="CIS - ITSM" sequence="200" value="cis_itsm"/>
+                <element inactive_on_update="false" label="CIS - HRSD" sequence="300" value="cis_hrsd"/>
+                <element inactive_on_update="false" label="CIS - Risk &amp; Compliance" sequence="400" value="cis_grc"/>
+                <element inactive_on_update="false" label="CIS - CSM" sequence="500" value="cis_csm"/>
+                <element inactive_on_update="false" label="CIS - Discovery" sequence="600" value="cis_discovery"/>
+                <element inactive_on_update="false" label="CIS - PPM" sequence="700" value="cis_ppm"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Enable anti-cheat" max_length="40" name="enable_anti_cheat" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Enable retakes" max_length="40" name="enable_retakes" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Import from Groups" max_length="4000" name="groups" reference="sys_user_group" type="glide_list"/>
+        <element display="true" label="Name" mandatory="true" max_length="40" name="name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Question set" mandatory="true" max_length="32" name="question_set" reference="x_93700_arena_question_set" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Show Responses" max_length="40" name="show_responses" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Shuffle Questions" max_length="40" name="shuffle" type="boolean"/>
+        <element label="Start Time" mandatory="true" max_length="40" name="start_time" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Test Duration (in minutes)" mandatory="true" max_length="40" name="test_duration_in_minutes" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Test Takers" max_length="4000" name="test_takers" reference="x_93700_arena_test_takers" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Import from Users" max_length="4000" name="users" reference="sys_user" type="glide_list"/>
+        <index name="index">
+            <element name="question_set"/>
+        </index>
+    </element>
+</database>

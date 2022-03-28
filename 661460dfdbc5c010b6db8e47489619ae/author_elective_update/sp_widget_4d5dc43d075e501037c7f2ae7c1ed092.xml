@@ -1,0 +1,1175 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="DELETE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $http, $timeout) {
+	/* widget controller */
+	var c = this;
+
+	$timeout(function () {
+		var stepper = document.querySelector('.stepper');
+		var stepperInstance = new MStepper(stepper, {
+			firstActive: 0
+		});
+
+		var datePickers = document.querySelectorAll('.datepicker');
+		M.Datepicker.init(datePickers, {
+			autoClose: true,
+			format: 'yyyy-mm-dd',
+			showClearBtn: true
+		});
+
+		var timePickers = document.querySelectorAll('.timepicker');
+		M.Timepicker.init(timePickers, {
+			autoClose: true,
+			showClearBtn: true
+		});
+
+	}, 0);
+
+	$scope.scheduleForm = {
+		scheduleName: '',
+		scheduleStartDate: "",
+		scheduleStartTime: "",
+		scheduleDuration: '',
+		questionSet: {
+			displayValue: '',
+			value: ''
+		},
+		setName: '',
+		totalQuestionCount: undefined,
+		levelOneWeightage: 0,
+		levelTwoWeightage: 0,
+		levelThreeWeightage: 0,
+		levelFourWeightage: 0,
+		testTakers: [{name: "", email: "", sys_id: ""}]
+	};
+
+	$scope.questionCount = {
+		level1: 0,
+		level2: 0,
+		level3: 0,
+		level4: 0
+	};
+
+	$scope.autopopulatedUsers = [];
+	$scope.autopopulatedQuestionSets = [];
+	$scope.testTakerIndexInFocus = -1;
+
+	$scope.questionSetDropdown = false;
+	$scope.questionSetArrowDownCount = -1
+
+	$scope.changeWeightage = function(level) {
+		if(!$scope.scheduleForm.totalQuestionCount) {
+			alert("Please enter question count");
+			$scope.resetWeightages();
+			return;
+		}
+		var value = 0;
+		var remainingWeightage = 100;
+		if(level === 1) {
+			value = parseInt($scope.scheduleForm.levelOneWeightage);
+			remainingWeightage = 100 - ((($scope.questionCount.level2+$scope.questionCount.level3+$scope.questionCount.level4)/$scope.scheduleForm.totalQuestionCount)*100);
+			if(remainingWeightage >= value) $scope.scheduleForm.levelOneWeightage = value;
+			else $scope.scheduleForm.levelOneWeightage = remainingWeightage;
+			$scope.questionCount.level1 = Math.round(($scope.scheduleForm.levelOneWeightage*$scope.scheduleForm.totalQuestionCount)/100);
+		} else if(level === 2) {
+			value = parseInt($scope.scheduleForm.levelTwoWeightage);
+			remainingWeightage = 100 - ((($scope.questionCount.level1+$scope.questionCount.level3+$scope.questionCount.level4)/$scope.scheduleForm.totalQuestionCount)*100);
+			if(remainingWeightage >= value) $scope.scheduleForm.levelTwoWeightage = value;
+			else $scope.scheduleForm.levelTwoWeightage = remainingWeightage;
+			$scope.questionCount.level2 = Math.round(($scope.scheduleForm.levelTwoWeightage*$scope.scheduleForm.totalQuestionCount)/100);
+		} else if(level === 3) {
+			value = parseInt($scope.scheduleForm.levelThreeWeightage);
+			remainingWeightage = 100 - ((($scope.questionCount.level1+$scope.questionCount.level2+$scope.questionCount.level4)/$scope.scheduleForm.totalQuestionCount)*100);
+			if(remainingWeightage >= value) $scope.scheduleForm.levelThreeWeightage = value;
+			else $scope.scheduleForm.levelThreeWeightage = remainingWeightage;
+			$scope.questionCount.level3 = Math.round(($scope.scheduleForm.levelThreeWeightage*$scope.scheduleForm.totalQuestionCount)/100);
+		} else if(level === 4) {
+			value = parseInt($scope.scheduleForm.levelFourWeightage);
+			remainingWeightage = 100 - ((($scope.questionCount.level2+$scope.questionCount.level3+$scope.questionCount.level1)/$scope.scheduleForm.totalQuestionCount)*100);
+			if(remainingWeightage >= value) $scope.scheduleForm.levelFourWeightage = value;
+			else $scope.scheduleForm.levelFourWeightage = remainingWeightage;
+			$scope.questionCount.level4 = Math.round(($scope.scheduleForm.levelFourWeightage*$scope.scheduleForm.totalQuestionCount)/100);
+		}
+	}
+
+	$scope.resetWeightages = function() {
+		$scope.scheduleForm.levelOneWeightage = 0;
+		$scope.scheduleForm.levelTwoWeightage = 0;
+		$scope.scheduleForm.levelThreeWeightage = 0;
+		$scope.scheduleForm.levelFourWeightage = 0;
+
+		$scope.questionCount = {
+			level1: 0,
+			level2: 0,
+			level3: 0,
+			level4: 0
+		}
+	}
+
+	$scope.addTestTaker = function() {
+		$scope.scheduleForm.testTakers.push({name: "", email: "", sys_id: ""})
+	}
+
+	$scope.removeTestTaker = function() {
+		if($scope.scheduleForm.testTakers.length>1) $scope.scheduleForm.testTakers.pop();
+	}
+
+	$scope.selectUser = function(user, testTakerIndex) {
+		$scope.scheduleForm.testTakers[testTakerIndex].name = user.name;
+		$scope.scheduleForm.testTakers[testTakerIndex].email = user.email;
+		$scope.scheduleForm.testTakers[testTakerIndex].sys_id = user.sys_id;
+		$scope.autopopulatedUsers = [];
+	}
+
+	$scope.setIndex = function(testTakerIndex, blur) {
+		if(blur===true) {
+			setTimeout(function() { $scope.testTakerIndexInFocus = -1 }, 0);
+		}
+		else {
+			$scope.testTakerIndexInFocus = testTakerIndex;
+			if($scope.testTakerIndexInFocus !== testTakerIndex) $scope.autopopulatedUsers = [];
+		} 
+	}
+
+	$scope.selectQuestionSet = function(set) {
+		$scope.scheduleForm.questionSet.displayValue = set.name;
+		$scope.scheduleForm.questionSet.value = set.sys_id;
+		$scope.questionSetDropdown = false;
+	}
+
+	$scope.submitForm = function() {
+		console.log($scope.scheduleForm);
+		if($scope.scheduleForm.scheduleStartTime === "") {
+			alert('Please select start time');
+			return;
+		}
+		var totalSelectedQuestionCount = $scope.questionCount.level1+$scope.questionCount.level2+$scope.questionCount.level3+$scope.questionCount.level4;
+		if($scope.scheduleForm.questionSet.value.length===0 && parseInt(totalSelectedQuestionCount)<parseInt($scope.scheduleForm.totalQuestionCount)) {
+			alert('Please assign question weightages');
+			return;
+		}
+		c.data.action = 'createTestSchedule';
+		c.data.scheduleForm = JSON.stringify($scope.scheduleForm);
+		c.data.questionCount = JSON.stringify($scope.questionCount);
+		c.server.update();
+	}
+
+	$scope.autopopulateEmail = function(testTakerIndex) {
+		$scope.autopopulatedUsers = [];
+		var email = $scope.scheduleForm.testTakers[testTakerIndex].email;
+		if(!email || email.length < 1) return;
+		clearTimeout($scope.timeout);
+		$scope.timeout = setTimeout(function() {
+			$http({
+				method: 'GET',
+				url: '/api/now/table/sys_user?sysparm_fields=email%2Csys_id%2Cname&sysparm_limit=10&sysparm_query=emailSTARTSWITH'+email
+			}).then(function successCallback(response) {
+				$scope.autopopulatedUsers = response.data.result;
+				console.log($scope.autopopulatedUsers)
+			}, function errorCallback(response) {
+			});
+		}, 300);
+	}
+
+	$scope.autopopulateQuestionSets = function() {
+		var questionSetInput = $scope.scheduleForm.questionSet.displayValue;
+		$scope.autopopulatedQuestionSets = [];
+		if(!questionSetInput || questionSetInput < 1) return;
+		clearTimeout($scope.timeout);
+		$scope.timeout = setTimeout(function() {
+			$http({
+				method: 'GET',
+				url: '/api/now/table/x_93700_arena_question_set?sysparm_fields=name%2Csys_id%2Cname&sysparm_query=nameLIKE'+questionSetInput
+			}).then(function successCallback(response) {
+				$scope.autopopulatedQuestionSets = response.data.result;
+				$scope.questionSetDropdown = true;
+				console.log($scope.autopopulatedQuestionSets)
+			}, function errorCallback(response) {
+			});
+		}, 300);
+	}
+
+	$scope.handleQuestionSetDropdown = function(open) {
+		if(open === true) {
+			$scope.questionSetDropdown = true;
+		} else {
+			$timeout(function() {
+				$scope.questionSetDropdown = false;
+				$scope.questionSetArrowDownCount = 0;
+			}, 100);
+		}
+	}
+
+	$scope.onArrowKeys = function(event) {
+		$scope.handleQuestionSetDropdown(true);
+		var keycode = event.keyCode;
+		//arrow down
+		if(keycode === 40) {
+			event.preventDefault();
+			var max = $scope.autopopulatedQuestionSets.length;
+			max = max === 0 ? 0 : max-1;
+			$scope.questionSetArrowDownCount = $scope.questionSetArrowDownCount >= max ? max : ++$scope.questionSetArrowDownCount;
+		}
+		//arrow up
+		else if(keycode === 38) {
+			event.preventDefault();
+			$scope.questionSetArrowDownCount = $scope.questionSetArrowDownCount <= 0 ? 0 : --$scope.questionSetArrowDownCount;
+		}
+		// return key
+		else if(keycode === 13) {
+			$scope.selectQuestionSet($scope.autopopulatedQuestionSets[$scope.questionSetArrowDownCount]);
+		}
+	}
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.modal {
+  background: transparent;
+  box-shadow: none;
+}
+
+.dropdown-content {
+  display: block !important;
+  opacity: 1 !important;
+  width: calc(100% - 22px) !important;
+  top: 0 !important;
+  left: 10px !important;
+  transform: scaleX(1) scaleY(1) translateY(46px) !important;
+}
+
+.dropdown-item-active {
+  background-color: #eeee;
+}
+
+
+
+.add-remove-btns {
+  position: absolute;
+  right: 0;
+  transform: translateY(-30px) translateX(-30px);
+  .glyphicon {
+    font-size: 25px;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px grey;
+  }
+  .glyphicon:hover {
+  }
+}
+
+.question-count-wrapper {
+  margin: auto 15px;
+}
+
+.test-taker-rows {
+  height: 25vh;
+  margin-bottom: 30px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.select2-container {
+  margin-bottom: 15px;
+}
+
+.section-label {
+  margin-top: 30px;
+}
+
+.sub-section-label {
+  font-size: 1.3em;
+}
+
+.test-taker-label {
+  transform: translateX(15px);
+  width: 100%;
+}
+
+.autopopulate {
+  list-style-type: none;
+  position: absolute;
+  z-index: 100;
+  width: 90%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  li {
+    padding: 5px 10px;
+    border-bottom: 0;
+    background-color: white;
+    cursor: pointer;
+  }
+  li:hover {
+    background-color: #3e95f4;
+    color: white;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Copy of Test scheduler</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    if (input && input.action == 'createTestSchedule') {
+
+        var scheduleForm = JSON.parse(input.scheduleForm);
+        var questionCount = JSON.parse(input.questionCount);
+
+        if (scheduleForm.questionSet.value.length === 0) {
+            scheduleForm.questionSet = createQuestionSet(scheduleForm, questionCount);
+        }
+
+        var testTakerIds = createTestTakerProfiles(scheduleForm.testTakers);
+
+        var testScheduleGr = new GlideRecord('x_93700_arena_test_schedule');
+        testScheduleGr.initialize();
+        testScheduleGr.setValue('name', scheduleForm.scheduleName);
+        testScheduleGr.setValue('test_duration_in_minutes', scheduleForm.scheduleDuration);
+        testScheduleGr.setValue('start_time', scheduleForm.scheduleStartTime);
+        testScheduleGr.setValue('question_set', scheduleForm.questionSet.value);
+        testScheduleGr.setValue('test_takers', testTakerIds.toString());
+        if (testScheduleGr.insert()) gs.addInfoMessage('Schedule successfully created');
+		
+		// send email to all test takers
+		testTakerIds.forEach(function(testTaker) {
+            gs.eventQueue("x_93700_arena.test_scheduled", testScheduleGr, testTaker);
+        });
+    }
+
+    function createTestTakerProfiles(testTakers) {
+        var testTakerIds = [];
+        var defaultPassword = gs.getProperty('x_93700_arena.test.user.default_password');
+        var testUserGroupId = gs.getProperty('x_93700_arena.test.user.group_id');
+        testTakers.forEach(function(testTaker) {
+            var userId = '';
+            var userGr = new GlideRecord('sys_user');
+            userGr.setLimit(1);
+            if (testTaker.sys_id.length > 0) userGr.addQuery('sys_id', testTaker.sys_id);
+            userGr.addQuery('email', testTaker.email);
+            userGr.query();
+            if (userGr.next()) {
+                userId = testTakerIds.push(userGr.getValue('sys_id'));
+            } else {
+                var nameParts = testTaker.name.split(' ');
+                var username = nameParts.join('_').toLowerCase();
+                var firstName = nameParts[0];
+                nameParts.shift();
+                var lastName = nameParts.join(' ');
+                userGr.initialize();
+                userGr.setValue('user_name', username);
+                userGr.setValue('first_name', firstName);
+                userGr.setValue('last_name', lastName);
+                userGr.setValue('email', testTaker.email);
+                userGr.user_password.setDisplayValue(defaultPassword);
+                userId = userGr.insert() || '';
+            }
+            if (userId.length > 0) testTakerIds.push(userId);
+        });
+        testTakerIds.forEach(function(testTakerId) {
+            var grMember = new GlideRecord('sys_user_grmember');
+			grMember.setLimit(1);
+			grMember.addQuery('user', testTakerId);
+            grMember.addQuery('group', testUserGroupId);
+			grMember.query();
+			if(!grMember.next()) {
+				grMember.initialize();
+				grMember.setValue('user', testTakerId);
+				grMember.setValue('group', testUserGroupId);
+				grMember.insert();
+			}
+        });
+        return testTakerIds;
+    }
+
+    function createQuestionSet(scheduleForm, questionCount) {
+        var level1QuestionIds = [];
+        var level2QuestionIds = [];
+        var level3QuestionIds = [];
+        var level4QuestionIds = [];
+
+        var levels = Object.keys(questionCount);
+
+        var questionIds = {
+            level1: [],
+            level2: [],
+            level3: [],
+            level4: []
+        };
+
+        var questionGr = new GlideRecord('x_93700_arena_arena_question');
+        questionGr.addActiveQuery();
+        questionGr.query();
+        while (questionGr.next()) {
+            var level = questionGr.getValue('level');
+            if (level) {
+                questionIds[level].push(questionGr.getValue('sys_id'));
+            }
+        }
+
+        var levelKeys = Object.keys(questionCount);
+
+        var questions = [];
+
+        for (var index = 0; index < levelKeys.length; index++) {
+            var levelValue = levelKeys[index];
+            var levelQuestionCount = questionCount[levelValue];
+            var currentCount = questionIds[levelValue].length;
+
+            for (var quesIndex = 0; quesIndex < levelQuestionCount; quesIndex++) {
+                var randomIndex = Math.floor(Math.random() * currentCount);
+                questions.push(questionIds[levelValue][randomIndex]);
+                questionIds[levelValue].splice(randomIndex, 1);
+            }
+        }
+
+        var questionSetGr = new GlideRecord('x_93700_arena_question_set');
+        questionSetGr.initialize();
+        questionSetGr.setValue('name', scheduleForm.setName);
+        questionSetGr.setValue('questions', questions.toString());
+        questionSetGr.setValue('level_1_weightage', scheduleForm.levelOneWeightage);
+        questionSetGr.setValue('level_2_weightage', scheduleForm.levelTwoWeightage);
+        questionSetGr.setValue('level_3_weightage', scheduleForm.levelThreeWeightage);
+        questionSetGr.setValue('level_4_weightage', scheduleForm.levelFourWeightage);
+        var questionSetId = questionSetGr.insert();
+
+        return {
+            displayValue: scheduleForm.scheduleName,
+            value: questionSetId
+        };
+    }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-29 14:58:30</sys_created_on>
+        <sys_id>4d5dc43d075e501037c7f2ae7c1ed092</sys_id>
+        <sys_mod_count>139</sys_mod_count>
+        <sys_name>Copy of Test scheduler</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_4d5dc43d075e501037c7f2ae7c1ed092</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-31 16:46:15</sys_updated_on>
+        <template><![CDATA[<div class="row">
+  <div class="card z-depth-3" style="border-radius: 15px;">
+    <div class="card-content">
+      <ul class="stepper" style="min-height: 70vh">
+        <li class="step active">
+          <div class="step-title waves-effect">Basic Information</div>
+          <div class="step-content">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="name" type="text" ng-model="scheduleForm.scheduleName" class="validate" placeholder="eg. - KGS ServiceNow Recruitment Drive" required>
+                <label class="active" for="name">Schedule name</label>
+                <span class="helper-text" data-error="Can't leave this field empty"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input type="text" ng-model="scheduleForm.scheduleStartDate" id="start_date" class="datepicker validate" placeholder="yyyy-mm-dd" required>
+                <label class="active" for="start_date">Start Date</label>
+                <span class="helper-text" data-error="Can't leave this field empty"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input type="text" ng-model="scheduleForm.scheduleStartTime" id="start_time" class="timepicker validate" placeholder="hh:mm" required>
+                <label class="active" for="start_time">Start Time</label>
+                <span class="helper-text" data-error="Can't leave this field empty"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input type="text" class="form-control" id="test_duration" class="validate" ng-model="scheduleForm.scheduleDuration" placeholder="eg. - 30" required/>
+                <label class="active" for="name">Test duration (in minutes)</label>
+                <span class="helper-text" data-error="Can't leave this field empty"></span>
+              </div>
+            </div>
+            <div class="step-actions">
+              <a class="waves-effect waves-dark btn blue next-step">Next</a>
+            </div>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-title waves-effect">Select questions</div>
+          <div class="step-content">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="question_set" type="text" placeholder="Start typing to see options" ng-model="scheduleForm.questionSet.displayValue" ng-focus="handleQuestionSetDropdown(true)" ng-blur="handleQuestionSetDropdown(false)" ng-keydown="onArrowKeys($event)" ng-change="autopopulateQuestionSets()">
+                <label class="active" for="question_set">Choose existing set</label>
+                <span class="helper-text" data-error="Can't leave this field empty"></span>
+                <ul class="dropdown-content">
+                  <li ng-repeat="set in autopopulatedQuestionSets track by $index" ng-init="questionSetIndex = $index"><span>{{set.name}}</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="question-set-generator">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="set_name" type="text" ng-model="scheduleForm.setName" class="validate" ng-disabled="scheduleForm.questionSet.value.length>0" placeholder="eg. - KGS-SNOW-Consultant-Medium Level" required>
+                  <label class="active" for="set_name">Set Name</label>
+                  <span class="helper-text" data-error="Can't leave this field empty"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="total_questions" type="text" ng-model="scheduleForm.totalQuestionCount" ng-change="resetWeightages()" class="validate" placeholder="eg. - 10" required>
+                  <label class="active" for="total_questions">Total questions count</label>
+                  <span class="helper-text" data-error="Can't leave this field empty"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="range" class="form-control-range" ng-change="changeWeightage(1)" ng-model="scheduleForm.levelOneWeightage" min="0" max="100" step="1" id="level_1_count">
+                  <label class="active" for="level_1_count">Level 1 questions count : {{questionCount.level1}}</label>
+                  <span class="helper-text" data-error="Can't leave this field empty"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="range" class="form-control-range" ng-change="changeWeightage(2)" ng-model="scheduleForm.levelTwoWeightage" min="0" max="100" step="1" id="level_2_count">
+                  <label class="active" for="level_2_count">Level 2 questions count : {{questionCount.level2}}</label>
+                  <span class="helper-text" data-error="Can't leave this field empty"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="range" class="form-control-range" ng-change="changeWeightage(3)" ng-model="scheduleForm.levelThreeWeightage" min="0" max="100" step="1" id="level_3_count">
+                  <label class="active" for="level_3_count">Level 3 questions count : {{questionCount.level3}}</label>
+                  <span class="helper-text" data-error="Can't leave this field empty"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input type="range" class="form-control-range" ng-change="changeWeightage(4)" ng-model="scheduleForm.levelFourWeightage" min="0" max="100" step="1" id="level_4_count">
+                  <label class="active" for="level_4_count">Level 4 questions count : {{questionCount.level4}}</label>
+                  <span class="helper-text" data-error="Can't leave this field empty"></span>
+                </div>
+              </div>
+            </div>
+            <div class="step-actions">
+              <a class="waves-effect waves-dark btn blue next-step">Next</a>
+              <a class="waves-effect waves-dark btn blue previous-step">Back</a>
+            </div>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-title waves-effect">Add Test Takers</div>
+          <div class="step-content">
+            <div class="step-actions">
+              <a class="waves-effect waves-dark btn blue next-step">Next</a>
+              <a class="waves-effect waves-dark btn blue previous-step">Back</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sp_widget_4d5dc43d075e501037c7f2ae7c1ed092</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_widget"&gt;&lt;sp_widget action="INSERT_OR_UPDATE"&gt;&lt;category&gt;custom&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[function($scope, $http, $timeout) {
+	/* widget controller */
+	var c = this;
+
+	$timeout(function () {
+		var stepper = document.querySelector('.stepper');
+		var stepperInstance = new MStepper(stepper, {
+			firstActive: 0
+		});
+
+		var datePickers = document.querySelectorAll('.datepicker');
+		M.Datepicker.init(datePickers, {
+			autoClose: true,
+			format: 'yyyy-mm-dd',
+			showClearBtn: true
+		});
+
+		var timePickers = document.querySelectorAll('.timepicker');
+		M.Timepicker.init(timePickers, {
+			autoClose: true,
+			showClearBtn: true
+		});
+
+	}, 0);
+
+	$scope.scheduleForm = {
+		scheduleName: '',
+		scheduleStartDate: "",
+		scheduleStartTime: "",
+		scheduleDuration: '',
+		questionSet: {
+			displayValue: '',
+			value: ''
+		},
+		setName: '',
+		totalQuestionCount: undefined,
+		levelOneWeightage: 0,
+		levelTwoWeightage: 0,
+		levelThreeWeightage: 0,
+		levelFourWeightage: 0,
+		testTakers: [{name: "", email: "", sys_id: ""}]
+	};
+
+	$scope.questionCount = {
+		level1: 0,
+		level2: 0,
+		level3: 0,
+		level4: 0
+	};
+
+	$scope.autopopulatedUsers = [];
+	$scope.autopopulatedQuestionSets = [];
+	$scope.testTakerIndexInFocus = -1;
+
+	$scope.questionSetDropdown = false;
+	$scope.questionSetArrowDownCount = -1
+
+	$scope.changeWeightage = function(level) {
+		if(!$scope.scheduleForm.totalQuestionCount) {
+			alert("Please enter question count");
+			$scope.resetWeightages();
+			return;
+		}
+		var value = 0;
+		var remainingWeightage = 100;
+		if(level === 1) {
+			value = parseInt($scope.scheduleForm.levelOneWeightage);
+			remainingWeightage = 100 - ((($scope.questionCount.level2+$scope.questionCount.level3+$scope.questionCount.level4)/$scope.scheduleForm.totalQuestionCount)*100);
+			if(remainingWeightage &gt;= value) $scope.scheduleForm.levelOneWeightage = value;
+			else $scope.scheduleForm.levelOneWeightage = remainingWeightage;
+			$scope.questionCount.level1 = Math.round(($scope.scheduleForm.levelOneWeightage*$scope.scheduleForm.totalQuestionCount)/100);
+		} else if(level === 2) {
+			value = parseInt($scope.scheduleForm.levelTwoWeightage);
+			remainingWeightage = 100 - ((($scope.questionCount.level1+$scope.questionCount.level3+$scope.questionCount.level4)/$scope.scheduleForm.totalQuestionCount)*100);
+			if(remainingWeightage &gt;= value) $scope.scheduleForm.levelTwoWeightage = value;
+			else $scope.scheduleForm.levelTwoWeightage = remainingWeightage;
+			$scope.questionCount.level2 = Math.round(($scope.scheduleForm.levelTwoWeightage*$scope.scheduleForm.totalQuestionCount)/100);
+		} else if(level === 3) {
+			value = parseInt($scope.scheduleForm.levelThreeWeightage);
+			remainingWeightage = 100 - ((($scope.questionCount.level1+$scope.questionCount.level2+$scope.questionCount.level4)/$scope.scheduleForm.totalQuestionCount)*100);
+			if(remainingWeightage &gt;= value) $scope.scheduleForm.levelThreeWeightage = value;
+			else $scope.scheduleForm.levelThreeWeightage = remainingWeightage;
+			$scope.questionCount.level3 = Math.round(($scope.scheduleForm.levelThreeWeightage*$scope.scheduleForm.totalQuestionCount)/100);
+		} else if(level === 4) {
+			value = parseInt($scope.scheduleForm.levelFourWeightage);
+			remainingWeightage = 100 - ((($scope.questionCount.level2+$scope.questionCount.level3+$scope.questionCount.level1)/$scope.scheduleForm.totalQuestionCount)*100);
+			if(remainingWeightage &gt;= value) $scope.scheduleForm.levelFourWeightage = value;
+			else $scope.scheduleForm.levelFourWeightage = remainingWeightage;
+			$scope.questionCount.level4 = Math.round(($scope.scheduleForm.levelFourWeightage*$scope.scheduleForm.totalQuestionCount)/100);
+		}
+	}
+
+	$scope.resetWeightages = function() {
+		$scope.scheduleForm.levelOneWeightage = 0;
+		$scope.scheduleForm.levelTwoWeightage = 0;
+		$scope.scheduleForm.levelThreeWeightage = 0;
+		$scope.scheduleForm.levelFourWeightage = 0;
+
+		$scope.questionCount = {
+			level1: 0,
+			level2: 0,
+			level3: 0,
+			level4: 0
+		}
+	}
+
+	$scope.addTestTaker = function() {
+		$scope.scheduleForm.testTakers.push({name: "", email: "", sys_id: ""})
+	}
+
+	$scope.removeTestTaker = function() {
+		if($scope.scheduleForm.testTakers.length&gt;1) $scope.scheduleForm.testTakers.pop();
+	}
+
+	$scope.selectUser = function(user, testTakerIndex) {
+		$scope.scheduleForm.testTakers[testTakerIndex].name = user.name;
+		$scope.scheduleForm.testTakers[testTakerIndex].email = user.email;
+		$scope.scheduleForm.testTakers[testTakerIndex].sys_id = user.sys_id;
+		$scope.autopopulatedUsers = [];
+	}
+
+	$scope.setIndex = function(testTakerIndex, blur) {
+		if(blur===true) {
+			setTimeout(function() { $scope.testTakerIndexInFocus = -1 }, 0);
+		}
+		else {
+			$scope.testTakerIndexInFocus = testTakerIndex;
+			if($scope.testTakerIndexInFocus !== testTakerIndex) $scope.autopopulatedUsers = [];
+		} 
+	}
+
+	$scope.selectQuestionSet = function(set) {
+		$scope.scheduleForm.questionSet.displayValue = set.name;
+		$scope.scheduleForm.questionSet.value = set.sys_id;
+		$scope.questionSetDropdown = false;
+	}
+
+	$scope.submitForm = function() {
+		console.log($scope.scheduleForm);
+		if($scope.scheduleForm.scheduleStartTime === "") {
+			alert('Please select start time');
+			return;
+		}
+		var totalSelectedQuestionCount = $scope.questionCount.level1+$scope.questionCount.level2+$scope.questionCount.level3+$scope.questionCount.level4;
+		if($scope.scheduleForm.questionSet.value.length===0 &amp;&amp; parseInt(totalSelectedQuestionCount)&lt;parseInt($scope.scheduleForm.totalQuestionCount)) {
+			alert('Please assign question weightages');
+			return;
+		}
+		c.data.action = 'createTestSchedule';
+		c.data.scheduleForm = JSON.stringify($scope.scheduleForm);
+		c.data.questionCount = JSON.stringify($scope.questionCount);
+		c.server.update();
+	}
+
+	$scope.autopopulateEmail = function(testTakerIndex) {
+		$scope.autopopulatedUsers = [];
+		var email = $scope.scheduleForm.testTakers[testTakerIndex].email;
+		if(!email || email.length &lt; 1) return;
+		clearTimeout($scope.timeout);
+		$scope.timeout = setTimeout(function() {
+			$http({
+				method: 'GET',
+				url: '/api/now/table/sys_user?sysparm_fields=email%2Csys_id%2Cname&amp;sysparm_limit=10&amp;sysparm_query=emailSTARTSWITH'+email
+			}).then(function successCallback(response) {
+				$scope.autopopulatedUsers = response.data.result;
+				console.log($scope.autopopulatedUsers)
+			}, function errorCallback(response) {
+			});
+		}, 300);
+	}
+
+	$scope.autopopulateQuestionSets = function() {
+		var questionSetInput = $scope.scheduleForm.questionSet.displayValue;
+		$scope.autopopulatedQuestionSets = [];
+		if(!questionSetInput || questionSetInput &lt; 1) return;
+		clearTimeout($scope.timeout);
+		$scope.timeout = setTimeout(function() {
+			$http({
+				method: 'GET',
+				url: '/api/now/table/x_93700_arena_question_set?sysparm_fields=name%2Csys_id%2Cname&amp;sysparm_query=nameLIKE'+questionSetInput
+			}).then(function successCallback(response) {
+				$scope.autopopulatedQuestionSets = response.data.result;
+				$scope.questionSetDropdown = true;
+				console.log($scope.autopopulatedQuestionSets)
+			}, function errorCallback(response) {
+			});
+		}, 300);
+	}
+
+	$scope.handleQuestionSetDropdown = function(open) {
+		if(open === true) {
+			$scope.questionSetDropdown = true;
+		} else {
+			$timeout(function() {
+				$scope.questionSetDropdown = false;
+				$scope.questionSetArrowDownCount = 0;
+			}, 100);
+		}
+	}
+
+	$scope.onArrowKeys = function(event) {
+		$scope.handleQuestionSetDropdown(true);
+		var keycode = event.keyCode;
+		//arrow down
+		if(keycode === 40) {
+			event.preventDefault();
+			var max = $scope.autopopulatedQuestionSets.length;
+			max = max === 0 ? 0 : max-1;
+			$scope.questionSetArrowDownCount = $scope.questionSetArrowDownCount &gt;= max ? max : ++$scope.questionSetArrowDownCount;
+		}
+		//arrow up
+		else if(keycode === 38) {
+			event.preventDefault();
+			$scope.questionSetArrowDownCount = $scope.questionSetArrowDownCount &lt;= 0 ? 0 : --$scope.questionSetArrowDownCount;
+		}
+		// return key
+		else if(keycode === 13) {
+			$scope.selectQuestionSet($scope.autopopulatedQuestionSets[$scope.questionSetArrowDownCount]);
+		}
+	}
+
+}]]&gt;&lt;/client_script&gt;&lt;controller_as&gt;c&lt;/controller_as&gt;&lt;css&gt;.modal {
+  background: transparent;
+  box-shadow: none;
+}
+
+.dropdown-content {
+  display: block !important;
+  opacity: 1 !important;
+  width: calc(100% - 22px) !important;
+  top: 0 !important;
+  left: 10px !important;
+  transform: scaleX(1) scaleY(1) translateY(46px) !important;
+}
+
+.dropdown-item-active {
+  background-color: #eeee;
+}
+
+
+
+.add-remove-btns {
+  position: absolute;
+  right: 0;
+  transform: translateY(-30px) translateX(-30px);
+  .glyphicon {
+    font-size: 25px;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px grey;
+  }
+  .glyphicon:hover {
+  }
+}
+
+.question-count-wrapper {
+  margin: auto 15px;
+}
+
+.test-taker-rows {
+  height: 25vh;
+  margin-bottom: 30px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.select2-container {
+  margin-bottom: 15px;
+}
+
+.section-label {
+  margin-top: 30px;
+}
+
+.sub-section-label {
+  font-size: 1.3em;
+}
+
+.test-taker-label {
+  transform: translateX(15px);
+  width: 100%;
+}
+
+.autopopulate {
+  list-style-type: none;
+  position: absolute;
+  z-index: 100;
+  width: 90%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  li {
+    padding: 5px 10px;
+    border-bottom: 0;
+    background-color: white;
+    cursor: pointer;
+  }
+  li:hover {
+    background-color: #3e95f4;
+    color: white;
+  }
+}&lt;/css&gt;&lt;data_table&gt;sp_instance&lt;/data_table&gt;&lt;demo_data/&gt;&lt;description/&gt;&lt;docs/&gt;&lt;field_list/&gt;&lt;has_preview&gt;false&lt;/has_preview&gt;&lt;id/&gt;&lt;internal&gt;false&lt;/internal&gt;&lt;link&gt;&lt;![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]&gt;&lt;/link&gt;&lt;name&gt;Copy of Test scheduler&lt;/name&gt;&lt;option_schema/&gt;&lt;public&gt;false&lt;/public&gt;&lt;roles/&gt;&lt;script&gt;&lt;![CDATA[(function() {
+    if (input &amp;&amp; input.action == 'createTestSchedule') {
+
+        var scheduleForm = JSON.parse(input.scheduleForm);
+        var questionCount = JSON.parse(input.questionCount);
+
+        if (scheduleForm.questionSet.value.length === 0) {
+            scheduleForm.questionSet = createQuestionSet(scheduleForm, questionCount);
+        }
+
+        var testTakerIds = createTestTakerProfiles(scheduleForm.testTakers);
+
+        var testScheduleGr = new GlideRecord('x_93700_arena_test_schedule');
+        testScheduleGr.initialize();
+        testScheduleGr.setValue('name', scheduleForm.scheduleName);
+        testScheduleGr.setValue('test_duration_in_minutes', scheduleForm.scheduleDuration);
+        testScheduleGr.setValue('start_time', scheduleForm.scheduleStartTime);
+        testScheduleGr.setValue('question_set', scheduleForm.questionSet.value);
+        testScheduleGr.setValue('test_takers', testTakerIds.toString());
+        if (testScheduleGr.insert()) gs.addInfoMessage('Schedule successfully created');
+		
+		// send email to all test takers
+		testTakerIds.forEach(function(testTaker) {
+            gs.eventQueue("x_93700_arena.test_scheduled", testScheduleGr, testTaker);
+        });
+    }
+
+    function createTestTakerProfiles(testTakers) {
+        var testTakerIds = [];
+        var defaultPassword = gs.getProperty('x_93700_arena.test.user.default_password');
+        var testUserGroupId = gs.getProperty('x_93700_arena.test.user.group_id');
+        testTakers.forEach(function(testTaker) {
+            var userId = '';
+            var userGr = new GlideRecord('sys_user');
+            userGr.setLimit(1);
+            if (testTaker.sys_id.length &gt; 0) userGr.addQuery('sys_id', testTaker.sys_id);
+            userGr.addQuery('email', testTaker.email);
+            userGr.query();
+            if (userGr.next()) {
+                userId = testTakerIds.push(userGr.getValue('sys_id'));
+            } else {
+                var nameParts = testTaker.name.split(' ');
+                var username = nameParts.join('_').toLowerCase();
+                var firstName = nameParts[0];
+                nameParts.shift();
+                var lastName = nameParts.join(' ');
+                userGr.initialize();
+                userGr.setValue('user_name', username);
+                userGr.setValue('first_name', firstName);
+                userGr.setValue('last_name', lastName);
+                userGr.setValue('email', testTaker.email);
+                userGr.user_password.setDisplayValue(defaultPassword);
+                userId = userGr.insert() || '';
+            }
+            if (userId.length &gt; 0) testTakerIds.push(userId);
+        });
+        testTakerIds.forEach(function(testTakerId) {
+            var grMember = new GlideRecord('sys_user_grmember');
+			grMember.setLimit(1);
+			grMember.addQuery('user', testTakerId);
+            grMember.addQuery('group', testUserGroupId);
+			grMember.query();
+			if(!grMember.next()) {
+				grMember.initialize();
+				grMember.setValue('user', testTakerId);
+				grMember.setValue('group', testUserGroupId);
+				grMember.insert();
+			}
+        });
+        return testTakerIds;
+    }
+
+    function createQuestionSet(scheduleForm, questionCount) {
+        var level1QuestionIds = [];
+        var level2QuestionIds = [];
+        var level3QuestionIds = [];
+        var level4QuestionIds = [];
+
+        var levels = Object.keys(questionCount);
+
+        var questionIds = {
+            level1: [],
+            level2: [],
+            level3: [],
+            level4: []
+        };
+
+        var questionGr = new GlideRecord('x_93700_arena_arena_question');
+        questionGr.addActiveQuery();
+        questionGr.query();
+        while (questionGr.next()) {
+            var level = questionGr.getValue('level');
+            if (level) {
+                questionIds[level].push(questionGr.getValue('sys_id'));
+            }
+        }
+
+        var levelKeys = Object.keys(questionCount);
+
+        var questions = [];
+
+        for (var index = 0; index &lt; levelKeys.length; index++) {
+            var levelValue = levelKeys[index];
+            var levelQuestionCount = questionCount[levelValue];
+            var currentCount = questionIds[levelValue].length;
+
+            for (var quesIndex = 0; quesIndex &lt; levelQuestionCount; quesIndex++) {
+                var randomIndex = Math.floor(Math.random() * currentCount);
+                questions.push(questionIds[levelValue][randomIndex]);
+                questionIds[levelValue].splice(randomIndex, 1);
+            }
+        }
+
+        var questionSetGr = new GlideRecord('x_93700_arena_question_set');
+        questionSetGr.initialize();
+        questionSetGr.setValue('name', scheduleForm.setName);
+        questionSetGr.setValue('questions', questions.toString());
+        questionSetGr.setValue('level_1_weightage', scheduleForm.levelOneWeightage);
+        questionSetGr.setValue('level_2_weightage', scheduleForm.levelTwoWeightage);
+        questionSetGr.setValue('level_3_weightage', scheduleForm.levelThreeWeightage);
+        questionSetGr.setValue('level_4_weightage', scheduleForm.levelFourWeightage);
+        var questionSetId = questionSetGr.insert();
+
+        return {
+            displayValue: scheduleForm.scheduleName,
+            value: questionSetId
+        };
+    }
+})();]]&gt;&lt;/script&gt;&lt;servicenow&gt;false&lt;/servicenow&gt;&lt;sys_class_name&gt;sp_widget&lt;/sys_class_name&gt;&lt;sys_created_by&gt;jaydeepdeb&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-07-29 14:58:30&lt;/sys_created_on&gt;&lt;sys_id&gt;4d5dc43d075e501037c7f2ae7c1ed092&lt;/sys_id&gt;&lt;sys_mod_count&gt;139&lt;/sys_mod_count&gt;&lt;sys_name&gt;Copy of Test scheduler&lt;/sys_name&gt;&lt;sys_package display_value="Arena" source="x_93700_arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_widget_4d5dc43d075e501037c7f2ae7c1ed092&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;jaydeepdeb&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-07-31 16:46:15&lt;/sys_updated_on&gt;&lt;template&gt;&lt;![CDATA[&lt;div class="row"&gt;
+  &lt;div class="card z-depth-3" style="border-radius: 15px;"&gt;
+    &lt;div class="card-content"&gt;
+      &lt;ul class="stepper" style="min-height: 70vh"&gt;
+        &lt;li class="step active"&gt;
+          &lt;div class="step-title waves-effect"&gt;Basic Information&lt;/div&gt;
+          &lt;div class="step-content"&gt;
+            &lt;div class="row"&gt;
+              &lt;div class="input-field col s12"&gt;
+                &lt;input id="name" type="text" ng-model="scheduleForm.scheduleName" class="validate" placeholder="eg. - KGS ServiceNow Recruitment Drive" required&gt;
+                &lt;label class="active" for="name"&gt;Schedule name&lt;/label&gt;
+                &lt;span class="helper-text" data-error="Can't leave this field empty"&gt;&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="row"&gt;
+              &lt;div class="input-field col s12"&gt;
+                &lt;input type="text" ng-model="scheduleForm.scheduleStartDate" id="start_date" class="datepicker validate" placeholder="yyyy-mm-dd" required&gt;
+                &lt;label class="active" for="start_date"&gt;Start Date&lt;/label&gt;
+                &lt;span class="helper-text" data-error="Can't leave this field empty"&gt;&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="row"&gt;
+              &lt;div class="input-field col s12"&gt;
+                &lt;input type="text" ng-model="scheduleForm.scheduleStartTime" id="start_time" class="timepicker validate" placeholder="hh:mm" required&gt;
+                &lt;label class="active" for="start_time"&gt;Start Time&lt;/label&gt;
+                &lt;span class="helper-text" data-error="Can't leave this field empty"&gt;&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="row"&gt;
+              &lt;div class="input-field col s12"&gt;
+                &lt;input type="text" class="form-control" id="test_duration" class="validate" ng-model="scheduleForm.scheduleDuration" placeholder="eg. - 30" required/&gt;
+                &lt;label class="active" for="name"&gt;Test duration (in minutes)&lt;/label&gt;
+                &lt;span class="helper-text" data-error="Can't leave this field empty"&gt;&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="step-actions"&gt;
+              &lt;a class="waves-effect waves-dark btn blue next-step"&gt;Next&lt;/a&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class="step"&gt;
+          &lt;div class="step-title waves-effect"&gt;Select questions&lt;/div&gt;
+          &lt;div class="step-content"&gt;
+            &lt;div class="row"&gt;
+              &lt;div class="input-field col s12"&gt;
+                &lt;input id="question_set" type="text" placeholder="Start typing to see options" ng-model="scheduleForm.questionSet.displayValue" ng-focus="handleQuestionSetDropdown(true)" ng-blur="handleQuestionSetDropdown(false)" ng-keydown="onArrowKeys($event)" ng-change="autopopulateQuestionSets()"&gt;
+                &lt;label class="active" for="question_set"&gt;Choose existing set&lt;/label&gt;
+                &lt;span class="helper-text" data-error="Can't leave this field empty"&gt;&lt;/span&gt;
+                &lt;ul class="dropdown-content"&gt;
+                  &lt;li ng-repeat="set in autopopulatedQuestionSets track by $index" ng-init="questionSetIndex = $index"&gt;&lt;span&gt;{{set.name}}&lt;/span&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="question-set-generator"&gt;
+              &lt;div class="row"&gt;
+                &lt;div class="input-field col s12"&gt;
+                  &lt;input id="set_name" type="text" ng-model="scheduleForm.setName" class="validate" ng-disabled="scheduleForm.questionSet.value.length&gt;0" placeholder="eg. - KGS-SNOW-Consultant-Medium Level" required&gt;
+                  &lt;label class="active" for="set_name"&gt;Set Name&lt;/label&gt;
+                  &lt;span class="helper-text" data-error="Can't leave this field empty"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class="row"&gt;
+                &lt;div class="input-field col s12"&gt;
+                  &lt;input id="total_questions" type="text" ng-model="scheduleForm.totalQuestionCount" ng-change="resetWeightages()" class="validate" placeholder="eg. - 10" required&gt;
+                  &lt;label class="active" for="total_questions"&gt;Total questions count&lt;/label&gt;
+                  &lt;span class="helper-text" data-error="Can't leave this field empty"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class="row"&gt;
+                &lt;div class="input-field col s12"&gt;
+                  &lt;input type="range" class="form-control-range" ng-change="changeWeightage(1)" ng-model="scheduleForm.levelOneWeightage" min="0" max="100" step="1" id="level_1_count"&gt;
+                  &lt;label class="active" for="level_1_count"&gt;Level 1 questions count : {{questionCount.level1}}&lt;/label&gt;
+                  &lt;span class="helper-text" data-error="Can't leave this field empty"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class="row"&gt;
+                &lt;div class="input-field col s12"&gt;
+                  &lt;input type="range" class="form-control-range" ng-change="changeWeightage(2)" ng-model="scheduleForm.levelTwoWeightage" min="0" max="100" step="1" id="level_2_count"&gt;
+                  &lt;label class="active" for="level_2_count"&gt;Level 2 questions count : {{questionCount.level2}}&lt;/label&gt;
+                  &lt;span class="helper-text" data-error="Can't leave this field empty"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class="row"&gt;
+                &lt;div class="input-field col s12"&gt;
+                  &lt;input type="range" class="form-control-range" ng-change="changeWeightage(3)" ng-model="scheduleForm.levelThreeWeightage" min="0" max="100" step="1" id="level_3_count"&gt;
+                  &lt;label class="active" for="level_3_count"&gt;Level 3 questions count : {{questionCount.level3}}&lt;/label&gt;
+                  &lt;span class="helper-text" data-error="Can't leave this field empty"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div class="row"&gt;
+                &lt;div class="input-field col s12"&gt;
+                  &lt;input type="range" class="form-control-range" ng-change="changeWeightage(4)" ng-model="scheduleForm.levelFourWeightage" min="0" max="100" step="1" id="level_4_count"&gt;
+                  &lt;label class="active" for="level_4_count"&gt;Level 4 questions count : {{questionCount.level4}}&lt;/label&gt;
+                  &lt;span class="helper-text" data-error="Can't leave this field empty"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="step-actions"&gt;
+              &lt;a class="waves-effect waves-dark btn blue next-step"&gt;Next&lt;/a&gt;
+              &lt;a class="waves-effect waves-dark btn blue previous-step"&gt;Back&lt;/a&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class="step"&gt;
+          &lt;div class="step-title waves-effect"&gt;Add Test Takers&lt;/div&gt;
+          &lt;div class="step-content"&gt;
+            &lt;div class="step-actions"&gt;
+              &lt;a class="waves-effect waves-dark btn blue next-step"&gt;Next&lt;/a&gt;
+              &lt;a class="waves-effect waves-dark btn blue previous-step"&gt;Back&lt;/a&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;]]&gt;&lt;/template&gt;&lt;/sp_widget&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1630384109</payload_hash>
+        <record_name>Copy of Test scheduler</record_name>
+        <reverted_from/>
+        <source>6dfbaed3070a501037c7f2ae7c1ed092</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-31 16:46:15</sys_created_on>
+        <sys_id>cb29fe16071ad01037c7f2ae7c1ed0a7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>173a5c459540000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-31 16:46:15</sys_updated_on>
+        <type>Widget</type>
+        <update_guid>8329fe16491ad010505351829ebfdda7</update_guid>
+        <update_guid_history>8329fe16491ad010505351829ebfdda7:1630384109,98297ed2121ad0101e4181c52644daf4:-2029366642,55d8fa16931ad0103f37a27736a8b403:-15700073,f5b8ba16711ad01032aba0890b0f80fb:-1755828121,2308f216b91ad010566a8e81f22360cb:1587549831,0826f292bf1ad01031e2c19f7c258f68:-980255363,78e53692b81ad010490a59d55d50d365:-133939002,caf436923f1ad01094c07b974b50025d:323391276,0dd3b212271ad01016409343d58ba696:1635437153,535336523b1ad01040bb23689a3de186:1055000958,5fb13612801ad0104204d7dec06b5de0:1010090772,ed81b2120b1ad01071fa3e7d6c1c8f8e:-119240053,28b0f6de8dd6d0102f598ef4bffb8743:297787148,38907adec6d6d010812834c3e0f78945:7243867,c060f6de2ad6d010253987faf94e6a2f:-1237283224,ff8fee5e28d6d0109395e074b23d0156:-319740249,083fea9ed5d6d010f3e19a29565e5524:-1374601351,ed1f6a9ef8d6d010f0eca82c00268201:1801584121,a9feee5e16d6d010537129ff51b67f4b:-1374601351,3bee265e24d6d01091469765b4f0d479:-1782540931,65fdee1ebbd6d01093cd7c33ba394b54:-1636780124,4ecd6e5e22d6d010cdca2d6adea7e654:1221530788,acadea5e4bd6d010fcbcec2f72c1d5d4:-1295383614,2b6d6e1e8cd6d010be6a1ae474370054:658635652,3fdc6a1e8ad6d010e9774f63bf2b2593:1624487651,1b5c2edaf3d6d010ec942274523e2d9b:1407074880,5b2c6e1eccd6d010327b537b6b746f4b:-349576224,43cb6e5afad6d010567053e25be6642f:1240957596,50f86e9a46d6d010ba1cd8b215068db9:-497394743,0ab8ea9a7ed6d010790691636aadae7b:1437135221,28a8aa9ae5d6d010aeda9594716b8483:263150197,6c886a9af5d6d010c70b742ac796cc4c:-173642866,1d472e1aadd6d010e247c81f490857aa:-1368502179,11176a1a82d6d010d9aa80cc3ac818c0:100271691,ec766a1acbd6d0102debcc19d58d8b9b:846940802,fd952e1a77d6d010bc23bc108d9007a2:-1537250128,94856e92bdd6d0108ac48ccc7a213ed3:2104372789,a1456a1a86d6d01090a7847981f92958:-1119329523,cd54ea524dd6d010437fb5aeadf886a6:-1150475560,b1d3ea52a8d6d010b63aa2eef891be5f:-568840144,0bf2a2d604d6d010c47fa7a11766419a:-1004265008,16c2aa160fd6d010a6dfd492e3b8e31a:147003029,ee5162d283d6d010ccffa4352af02386:-1317506205,c6de9a1639d6d01092b542ea0bcaa012:-954037365,e8fcd6d284d6d010bfb76d75c566896d:1366358936,48dc5e922cd6d0105d2601d2dd4804dd:801141059,755c52d2fed6d010c302a4cc8256887e:629953110,3afb5e9230d6d01062f73182fb693dcb:1467812113,87cb5e52e4d6d0108808ff4d9b4ac1b0:86394313,f5de111e0a16d0100c4aae188ff54140:-948150454,21fd911efb16d010c33aec66a8c41d0e:-2147178283,b20d911e0816d010d2c91973d3e3df06:1600157012,5adc111e6016d0101f676489c3adf538:-1162540812,8c8c9d5a9216d0102297a7bff39074b9:-154592235,bf1cd95a8016d010c85f67ed24d862d1:167810559,a2fb55da2516d010311d6baa0df9e4ed:2122500034,58f6c11e50d2d0108215bb8641c8c200:298892658,4655c99a03d2d01075491bc77c95d998:1576860919,1484c99ad3d2d0109f6306b58f745155:2092244600,816aa54630da90104c6934c3f4b6a2e5:-1834016186,f63ae54e2f9a9010e3d7b620dd77c8de:1450537919,8990a18ebf9a90102f994c33705cc940:-520318082,903f1dcabb9a9010ca88d0d48c456462:-76393707,6bbe118efb9a901087a598d72593b007:-81524040,016e910e7b9a9010bf45f42257aa3428:810672786,af2e1d4ecd9a90109d34254c8b0202fa:1636912241,b0ed1d4e789a9010ec8b5c809616a6f3:1259005934,2e8ddd4ae59a901097fa403f7d3e2c75:-550502772,904dd50ab89a90108ceb7dd3f9d57daa:669051756,f52c1dcafe9a9010126026d7ca243380:-846422983,301c19ca399a9010f7bd73839148033c:1368971522,612b5146349a90106df4eb80cf5eac4d:813202630,7f8ad9cabc9a90109a42a7c64cba2af6:2017592978,587a99ca3c9a9010c9c6bce26a0e46fd:659427264,dca9dd4a0f9a901009b6ee38ec6ea353:-1664382333,41e7590ab19a90103a129ffeabd994d7:-1093317804,98a7dd4ad59a90109029dd4efe034b4b:497671440,cb6795c6799a901058ef692826765b8f:-1713663245,ae17594a359a9010d8768a0017435dbf:1267317659,b1655d06759a9010938e13cc7d7de358:423534952,7f3591069b9a90101ad6f1c190e267e8:-1730838107,8c055d06c79a90104b1dab3cb7a9ce4f:1467982839,f1b4510a849a901053155ef4157b4c6c:497671440,f2835146e39a901024a7425ea58a492f:1619648069,be129542f39a9010c99c783ecb246636:1032582387,30bf4d82c49a90106305eeebf68ba823:634241227,c05f4d06389a90101427fb75fa103146:-175636492,333e0942289a9010d12996b63d12807f:-1703468377,d01e0106bd9a9010622364073f203dc1:-1149366038,290c0d06051a90109610f9e2814e8850:-175636492,832a8942809a901031123cd22f1c3caa:-2023148285,1ee94d06ff1a90103fa23ef41cdb8953:-864674239,157b1806bb1a9010d35bdce84c71456d:-2023148285,55fa5846b2d690108d570dba3c55109f:-1150759268,7c9ad006091a901080701f5acb378bbe:234651386,0053cc0602d69010e48773c24edcd139:1348229403,aee2cc823dd69010893e7f91345efefc:-1008721810,b2d2c842d6d69010ce6f3c2f36d32064:1733369924,35928446bcd69010e25bb72b3c8b1ad7:1871656997,e4f180425dd690103d59732998425c68:647002626,67c108c287d69010a97b56c7018c2bbb:554689583,6370844208d69010b3e24525b6035ca0:1719278240,0a8f3bf14fd69010b61006ac9f33ac17:-896797570,500fb77114d690108cc61d28100917ae:1710730901,0aaef7b13fd69010c9409fed3c9dc2a3:283766170,261e3331edd69010b9e7149ea0f6138a:-734538907,e7cdf7b165d69010d49afd431135e39b:-1572727565,278cfb71f3d69010b81dcebc9ae23246:948001557,77866cbd4a9e50103205d97e441ea4ba:-1178628112,8c36ecbdd99e501091574c257ea380de:1651414976,66f568bd409e501018e0414ff13b7819:502582611,72b5ac39219e50109ef69790e86ae31d:-1801373554,e0a5e4bd109e5010962113b057342a8a:565309506,1c8528bd5e9e5010c9e13c059bbf7abc:-1390937872,606564bde39e5010a60c2f46663368d5:2091391301,b945a4bd479e5010f67c967cfc71fe68:-1176734848,cf356c7dfb9e5010ef9bdbf52c66c80a:863493085,cf15e8f5ac9e50105869c037b236c5f0:-455458801,5af4a0bd549e50107522491c429c72c4:-898223855,3dd4e07d9a9e5010e87d00fdb3689079:-1524936423,13542c7df89e50105ab7213aa34d93ca:1728009483,f2b3247d929e5010b978fc14b4017998:-57556023,d29324359e9e501016b1637c674d93d6:-625854273,ab836c3df79e5010cc8eedd6094187cf:162568127,d763e8f5ce9e5010d0b45cd37b91cdd5:-1188326127,afe26c3da59e50105d9eddb0d82ebec7:-1611093367,98d0a039109e50105653b3fc4b6b3564:-1992983269,a73c58b1d89e5010fdb0b6b07ded67bc:251709545,770cd839bb9e5010239f3b45a9c1964f:-1992983269,c95b1439619e50105be9192d8f6b1307:727890723,052bdcf1469e5010db8b9f41989eba66:1181705345,8dfa14b5379e5010feb4bdbb8c7ed112:-2011820328,c77a1435ec9e50100a6ea2dde3ae06cc:-876908587,01e954f5559e5010c161a8c576b08dbb:827089997,d918dcf1ec9e5010e66e559f62564687:2096193928,17d458f1739e501026829f5b8916870a:-1328844905,b08410359c9e5010826ec5995b55aebc:-143042078,815458f1599e50101a2835cdf9502204:-1783809570,1a2358b14c9e501059b3e7accfd1f514:324296772,455dc43db45e5010a17e591f6abbc694:774020314</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Copy of Test scheduler">16b97656071ad01037c7f2ae7c1ed0d0</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-31 16:48:39</sys_created_on>
+        <sys_db_object display_value="" name="sp_widget">sp_widget</sys_db_object>
+        <sys_id>15a86a7f800f492087b6144301b6d509</sys_id>
+        <sys_metadata>4d5dc43d075e501037c7f2ae7c1ed092</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Copy of Test scheduler</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sp_widget_4d5dc43d075e501037c7f2ae7c1ed092</sys_update_name>
+        <sys_update_version display_value="sp_widget_4d5dc43d075e501037c7f2ae7c1ed092">cb29fe16071ad01037c7f2ae7c1ed0a7</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-31 16:48:39</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

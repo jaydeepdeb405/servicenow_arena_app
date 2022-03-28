@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="DELETE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>ArenaLevels</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+	var data = {};
+	var userLevel = null;
+    var userDifficulty = null;
+
+    var currentUserID = gs.getUserID();
+    var arenaUserGr = new GlideRecord('x_93700_arena_user');
+    arenaUserGr.get("user", currentUserID);
+    data.currentArenaUserID = arenaUserGr.getValue('sys_id') || '';
+    userLevel = arenaUserGr.getValue('level');
+    userDifficulty = arenaUserGr.getValue('difficulty');
+    data.userLevelLabel = arenaUserGr.getDisplayValue('level');
+
+    data.arenaLevels = [];
+
+    // get level choices
+    var choiceGr = new GlideRecord('sys_choice');
+    choiceGr.addQuery("name", 'x_93700_arena_user');
+    choiceGr.addQuery("element", "level");
+    choiceGr.query();
+    while (choiceGr.next()) {
+        var arenaLevel = {};
+        arenaLevel.label = choiceGr.getValue('label');
+        arenaLevel.value = choiceGr.getValue('value');
+        arenaLevel.locked = arenaLevel.value <= userLevel ? false : true;
+        data.arenaLevels.push(arenaLevel);
+    }
+
+    // adding difficulties to levels
+    var lockFlag = false;
+
+    data.arenaLevels.forEach(function(level) {
+        level.difficulties = [];
+
+        var choiceGr = new GlideRecord('sys_choice');
+        choiceGr.addQuery("name", 'x_93700_arena_user');
+        choiceGr.addQuery("element", "difficulty");
+        choiceGr.query();
+        while (choiceGr.next()) {
+            var difficulty = {};
+            difficulty.label = choiceGr.getValue('label');
+            difficulty.value = choiceGr.getValue('value');
+            difficulty.icon = "arena-level-" + difficulty.value + ".svg";
+
+            difficulty.locked = lockFlag;
+            if (level.value == userLevel && difficulty.value == userDifficulty) {
+                lockFlag = true;
+            }
+            level.difficulties.push(difficulty);
+        }
+
+    });
+	
+	response.setBody(data.arenaLevels);
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_93700_arena/arena/levels</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/levels</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>jaydeep</sys_created_by>
+        <sys_created_on>2020-06-09 07:02:16</sys_created_on>
+        <sys_id>6cc005addb519010b6db8e47489619b1</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>ArenaLevels</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ws_operation_6cc005addb519010b6db8e47489619b1</sys_update_name>
+        <sys_updated_by>jaydeep</sys_updated_by>
+        <sys_updated_on>2020-06-09 07:03:49</sys_updated_on>
+        <web_service_definition display_value="Arena">9ea0c1addb519010b6db8e4748961916</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_ws_operation_6cc005addb519010b6db8e47489619b1</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ws_operation"&gt;&lt;sys_ws_operation action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;consumes&gt;application/json,application/xml,text/xml&lt;/consumes&gt;&lt;consumes_customized&gt;false&lt;/consumes_customized&gt;&lt;default_operation_uri/&gt;&lt;enforce_acl&gt;cf9d01d3e73003009d6247e603f6a990&lt;/enforce_acl&gt;&lt;http_method&gt;GET&lt;/http_method&gt;&lt;name&gt;ArenaLevels&lt;/name&gt;&lt;operation_script&gt;&lt;![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+	var data = {};
+	var userLevel = null;
+    var userDifficulty = null;
+
+    var currentUserID = gs.getUserID();
+    var arenaUserGr = new GlideRecord('x_93700_arena_user');
+    arenaUserGr.get("user", currentUserID);
+    data.currentArenaUserID = arenaUserGr.getValue('sys_id') || '';
+    userLevel = arenaUserGr.getValue('level');
+    userDifficulty = arenaUserGr.getValue('difficulty');
+    data.userLevelLabel = arenaUserGr.getDisplayValue('level');
+
+    data.arenaLevels = [];
+
+    // get level choices
+    var choiceGr = new GlideRecord('sys_choice');
+    choiceGr.addQuery("name", 'x_93700_arena_user');
+    choiceGr.addQuery("element", "level");
+    choiceGr.query();
+    while (choiceGr.next()) {
+        var arenaLevel = {};
+        arenaLevel.label = choiceGr.getValue('label');
+        arenaLevel.value = choiceGr.getValue('value');
+        arenaLevel.locked = arenaLevel.value &lt;= userLevel ? false : true;
+        data.arenaLevels.push(arenaLevel);
+    }
+
+    // adding difficulties to levels
+    var lockFlag = false;
+
+    data.arenaLevels.forEach(function(level) {
+        level.difficulties = [];
+
+        var choiceGr = new GlideRecord('sys_choice');
+        choiceGr.addQuery("name", 'x_93700_arena_user');
+        choiceGr.addQuery("element", "difficulty");
+        choiceGr.query();
+        while (choiceGr.next()) {
+            var difficulty = {};
+            difficulty.label = choiceGr.getValue('label');
+            difficulty.value = choiceGr.getValue('value');
+            difficulty.icon = "arena-level-" + difficulty.value + ".svg";
+
+            difficulty.locked = lockFlag;
+            if (level.value == userLevel &amp;&amp; difficulty.value == userDifficulty) {
+                lockFlag = true;
+            }
+            level.difficulties.push(difficulty);
+        }
+
+    });
+	
+	response.setBody(data.arenaLevels);
+})(request, response);]]&gt;&lt;/operation_script&gt;&lt;operation_uri&gt;/api/x_93700_arena/arena/levels&lt;/operation_uri&gt;&lt;produces&gt;application/json,application/xml,text/xml&lt;/produces&gt;&lt;produces_customized&gt;false&lt;/produces_customized&gt;&lt;relative_path&gt;/levels&lt;/relative_path&gt;&lt;request_example/&gt;&lt;requires_acl_authorization&gt;true&lt;/requires_acl_authorization&gt;&lt;requires_authentication&gt;true&lt;/requires_authentication&gt;&lt;requires_snc_internal_role&gt;true&lt;/requires_snc_internal_role&gt;&lt;short_description/&gt;&lt;sys_class_name&gt;sys_ws_operation&lt;/sys_class_name&gt;&lt;sys_created_by&gt;jaydeep&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-06-09 07:02:16&lt;/sys_created_on&gt;&lt;sys_id&gt;6cc005addb519010b6db8e47489619b1&lt;/sys_id&gt;&lt;sys_mod_count&gt;1&lt;/sys_mod_count&gt;&lt;sys_name&gt;ArenaLevels&lt;/sys_name&gt;&lt;sys_package display_value="Arena" source="x_93700_arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Arena"&gt;661460dfdbc5c010b6db8e47489619ae&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ws_operation_6cc005addb519010b6db8e47489619b1&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;jaydeep&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-06-09 07:03:49&lt;/sys_updated_on&gt;&lt;web_service_definition display_value="Arena"&gt;9ea0c1addb519010b6db8e4748961916&lt;/web_service_definition&gt;&lt;web_service_version/&gt;&lt;/sys_ws_operation&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1501938517</payload_hash>
+        <record_name>ArenaLevels</record_name>
+        <reverted_from/>
+        <source>3a870d56071d501037c7f2ae7c1ed0e1</source>
+        <source_table>sys_update_set</source_table>
+        <state>backedout</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-11 15:28:38</sys_created_on>
+        <sys_id>a2e781d6071d501037c7f2ae7c1ed091</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_recorded_at>172a3ff50760000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-11 18:22:32</sys_updated_on>
+        <type>Scripted REST Resource</type>
+        <update_guid>ac3185ad04519010760b872489a0f847</update_guid>
+        <update_guid_history>ac3185ad04519010760b872489a0f847:1501938517,7dd04d6de7519010c21f05762a11ac59:1904678430</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-11 18:22:32</sys_created_on>
+        <sys_db_object display_value="" name="sys_ws_operation">sys_ws_operation</sys_db_object>
+        <sys_id>8fc596b55586412d94d0213638411a41</sys_id>
+        <sys_metadata>6cc005addb519010b6db8e47489619b1</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ArenaLevels</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete/>
+        <sys_update_name>sys_ws_operation_6cc005addb519010b6db8e47489619b1</sys_update_name>
+        <sys_update_version display_value="sys_ws_operation_6cc005addb519010b6db8e47489619b1">a2e781d6071d501037c7f2ae7c1ed091</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-11 18:22:32</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Arena Test Question" max_length="40" name="x_93700_arena_question_staging" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="101" max_length="40" name="u_101" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=ANSWER" label="ANSWER" max_length="40" name="u_answer" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="A-Fields&#10;B-Form&#10;C-Record&#10;D-Lists" max_length="40" name="u_a_fields_b_f_record_d_lists" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="C" max_length="40" name="u_c" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=CHOICES" label="CHOICES" max_length="4000" name="u_choices" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=QUESTIONS" label="QUESTIONS" max_length="4000" name="u_questions" type="string"/>
+        <element attributes="edge_encryption_enabled=true,import_attribute_name=SERIAL NO." label="SERIAL NO." max_length="40" name="u_serial_no_" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="ServiceNow uses what term to describe all the data saved within a particular for" max_length="40" name="u_servicenow_u_rticular_form_" type="string"/>
+    </element>
+</database>

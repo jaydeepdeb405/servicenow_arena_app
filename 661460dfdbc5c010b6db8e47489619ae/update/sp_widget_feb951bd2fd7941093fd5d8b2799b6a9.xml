@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($rootScope, $window) {
+	/* widget controller */
+	var c = this;
+	c.showIcon = true;
+
+	c.goToSp = function() {
+		$window.location.href = '/arena?id=sp';
+	}
+
+	$rootScope.$on('gameScreen', function(event, screens) {
+		if (screens.introSequence === true || screens.mainMenu === true) c.showIcon = true;
+		else c.showIcon = false;
+	});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.icon-wrapper {
+  position: fixed;
+  height: 100px;
+  background-image: url(shankaran-pillai-thumbnail.jpg);
+  background-size: cover;
+  border-radius: 50%;
+  width: 100px;
+  bottom: 1vh;
+  right: 1vh;
+  border: 2px solid grey;
+  box-shadow: 1px 2px 5px #ccc;
+}
+
+.bounce {
+  animation: bounce 0.75s infinite;
+  -webkit-animation: bounce 0.75s infinite;
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    transform: scale(1,1) translate(0px, 0px);
+  }
+  30%{
+    transform: scale(1,0.8) translate(0px, 10px); 
+  }
+  75%{
+    transform: scale(1,1.1) translate(0px, -25px); 
+  }
+  100% {
+    transform: scale(1,1) translate(0px, 0px);
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Shankaran Pillai Icon</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-17 13:35:32</sys_created_on>
+        <sys_id>feb951bd2fd7941093fd5d8b2799b6a9</sys_id>
+        <sys_mod_count>31</sys_mod_count>
+        <sys_name>Shankaran Pillai Icon</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_feb951bd2fd7941093fd5d8b2799b6a9</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2021-04-22 10:19:59</sys_updated_on>
+        <template><![CDATA[<div ng-if="c.showIcon === true" class="icon-wrapper bounce" ng-click="c.goToSp()"></div>]]></template>
+    </sp_widget>
+</record_update>

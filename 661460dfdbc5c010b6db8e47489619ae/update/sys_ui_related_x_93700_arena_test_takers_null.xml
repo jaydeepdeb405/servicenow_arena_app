@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_related sys_domain="global" table="x_93700_arena_test_takers" version="2" view="">
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Test Taker - Default view" name="x_93700_arena_test_takers" related_list="NULL" sys_domain="global" view="Default view">648343f02f4fd01093fd5d8b2799b609</list_id>
+            <order_by/>
+            <position>0</position>
+            <related_list>x_93700_arena_results.test_taker</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2020-09-02 08:27:36</sys_created_on>
+            <sys_id>248343f02f4fd01093fd5d8b2799b60a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2020-09-02 08:27:36</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list action="INSERT_OR_UPDATE">
+            <calculated_name>Test Taker - Default view</calculated_name>
+            <filter/>
+            <name>x_93700_arena_test_takers</name>
+            <order_by/>
+            <position/>
+            <related_list/>
+            <sys_class_name>sys_ui_related_list</sys_class_name>
+            <sys_created_by>jaydeepdeb</sys_created_by>
+            <sys_created_on>2020-09-02 08:27:36</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>648343f02f4fd01093fd5d8b2799b609</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Test Taker - Default view</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_ui_related_x_93700_arena_test_takers_null</sys_update_name>
+            <sys_updated_by>jaydeepdeb</sys_updated_by>
+            <sys_updated_on>2020-09-02 08:27:36</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_related_list>
+    </sys_ui_related>
+</record_update>

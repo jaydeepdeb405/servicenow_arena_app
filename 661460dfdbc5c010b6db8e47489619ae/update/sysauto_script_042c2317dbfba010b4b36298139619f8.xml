@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition/>
+        <conditional>false</conditional>
+        <entered_time/>
+        <name>Populate Shankaran Pillai Quotes</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as display_value="Jaydeep Deb">6815b7450770101037c7f2ae7c1ed068</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>5</run_dayofweek>
+        <run_period/>
+        <run_start>2021-05-04 08:48:07</run_start>
+        <run_time>1969-12-31 18:30:00</run_time>
+        <run_type>weekly</run_type>
+        <script><![CDATA[var quotes = new GlideRecord('x_93700_arena_shankaran_pillai_quotes');
+quotes.setLimit(1);
+quotes.orderBy('sys_updated_on');
+quotes.addQuery('quote_used', false);
+quotes.query();
+if (quotes.next()) {
+    gs.setProperty('x_93700_arena.shankaran_pillai_quote', quotes.quote.toString());
+    quotes.quote_used = true;
+    quotes.update();
+}
+
+var usedQuotesCount = 0;
+var totalQuotesCount = 0;
+quotes = new GlideRecord('x_93700_arena_shankaran_pillai_quotes');
+quotes.query();
+while (quotes.next()) {
+    if (quotes.quote_used == true) usedQuotesCount++;
+	totalQuotesCount++;
+}
+
+if (usedQuotesCount === totalQuotesCount) {
+    quotes = new GlideRecord('x_93700_arena_shankaran_pillai_quotes');
+    quotes.setValue('quote_used', false);
+    quotes.updateMultiple();
+}]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>jaydeepdeb@kpmg.com</sys_created_by>
+        <sys_created_on>2021-05-04 09:01:33</sys_created_on>
+        <sys_id>042c2317dbfba010b4b36298139619f8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Populate Shankaran Pillai Quotes</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sysauto_script_042c2317dbfba010b4b36298139619f8</sys_update_name>
+        <sys_updated_by>jaydeepdeb@kpmg.com</sys_updated_by>
+        <sys_updated_on>2021-05-04 09:01:33</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

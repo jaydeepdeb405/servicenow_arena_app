@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_aw_module">
+    <sys_aw_module action="DELETE">
+        <active>true</active>
+        <content/>
+        <content_attrs/>
+        <content_component display_value="sn-inbox">15415f6bc913d31534330f91530c944c</content_component>
+        <content_tag/>
+        <detail/>
+        <detail_attrs/>
+        <detail_component display_value="sn-inbox-empty">ee222d2bff222300294153bd6338f113</detail_component>
+        <detail_tag/>
+        <hide_until_ready>false</hide_until_ready>
+        <icon>inbox-outline</icon>
+        <id>inbox</id>
+        <label>Inbox</label>
+        <order>200</order>
+        <roles/>
+        <sys_class_name>sys_aw_module</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-21 08:17:41</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a477388b0713101037c7f2ae7c1ed010</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>inbox</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_props/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_aw_module_a477388b0713101037c7f2ae7c1ed010</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-21 08:17:41</sys_updated_on>
+        <toolbar_button/>
+        <type>master_detail</type>
+        <workspace_config display_value="Arena">cc77f48b0713101037c7f2ae7c1ed053</workspace_config>
+    </sys_aw_module>
+    <sys_variable_value action="DELETE" query="document_key=a477388b0713101037c7f2ae7c1ed010"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sys_aw_module_a477388b0713101037c7f2ae7c1ed010</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_aw_module"><sys_aw_module action="INSERT_OR_UPDATE"><active>true</active><content/><content_attrs/><content_component display_value="sn-inbox">15415f6bc913d31534330f91530c944c</content_component><content_tag/><detail/><detail_attrs/><detail_component display_value="sn-inbox-empty">ee222d2bff222300294153bd6338f113</detail_component><detail_tag/><hide_until_ready>false</hide_until_ready><icon>inbox-outline</icon><id>inbox</id><label>Inbox</label><order>200</order><roles/><sys_class_name>sys_aw_module</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-09-21 08:17:41</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>a477388b0713101037c7f2ae7c1ed010</sys_id><sys_mod_count>0</sys_mod_count><sys_name>inbox</sys_name><sys_overrides/><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_props/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sys_aw_module_a477388b0713101037c7f2ae7c1ed010</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-09-21 08:17:41</sys_updated_on><toolbar_button/><type>master_detail</type><workspace_config display_value="Arena">cc77f48b0713101037c7f2ae7c1ed053</workspace_config></sys_aw_module><sys_variable_value action="delete_multiple" query="document_key=a477388b0713101037c7f2ae7c1ed010"/></record_update>]]></payload>
+        <payload_hash>-1354856128</payload_hash>
+        <record_name>inbox</record_name>
+        <reverted_from/>
+        <source>9d4fad12079d501037c7f2ae7c1ed0a1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-21 08:17:43</sys_created_on>
+        <sys_id>4d77b88b0713101037c7f2ae7c1ed027</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>174afbd77c00000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-21 08:17:43</sys_updated_on>
+        <type>Workspace Module</type>
+        <update_guid>6877788b2c131010bc3ee95cd4ca3308</update_guid>
+        <update_guid_history>6877788b2c131010bc3ee95cd4ca3308:1227716933,6877788b2c131010bc3ee95cd4ca3308:1227716933,6877788b2c131010bc3ee95cd4ca3308:1227716933,6877788b2c131010bc3ee95cd4ca3308:1227716933</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-21 08:17:43</sys_created_on>
+        <sys_db_object display_value="" name="sys_aw_module">sys_aw_module</sys_db_object>
+        <sys_id>37dd866c868c48a289a2c31f0120b6c9</sys_id>
+        <sys_metadata>a477388b0713101037c7f2ae7c1ed010</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>inbox</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sys_aw_module_a477388b0713101037c7f2ae7c1ed010</sys_update_name>
+        <sys_update_version display_value="sys_aw_module_a477388b0713101037c7f2ae7c1ed010">4d77b88b0713101037c7f2ae7c1ed027</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-21 08:17:43</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

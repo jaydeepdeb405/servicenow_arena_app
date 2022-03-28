@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="DELETE">
+        <category>custom</category>
+        <css/>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <id>scheduler</id>
+        <internal>false</internal>
+        <omit_watcher>false</omit_watcher>
+        <public>false</public>
+        <roles>x_93700_arena.test_admin</roles>
+        <seo_script/>
+        <short_description/>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-29 15:20:00</sys_created_on>
+        <sys_id>d04218bd075e501037c7f2ae7c1ed04a</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>scheduler</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_page_d04218bd075e501037c7f2ae7c1ed04a</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-08-03 22:20:51</sys_updated_on>
+        <title>Scheduler</title>
+        <use_seo_script>false</use_seo_script>
+    </sp_page>
+    <sys_translated_text action="DELETE" query="documentkey=d04218bd075e501037c7f2ae7c1ed04a"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>sp_page_d04218bd075e501037c7f2ae7c1ed04a</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page"><sp_page action="INSERT_OR_UPDATE"><category>custom</category><css/><draft>false</draft><dynamic_title_structure/><id>scheduler</id><internal>false</internal><omit_watcher>false</omit_watcher><public>false</public><roles>x_93700_arena.test_admin</roles><seo_script/><short_description/><sys_class_name>sp_page</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-07-29 15:20:00</sys_created_on><sys_id>d04218bd075e501037c7f2ae7c1ed04a</sys_id><sys_mod_count>8</sys_mod_count><sys_name>scheduler</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>sp_page_d04218bd075e501037c7f2ae7c1ed04a</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-08-03 22:20:51</sys_updated_on><title>Scheduler</title><use_seo_script>false</use_seo_script></sp_page><sys_translated_text action="delete_multiple" query="documentkey=d04218bd075e501037c7f2ae7c1ed04a"/></record_update>]]></payload>
+        <payload_hash>5614471</payload_hash>
+        <record_name>scheduler</record_name>
+        <reverted_from/>
+        <source>d44dfe210783181037c7f2ae7c1ed023</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-04 15:56:04</sys_created_on>
+        <sys_id>555d76610783181037c7f2ae7c1ed070</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17459d4fc090000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-04 15:56:04</sys_updated_on>
+        <type>Page</type>
+        <update_guid>f5826bd7c95294107341b77984ff5c32</update_guid>
+        <update_guid_history>f5826bd7c95294107341b77984ff5c32:-472705389,f5826bd7c95294107341b77984ff5c32:-472705389,2ed3e01fef5a541064f87aa3dfd71caf:1328189539,4f13a8db685a5410ec357b18eb87f13e:397147975,86b2a8dbaa5a541082f44e9fb7b1298d:-2007992089,dcdd00cbe09e14102c8e00c09ad95a90:1008892843,8ae9f256d01ad010e26d95e36f2a1ab7:-402859701,715258b1059e5010888ddde90a2f2cb2:-1422504660,a85258b1f49e5010b01e710079892a9e:1007327504,584218bd415e50108f4f9c1900ca2c4c:676565680</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="scheduler">b1f810b107c7181037c7f2ae7c1ed078</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-04 22:36:26</sys_created_on>
+        <sys_db_object display_value="" name="sp_page">sp_page</sys_db_object>
+        <sys_id>88abf90a72d94bc0a534fe7369d94400</sys_id>
+        <sys_metadata>d04218bd075e501037c7f2ae7c1ed04a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>scheduler</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>sp_page_d04218bd075e501037c7f2ae7c1ed04a</sys_update_name>
+        <sys_update_version display_value="sp_page_d04218bd075e501037c7f2ae7c1ed04a">555d76610783181037c7f2ae7c1ed070</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-09-04 22:36:26</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

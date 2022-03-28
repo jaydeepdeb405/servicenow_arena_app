@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $rootScope, $timeout,$sce) {
+	/* widget controller */
+	var c = this;
+
+	$scope.change = function(branch) {
+		var qid = branch.data;
+		if (!qid) return;
+		$rootScope.$broadcast('loadContent', {
+			'qid': qid
+		});
+	}
+
+	$scope.loaded = true;
+	$scope.dykSearchText = '';
+	$scope.tags = [];
+
+	var autocompleteElement = angular.element('#dyk-search-autocomplete');
+	var inputElement = angular.element('#search');
+	
+	$scope.clearSearchText = function() {
+		$scope.dykSearchText = '';
+	};
+
+	$scope.addTag = function(tag) {
+		autocompleteElement.css({
+			display: '',
+			opacity: ''
+		});
+		$scope.tags.push(tag);
+		$scope.dykSearchText = '';
+		applyFilterFromTag();
+	};
+
+	$scope.removeTag = function(index) {
+		$scope.tags.splice(index, 1);
+		applyFilterFromTag();
+	};
+
+	function applyFilterFromTag() {
+		$scope.data.action = 'search';
+		$scope.data.filter = $scope.tags.map(function(tag) {
+			return 'sys_tags.' + tag.sys_id + '=' + tag.sys_id;
+		}).join('^OR');
+		$scope.server.update().then(function() {
+			$scope.data.action = undefined;
+			$scope.data.filter = undefined;
+		});
+	}
+
+	$scope.showAutocomplete = function() {
+		autocompleteElement.css({
+			top: "calc(" + inputElement.outerHeight() + "px + 0.5rem)",
+			width: inputElement.outerWidth() + "px",
+			display: 'block',
+			opacity: '1'
+		});
+	}
+
+	$scope.filterOptions = function(tag) {
+		return tag && tag.label && $scope.dykSearchText && $scope.tags.filter(function(t) { return t.sys_id === tag.sys_id }).length === 0;
+	};
+
+	$scope.getAutoCompletedEntry = function(label) {
+		var searchTextLen = $scope.dykSearchText.length;
+		var indexOfSearchText = label.toLowerCase().indexOf($scope.dykSearchText.toLowerCase());
+		return $sce.trustAsHtml(label.substring(0, indexOfSearchText) + 
+														'<span class="highlight">' + 
+														label.substr(indexOfSearchText, searchTextLen)+
+														'</span>' + 
+														label.substring(indexOfSearchText + searchTextLen));
+	};
+
+	$scope.searchData = function(dykSearchText) {
+		$('.chips-autocomplete').chips({
+			autocompleteOptions: {
+				data: {
+					'flow': null,
+					'service portal': null
+				},
+				limit: Infinity
+			}
+		});
+		$timeout.cancel($scope.searchTimeout);
+		$scope.searchTimeout =  $timeout(function() {
+			$scope.data.action = 'searchtag';
+			$scope.data.searchText = dykSearchText;
+			$scope.loaded = false;
+			$scope.server.update().then(function() {
+				$scope.data.action = undefined;
+				$scope.data.searchText = undefined;
+				$scope.loaded = true;
+			});
+		}, 500);
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.card{&#13;
+  border-radius: 0.7rem;&#13;
+&#13;
+}&#13;
+.tree-card-title {&#13;
+  font-size: 1.4rem;&#13;
+  background: #6f569b; /*purple*/&#13;
+  padding: 0.5rem;&#13;
+  border-radius: 0.7rem 0.7rem 0rem 0rem;&#13;
+  color: #FFF; /*white*/&#13;
+  font-weight: bold;&#13;
+}&#13;
+&#13;
+.tree-picker {&#13;
+  padding: 5px;&#13;
+  height: 45vh;&#13;
+  overflow-y: auto;&#13;
+  overflow-x: hidden;&#13;
+&#13;
+}&#13;
+a{&#13;
+color:#3a0696;/*violet*/&#13;
+}&#13;
+.nav-pills &gt; li.active &gt; a, .nav-pills &gt; li.active &gt; a:hover, .nav-pills &gt; li.active &gt; a:focus {&#13;
+  /* background-color: $dyk-secondary !important;*/&#13;
+  background-color: #d2ccee !important; /*Light grayish purple*/.&#13;
+}&#13;
+&#13;
+/* width */&#13;
+::-webkit-scrollbar {&#13;
+  width  : 5px;&#13;
+}&#13;
+.chips-wrapper {&#13;
+  display: flex;&#13;
+  flex-flow: row;&#13;
+  align-items: center;&#13;
+  flex-wrap: wrap;&#13;
+  padding: 10px;&#13;
+  width: 100%;&#13;
+  .dyk-search-input-wrapper {&#13;
+    margin-top: 0;&#13;
+    margin-bottom: 0;&#13;
+    width: 100%;&#13;
+    ul#dyk-search-autocomplete li span {&#13;
+      color: #444 !important;&#13;
+      &amp;.highlight {&#13;
+        color: #6f569b !important; /*purple*/&#13;
+      }&#13;
+    }&#13;
+  }&#13;
+}&#13;
+input#search {&#13;
+  height: 30px;&#13;
+  margin: 0;&#13;
+  margin-top:0.5rem;&#13;
+  margin-bottom:0.5rem;&#13;
+}&#13;
+&#13;
+::-webkit-scrollbar-thumb {&#13;
+  border-radius   : 5px;&#13;
+  background-color: rgba(0, 0, 0, 0.3);&#13;
+}&#13;
+&#13;
+/* Handle on hover */&#13;
+::-webkit-scrollbar-thumb:hover {&#13;
+  background: #d2ccee;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>DYK Tree Picker_v2</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.tagsAutocomplete = [];
+
+    var tagGr = new GlideAggregate('label_entry');
+    tagGr.addQuery('label.active', true);
+    tagGr.addQuery('table', 'x_93700_arena_did_you_know');
+    tagGr.groupBy('label');
+    tagGr.query();
+    while (tagGr.next()) {
+        data.tagsAutocomplete.push({
+            label: tagGr.label.getDisplayValue(),
+            sys_id: tagGr.getValue('label')
+        });
+    }
+
+    data.treeData = [];
+    data.selectedTab = "";
+    var years = [];
+    var tags = [];
+
+    var questions = new GlideAggregate("x_93700_arena_did_you_know");
+    questions.addQuery("active=true");
+    questions.orderByDesc('year');
+    questions.addNotNullQuery('date');
+    questions.addNotNullQuery('year');
+    if (input && input.action === 'search') {
+        questions.addEncodedQuery(input.filter);
+    }
+    questions.groupBy('year');
+    questions.query();
+    while (questions.next()) {
+        years.push(questions.year + '');
+    }
+
+    years.forEach(function(year, index) {
+        var question = {};
+        question.label = year;
+        question.expanded = true;
+        question.children = getMonths(year);
+        data.treeData.push(question);
+    });
+
+    function getWeek(year, month) {
+        var weeks = [];
+        var weekQuestions = new GlideRecord("x_93700_arena_did_you_know");
+        weekQuestions.addEncodedQuery('year=' + year + '^month=' + month+'^active=true');
+        if (input && input.action === 'search') {
+            weekQuestions.addEncodedQuery(input.filter);
+        }
+        weekQuestions.orderByDesc('date');
+        weekQuestions.query();
+        while (weekQuestions.next()) {
+            var weekObj = {};
+            weekObj.label = weekQuestions.title + '';
+            weekObj.data = weekQuestions.sys_id + '';
+            weekObj.expanded = true;
+            weeks.push(weekObj);
+            // select latest record in tree picker tab
+            if (!data.selectedTab) data.selectedTab = weekObj.data;
+        }
+        return weeks;
+    }
+
+    function getMonths(year) {
+        var months = [];
+        questions = new GlideAggregate("x_93700_arena_did_you_know");
+		questions.addQuery("active=true");
+        questions.orderByDesc('month');
+        questions.addNotNullQuery('date');
+        questions.addNotNullQuery('month');
+        if (input && input.action === 'search') {
+            questions.addEncodedQuery(input.filter);
+        }
+        questions.addQuery('year', year);
+        questions.groupBy('month');
+        questions.query();
+        while (questions.next()) {
+            var weeks = getWeek(year, questions.month.toString());
+            var obj = {};
+            obj.label = questions.month.getDisplayValue();
+            obj.expanded = true;
+            obj.children = weeks;
+            months.push(obj);
+        }
+        return months;
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>chandana</sys_created_by>
+        <sys_created_on>2022-02-09 12:44:29</sys_created_on>
+        <sys_id>9ef82ff11ba54510c79742e4cc4bcbf1</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>DYK Tree Picker_v2</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_9ef82ff11ba54510c79742e4cc4bcbf1</sys_update_name>
+        <sys_updated_by>chandana</sys_updated_by>
+        <sys_updated_on>2022-03-03 15:07:28</sys_updated_on>
+        <template><![CDATA[<div class="card">
+  <div class="tree-card-title">
+    <span class="fa fa-newspaper-o" style="font-size:25px"></span>
+    <span> Now Bytes Archive</span>
+  </div>
+
+  <div class="chips-wrapper">
+    <div ng-repeat="tag in tags" class="chip">
+      {{tag.label}}
+      <i ng-click="removeTag($index)" 
+         class="close material-icons">
+        close
+      </i>
+    </div>
+    <div class="input-field dyk-search-input-wrapper">
+      <input placeholder="Search by tags" 
+             id="search" 
+             type="text" 
+             class="autocomplete"
+             ng-model="dykSearchText"
+             ng-keyup="showAutocomplete()" />
+      <i ng-if="dykSearchText" 
+         ng-click="clearSearchText()" 
+         class="close material-icons" 
+         role="button" 
+         style="position: absolute; right: 0; top: calc(0.5rem + 5px);">
+        close
+      </i>
+      <ul id="dyk-search-autocomplete"
+          class="autocomplete-content dropdown-content" 
+          ng-show="dykSearchText">
+        <li ng-if="filterOptions(tag)" 
+            ng-repeat="tag in data.tagsAutocomplete | filter: {label: dykSearchText}"
+            ng-click="addTag(tag)">
+          <span ng-bind-html="getAutoCompletedEntry(tag.label, dykSearchText)"></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tree-picker">
+    <abn-tree ng-if="loaded"
+              tree-data         = "data.treeData"
+              tree-control      = "my_tree"
+              icon-leaf         = "glyphicon glyphicon-chevron-right"
+              icon-expand       = "glyphicon glyphicon-chevron-right"
+              icon-collapse     = "glyphicon glyphicon-chevron-down"
+              on-select         = "change(branch)"
+              expand-level      = "3"
+              initial-selection = "{{data.selectedTab}}">      
+    </abn-tree>
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

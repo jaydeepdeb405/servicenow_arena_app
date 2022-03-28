@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_dependency_js_include">
+    <m2m_sp_dependency_js_include action="INSERT_OR_UPDATE">
+        <order>100</order>
+        <sp_dependency display_value="Materialize Stepper">a08394f1079e501037c7f2ae7c1ed027</sp_dependency>
+        <sp_js_include display_value="https://unpkg.com/materialize-stepper@3.1.0/dist/js/mstepper.min.js">2e93d4f1079e501037c7f2ae7c1ed048</sp_js_include>
+        <sys_class_name>m2m_sp_dependency_js_include</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-07-29 15:26:24</sys_created_on>
+        <sys_id>35b318f1079e501037c7f2ae7c1ed086</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Materialize Stepper.https://unpkg.com/materialize-stepper@3.1.0/dist/js/mstepper.min.js</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>m2m_sp_dependency_js_include_35b318f1079e501037c7f2ae7c1ed086</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-07-29 15:26:24</sys_updated_on>
+    </m2m_sp_dependency_js_include>
+</record_update>

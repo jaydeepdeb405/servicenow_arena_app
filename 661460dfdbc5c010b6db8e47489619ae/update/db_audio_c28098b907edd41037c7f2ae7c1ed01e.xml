@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_audio">
+    <db_audio action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <audio>d0137f2f07a1101037c7f2ae7c1ed045</audio>
+        <name>pop.mp3</name>
+        <sys_class_name>db_audio</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-22 08:25:30</sys_created_on>
+        <sys_id>c28098b907edd41037c7f2ae7c1ed01e</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>pop.mp3</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>db_audio_c28098b907edd41037c7f2ae7c1ed01e</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-28 11:24:31</sys_updated_on>
+    </db_audio>
+    <sys_attachment action="INSERT_OR_UPDATE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>audio/mpeg</content_type>
+        <encryption_context/>
+        <file_name>audio.mp3</file_name>
+        <hash>369a35bcf920f8a65258fc8bf7a44a8e916dec1f99ddb59d5e30745193608929</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>28465</size_bytes>
+        <size_compressed>4199</size_compressed>
+        <state>available</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-28 11:24:31</sys_created_on>
+        <sys_id>d0137f2f07a1101037c7f2ae7c1ed045</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-06-28 11:24:31</sys_updated_on>
+        <table_name>ZZ_YYdb_audio</table_name>
+        <table_sys_id>c28098b907edd41037c7f2ae7c1ed01e</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="audio.mp3" sys_id="d0137f2f07a1101037c7f2ae7c1ed045">d0137f2f07a1101037c7f2ae7c1ed045</sys_attachment>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-28 11:24:31</sys_created_on>
+        <sys_id>14137f2f07a1101037c7f2ae7c1ed045</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="INSERT_OR_UPDATE">
+        <data>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</data>
+        <length>5588</length>
+        <position>1</position>
+        <sys_attachment display_value="audio.mp3" sys_id="d0137f2f07a1101037c7f2ae7c1ed045">d0137f2f07a1101037c7f2ae7c1ed045</sys_attachment>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-28 11:24:31</sys_created_on>
+        <sys_id>94137f2f07a1101037c7f2ae7c1ed045</sys_id>
+    </sys_attachment_doc>
+</record_update>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Shankaran Pillai Quotes" max_length="40" name="x_93700_arena_shankaran_pillai_quotes" sizeclass="0" type="collection">
+        <element label="Quote" max_length="3000" name="quote" type="string" unique="true"/>
+        <element attributes="edge_encryption_enabled=true" label="Quote Used?" max_length="40" name="quote_used" type="boolean"/>
+        <index name="index">
+            <element name="quote"/>
+        </index>
+    </element>
+</database>

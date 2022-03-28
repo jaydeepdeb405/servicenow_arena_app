@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $rootScope, $timeout) {
+    /* widget controller */
+    var c = this;
+
+    // backup tree data for search
+    $scope.treeDataBackup = $scope.data.treeData;
+
+    $scope.change = function(branch) {
+        var qid = branch.data;
+        if (!qid) return;
+        $rootScope.$broadcast('loadQuestion', {
+            'qid': qid
+        });
+    }
+
+    $scope.search = function(searchText) {
+		// debouncing search requests
+        $timeout(function() {
+            if (searchText) {
+                var treeData = [];
+                searchText = searchText.toLowerCase();
+                $scope.treeDataBackup.forEach(function(years) {
+                    years.children.forEach(function(months) {
+                        months.children.forEach(function(question) {
+                            if (question.search_text.indexOf(searchText) > -1) {
+                                treeData.push({
+                                    data: question.data,
+                                    label: question.label,
+                                    level: 1,
+                                    noLeaf: true
+                                });
+                            }
+                        });
+                    });
+                });
+                $scope.data.treeData = treeData;
+            } else {
+                $scope.data.treeData = $scope.treeDataBackup;
+            }
+        }, 1000);
+    }
+	
+	$scope.clearSearch = function() {
+		$scope.searchText = "";
+		$scope.data.treeData = $scope.treeDataBackup;
+	}
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.tree-card-title {
+  display:flex;
+  flex-flow:row;
+  align-items:center;
+  justify-content:space-between;
+  font-family:sans-serif;
+  font-size: 16px;
+  text-align: right;
+  height:40px;
+  padding: 0px 15px;
+  color: #fff;
+  background: $shankaran-pillai-primary;
+}
+
+.tree-picker {
+  padding: 0 5px 5px 5px;
+  height: 30vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+input#search {
+  height: 30px;
+  margin: 0;
+}
+.search-wrapper{
+  margin-top:0.5rem;
+  margin-bottom:0.5rem;
+}
+
+i#clearSearch {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width  : 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius   : 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>Shankaran Pillai Tree Picker</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	data.treeData = [];
+	data.hasData = false;
+	data.selectedQuestionId = "";
+	
+	var years = [];
+	var questions = new GlideRecord("x_93700_arena_questions");
+	questions.orderByDesc('year');
+	questions.addActiveQuery();
+	questions.addNotNullQuery('date');
+	questions.addNotNullQuery('year');
+	questions.query();
+	while (questions.next()) {
+		years.push(questions.year + '');
+	}
+
+	var arrayUtil = new global.ArrayUtil();
+	years = arrayUtil.unique(years);
+
+	years.forEach(function(year, index) {
+		var question = {};
+		question.label = year;
+		question.children = getMonths(year);
+		data.treeData.push(question);
+		data.hasData = true;
+	});
+
+	function getWeek(year, month) {
+		var weeks = [];
+		var weekQuestions = new GlideRecord("x_93700_arena_questions");
+		weekQuestions.addActiveQuery();
+		weekQuestions.addEncodedQuery('year=' + year + '^month=' + month);
+		weekQuestions.orderByDesc('date');
+		weekQuestions.query();
+		while (weekQuestions.next()) {
+			var weekObj = {};
+			weekObj.label = weekQuestions.title + '';
+			weekObj.data = weekQuestions.sys_id + '';
+			weekObj.search_text = weekQuestions.title.toString().toLowerCase() + " " + weekQuestions.question.toString().toLowerCase();
+			weekObj.noLeaf = true;
+			weeks.push(weekObj);
+			// select latest record in tree picker tab
+			if (!data.selectedQuestionId) {
+				data.selectedQuestionId = weekObj.data;
+			}
+		}
+		return weeks;
+	}
+
+	function getMonths(year) {
+		var oldValue = "";
+		var months = [];
+		questions = new GlideRecord("x_93700_arena_questions");
+		questions.addActiveQuery();
+		questions.addEncodedQuery('year=' + year);
+		questions.orderByDesc('date');
+		questions.query();
+		while (questions.next()) {
+			var weeks = getWeek(year, questions.month.toString());
+			if (oldValue != questions.month + '') {
+				var obj = {};
+				obj.label = questions.month.getDisplayValue() + '';
+				obj.children = weeks;
+				months.push(obj);
+				oldValue = questions.month + '';
+			} else {
+				oldValue = questions.month + '';
+			}
+		}
+		return months;
+	}
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-02 05:07:28</sys_created_on>
+        <sys_id>0145bc22db631010b6db8e4748961980</sys_id>
+        <sys_mod_count>203</sys_mod_count>
+        <sys_name>Shankaran Pillai Tree Picker</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_0145bc22db631010b6db8e4748961980</sys_update_name>
+        <sys_updated_by>jaydeepdeb@kpmg.com</sys_updated_by>
+        <sys_updated_on>2021-06-18 07:39:05</sys_updated_on>
+        <template><![CDATA[<div class="card">
+
+  <div class="tree-card-title">
+  <span class="fa fa-question" style="font-size:25px">
+    </span>
+   <span>QUESTION ARCHIVE</span> 
+  </div>
+
+  <div ng-hide="data.hasData" class="col s12 text-center">
+    <h6>No archives</h6>
+  </div>
+  
+  <div class="search-wrapper input-field col s12" ng-show="data.hasData">
+    <input placeholder="Search question" id="search" type="text" ng-model="searchText" ng-change="search(searchText)">
+    <i ng-show="searchText" class="material-icons" id="clearSearch" ng-click="clearSearch()">clear</i>
+  </div>
+
+  <div class="tree-picker">
+    <abn-tree 
+              tree-data         = "data.treeData"
+              tree-control      = "my_tree"
+              icon-leaf         = "glyphicon glyphicon-chevron-right"
+              icon-expand       = "glyphicon glyphicon-chevron-right"
+              icon-collapse     = "glyphicon glyphicon-chevron-down"
+              on-select         = "change(branch)"
+              expand-level      = "3"
+              initial-selection = "{{data.selectedQuestionId}}">      
+    </abn-tree>
+  </div>
+
+</div>
+<div>
+    <widget id="spillai_leaderboard"></widget>
+</div>]]></template>
+    </sp_widget>
+</record_update>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="m2m_sp_dependency_js_include">
+    <m2m_sp_dependency_js_include action="INSERT_OR_UPDATE">
+        <order>100</order>
+        <sp_dependency display_value="ari">fc5b0706db370c10b6db8e47489619bd</sp_dependency>
+        <sp_js_include display_value="ari">4e7b8706db370c10b6db8e47489619bb</sp_js_include>
+        <sys_class_name>m2m_sp_dependency_js_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-03-28 16:51:18</sys_created_on>
+        <sys_id>1a9bc706db370c10b6db8e4748961920</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ari.ari</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>m2m_sp_dependency_js_include_1a9bc706db370c10b6db8e4748961920</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-03-28 16:51:18</sys_updated_on>
+    </m2m_sp_dependency_js_include>
+</record_update>

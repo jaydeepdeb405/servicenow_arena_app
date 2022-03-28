@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>standard</category>
+        <client_script><![CDATA[function loginCtrl($scope, $http, $window, spUtil, $timeout, $location) {
+    var c = this;
+	
+	if (!$scope.data.is_logged_in && $scope.data.multisso_enabled && $scope.data.default_idp) {
+		var pageId = $location.search().id || $scope.page.id;
+		var isLoginPage = $scope.portal.login_page_dv == pageId;
+		$scope.server.get({
+			action: "set_sso_destination",
+			pageURI: isLoginPage ? null : $scope.data.pageURI
+		}).then(function() {
+			$window.location = "/login_with_sso.do?glide_sso_id=" + $scope.data.default_idp;
+		});
+	}
+
+    if ($scope.data.is_logged_in) {
+        $scope.transition = true;
+        $window.location = '/arena_test';
+    }
+
+    $scope.username = "";
+    $scope.password = "";
+    $scope.remember_me = false;
+    $scope.transition = false;
+    $scope.isLoginForm = true;
+
+    $scope.login = function(username, password, remember_me, isCertLogin) {
+        $scope.transition = true;
+        var url = spUtil.getURL({
+            sysparm_type: 'view_form.login'
+        });
+
+        console.log('internal login')
+        $http({
+            method: 'post',
+            url: url,
+            data: $.param({
+                'sysparm_type': 'login',
+				'ni.nolog.user_password': true,
+				'remember_me': remember_me ? true : false,
+				'user_name': username,
+				'user_password': password,
+				'get_redirect_url': true,
+				'sysparm_goto_url': isLoginPage ? null : $location.url(),
+				'mfa_redirect_url': isLoginPage ? null : c.data.pageURI,
+				'cert_login' : !!isCertLogin
+            }),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function(response) {
+            if (!response.data) {
+                M.toast({
+                    html: "Internal application error"
+                });
+                $scope.transition = false;
+                return;
+            }
+            if (response.data.status == 'success') {
+                console.log('internal login success')
+                M.toast({
+                    html: "Login successful"
+                });
+                $window.location = '/arena_test';
+                $scope.transition = false;
+            } else {
+                console.log('internal login failed, trying external')
+                c.data.action = "externalLogin";
+                c.data.user_id = username;
+                c.data.password = password;
+                c.server.update().then(function() {
+                    c.data.action = undefined;
+                    if (c.data.loginSuccess === false) {
+                        M.toast({
+                            html: "Invalid username or password"
+                        });
+                        $scope.transition = false;
+                    } else {
+                        console.log('external login user found, trying login with master')
+                        $http({
+                            method: 'post',
+                            url: url,
+                            data: $.param({
+                                'sysparm_type': 'login',
+                                'ni.nolog.user_password': true,
+                                'remember_me': remember_me,
+								'user_name': c.data.testTakerMasterUsername,
+								'user_password': c.data.testTakerMasterPassword,
+								'get_redirect_url': true,
+								'sysparm_goto_url': isLoginPage ? null : $location.url(),
+								'mfa_redirect_url': isLoginPage ? null : c.data.pageURI,
+								'cert_login' : !!isCertLogin
+							}),
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            }
+                        }).then(function(response) {
+                            if (!response.data) {
+                                M.toast({
+                                    html: "Internal application error"
+                                });
+                                $scope.transition = false;
+                                return;
+                            }
+                            if (response.data.status == 'success') {
+                                console.log('external login success')
+                                M.toast({
+                                    html: "Login successful"
+                                });
+                                $scope.transition = false;
+                                $window.location = '/arena_test';
+                            } else {
+                                console.log('external login failed')
+                                M.toast({
+                                    html: "Invalid username or password"
+                                });
+                                $scope.transition = false;
+                            }
+                        }, function errorCallback(response) {
+                            M.toast({
+                                html: "Internal application error"
+                            });
+                            $scope.transition = false;
+                        });
+                    }
+                });
+            }
+        }, function errorCallback(response) {
+            M.toast({
+                html: "Internal application error"
+            });
+            $scope.transition = false;
+        });
+    };
+
+    $scope.register = function(first_name, last_name, email, password) {
+        $scope.transition = true;
+        c.data.action = "register";
+        c.data.first_name = first_name;
+        c.data.last_name = last_name;
+        c.data.email = email;
+        c.data.password = password;
+        c.server.update().then(function() {
+            c.data.action = undefined;
+            $scope.transition = false;
+            if (c.data.alreadyRegistered) {
+                M.toast({
+                    html: email + " is already registered"
+                });
+            }
+            if (c.data.registrationComplete) {
+                M.toast({
+                    html: "Registration complete. Logging you in..."
+                });
+                $timeout(function() {
+                    $scope.login(email, password, false);
+                }, 1000);
+            }
+        });
+    };
+
+    $scope.goToRegistration = function() {
+        $scope.isLoginForm = false;
+    };
+
+    $scope.goToLogin = function() {
+        $scope.isLoginForm = true;
+    };
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.form-wrapper {&#13;
+  margin-top: 10vh;&#13;
+}&#13;
+&#13;
+.switch {&#13;
+  margin: auto 0;&#13;
+}&#13;
+&#13;
+.switch label input[type=checkbox]:checked + .lever:after {&#13;
+  background-color: #0d47a1;&#13;
+}&#13;
+&#13;
+.loader-wrapper {&#13;
+  display: flex;&#13;
+  left: 0;&#13;
+  right: 0;&#13;
+  width: 100%;&#13;
+  position: fixed;&#13;
+  z-index: 999;&#13;
+  height: 80vh;&#13;
+  top: 0;&#13;
+  bottom: 0;&#13;
+}&#13;
+&#13;
+.form-footer {&#13;
+  display: flex;&#13;
+  justify-content: space-between;&#13;
+}&#13;
+&#13;
+.login-form-btn {&#13;
+  min-width: 100px;&#13;
+  margin-top: 5px;&#13;
+  margin-bottom: 5px;&#13;
+}&#13;
+&#13;
+.switch {&#13;
+  margin-top: 5px;&#13;
+  margin-bottom: 5px;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Arena Test Login</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.loginSuccess = false;
+    data.testTakerMasterUsername = gs.getProperty('x_93700_arena.test_taker.master_username');
+    data.testTakerMasterPassword = gs.getProperty('x_93700_arena.test_taker.master_password');
+    var testTakerGr, externalMasterPassword = gs.getProperty('x_93700_arena.test_taker.external_master_password');
+
+    if (input && input.action === "externalLogin") {
+        var userEmail = input.user_id;
+        var password = input.password;
+
+        testTakerGr = new GlideRecord('x_93700_arena_test_takers');
+        testTakerGr.setLimit(1);
+        testTakerGr.addActiveQuery();
+        testTakerGr.addQuery('email', userEmail);
+        testTakerGr.query();
+        if (testTakerGr.next() && testTakerGr.password.getDecryptedValue() === password) {
+            data.loginSuccess = true;
+            gs.getSession().putClientData('currentTestTakerID', testTakerGr.getValue('sys_id'));
+        }
+    }
+
+    if (input && input.action === "register") {
+        data.registrationComplete = false;
+        data.alreadyRegistered = false;
+
+        var user = new GlideRecord('sys_user');
+        user.setLimit(1);
+        user.addQuery('email', input.email);
+        user.query();
+        if (user.hasNext()) {
+            data.alreadyRegistered = true;
+            return;
+        }
+
+        testTakerGr = new GlideRecord('x_93700_arena_test_takers');
+        testTakerGr.setLimit(1);
+        testTakerGr.addActiveQuery();
+        testTakerGr.addQuery('email', input.email);
+        testTakerGr.query();
+        if (testTakerGr.next()) {
+            data.alreadyRegistered = true;
+        } else {
+            testTakerGr = new GlideRecord('x_93700_arena_test_takers');
+            testTakerGr.initialize();
+            testTakerGr.setValue('first_name', input.first_name);
+            testTakerGr.setValue('last_name', input.last_name);
+            testTakerGr.setValue('email', input.email);
+            testTakerGr.setValue('password', input.password);
+            testTakerGr.setValue('external_user', true);
+            if (testTakerGr.insert()) data.registrationComplete = true;
+        }
+        return;
+    }
+
+    if (input && input.action === "multi_factor_auth_setup") {
+        if (gs.getSession().getProperty("setup_multifactor_authn")) {
+            gs.getSession().putProperty("nav_to", input.directTo);
+            gs.getSession().putProperty("starting_page", input.directTo);
+            gs.getSession().putProperty("is_direct_redirect", "true");
+        }
+        return;
+    }
+
+    // We don't want to set a starting page until we've begun the login process.
+    if (input && input.action === "set_sso_destination") {
+        var gs_nav_to = gs.getSession().getProperty("nav_to");
+        gs.getSession().putProperty("nav_to", null);
+
+        if (input.pageURI) {
+            gs.getSession().putProperty("is_direct_redirect", "true");
+            gs.getSession().putProperty("starting_page", input.pageURI);
+        } else if (!gs.getSession().getProperty("starting_page") && gs_nav_to)
+            gs.getSession().putProperty("starting_page", gs_nav_to);
+        return;
+
+    }
+
+    // for self registration fields
+    var portalRecord = $sp.getPortalRecord();
+    var self_registration_field = portalRecord ? portalRecord.getValue("user_registration_config") : "";
+    if (self_registration_field) {
+        var registration_config = new GlideRecord("sys_user_registration_config");
+        registration_config.addActiveQuery();
+        registration_config.query('sys_id', self_registration_field);
+        if (registration_config.next()) {
+            var self_registration_record_producer = registration_config.getValue("record_producer");
+            var self_registration_label = registration_config.getValue("registration_label") || gs.getMessage("Sign Up");
+            data.self_registration_record_producer = self_registration_record_producer;
+            data.self_registration_label = self_registration_label;
+        }
+    }
+
+    //Enabling certificate based authentication per portal
+    if (portalRecord && (portalRecord.getValue('enable_certificate_based_authentication') == 1))
+        data.cert_based_auth = gs.getProperty('glide.authenticate.mutual.enabled', 'false') == 'true';
+
+    //Get the OpenID Connect type Identity provider which can be shown on the Portal login page.
+    data.isShowLoginWithIdps = false;
+    data.isMultiSSOActive = gs.getProperty('glide.authenticate.multisso.enabled', 'false') == 'true';
+    data.showOidcLogin = gs.getProperty('glide.service_portal.show.oidc.login.option', 'false') == 'true';
+    var gr = new GlideRecord("oidc_identity_provider");
+    if (data.isMultiSSOActive && data.showOidcLogin && gr.isValid()) {
+        var oidcUtil = new MultiSSO_OidcUtil();
+        data.oidcRecords = oidcUtil.getOidcIdpRecords();
+        data.isShowLoginWithIdps = (data.oidcRecords.length > 0);
+    }
+
+
+    //STRY50033370: Forgot Password link in the login widget
+    data.pswdResetUrl = gs.getProperty('glide.security.password_reset.uri');
+    data.forgotPwdLinkProp = gs.getProperty('glide.security.forgot_password.display.link');
+
+    data.errorMsg = gs.getMessage("There was an error processing your request");
+    data.errorMsg2 = gs.getMessage("An error has occurred - please contact your system administrator");
+    data.passwordMsg = gs.getMessage("Password");
+    data.usernameMsg = gs.getMessage("User name");
+    data.forgetMe = gs.getProperty("glide.ui.forgetme") === 'true';
+    data.forgetMeDefault = gs.getProperty('glide.ui.remember.me.default', true) === 'true';
+    data.is_logged_in = gs.getSession().isLoggedIn();
+    var bypass_sso = options.bypass_sso == "true";
+    data.multisso_enabled = !bypass_sso && gs.getProperty("glide.authenticate.multisso.enabled") === 'true';
+    data.default_idp = gs.getProperty("glide.authenticate.sso.redirect.idp");
+    data.pageURI = new GlideSPUtil().getPageUri();
+    data.multiFactorAuthEnabled = gs.getProperty('glide.authenticate.multifactor', false) === 'true';
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-08-03 16:28:22</sys_created_on>
+        <sys_id>1ed15217079e541037c7f2ae7c1ed0ad</sys_id>
+        <sys_mod_count>160</sys_mod_count>
+        <sys_name>Arena Test Login</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_1ed15217079e541037c7f2ae7c1ed0ad</sys_update_name>
+        <sys_updated_by>jaydeepdeb@kpmg.com</sys_updated_by>
+        <sys_updated_on>2021-10-11 13:56:11</sys_updated_on>
+        <template><![CDATA[<div ng-include="'loader'"></div>
+
+<div ng-if="!data.isLoggedIn" ng-style="transition === true && {'filter': 'blur(5px)'}">
+  <div class="card z-depth-3 form-wrapper">
+    <div class="card-content">
+
+      <form class="login-form" ng-if="isLoginForm" ng-submit="login(username, password, remember_me)">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="username" type="text" ng-model="username" class="validate" required />
+            <label for="username">Username</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password" type="password" ng-model="password" class="validate" required />
+            <label for="password">Password</label>
+          </div>
+        </div>
+        <div class="form-footer">
+          <div>
+            <button type="submit" class="waves-effect blue-grey lighten-4 btn black-text login-form-btn" style="margin-right:5px;">LOGIN</button>    
+            <button type="button" class="waves-effect blue-grey lighten-4 btn black-text login-form-btn" ng-click="goToRegistration()">REGISTER</button>    
+          </div>
+          <div class="switch">
+            <label>
+              <span class="hidden-xs">Remember me</span>
+              <div class="visible-xs">Remember me</div>
+              <input type="checkbox" ng-model="remember_me" />
+              <span class="lever blue-grey lighten-4"></span>
+            </label>
+          </div>
+        </div>
+      </form>
+
+      <form class="registration-form" ng-if="!isLoginForm" ng-submit="register(first_name, last_name, email, password)">
+        <div class="text-center" style="font-size: 1.2em;">You'll be logged in after successful registration</div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="first_name" type="text" ng-model="first_name" class="validate" autocomplete="off" required />
+            <label for="first_name">First Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="last_name" type="text" ng-model="last_name" class="validate" autocomplete="off" required />
+            <label for="last_name">Last Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="email" type="text" ng-model="email" class="validate" autocomplete="off" required />
+            <label for="email">Email (This will be your username)</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="password" type="password" ng-model="password" class="validate" autocomplete="off" required />
+            <label for="password">Password</label>
+          </div>
+        </div>
+        <div class="form-footer">
+          <a class="waves-effect waves-light btn-flat" ng-click="goToLogin()">
+            <i class="material-icons left">arrow_back</i>Go to login
+          </a>
+          <button type="submit" class="waves-effect blue-grey lighten-4 btn black-text">REGISTER</button>    
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

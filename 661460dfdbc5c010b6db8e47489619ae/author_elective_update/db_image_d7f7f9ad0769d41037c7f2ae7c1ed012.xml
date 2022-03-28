@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image">
+    <db_image action="DELETE">
+        <active>true</active>
+        <category/>
+        <format/>
+        <height/>
+        <image/>
+        <name>arena-loading.svg</name>
+        <size_bytes/>
+        <sys_class_name>db_image</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-21 21:18:55</sys_created_on>
+        <sys_id>d7f7f9ad0769d41037c7f2ae7c1ed012</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>arena-loading.svg</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>db_image_d7f7f9ad0769d41037c7f2ae7c1ed012</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-21 21:18:55</sys_updated_on>
+        <thumbnail/>
+        <width/>
+    </db_image>
+    <sys_attachment action="DELETE">
+        <average_image_color/>
+        <chunk_size_bytes>700000</chunk_size_bytes>
+        <compressed>true</compressed>
+        <content_type>image/svg</content_type>
+        <file_name>image</file_name>
+        <hash>d8c7ff466c0bd37d7485f8cf568ffd224abe657f01105a546353f3b4d3daf155</hash>
+        <image_height/>
+        <image_width/>
+        <size_bytes>1674</size_bytes>
+        <size_compressed>472</size_compressed>
+        <state>pending</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-21 21:18:57</sys_created_on>
+        <sys_id>3ff7f12107a9d41037c7f2ae7c1ed065</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-21 21:18:57</sys_updated_on>
+        <table_name>db_image</table_name>
+        <table_sys_id>d7f7f9ad0769d41037c7f2ae7c1ed012</table_sys_id>
+    </sys_attachment>
+    <sys_attachment_doc action="DELETE">
+        <data>H4sIAAAAAAAAAA==</data>
+        <length>16</length>
+        <position>0</position>
+        <sys_attachment display_value="image" sys_id="3ff7f12107a9d41037c7f2ae7c1ed065">3ff7f12107a9d41037c7f2ae7c1ed065</sys_attachment>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-21 21:18:57</sys_created_on>
+        <sys_id>7ff7f12107a9d41037c7f2ae7c1ed065</sys_id>
+    </sys_attachment_doc>
+    <sys_attachment_doc action="DELETE">
+        <data>1VVNj9MwEL3zK4bhnMTuF23SdAWclwNwQYiDm0xTq64d2U7T/Hum2dVSpBVIu0gsI42UzLyx38tTNOub89HAiXzQzpYoU4FAtnK1tk2JXdwlS7zZvFqHUwOMtKHEfYxtnmV936f9NHW+ySZCiIwReAfJz0bbw2NAuVqtsrGLEOJgqMSj8o22OaguugK2qjo03nW2zsE6SwXUOrRGDTlsjasOBYS9ainxZGvyzPF+EKHXddyXyFTaM8KedLOPD68nTf17dy5RgAApxkRoPQXyJ3oXWqriJxW1K/F8q+uvnMiiPZeBp+TbdI4wlDgVDxfJ+c9bZlzeaWNKfLMbg4cB1srqo4oEKkavt12kj+rIigcETy2p+IF18rRmKTttdSSEuvN8dEColKluXc1wlq8ttw40fNFHYgNEIdJ5IVmWMt2lIJfFVBQXcgz6POLDqDWdjymLq2eELfEXLzER6STgZp3d8/wd5zulf534YlbMRDF7NvF1drHqyrHZ5GU7NhHp6pdYPNFB+Y8dnC9TcR3yiYbKPxi6eOG/4PMM/X8tfNS010kC30yt3XdoyJLnbg3bAS4LIfBGME5d9kuqXQZJwkfw7tj8AJ/+1YeKBgAA</data>
+        <length>616</length>
+        <position>1</position>
+        <sys_attachment display_value="image" sys_id="3ff7f12107a9d41037c7f2ae7c1ed065">3ff7f12107a9d41037c7f2ae7c1ed065</sys_attachment>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-21 21:18:57</sys_created_on>
+        <sys_id>fff7f12107a9d41037c7f2ae7c1ed065</sys_id>
+    </sys_attachment_doc>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Arena">661460dfdbc5c010b6db8e47489619ae</application>
+        <file_path/>
+        <instance_id>857b18e3dbfc2300ff27d5b0cf96193b</instance_id>
+        <instance_name>dev71980</instance_name>
+        <name>db_image_d7f7f9ad0769d41037c7f2ae7c1ed012</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="db_image"><db_image action="INSERT_OR_UPDATE"><active>true</active><category/><format/><height/><image/><name>arena-loading.svg</name><size_bytes/><sys_class_name>db_image</sys_class_name><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-06-21 21:18:55</sys_created_on><sys_id>d7f7f9ad0769d41037c7f2ae7c1ed012</sys_id><sys_mod_count>0</sys_mod_count><sys_name>arena-loading.svg</sys_name><sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package><sys_policy/><sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope><sys_update_name>db_image_d7f7f9ad0769d41037c7f2ae7c1ed012</sys_update_name><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-06-21 21:18:55</sys_updated_on><thumbnail/><width/></db_image><sys_attachment action="INSERT_OR_UPDATE"><average_image_color/><chunk_size_bytes>700000</chunk_size_bytes><compressed>true</compressed><content_type>image/svg</content_type><file_name>image</file_name><hash>d8c7ff466c0bd37d7485f8cf568ffd224abe657f01105a546353f3b4d3daf155</hash><image_height/><image_width/><size_bytes>1674</size_bytes><size_compressed>472</size_compressed><state>pending</state><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-06-21 21:18:57</sys_created_on><sys_id>3ff7f12107a9d41037c7f2ae7c1ed065</sys_id><sys_mod_count>0</sys_mod_count><sys_updated_by>jaydeepdeb</sys_updated_by><sys_updated_on>2020-06-21 21:18:57</sys_updated_on><table_name>db_image</table_name><table_sys_id>d7f7f9ad0769d41037c7f2ae7c1ed012</table_sys_id></sys_attachment><sys_attachment_doc action="INSERT_OR_UPDATE"><data>H4sIAAAAAAAAAA==</data><length>16</length><position>0</position><sys_attachment display_value="image" sys_id="3ff7f12107a9d41037c7f2ae7c1ed065">3ff7f12107a9d41037c7f2ae7c1ed065</sys_attachment><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-06-21 21:18:57</sys_created_on><sys_id>7ff7f12107a9d41037c7f2ae7c1ed065</sys_id></sys_attachment_doc><sys_attachment_doc action="INSERT_OR_UPDATE"><data>1VVNj9MwEL3zK4bhnMTuF23SdAWclwNwQYiDm0xTq64d2U7T/Hum2dVSpBVIu0gsI42UzLyx38tTNOub89HAiXzQzpYoU4FAtnK1tk2JXdwlS7zZvFqHUwOMtKHEfYxtnmV936f9NHW+ySZCiIwReAfJz0bbw2NAuVqtsrGLEOJgqMSj8o22OaguugK2qjo03nW2zsE6SwXUOrRGDTlsjasOBYS9ainxZGvyzPF+EKHXddyXyFTaM8KedLOPD68nTf17dy5RgAApxkRoPQXyJ3oXWqriJxW1K/F8q+uvnMiiPZeBp+TbdI4wlDgVDxfJ+c9bZlzeaWNKfLMbg4cB1srqo4oEKkavt12kj+rIigcETy2p+IF18rRmKTttdSSEuvN8dEColKluXc1wlq8ttw40fNFHYgNEIdJ5IVmWMt2lIJfFVBQXcgz6POLDqDWdjymLq2eELfEXLzER6STgZp3d8/wd5zulf534YlbMRDF7NvF1drHqyrHZ5GU7NhHp6pdYPNFB+Y8dnC9TcR3yiYbKPxi6eOG/4PMM/X8tfNS010kC30yt3XdoyJLnbg3bAS4LIfBGME5d9kuqXQZJwkfw7tj8AJ/+1YeKBgAA</data><length>616</length><position>1</position><sys_attachment display_value="image" sys_id="3ff7f12107a9d41037c7f2ae7c1ed065">3ff7f12107a9d41037c7f2ae7c1ed065</sys_attachment><sys_created_by>jaydeepdeb</sys_created_by><sys_created_on>2020-06-21 21:18:57</sys_created_on><sys_id>fff7f12107a9d41037c7f2ae7c1ed065</sys_id></sys_attachment_doc></record_update>]]></payload>
+        <payload_hash>-1466433616</payload_hash>
+        <record_name>arena-loading.svg</record_name>
+        <reverted_from/>
+        <source>9d4fad12079d501037c7f2ae7c1ed0a1</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-21 21:18:57</sys_created_on>
+        <sys_id>b7f7f12107a9d41037c7f2ae7c1ed068</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>172d8bfa3ea0000001</sys_recorded_at>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-21 21:18:57</sys_updated_on>
+        <type>Images</type>
+        <update_guid>7ff7f1212aa9d4106398fda9761a0167</update_guid>
+        <update_guid_history>7ff7f1212aa9d4106398fda9761a0167:-1466433616,1ff7f9ad4f69d410c8c5daac03e96013:-805586619</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="arena-loading.svg">9e79712107a9d41037c7f2ae7c1ed067</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-21 21:25:24</sys_created_on>
+        <sys_db_object display_value="" name="db_image">db_image</sys_db_object>
+        <sys_id>07dedf97ff744fa88e78f94c1dfe7c40</sys_id>
+        <sys_metadata>d7f7f9ad0769d41037c7f2ae7c1ed012</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>arena-loading.svg</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_scope_delete display_value="">63859da1086847008624039f880bfa64</sys_scope_delete>
+        <sys_update_name>db_image_d7f7f9ad0769d41037c7f2ae7c1ed012</sys_update_name>
+        <sys_update_version display_value="db_image_d7f7f9ad0769d41037c7f2ae7c1ed012">b7f7f12107a9d41037c7f2ae7c1ed068</sys_update_version>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-21 21:25:24</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

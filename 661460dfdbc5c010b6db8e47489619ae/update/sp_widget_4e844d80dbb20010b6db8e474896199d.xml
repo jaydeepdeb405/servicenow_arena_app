@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function arenaLevels(spUtil) {
+
+	var c = this;
+
+	c.playLevel = function(level, difficulty, difficultyClass) {
+		sfx.playTik();
+		if (difficultyClass.indexOf("inactive") > -1) {
+			Notiflix.Notify.Init({width:'500px',position:'right-bottom',fontSize:'20px'});
+			Notiflix.Notify.Failure('You must complete lower levels before');
+		} else {
+			
+			var gameScreen = {
+
+				introSequence: false,
+				gameHeading: false,
+				mainMenu: false,
+				gameLevels: false,
+				quizPage: true,
+				profilePage: false,
+				level: level,
+				difficulty: difficulty,
+				challenge: false
+			};
+			$rootScope.$broadcast('gameScreen', gameScreen);
+		}
+
+	};
+
+	c.home = function() {
+		var gameScreen = {
+			introSequence: false,
+			gameHeading: true,
+			mainMenu: true,
+			gameLevels: false,
+			quizPage: false,
+			profilePage: false
+		};
+		$rootScope.$broadcast('gameScreen', gameScreen);
+	};
+
+	/////////////////////////Listener/////////////////////////
+	$rootScope.$on('gameScreen', function(event, obj) {
+		c.showGameLevels = obj.gameLevels;
+	});
+
+	$(document).ready(function() {
+		$(".drop .option").click(function() {
+			var val = $(this).attr("data-value"),
+					$drop = $(".drop"),
+					prevActive = $(".drop .option.active").attr("data-value"),
+					options = $(".drop .option").length;
+			$drop.find(".option.active").addClass("mini-hack");
+			$drop.toggleClass("visible");
+			$drop.removeClass("withBG");
+			$(this).css("top");
+			$drop.toggleClass("opacity");
+			$(".mini-hack").removeClass("mini-hack");
+			if ($drop.hasClass("visible")) {
+				setTimeout(function() {
+					$drop.addClass("withBG");
+				}, 400 + options * 100);
+			}
+			triggerAnimation();
+			if (val !== "placeholder" || prevActive === "placeholder") {
+				$(".drop .option").removeClass("active");
+				$(this).addClass("active");
+			};
+		});
+
+		function triggerAnimation() {
+			var finalWidth = $(".drop").hasClass("visible") ? 22 : 20;
+			$(".drop").css("width", "24em");
+			setTimeout(function() {
+				$(".drop").css("width", finalWidth + "em");
+			}, 400);
+		}
+	});
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.menuStyle {
+    width: 7em;
+    opacity: 0.8;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.listPadding {
+    padding: 3px;
+}
+
+
+@import "compass/css3";
+$dark: #35414a;
+$semilight: #86919a;
+$blue: #5aafee;
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: pfs-bold;
+    src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/PFSquareSansPro-Bold.otf');
+}
+
+.drop {
+    width: 20em;
+    margin: 5em auto;
+    font-family: pfs-bold;
+    color: white;
+    text-transform: uppercase;
+    position: relative;
+    transition: width 0.5s;
+    will-change: width;
+    .option {
+        cursor: pointer;
+        background-color: #5cb85c;
+     		border-color: #4cae4c;
+        border-radius: 5px;
+        margin: 5px;
+        &amp;:not(.active) {
+            display: none;
+            opacity: 0;
+            transform: translateY(-50%);
+        }
+    }
+    &amp;.visible {
+        animation: bounce 1s;
+        width: 24em;
+        &amp;:before,
+        &amp;:after {
+            border-color: #fff;
+        }
+        &amp;:before {
+            opacity: 0;
+        }
+        &amp;:after {
+            opacity: 1;
+        }
+        .option {
+            color: #fff;
+            display: block;
+        }
+    }
+    &amp;.opacity {
+        .option {
+            transform: translateZ(0);
+            opacity: 1;
+            @for $i from 0 to 10 {
+                &amp;:nth-child(#{$i}) {
+                    transition: opacity 0.5s 0.1s*$i, transform 0.5s 0.1s*$i;
+                }
+            }
+        }
+    }
+    &amp;.withBG {
+        .option {
+            transition: background-color 0.1s;
+            &amp;:not(.placeholder):hover {
+                background-color: $blue;
+            }
+            &amp;:not(.placeholder).active {
+                background-color: $blue;
+            }
+        }
+    }
+    &amp;:after,
+    &amp;:before {
+        content: "";
+        position: absolute;
+        top: 1.5em;
+        right: 1em;
+        width: 0.75em;
+        height: 0.75em;
+        border: 0.2em solid $semilight;
+        transform: rotate(45deg);
+        transform-origin: 50% 50%;
+        transition: opacity 0.2s;
+    }
+    &amp;:before {
+        border-left: none;
+        border-top: none;
+        top: 1.2em;
+    }
+    &amp;:after {
+        border-right: none;
+        border-bottom: none;
+        opacity: 0;
+    }
+}
+
+.level {
+    padding: 1rem;
+}
+
+.placeholder{
+		padding:15px;
+}
+
+.easy {
+    float: left;
+    text-align: center;
+    display: none;
+    width: 33.33%;
+    border-right: 1px solid #eee;
+    height: 50px;
+    padding: 10px;
+  	padding-top:15px;
+  	border-radius:5px;
+  	
+}
+.easy:hover{
+background-color:#4CAF50;
+}
+
+
+.medium {
+    text-align: center;
+    display: none;
+    min-height: 20px;
+    width: 33.33%;
+    height: 50px;
+    padding: 10px;
+  	padding-top:15px;
+  
+}
+.medium:hover{
+background-color:#CDDC39;
+}
+
+.hard {
+    text-align: center;
+    float: right;
+    display: none;
+    min-height: 20px;
+    width: 33.33%;
+    height: 50px;
+    padding: 10px;
+  	border-left: 1px solid #eee;
+  	padding-top:15px;
+	  border-radius:5px;
+}
+.hard:hover{
+background-color:#FF5722;
+}
+
+.mini-hack {
+    opacity: 0;
+    transform: translateY(-50%);
+}
+
+.level:hover {
+    display: none;
+}
+
+.option:hover {
+    .easy {
+        display: inline-block;
+    }
+    .medium {
+        display: inline-block;
+    }
+  .hard {
+        display: inline-block;
+    }
+    .level {
+        display: none;
+    }  
+}
+.inactive:hover{
+ 	background-color:#eee !important;
+  color: black;
+  cursor: not-allowed;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>arena_level</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) { 
+
+ }]]></link>
+        <name>Arena Levels V1</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+    /* populate the 'data' object */
+    /* e.g., data.table = $sp.getValue('table'); */
+    var levels = 4; // Configure this parameter to chnage number of levels
+    var difficulty = ["easy", "medium", "hard"];
+    var levelArray = [];
+    var flag = true;
+
+    var user = gs.getUserID();
+    var grUser = new GlideRecord('x_93700_arena_user');
+    grUser.addQuery("user", user);
+    grUser.query();
+    if (grUser.next()) {
+        data.level = grUser.level;
+        data.difficulty = grUser.difficulty;
+    }
+
+    for (var i = 1; i <= levels; i++) {
+        var levelObj = {};
+        levelObj.label = "Level " + i;
+        levelObj.value = "level" + i;
+        levelObj.difficulty = [];
+
+        for (var j = 0; j < difficulty.length; j++) {
+            var difficultyObj = {};
+            difficultyObj.label = difficulty[j];
+            difficultyObj.value = difficulty[j];
+            difficultyObj.difficultyClass = difficulty[j] + " active";
+							if (flag) {
+									difficultyObj.difficultyClass = difficulty[j] + " active";
+							} else {
+									difficultyObj.difficultyClass = difficulty[j] + " inactive";
+							}
+            if (flag && (levelObj.value == data.level) && (difficultyObj.value == data.difficulty)) {
+                flag = false;
+            }
+            
+
+            levelObj.difficulty.push(difficultyObj);
+        }
+
+        levelArray.push(levelObj);
+    }
+    data.levelArray = levelArray;
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>nikesh</sys_created_by>
+        <sys_created_on>2020-02-01 08:55:16</sys_created_on>
+        <sys_id>4e844d80dbb20010b6db8e474896199d</sys_id>
+        <sys_mod_count>163</sys_mod_count>
+        <sys_name>Arena Levels V1</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_4e844d80dbb20010b6db8e474896199d</sys_update_name>
+        <sys_updated_by>jaydeep</sys_updated_by>
+        <sys_updated_on>2020-05-17 15:20:51</sys_updated_on>
+        <template><![CDATA[<p id = "alertmsg" style ="color:darkorange; font-size: 30px">
+  
+</p>
+<div ng-show="c.showGameLevels" class="textStyling text-center noselect">
+    <div class="drop">
+        <div class="option active placeholder noselect">
+            ${Select level}
+        </div>
+        <div class="option" ng-repeat="level in data.levelArray">
+            <div class="level noselect">
+               {{level.label}}
+            </div>
+          <div  ng-repeat="difficulty in level.difficulty" ng-class="difficulty.difficultyClass"  ng-click="c.playLevel(level.value,difficulty.label,difficulty.difficultyClass)">
+               {{difficulty.label}}
+            </div>
+        </div>
+    </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

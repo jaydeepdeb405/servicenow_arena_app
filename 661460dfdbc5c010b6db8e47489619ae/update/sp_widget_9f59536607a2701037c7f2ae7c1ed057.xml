@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function controller($scope, $sce, $window, $timeout) {
+    /* widget controller */
+    var c = this;
+
+    $timeout(function() {
+        M.Dropdown.init(angular.element('.dropdown-trigger'), {
+            coverTrigger: false
+        });
+    }, 0);
+
+    $scope.trustHtml = function(number, htmlStr) {
+        return $sce.trustAsHtml('<span style="position: absolute;font-weight: bold;font-size: 15px;left:-10px;top:2px;">' + number + '. </span>' + htmlStr);
+    };
+
+    $scope.home = function() {
+        $window.location.href = '/arena_test';
+    };
+
+    $scope.exportWord = function(mode) {
+        M.toast({
+            html: '<h6>Exporting to Word document</h6>'
+        });
+        var filename = $scope.data.test_name + 'responses.docx';
+        var responseElement = angular.element('#responses');
+        if (mode === 'doc') {
+            var html = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta><title>Export HTML To Doc</title></head><body>";
+            var footer = "</body></html>";
+            html = html + responseElement.html() + footer;
+            var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+            var downloadLink = document.createElement("a");
+            document.body.appendChild(downloadLink);
+            downloadLink.href = url;
+            downloadLink.download = filename;
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        } else if (mode === 'docx') {
+            saveAs(htmlDocx.asBlob(responseElement.html()), filename);
+        }
+    };
+
+    $scope.exportPdf = function() {
+        M.toast({
+            html: '<h6>Generating PDF, this may take some time</h6>'
+        });
+        var options = {
+            margin: [0.4, 1, 0.4, 1],
+            pagebreak: {
+                mode: ['avoid-all', 'css', 'legacy']
+            },
+            filename: $scope.data.test_name + ' responses.pdf',
+            image: {
+                type: 'jpeg',
+                quality: 0.98
+            },
+            jsPDF: {
+                unit: 'in',
+                format: 'a4',
+                orientation: 'portrait'
+            }
+        };
+        html2pdf().from(angular.element("#responses")[0]).set(options).save();
+    };
+
+    $scope.imgSources = {
+        'tick_red': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAArCAIAAAC1hEy1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAF3SURBVFhH7dgxisJAFMbxt4uWFt7E1tYLeAh7W0FEsLYWQaxsBHv7lF7A3hPY2AhRZ7+QYTckmcm8zAsEdv48UBLN/IghQr6UUtS+vvVrywosToHFKbA4/XPW60WHA41GtN0m7yvDXb7x4lit16rbxf9JMouFej71LkPNs3ImN1nDrFJTOstlstdQkyyLCdPrqctFf7JQY5c8ruvdjuZzimO9hZXmyYbztNkYzxMGu1Yr7x/x81G3m7peLQf6y9uEHFjvt9rv9TKTiXo89PbSJEyoipU1pWORCZmQlVU0pTOdlsjkTMjKOp2My+RkoiZkZc1m+aNn51cmbUJWVhSpfj+/RnYgu9/FTcjKwn3heKyQDQbiJmRlIReZaeqaUBUL1ZN5mJADC3FlfibkxkLuMm8TcmYhF5mECXFYyC4TMiEmC5lkcibEZ6GiTNSEarFQViZtQh6P3fDFKKLzmYZDGo+p09HbJQpPAzkFFqfA4hRYnFrJIvoBX8S28ayX364AAAAASUVORK5CYII=',
+        'tick_green': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAuCAIAAADlSd0GAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAGBSURBVFhH7dQxa8JAGMbxIIifwQ/gJ3F3cXARwd1dnLQtbhmkfoJOJQTaTllaEDrUdm+mjl2ki0ulWELSBxJKSPJe7k3uWof78wziSe4HAa3oJDMsTobFybA4GRYnw+L0F6xjcFw+LjuXndnDDJ+Tb4VpZ8Ex8SaNs4a1sLDhzfDwfUjO6PSyMiZ5mUZWoSne6HYkfpu6WAIT1jxvem9e8tOitLBgmt5PKRP2D6xSE47Gd+O6LzGMQv/D375vxQ+KU2JCJawgDOabeXxN96q7/9onB0WpMiERK22KJ5ApNCGSlTfF61338jK1JkSyVs8r6pqMTLkJkayBO8g8Pb1fmQ4TIlmu77YuWpk70oNs97nTYUIkC/8L9pMtlrXttg4TIllIRkatjgmJWKiarKYJlbAQV1bfhMpZSF6mxISkWEhGpsqEZFlILFNoQgwWomRqTYjHQnmZchNis1BapsOEqrAQZM6r03f665e1chOqyNKdYXEyLE6GxcmwOJ0kK4p+AEFU15Fz1swZAAAAAElFTkSuQmCC',
+        'cross_red': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAnCAIAAAD2P03SAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAHbSURBVFhH7Ze9zgFBFIYPoiAa2Z5Eo3ILLkR07kCtoVFwCeIStCRIdHrXoZGNwu987/fNZLPfmDM/mlV4chLsHud5F7Nrc0IIyo68esyIrz5DPl8fx3S9qudOgpod+vudplOKIqrXab0m+xJF82ikmrdbtdEJ1r2Z201MJqJYhPO3qlWxWonnU+3VQPNw+K95s1G7rDB6zZ0MNSbQ3EmzRwKTHoL5XB8n6zWB0S0Lzfu9amMw6c9n0enos5JKJ7C4ZQ0GfxNZTHoM7ff1QemSCS4Xhxu7Fgs1k4H57k8n0e3q49KFBO22vjFdcOPXgyOxwuiBM4Gl/NyA14P3Eni7gVUPQhOEuIFLD/wTBLqBhx74JAh3A78rXrlMjYZ6zlGpUKtFhYJ66YmKYQEHZF/fSb2eE1249P5uWYEJrPpQt6yQBLz+Pbcs7wSM3unGrijSN6bLL4FJj/eMx/q4dMGNNXY8OlYjEux2aiaDSW+/4Eo3Ph7gPB+8ecHFJ68NkpV2SywJ0LxcqjYG5ruPY9HrGcYZz2vGBGiezcTjoXoYGD3QEnBuiZbAzw14PUgS2N2SJIG3G7husPHv/XCgUomaTcq7LhCyGX/1azXK5dRGK9/7+wz56jMkUz3RDylFG8/K+3k0AAAAAElFTkSuQmCC'
+    };
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>arena_test_responses</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Arena Test Responses</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	data.result_id = $sp.getParameter('result_id') || (options && options.result_id) || (input && input.result_id) || "";
+	data.showHome = $sp.getParameter('hide_home') === 'true' || (input && input.result_id) ? false : true;
+	data.responses = [];
+	data.validResult = false;
+
+	var resultGr = new GlideRecord('x_93700_arena_results');
+	resultGr.setLimit(1);
+	resultGr.addQuery('sys_id', data.result_id);
+	resultGr.query();
+	if (resultGr.next()) {
+		data.test_name = resultGr.test_schedule.name.toString();
+		data.responses = JSON.parse(resultGr.getValue('response_json') || []);
+		data.score = resultGr.test_score.toString() + '% (' + data.responses.filter(function(r) {
+			return r.answered_correctly;
+		}).length + '/' + data.responses.length + ')';
+		data.validResult = true;
+	} else {
+		gs.addErrorMessage('Invalid result id');
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2021-09-15 16:23:49</sys_created_on>
+        <sys_id>9f59536607a2701037c7f2ae7c1ed057</sys_id>
+        <sys_mod_count>106</sys_mod_count>
+        <sys_name>Arena Test Responses</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_9f59536607a2701037c7f2ae7c1ed057</sys_update_name>
+        <sys_updated_by>jaydeepdeb@kpmg.com</sys_updated_by>
+        <sys_updated_on>2021-10-11 10:25:33</sys_updated_on>
+        <template><![CDATA[<div style="float: right;">
+  <a class="dropdown-trigger indigo btn" style="margin-right: 10px;color: white !important;" data-target="export-dropdown">
+    Export
+    <i class="material-icons" style="float:right; margin-left: 5px;">arrow_drop_down</i>
+  </a>
+  <ul id="export-dropdown" class="dropdown-content">
+    <li><a style="color:#3f51b5 !important;" ng-click="exportPdf()">PDF</a></li>
+    <li><a style="color:#3f51b5 !important;" ng-click="exportWord('doc')">Word</a></li>
+  </ul>
+  <a ng-show="data.showHome === true" class="btn-floating btn waves-effect waves-light indigo" ng-click="home()">
+    <i class="material-icons">home</i>
+  </a>
+</div>
+
+<div id="responses" ng-if="data.validResult">
+  <h5><strong>{{data.test_name}}</strong></h5>
+  <h6 style="margin-bottom: 10px;font-size: 1.3rem;"><strong>Your score: {{data.score}}</strong></h6>
+  <div ng-repeat="item in data.responses"
+       style="margin: 10px auto;padding: 10px;">
+    <div style="position:relative;padding-left: 15px;" id="{{item.id}}">
+      <div style="font-size: 1.2em;" ng-bind-html="trustHtml($index + 1, item.title)"></div>
+    </div>
+    <div style="padding-left: 15px;margin-top: 6px;margin-bottom: 6px;">
+      <strong style="padding-right: 5px;">Your Answer: </strong>
+      <span style="font-weight: 600;">{{item.answered_correctly ? 'Correct' : 'Incorrect'}}</span>
+      <img ng-if="item.answered_correctly" ng-src="{{::imgSources.tick_green}}" style="height: 15px;width: 15px;margin-left: 5px;margin-bottom: 2px;" />
+      <img ng-if="!item.answered_correctly" ng-src="{{::imgSources.cross_red}}" style="height: 14px;width: 14px;margin-left: 5px;margin-bottom: 2px;" />
+    </div>
+    <div style="padding-left: 15px;">
+      <div style="position:relative;" ng-repeat="c in item.choices">
+        <input style="position: static !important;opacity:1 !important;transform: translateY(1px);" ng-if="item.type == 'radioButton'" type="radio" name="{{item.id}}" id="{{c.id}}" ng-checked="c.selected" disabled="true" />
+        <input style="position: static !important;opacity:1 !important;transform: translateY(1px);" ng-if="item.type == 'checkBox'" type="checkbox" id="{{c.id}}" name="{{c.id}}" ng-checked="c.selected" disabled="true" />
+        <label style="color:black !important;font-size: 1em !important" for="{{c.id}}">{{c.value}}</label>
+        <img style="height: 15px;width: 15px;margin-left: 5px;margin-bottom: 2px;" ng-if="c.correct" ng-src="{{c.selected ? imgSources.tick_green : imgSources.tick_red}}" />
+        <img style="height: 15px;width: 15px;margin-left: 5px;margin-bottom: 2px;" ng-if="c.selected && !c.correct" ng-src="{{::imgSources.cross_red}}" />
+      </div>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

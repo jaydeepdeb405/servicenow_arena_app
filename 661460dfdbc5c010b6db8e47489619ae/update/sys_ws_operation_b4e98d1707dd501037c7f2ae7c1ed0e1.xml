@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>getLeaderboardData</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	
+	var data = {};
+	data.leaderboardData = [];
+
+	// get level/difficulty choices
+	var arenaLevels = [];
+	var arenaDifficulties = [];
+
+	var choiceGr= new GlideRecord('sys_choice');
+	choiceGr.addQuery("name", 'x_93700_arena_user');
+	choiceGr.addQuery("element", "level").addOrCondition("element", "difficulty");
+	choiceGr.query();
+	while(choiceGr.next()) {
+		var choiceData = {};
+		if (choiceGr.element == "level") {
+			choiceData.label = choiceGr.getValue('label') || "";
+			choiceData.value = choiceGr.getValue('value') || "";
+			arenaLevels.push(choiceData);
+		}
+		else {
+			choiceData.label = choiceGr.getValue('label') || "";
+			choiceData.value = choiceGr.getValue('value') || "";
+			arenaDifficulties.push(choiceData);
+		} 
+	}
+	
+	var userGr = new GlideRecord('x_93700_arena_user');
+	userGr.setLimit(1);
+	userGr.addQuery("user", gs.getUserID());
+	userGr.query();
+	if (userGr.next()) {
+		data.currentUserLevelIndex = getLevelIndex(userGr.getValue('level') || "");
+		data.currentUserDifficultyIndex = getDifficultyIndex(userGr.getValue('difficulty') || "");
+		data.currentArenaUserID = userGr.getValue('sys_id') || "";
+		data.currentArenaUserName = userGr.avatar.toString() || userGr.user.name.getDisplayValue() || '';
+	}
+
+	// fetch data for each level/difficulty
+	arenaLevels.forEach(function(level, index) {
+		var levelData = {};
+		levelData.label = level.label;
+		levelData.value = level.value;
+		levelData.difficulties = [];
+		arenaDifficulties.forEach(function(difficulty) {
+			var difficultyData = {};
+			difficultyData.label = difficulty.label;
+			difficultyData.value = difficulty.value;
+			difficultyData.data = getLevelData(level.value, difficulty.value);
+			levelData.difficulties.push(difficultyData);
+		});
+		data.leaderboardData.push(levelData);
+	});
+
+	function getLevelData(level, difficulty) {
+		var levelData = [];
+		var counter = 0;
+		var resultGr = new GlideRecord('x_93700_arena_results');
+		resultGr.orderByDesc('total_score');
+		resultGr.orderBy('time_taken');
+		resultGr.addQuery('difficulty', difficulty); //the active difficulty
+		resultGr.addQuery('level', level); //the active level
+		resultGr.addQuery('active', true);
+		//resultGr.setLimit(5);
+		resultGr.query();
+		while(resultGr.next()) {
+			var dataObj = {};
+			dataObj.user_id = resultGr.getValue('arena_user') || '';
+			dataObj.isCurrentUser = dataObj.user_id == data.currentArenaUserID;
+			dataObj.user_name = resultGr.arena_user.avatar.toString() || resultGr.arena_user.user.name.getDisplayValue() || '';
+			dataObj.score = resultGr.getValue('total_score') || '';
+			dataObj.time_taken = resultGr.getValue('time_taken') || '';
+			dataObj.avatar_src = resultGr.arena_user.profile_image.getDisplayValue() || resultGr.arena_user.user.photo.getDisplayValue() || '';
+			dataObj.initials = getInitials(dataObj.user_name);
+			dataObj.challenged_by = resultGr.challenged_by.avatar.toString() || resultGr.challenged_by.user.name.getDisplayValue() || '';
+			dataObj.challengeEnabled = validateChallengeEnabled(dataObj.user_id, dataObj.challenged_by, level, difficulty);
+			levelData.push(dataObj);
+			counter++;
+		}
+		return levelData;
+	}
+	
+	function isUserInLeaderboardAndIsRankedHigher(user_id, level, difficulty) {
+// 		var enabled = false;
+		var leaderboardUsers = [];
+		var resultGr = new GlideRecord('x_93700_arena_results');
+		resultGr.orderByDesc('total_score');
+		resultGr.orderBy('time_taken');
+		resultGr.addQuery('difficulty', difficulty); 
+		resultGr.addQuery('level', level); 
+		resultGr.addQuery('active', true);
+		//resultGr.setLimit(5);
+		resultGr.query();
+		while(resultGr.next()) {
+			leaderboardUsers.push(resultGr.getValue('arena_user')||'');
+		}
+// 		enable challenge only for higher ranked players in leaderboard - disabled
+// 		if(leaderboardUsers.indexOf(data.currentArenaUserID) !== -1)
+// 			enabled = leaderboardUsers.indexOf(user_id) < leaderboardUsers.indexOf(data.currentArenaUserID);
+// 		else 
+// 			enabled = false;
+		
+		return leaderboardUsers.indexOf(data.currentArenaUserID) !== -1 ? true : false;
+	}
+
+	function validateChallengeEnabled(user_id, challenged_by, level, difficulty) {
+		var enabled = true;
+		if(data.currentArenaUserID == user_id || challenged_by != "") enabled = false;
+		else if(challenged_by == "") {
+			var levelWeight = (getLevelIndex(level)+1)*10 + getDifficultyIndex(difficulty);
+			var userLevelWeight =  (data.currentUserLevelIndex+1)*10 +data.currentUserDifficultyIndex;
+			enabled = (levelWeight <= userLevelWeight) && isUserInLeaderboardAndIsRankedHigher(user_id, level, difficulty);
+		}
+		return enabled;
+	}
+
+	function getLevelIndex(level) {
+		for(var i=0; i<arenaLevels.length; i++) {
+			if(level == arenaLevels[i].value) return i;
+		}
+		return -1;
+	}
+
+	function getDifficultyIndex(difficulty) {
+		for(var i=0; i<arenaDifficulties.length; i++) {
+			if (difficulty == arenaDifficulties[i].value) return i;
+		}
+		return -1;
+	}
+
+	function getInitials(name) {
+		var first = (name.split(' ')[0] || '').charAt(0).toUpperCase();
+		var last = (name.split(' ')[1] || '').charAt(0).toUpperCase();
+		return first+last;
+	}
+	
+	response.setBody(data.leaderboardData);
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_93700_arena/arena/getLeaderboardData</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/getLeaderboardData</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-06-14 18:14:49</sys_created_on>
+        <sys_id>b4e98d1707dd501037c7f2ae7c1ed0e1</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>getLeaderboardData</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sys_ws_operation_b4e98d1707dd501037c7f2ae7c1ed0e1</sys_update_name>
+        <sys_updated_by>jaydeepdeb</sys_updated_by>
+        <sys_updated_on>2020-06-15 10:48:49</sys_updated_on>
+        <web_service_definition display_value="Arena">5b64b26e0755101037c7f2ae7c1ed048</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

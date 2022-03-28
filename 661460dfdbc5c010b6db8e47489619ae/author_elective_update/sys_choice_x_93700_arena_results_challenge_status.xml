@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="challenge_status" table="x_93700_arena_results" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>challenge_status</element>
+            <name>x_93700_arena_results</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>manoj</sys_created_by>
+            <sys_created_on>2020-05-06 12:52:12</sys_created_on>
+            <sys_id>34e9f11e079d501037c7f2ae7c1ed0ac</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>challenge_status</sys_name>
+            <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+            <sys_update_name>sys_choice_x_93700_arena_results_challenge_status</sys_update_name>
+            <sys_updated_by>manoj</sys_updated_by>
+            <sys_updated_on>2020-05-06 12:52:12</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>challenge_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Won</label>
+            <language>en</language>
+            <name>x_93700_arena_results</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>manoj</sys_created_by>
+            <sys_created_on>2020-05-06 12:52:12</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>abba8f6adb645010b6db8e4748961926</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>manoj</sys_updated_by>
+            <sys_updated_on>2020-05-06 12:52:12</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>challenge_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Lost</label>
+            <language>en</language>
+            <name>x_93700_arena_results</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>manoj</sys_created_by>
+            <sys_created_on>2020-05-06 12:52:26</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>63ea8f6adb645010b6db8e4748961904</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>manoj</sys_updated_by>
+            <sys_updated_on>2020-05-06 12:52:26</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

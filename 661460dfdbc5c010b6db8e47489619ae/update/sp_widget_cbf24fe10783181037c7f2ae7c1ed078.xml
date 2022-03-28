@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $timeout, $location, $window) {
+	/* widget controller */
+	var c = this;
+
+	$timeout(function () {
+		var triggerInstances = M.Dropdown.init(angular.element('.dropdown-trigger'), {
+			coverTrigger: false
+		});
+
+		var modalInstances = M.Modal.init(angular.element('.modal'), {});
+
+		var collapsibleInstances = M.Collapsible.init(angular.element('.collapsible'), {
+			accordion: true
+		});
+	}, 0);
+
+	c.validateTest = function(test) {
+		if (test.enable_retakes === true && test.appeared === true) c.prepareForRetake(test);
+		else if (test.appear_anytime === true && test.registered === false) c.registerAndStartTest(test);
+		else c.startTest(test);
+	}
+
+	c.prepareForRetake = function(test) {
+		var retake = confirm('Do you want to retake this test?');
+		if (retake) {
+			test.transition = true;
+			c.server.get({
+				action: "retakeTest",
+				test_id: test.id,
+				testTakerProfileId: c.data.testTakerProfile.id
+			}).then(function(response) {
+				test.transition = false;
+				c.startTest(test);
+			});
+		} 
+	};
+
+	c.registerAndStartTest = function(test) {
+		test.transition = true;
+		c.server.get({
+			action: "registerForTest",
+			test_id: test.id,
+			testTakerProfileId: c.data.testTakerProfile.id
+		}).then(function(response) {
+			test.transition = false;
+			c.startTest(test);
+		});
+	};
+
+	c.startTest = function(test) {
+		if (test.enable_retakes === false && test.appeared === true) {
+			M.Toast.dismissAll();
+			M.toast({ html: '<h6>You have already appeared for this test</h6>' });
+		}
+		else if (test.appear_anytime === false && test.pending_start === true) {
+			M.Toast.dismissAll();
+			M.toast({ html: '<h6>This test ' + test.time_to_go.toLowerCase() + '</h6>' });
+		} 
+		else {
+			$location.url('/arena_test?id=arena_test&test_id='+test.id);
+		}
+	};
+
+	c.reloadPage = function() {
+		$window.location.reload();
+	};
+
+	c.resetPasswordForm = function() {
+		$scope.changePasswordStatus = undefined;
+		$scope.changePasswordMessage = '';
+		$scope.current_password = '';
+		$scope.new_password = undefined;
+		$scope.confirm_password = undefined;
+	};
+
+	c.resetPasswordForm();
+
+	c.changePassword = function(current_password, new_password) {
+		$scope.changePasswordStatus = undefined;
+		$scope.changePasswordMessage = '';
+		c.server.get({
+			action: "changePassword",
+			current_password: current_password,
+			new_password: new_password,
+			testTakerProfileId: c.data.testTakerProfile.id
+		}).then(function(response) {
+			var status = response.data.changePasswordStatus;
+			$scope.changePasswordStatus = status === 3;
+			if (status === 1)
+				$scope.changePasswordMessage = 'User not found/Internal error';
+			else if (status === 2)
+				$scope.changePasswordMessage = 'Wrong password';
+			else {
+				M.toast({ html: '<h6>Password changed</h6>' });
+				$timeout(function() {
+					c.resetPasswordForm();
+					M.Modal.getInstance($('#password-modal')).close();
+				}, 3000);
+			}
+		});
+		return false;
+	};
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.test-header {&#13;
+  position: fixed;&#13;
+  left: 0;&#13;
+  right: 0;&#13;
+  top: 0;&#13;
+  height: 65px;&#13;
+  z-index: 1000;&#13;
+}&#13;
+&#13;
+.card-wrapper {&#13;
+  font-family: sans-serif;&#13;
+}&#13;
+&#13;
+.card-panel {&#13;
+  padding: 10px 18px 18px 18px;&#13;
+  margin: 0.5rem 0 0.5rem 0;&#13;
+  h5 {&#13;
+    font-size: 1.4rem;&#13;
+  }&#13;
+  .badge {&#13;
+    position: relative;&#13;
+    left: -5px;&#13;
+    margin-top: 5px;&#13;
+    padding: 8px 10px;&#13;
+    font-weight: 500;&#13;
+    font-family: sans-serif;&#13;
+    color: #656565;&#13;
+  }&#13;
+}&#13;
+&#13;
+.btn {&#13;
+  font-size: 0.86em;&#13;
+}&#13;
+&#13;
+.start-btn {&#13;
+  margin-top: 15px;&#13;
+  padding: 0 0.5rem;&#13;
+}&#13;
+&#13;
+.test-logo {&#13;
+  margin-left: 20px;&#13;
+}&#13;
+&#13;
+.close-icon {&#13;
+  position: absolute;&#13;
+  right: 5px;&#13;
+  top: 5px;&#13;
+}&#13;
+&#13;
+.modal-content {&#13;
+  border: none;&#13;
+  height: inherit;&#13;
+}&#13;
+&#13;
+.brand-logo .chip {&#13;
+  font-size: 18px;&#13;
+  padding: 2px 8px;&#13;
+  border-radius: 20px;&#13;
+  height: 36px;&#13;
+  width: 36px;&#13;
+}&#13;
+&#13;
+ul.collapsible {&#13;
+  li {&#13;
+    .collapsible-header i {&#13;
+      font-size: 1.6em;&#13;
+      transform: rotate(-90deg);&#13;
+    }&#13;
+    .collapsible-header span {&#13;
+      font-size: 1.1em;&#13;
+    }&#13;
+    &amp;.active {&#13;
+      .collapsible-header i {&#13;
+        transform: none;&#13;
+      }&#13;
+    }&#13;
+    .collapsible-body {&#13;
+      padding: 0.5rem 2rem;&#13;
+      .row {&#13;
+        margin-bottom: 0;&#13;
+      }&#13;
+    }&#13;
+  }&#13;
+}&#13;
+&#13;
+#password-modal {&#13;
+  .input-field {&#13;
+    margin-bottom: 0;&#13;
+  }&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Arena Test Home</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    if (input && input.action === 'changePassword') {
+        data.changePasswordStatus = 0;
+        var testTakerGr = new GlideRecord('x_93700_arena_test_takers');
+        testTakerGr.setLimit(1);
+        testTakerGr.addQuery('sys_id', input.testTakerProfileId);
+        testTakerGr.addActiveQuery();
+        testTakerGr.query();
+        if (testTakerGr.next()) {
+            if (testTakerGr.password.getDecryptedValue() === input.current_password) {
+                testTakerGr.password = input.new_password;
+                testTakerGr.update();
+                data.changePasswordStatus = 3;
+            } else {
+                data.changePasswordStatus = 2;
+            }
+        } else {
+            data.changePasswordStatus = 1;
+        }
+        return;
+    }
+
+    if (input && input.action === "registerForTest") {
+        var scheduleGr = new GlideRecord('x_93700_arena_test_schedule');
+        scheduleGr.setLimit(1);
+        scheduleGr.addActiveQuery();
+        scheduleGr.addQuery('sys_id', input.test_id);
+        scheduleGr.query();
+        if (scheduleGr.next()) {
+            var testTakers = scheduleGr.test_takers.toString().length > 0 ?
+                scheduleGr.test_takers.toString().split(',') : [];
+            if (testTakers.indexOf(input.testTakerProfileId) === -1) testTakers.push(input.testTakerProfileId);
+            scheduleGr.setValue('test_takers', testTakers);
+            scheduleGr.update();
+        }
+        return;
+    }
+
+    if (input && input.action === "retakeTest") {
+        var resultGr = new GlideRecord('x_93700_arena_results');
+        resultGr.setLimit(1);
+        resultGr.addActiveQuery();
+        resultGr.addQuery('test_schedule', input.test_id);
+        resultGr.addQuery('test_taker', input.testTakerProfileId);
+        resultGr.query();
+        if (resultGr.next()) {
+            resultGr.active = false;
+            resultGr.update();
+        }
+        return;
+    }
+
+    data.registeredTests = [];
+    data.hasRegisteredTests = false;
+    var currentTestTakerID = gs.getSession().getClientData('currentTestTakerID');
+
+    var testTakerGr, testResultGr;
+    // for external users
+    if (currentTestTakerID && currentTestTakerID.length === 32) {
+        testTakerGr = new GlideRecord('x_93700_arena_test_takers');
+        testTakerGr.setLimit(1);
+        testTakerGr.addQuery('sys_id', currentTestTakerID);
+        testTakerGr.query();
+        if (testTakerGr.next()) {
+            data.testTakerProfile = {
+                id: testTakerGr.getValue('sys_id'),
+                first_name: testTakerGr.getValue('first_name'),
+                last_name: testTakerGr.getValue('last_name'),
+                email: testTakerGr.getValue('email'),
+                initials: testTakerGr.first_name.toString().charAt(0) + testTakerGr.last_name.toString().charAt(0),
+                name: testTakerGr.getValue('name'),
+                external_user: true
+            };
+        }
+    }
+    // for internal users
+    else {
+        data.testTakerProfile = {
+            first_name: gs.getUser().getFirstName(),
+            last_name: gs.getUser().getLastName(),
+            email: gs.getUser().getEmail(),
+            initials: gs.getUser().getFirstName().charAt(0) + gs.getUser().getLastName().charAt(0),
+            name: gs.getUser().getFirstName() + " " + gs.getUser().getLastName()
+        };
+
+        testTakerGr = new GlideRecord('x_93700_arena_test_takers');
+        if (data.testTakerProfile.email.length > 0) {
+            testTakerGr.setLimit(1);
+            testTakerGr.addQuery('email', data.testTakerProfile.email);
+            testTakerGr.query();
+            if (testTakerGr.next()) {
+                data.testTakerProfile.id = testTakerGr.getValue('sys_id');
+                testTakerGr.setValue('first_name', data.testTakerProfile.first_name);
+                testTakerGr.setValue('last_name', data.testTakerProfile.last_name);
+                testTakerGr.setValue('active', true);
+                testTakerGr.update();
+            } else {
+                testTakerGr.initialize();
+                testTakerGr.setValue('email', data.testTakerProfile.email);
+                testTakerGr.setValue('first_name', data.testTakerProfile.first_name);
+                testTakerGr.setValue('last_name', data.testTakerProfile.last_name);
+                testTakerGr.setValue('active', true);
+                data.testTakerProfile.id = testTakerGr.insert();
+            }
+        } else {
+            testTakerGr.initialize();
+            testTakerGr.setValue('email', data.testTakerProfile.email);
+            testTakerGr.setValue('first_name', data.testTakerProfile.first_name);
+            testTakerGr.setValue('last_name', data.testTakerProfile.last_name);
+            testTakerGr.setValue('active', true);
+            data.testTakerProfile.id = testTakerGr.insert();
+        }
+    }
+
+    if (Object.keys(data.testTakerProfile).length > 0) {
+        data.myResponsesWidget = $sp.getWidget('arena_test_my_responses', {
+            testTakerProfileId: data.testTakerProfile.id
+        });
+        var testScheduleGr = new GlideRecord('x_93700_arena_test_schedule');
+        testScheduleGr.orderBy('name');
+        /*testScheduleGr.addActiveQuery();
+        testScheduleGr.addQuery('appear_anytime', false);
+        testScheduleGr.addQuery('test_takers', 'LIKE', data.testTakerProfile.id);*/
+		testScheduleGr.addEncodedQuery('active=true^appear_anytime=false^test_takersLIKE' + data.testTakerProfile.id);
+        testScheduleGr.query();
+        while (testScheduleGr.next()) {
+
+            testResultGr = new GlideRecord('x_93700_arena_results');
+            testResultGr.setLimit(1);
+            if (testScheduleGr.getValue('enable_retakes') !== '1') testResultGr.addActiveQuery();
+            testResultGr.addQuery('test_schedule', testScheduleGr.sys_id);
+            testResultGr.addQuery('test_taker', data.testTakerProfile.id);
+            testResultGr.query();
+
+            data.registeredTests.push({
+                id: testScheduleGr.getValue('sys_id'),
+                name: testScheduleGr.getDisplayValue('name'),
+                start_time: testScheduleGr.getDisplayValue('start_time'),
+                pending_start: new GlideDateTime().getNumericValue() - new GlideDateTime(testScheduleGr.getValue('start_time')).getNumericValue() < 0,
+                time_to_go: getTimeToGo(testScheduleGr.getValue('start_time')),
+                duration: testScheduleGr.getDisplayValue('test_duration_in_minutes'),
+                appeared: testResultGr.hasNext(),
+                appear_anytime: testScheduleGr.getValue('appear_anytime') === '1',
+                total_questions: testScheduleGr.question_set.number_of_questions.toString(),
+                enable_retakes: testScheduleGr.getValue('enable_retakes') === '1',
+                registered: testScheduleGr.test_takers.toString().split('').indexOf(data.testTakerProfile.id) > -1
+            });
+            data.hasRegisteredTests = true;
+        }
+
+        data.certificationPreps = {};
+        data.hasCertificationPreps = false;
+        testScheduleGr = new GlideRecord('x_93700_arena_test_schedule');
+        testScheduleGr.orderBy('name');
+        testScheduleGr.addActiveQuery();
+        testScheduleGr.addQuery('appear_anytime', true);
+        testScheduleGr.query();
+        while (testScheduleGr.next()) {
+
+            testResultGr = new GlideRecord('x_93700_arena_results');
+            testResultGr.setLimit(1);
+            if (testScheduleGr.getValue('enable_retakes') !== '1') testResultGr.addActiveQuery();
+            testResultGr.addQuery('test_schedule', testScheduleGr.sys_id);
+            testResultGr.addQuery('test_taker', data.testTakerProfile.id);
+            testResultGr.query();
+
+            var testData = {
+                id: testScheduleGr.getValue('sys_id'),
+                name: testScheduleGr.getDisplayValue('name'),
+                duration: testScheduleGr.getDisplayValue('test_duration_in_minutes'),
+                appeared: testResultGr.hasNext(),
+                appear_anytime: testScheduleGr.getValue('appear_anytime') === '1',
+                total_questions: testScheduleGr.question_set.number_of_questions.toString(),
+                enable_retakes: testScheduleGr.getValue('enable_retakes') === '1',
+                registered: testScheduleGr.test_takers.toString().split('').indexOf(data.testTakerProfile.id) > -1
+            };
+
+            var certName = testScheduleGr.certification_name.getDisplayValue();
+            if (data.certificationPreps[certName] && data.certificationPreps[certName] instanceof Array) {
+                data.certificationPreps[certName].push(testData);
+                data.hasCertificationPreps = true;
+            } else {
+                data.certificationPreps[certName] = [testData];
+                data.hasCertificationPreps = true;
+            }
+        }
+    }
+
+    function getTimeToGo(startDateTime) {
+        var startDate = new GlideDateTime(startDateTime);
+        var now = new GlideDateTime();
+
+        var distance = startDate.getNumericValue() - now.getNumericValue();
+        if (distance < 0) return "Ready to Take";
+
+        var _second = 1000;
+        var _minute = _second * 60;
+        var _hour = _minute * 60;
+        var _day = _hour * 24;
+
+        var days = Math.floor(distance / _day);
+        if (days > 0) days = days > 1 ? days + ' days' : days + ' day';
+        else days = "";
+        var hours = Math.floor((distance % _day) / _hour);
+        if (hours > 0) hours = hours > 1 ? hours + ' hours' : hours + ' hour';
+        else hours = "";
+        var minutes = Math.floor((distance % _hour) / _minute);
+        if (minutes > 0) minutes = minutes > 1 ? minutes + ' minutes' : minutes + ' minute';
+        else minutes = "";
+        var seconds = Math.floor((distance % _minute) / _second);
+        if (minutes === 0 && seconds > 0) seconds = seconds > 1 ? seconds + ' seconds' : seconds + ' second';
+        else seconds = "";
+
+        return "Starts in " + days + ' ' + hours + ' ' + minutes + ' ' + seconds;
+    }
+
+    gs.getSession().putClientData('testTakerProfile', JSON.stringify(data.testTakerProfile));
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>jaydeepdeb</sys_created_by>
+        <sys_created_on>2020-09-04 16:20:59</sys_created_on>
+        <sys_id>cbf24fe10783181037c7f2ae7c1ed078</sys_id>
+        <sys_mod_count>214</sys_mod_count>
+        <sys_name>Arena Test Home</sys_name>
+        <sys_package display_value="Arena" source="x_93700_arena">661460dfdbc5c010b6db8e47489619ae</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">661460dfdbc5c010b6db8e47489619ae</sys_scope>
+        <sys_update_name>sp_widget_cbf24fe10783181037c7f2ae7c1ed078</sys_update_name>
+        <sys_updated_by>jaydeepdeb@kpmg.com</sys_updated_by>
+        <sys_updated_on>2022-01-07 05:11:19</sys_updated_on>
+        <template><![CDATA[<nav class="test-header blue darken-4">
+  <div class="nav-wrapper">
+    <a href="javascript:void(0)" ng-click="c.reloadPage()" class="brand-logo left test-logo"><img ng-src="kpmg-logo-arena.png"/></a>
+    <a href="javascript:void(0)" class="brand-logo right dropdown-trigger" data-target="user-dropdown">
+      <h5><div class="chip">{{c.data.testTakerProfile.initials}}</div></h5>
+    </a>
+
+    <ul id="user-dropdown" class="dropdown-content">
+      <li><a data-target="profile-modal" class="black-text modal-trigger">Profile</a></li>
+      <li ng-show="data.testTakerProfile.external_user === true"><a data-target="password-modal" class="black-text modal-trigger">Change Password</a></li>
+      <li><a href="/logout.do?sysparm_goto_url=arena_test" class="black-text">Logout</a></li>
+    </ul>
+  </div>
+</nav> 
+
+<div class="row card-wrapper">
+  <div class="col s12">
+    <h5>My Registered Tests</h5>
+    <div class="col s12 card-panel white ng-scope" ng-hide="c.data.hasRegisteredTests"> 
+      <div class="black-text col s12"> 
+        <h6 class="center-align">You are not registered for any tests</h6> 
+      </div> 
+    </div>
+    <div ng-include="'mytests-card'" ng-repeat="test in c.data.registeredTests"></div>
+  </div>
+</div>
+
+<div class="row card-wrapper">
+  <div class="col s12">
+    <h5>Certification Preparation</h5>
+    <div class="col s12 card-panel white ng-scope" ng-hide="c.data.hasCertificationPreps"> 
+      <div class="black-text col s12"> 
+        <h6 class="center-align">No Tests available</h6> 
+      </div> 
+    </div>
+    <ul class="collapsible" ng-if="c.data.hasCertificationPreps">
+      <li ng-repeat="(certName, tests) in c.data.certificationPreps">
+        <div class="collapsible-header">
+          <i class="material-icons">arrow_drop_down</i>
+          <span>{{::certName}}</span>
+        </div>
+        <div class="collapsible-body">
+          <div class="row" ng-include="'mytests-card'" ng-repeat="test in tests"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row card-wrapper">
+  <div class="col s12">
+    <h5>My Test Responses</h5>
+    <sp-widget widget="data.myResponsesWidget"></sp-widget>
+  </div>
+</div>
+
+<div id="profile-modal" class="modal">
+  <div class="modal-content">
+    <div class="material-icons close-icon modal-close">close</div>
+    <h4>{{c.data.testTakerProfile.name}}</h4>
+    <table class="responsive-table">
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{c.data.testTakerProfile.first_name}}</td>
+          <td>{{c.data.testTakerProfile.last_name}}</td>
+          <td>{{c.data.testTakerProfile.email}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="password-modal" class="modal">
+  <div class="modal-content">
+    <div ng-click="c.resetPasswordForm()" class="material-icons close-icon modal-close">close</div>
+    <form class="change-password-form" ng-submit="new_password === confirm_password && c.changePassword(current_password, new_password)">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="current_password" type="password" ng-model="current_password" ng-class="{'valid': changePasswordStatus === true, 'invalid': changePasswordStatus === false}" required>
+          <label for="current_password">Current Password</label>
+          <span class="helper-text" data-error="{{changePasswordMessage}}" data-success="Password changed"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="new_password" type="password" ng-model="new_password"  ng-class="{'valid': new_password && confirm_password && new_password === confirm_password, 'invalid': new_password && confirm_password && new_password !== confirm_password}" required>
+          <label for="new_password">New Password</label>
+          <span class="helper-text" data-error="" data-success=""></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="confirm_password" type="password" ng-model="confirm_password" ng-class="{'valid': new_password && confirm_password && new_password === confirm_password, 'invalid': new_password && confirm_password && new_password !== confirm_password}" required>
+          <label for="confirm_password">Confirm New Password</label>
+          <span class="helper-text" data-error="Passwords do not match" data-success="Passwords match"></span>
+        </div>
+      </div>
+      <button type="submit" class="waves-effect btn blue-grey lighten-4 black-text">Change Password</button>
+    </form>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>
