@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-03-28 15:19:22</sys_created_on>
+        <sys_id>812f42051b62811035a5c843604bcbd3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_355028_arena_test.x_355028_arena.test_user</sys_name>
+        <sys_package display_value="Arena" source="x_355028_arena">a1bc4ecd1b22811035a5c843604bcbaf</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">a1bc4ecd1b22811035a5c843604bcbaf</sys_scope>
+        <sys_security_acl display_value="x_355028_arena_test">c12f42051b62811035a5c843604bcbd0</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_812f42051b62811035a5c843604bcbd3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-03-28 15:19:22</sys_updated_on>
+        <sys_user_role display_value="x_355028_arena.test_user" name="x_355028_arena.test_user">b82f4a811b62811035a5c843604bcb4c</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+</record_update>

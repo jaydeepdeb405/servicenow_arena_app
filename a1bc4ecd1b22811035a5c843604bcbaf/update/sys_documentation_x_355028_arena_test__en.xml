@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="" label="Test" language="en" table="x_355028_arena_test">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element/>
+            <help/>
+            <hint/>
+            <label>Test</label>
+            <language>en</language>
+            <name>x_355028_arena_test</name>
+            <plural>Tests</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 15:19:22</sys_created_on>
+            <sys_id>492f42051b62811035a5c843604bcbe9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Test</sys_name>
+            <sys_package display_value="Arena" source="x_355028_arena">a1bc4ecd1b22811035a5c843604bcbaf</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Arena">a1bc4ecd1b22811035a5c843604bcbaf</sys_scope>
+            <sys_update_name>sys_documentation_x_355028_arena_test__en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 15:19:22</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

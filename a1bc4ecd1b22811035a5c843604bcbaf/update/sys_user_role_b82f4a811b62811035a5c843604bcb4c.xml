@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role">
+    <sys_user_role action="INSERT_OR_UPDATE">
+        <assignable_by/>
+        <can_delegate>true</can_delegate>
+        <description/>
+        <elevated_privilege>false</elevated_privilege>
+        <grantable>true</grantable>
+        <includes_roles/>
+        <name>x_355028_arena.test_user</name>
+        <requires_subscription>-1</requires_subscription>
+        <scoped_admin>false</scoped_admin>
+        <suffix>test_user</suffix>
+        <sys_class_name>sys_user_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-03-28 15:19:21</sys_created_on>
+        <sys_id>b82f4a811b62811035a5c843604bcb4c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_355028_arena.test_user</sys_name>
+        <sys_package display_value="Arena" source="x_355028_arena">a1bc4ecd1b22811035a5c843604bcbaf</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Arena">a1bc4ecd1b22811035a5c843604bcbaf</sys_scope>
+        <sys_update_name>sys_user_role_b82f4a811b62811035a5c843604bcb4c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-03-28 15:19:21</sys_updated_on>
+    </sys_user_role>
+</record_update>
